@@ -23,7 +23,7 @@ sudo pip3 install -I -r REQUIREMENTS
 sudo pip3 install -I .
 ```
 
-Once you have install the MISP modules, you must enable them in Cortex by adding the following lines in Cortex `application.conf`:
+Once you have installed the MISP modules, you must enable them in Cortex by adding the following lines in Cortex `application.conf`:
 
 ```
 misp.modules.enabled = true
@@ -58,7 +58,7 @@ misp.modules.loader = /path/to/misp-modules-loader.py"
 ```
 
 ## Invoke Cortex Analyzers within MISP
-Starting from version 2.4.73, a MISP instance can invoke Cortex analyzers. To do so, connect to the MISP Web UI with sufficient privileges, then go to `Administration` > `Server settings` > `Plugin settings`. Edit the Cortex section:
+Starting from version 2.4.73, a MISP instance can invoke Cortex analyzers. To do so, connect to the MISP Web UI with sufficient privileges, then go to `Administration` > `Server settings` > `Plugin settings`. Edit the Cortex section as shown below:
 
  - set `Plugin.Cortex_services_enable` to `true`
  - set `Plugin.Cortex_services_url` to `http://<ip_address>` (replace `<ip_address>` by the IP address of Cortex)
