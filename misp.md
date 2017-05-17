@@ -61,8 +61,8 @@ misp.modules.loader = /path/to/misp-modules-loader.py"
 Starting from version 2.4.73, a MISP instance can invoke Cortex analyzers. To do so, connect to the MISP Web UI with sufficient privileges, then go to `Administration` > `Server settings` > `Plugin settings`. Edit the Cortex section as shown below:
 
  - set `Plugin.Cortex_services_enable` to `true`
- - set `Plugin.Cortex_services_url` to `http://<ip_address>` (replace `<ip_address>` by the IP address of Cortex)
- - set `Plugin.Plugin.Cortex_services_port` to `<port>` (replace `<port>` by the port on which Cortex is listening: 9000 by default)
+ - set `Plugin.Cortex_services_url` to `http://<ip_address>` (replace `<ip_address>` with the IP address of Cortex)
+ - set `Plugin.Plugin.Cortex_services_port` to `<port>` (replace `<port>` with the port on which Cortex is listening: 9000 by default)
 
 Once this operation is completed, the Cortex analyzer list should appear in MISP's Cortex section. The analyzers must be enabled to make them available to the instance's users.
 
