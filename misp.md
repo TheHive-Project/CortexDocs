@@ -2,7 +2,7 @@
 Starting from version 1.1.1, Cortex can be integrated in two ways with [MISP](http://www.misp-project.org/):
 
 - Cortex can [invoke MISP modules](misp.md#invoke-misp-modules-within-cortex)
-- MISP can [invoke Cortex analyzers](misp.md#invoke-cortex-analyzers-in-misp)
+- MISP can [invoke Cortex analyzers](misp.md#invoke-cortex-analyzers-within-misp)
 
 ## Invoke MISP Modules Within Cortex
 Besides its [regular analyzers](https://github.com/CERT-BDF/Cortex/#analyzers), Cortex 1.1.1 and above can analyze observables using
