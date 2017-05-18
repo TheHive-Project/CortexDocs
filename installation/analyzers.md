@@ -19,7 +19,7 @@ following commands:
 
 ```
 cd analyzers
-sudo pip install $(cat */requirements.txt | sort -u)
+sudo pip install $(sort -u */requirements.txt)
 ```
 
 ## From repository
