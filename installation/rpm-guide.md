@@ -10,7 +10,7 @@ yum install install https://dl.bintray.com/cert-bdf/rpm/thehive-project-release-
 This will install TheHive Project's repository (in `/etc/yum.repos.d/thehive-rpm.repo`) and the GPG public key (in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`).
  
-Then you will able to install Cortex package using yum
+Then you will able to install Cortex package using `yum`:
 ```
 yum install cortex
 ```
