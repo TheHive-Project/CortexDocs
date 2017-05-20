@@ -1,6 +1,6 @@
 # Installation Guide for Ubuntu 16.04 LTS
 
-This guide describes the manual installation of Cortex from binaries in Ubuntu 16.04.
+This guide describes the manual installation of Cortex from binaries for Ubuntu 16.04.
 
 # 1. Minimal Ubuntu Installation
 
@@ -35,9 +35,9 @@ sudo apt-get install openjdk-8-jre-headless
 
 # 3. Install Cortex
 
-Binary package can be downloaded at [thehive-cortex.zip](https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip)
+Binary packages can be downloaded from [Bintray](https://dl.bintray.com/cert-bdf/cortex/). The latest version is called [cortex-latest.zip](https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip).
 
-Download and unzip the chosen binary package. TheHive files can be installed wherever you want on the filesystem. In
+Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In
 this guide, we decided to set it in `/opt`.
 
 ```
@@ -50,15 +50,15 @@ ln -s cortex-x.x.x cortex
 
 # 4. First start
 
-Change your current directory to Cortex installation directory (`/opt/cortex` in this guide), then execute:
+Change your current directory to the Cortex installation directory (`/opt/cortex` in this guide), then execute:
 
 ```
 bin/cortex -Dconfig.file=/etc/cortex/application.conf
 ```
 
-It is recommended to use a dedicated non-privilege user to start Cortex. If so, make sure that your user can create log file in `/opt/cortex/logs`
+It is recommended to use a dedicated, non-privileged user account to start Cortex. If so, make sure that the chosen account can create log file in `/opt/cortex/logs`.
 
-If you'd rather start the application as a service, do the following:
+If you'd rather start the application as a service, use the following commands:
 ```
 sudo addgroup cortex
 sudo adduser --system cortex
@@ -76,8 +76,8 @@ Cortex comes with a simplistic frontend. Open your browser and connect to `http:
 
 # 5. Plug analysers
 
-Now that Cortex starts successfully, downloads `Cortex-Analyzers` and edit the configuration file and set the path to
-`Cortex-Analyzers/analyzers`. Follow details available in the [analyzers page](analyzers.md).
+Now that Cortex starts successfully, download `Cortex-Analyzers`, edit the configuration file then set the path to
+`Cortex-Analyzers/analyzers`. Follow the details available in the [analyzers page](analyzers.md).
 
 ## 6. Update
 
