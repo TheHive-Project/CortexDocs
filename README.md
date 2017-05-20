@@ -11,11 +11,11 @@ Cortex tries to solve a common problem frequently encountered by SOCs, CSIRTs an
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
 physical machine with similar specifications.
 
-## What's new
+## What's New
 
 - [Changelog](/CHANGELOG.md)
 
-## Installation guides
+## Installation Guides
 
 Cortex can be installed using:
 - An [RPM package](installation/rpm-guide.md)
@@ -29,10 +29,10 @@ Cortex can also be [built from sources](installation/build-guide.md).
 
 Once you have installed Cortex, you need to [install the analyzers](installation/analyzers.md).
 
-## Developer guides
+## Developer Guides
 
-- [API documentation](api/README.md)
-- [How to create an analyzer](api/how-to-create-an-analyzer.md)
+- [API Documentation](api/README.md)
+- [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 
 ## Other
 - [MISP Integration](misp.md)
