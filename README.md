@@ -7,7 +7,7 @@ Cortex tries to solve a common problem frequently encountered by SOCs, CSIRTs an
 **Note:**  This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/Cortex/](https://github.com/CERT-BDF/Cortex/).
 
 
-## Hardware pre-requisites
+## Hardware Pre-requisites
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
 physical machine with similar specifications.
 
