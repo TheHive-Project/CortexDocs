@@ -11,7 +11,7 @@ to be installed. Before proceeding, you'll need to install the system package de
 them:
 
 ```
-apt-get install python-pip python2.7-dev ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl libmagic1 build-essential
+apt-get install python-pip python2.7-dev ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl libmagic1 build-essential libssl-dev
 ```
 
 Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the
