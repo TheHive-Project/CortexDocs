@@ -43,30 +43,20 @@ Any service may query Cortex without authentication. If you need to let only aut
 - [Can I Enable HTTPS to Connect to Cortex?](https://github.com/CERT-BDF/Cortex/wiki/FAQ#can-i-enable-https-to-connect-to-cortex)
 
 ### Can I Enable HTTPS to Connect to Cortex?
-#### TL;DR
-Add the following lines to `/etc/cortex/application.conf`
 
-    https.port: 9443
-    play.server.https.keyStore {
-      path: "/path/to/keystore.jks"
-      type: "JKS"
-      password: "password_of_keystore"
-    }
-
-HTTP can disabled by adding line `http.port=disabled`
-#### Details
 To enable HTTPS in the application, add the following lines to `/etc/cortex/application.conf`:
 ```
-    https.port: 9443
-    play.server.https.keyStore {
-      path: "/path/to/keystore.jks"
-      type: "JKS"
-      password: "password_of_keystore"
-    }
+https.port: 9443
+play.server.https.keyStore {
+  path: "/path/to/keystore.jks"
+  type: "JKS"
+  password: "password_of_keystore"
+}
 ```
 As HTTPS is enabled HTTP can be disabled by adding `http.port=disabled` in configuration.
 
-To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
+* To import your certificate in the keystore, depending on your situation, you can follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
+* Make sure the keystore file is owned/can be accessed by the user running Cortex.
 
 **More information**:
 This is a setting of the Play framework that is documented on its website. Please refer to [https://www.playframework.com/documentation/2.5.x/ConfiguringHttps](https://www.playframework.com/documentation/2.5.x/ConfiguringHttps).
