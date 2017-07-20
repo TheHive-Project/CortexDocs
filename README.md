@@ -13,7 +13,8 @@ physical machine with similar specifications.
 
 ## What's New
 
-- [Changelog](/CHANGELOG.md)
+- [Training Material](https://github.com/CERT-BDF/TheHiveDocs/blob/master/training-material.md)
+- [Changelog](/blob/master/CHANGELOG.md)
 
 ## Installation Guides
 
@@ -36,6 +37,7 @@ Once you have installed Cortex, you need to [install the analyzers](installation
 
 ## Other
 - [MISP Integration](misp.md)
+- [Training Material](https://github.com/CERT-BDF/TheHiveDocs/blob/master/training-material.md)
 - [FAQ](FAQ.md)
 
 # License
