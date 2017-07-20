@@ -14,7 +14,7 @@ physical machine with similar specifications.
 ## What's New
 
 - [Training Material](https://github.com/CERT-BDF/TheHiveDocs/blob/master/training-material.md)
-- [Changelog](/blob/master/CHANGELOG.md)
+- [Changelog](https://github.com/CERT-BDF/Cortex/blob/master/CHANGELOG.md)
 
 ## Installation Guides
 
