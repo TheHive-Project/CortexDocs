@@ -149,3 +149,6 @@ From [CIRCL](https://www.circl.lu/services/passive-ssl/)
 Access to CIRCL Passive SSL is allowed to partners including security researchers or 
 incident analysts worldwide. Contact us if you would like to obtain access.
 ```
+
+
+**NOTE**: If there are any errors on this page or changes you would like to see, please submit a pull request or email megansroddie[at]gmail.com
