@@ -62,7 +62,7 @@ If you'd rather start the application as a service, use the following commands:
 ```
 sudo addgroup cortex
 sudo adduser --system cortex
-sudo cp /opt/cortex/package/cortex.service /usr/lib/systemd/system
+sudo cp /opt/cortex/package/cortex.service /usr/lib/systemd/system/
 sudo chown -R cortex:cortex /opt/cortex
 sudo chgrp cortex /etc/cortex/application.conf
 sudo chmod 640 /etc/cortex/application.conf
