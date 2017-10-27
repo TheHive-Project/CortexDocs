@@ -13,6 +13,7 @@ physical machine with similar specifications.
 
 ## What's New
 
+- [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 - [Training Material](https://github.com/CERT-BDF/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/CERT-BDF/Cortex/blob/master/CHANGELOG.md)
 
