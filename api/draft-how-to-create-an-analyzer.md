@@ -394,12 +394,12 @@ If templates are imported into TheHive:
 -   Short reports are displayed in the observable list and in the detailed
 observable page.
 
-![VT short report](../images/sc-short-vt.png){width="100px"}
+![VT short report](../images/sc-short-vt.png)
 
 -   Long reports are displayed when clicking on the short reports or in the
 detailed observable page.
 
-![VT long report](../images/sc-long-vt.jpg){width="600px"}
+![VT long report](../images/sc-long-vt.jpg)
 
 
 #### Writing Templates
