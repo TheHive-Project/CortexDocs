@@ -46,13 +46,13 @@ Here is a directory listing of the files corresponding to the VirusTotal
 analyzer. You can see that the analyzer has two flavors: **GetReport** and
 **Scan**.
 
-``` {.sourceCode .bash}
+```bash
 analyzers/VirusTotal
-├── VirusTotal_GetReport.json
-├── VirusTotal_Scan.json
-├── requirements.txt
-├── virustotal.py
-└── virustotal_api.py
+|-- VirusTotal_GetReport.json
+|-- VirusTotal_Scan.json
+|-- requirements.txt
+|-- virustotal.py
+`-- virustotal_api.py
 ```
 
 ### Input
@@ -62,7 +62,7 @@ pieces of information. For example, to use the VirusTotal analyzer's
 `d41d8cd98f00b204e9800998ecf8427e` , you must submit input such as:
 
 
-``` {.sourceCode .json}
+```json
 {
     "data":"d41d8cd98f00b204e9800998ecf8427e",
     "dataType":"hash",
@@ -92,7 +92,7 @@ example again.
 
 #### Example: VirusTotal Get Report's Input
 
-``` {.sourceCode .json}
+```json
 {
     "data":"d41d8cd98f00b204e9800998ecf8427e",
     "dataType":"hash",
@@ -106,7 +106,7 @@ example again.
 The `<==` sign and anything after it are comments that do no appear in the
 original file.
 
-``` {.sourceCode .json}
+```json
 {
     "name": "VirusTotal_GetReport",
     "version": "3.0",
@@ -246,7 +246,7 @@ Please respect the following variable calling convention:
 
 Here is how the configuration section of the VirusTotal analyzer looks:
 
-``` {.sourceCode }
+```
 analyzer {
     config {
             global {
@@ -266,7 +266,7 @@ The output of an analyzer depends on the success or failure of its execution
 
 -   If the analyzer **fails** to execute:
 
-    ``` {.sourceCode .json}
+    ```json
     {
         "success": false,
         "errorMessage":".."
@@ -279,7 +279,7 @@ The output of an analyzer depends on the success or failure of its execution
 
 -   If thr analyzer **succeeds** (i.e. it runs without any error):
 
-    ``` {.sourceCode .json}
+    ```json
     {
         "success":true
         "artifacts":[..],
@@ -300,7 +300,7 @@ The output of an analyzer depends on the success or failure of its execution
         contains a list of taxonomies.
         -   `taxonomies`:
 
-        ``` {.sourceCode .json}
+        ```json
         "taxonomies":[
           {
               "namespace": "NAME",
@@ -341,13 +341,13 @@ analyzer developers to easily write their programs. Note thought that Python is
 Cortexutils can be used with Python 2 and 3.
 To install it :
 
-``` {.sourceCode .bash}
+```bash
 pip install cortexutils
 ```
 
 or
 
-``` {.sourceCode .bash}
+```bash
 pip3 install cortexutils
 ```
 
@@ -419,13 +419,13 @@ templates (short and long reports) for each flavor.
 For example, the VirusTotal analyzer comes in two flavors hence it has 4 HTML
  templates:
 
-``` {.sourceCode .bash}
+```bash
 thehive-templates/VirusTotal_GetReport_3_0
-├── long.html
-└── short.html
+|-- long.html
+`-- short.html
 thehive-templates/VirusTotal_Scan_3_0
-├── long.html
-└── short.html
+|-- long.html
+`-- short.html
 ```
 
 The folder's name is built with the concatenation of the `name` and the
@@ -439,7 +439,7 @@ templates.
 The short report uses taxonomies and is built into the analyzers by the
 `summary()` function. Report templates read it as shown in the example below:
 
-``` {.sourceCode .html}
+```html
 <span class="label" ng-repeat="t in content.taxonomies"
   ng-class="{'info': 'label-info', 'safe': 'label-success',
   'suspicious': 'label-warning',
@@ -462,7 +462,7 @@ yours.
 
 A good start can be:
 
-``` {.sourceCode .html}
+```html
 <!-- Success -->
 <div class="panel panel-danger" ng-if="success">
     <div class="panel-heading">
@@ -507,7 +507,7 @@ more quickly and release them to the benefit of the whole community.
 Review your service interaction files. For example, let's check the
 VirusTotal JSON analyzer configuration file(s):
 
-``` {.sourceCode .json}
+```json
 {
     "name": "VirusTotal_GetReport",
     "version": "3.0",
