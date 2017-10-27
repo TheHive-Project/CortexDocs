@@ -284,67 +284,67 @@ The output of an analyzer depends on the success or failure of its execution.
 
 If the analyzer **fails** to execute:
 
-    ```json
-    {
-        "success": false,
-        "errorMessage":".."
-    }
-    ```
+```json
+{
+    "success": false,
+    "errorMessage":".."
+}
+```
 
-    -   When `success` is set to `false`, it indicates that something went wrong
-        during the execution.
-    -   `errorMessage` is free text - typically the error output message.
+-   When `success` is set to `false`, it indicates that something went wrong
+    during the execution.
+-   `errorMessage` is free text - typically the error output message.
 
 If the analyzer **succeeds** (i.e. it runs without any error):
 
+```json
+{
+    "success":true
+    "artifacts":[..],
+    "summary":{
+        "taxonomies":[..]
+    },
+    "full":{..}
+}
+```
+
+-   When `success` is set to `true`, it indicates that the analyzer ran
+    successfully.
+-   `artifacts` is a list of indicators extracted from the produced report.
+-   `full` is the full report of the analyzer. It is free form, as long
+as it is JSON formatted.
+-   `summary` is used in TheHive for short reports displayed in the
+    observable list and in the detailed page of each observable. It
+    contains a list of taxonomies.
+    -   `taxonomies`:
+
     ```json
-    {
-        "success":true
-        "artifacts":[..],
-        "summary":{
-            "taxonomies":[..]
-        },
-        "full":{..}
-    }
+    "taxonomies":[
+      {
+          "namespace": "NAME",
+          "predicate": "PREDICATE",
+          "value": "\"VALUE\"",
+          "level":"info"
+      }
+    ]
     ```
 
-    -   When `success` is set to `true`, it indicates that the analyzer ran
-        successfully.
-    -   `artifacts` is a list of indicators extracted from the produced report.
-    -   `full` is the full report of the analyzer. It is free form, as long
-    as it is JSON formatted.
-    -   `summary` is used in TheHive for short reports displayed in the
-        observable list and in the detailed page of each observable. It
-        contains a list of taxonomies.
-        -   `taxonomies`:
-
-        ```json
-        "taxonomies":[
-          {
-              "namespace": "NAME",
-              "predicate": "PREDICATE",
-              "value": "\"VALUE\"",
-              "level":"info"
-          }
-        ]
-        ```
-
-        -   `namespace` and `predicate` are free values but they should be as
-         concise as possible. For example, the VirusTotal analyzer uses *VT*
-         as a namespace and *Score* as a predicate.
-        -   `level` intends to convey the maliciousness of the result:
-            :
-            -   `info` : the analyzer produced an information, and the
-                short report is shown in blue color in TheHive.
-            -   `safe` : the analyzer did not find anything suspicious
-                or the analyzed observable is safe according to
-                the analyzer. TheHive displays the short report in green
-                color.
-            -   `suspicious` : the analyzer found that the observable is
-                either suspicious or warrants further investigation. The
-                short report has an orange color in TheHive.
-            -   `malicious` : the analyzer found that the observable
-                is malicious. The short report is red colored in TheHive.
+    -   `namespace` and `predicate` are free values but they should be as
+     concise as possible. For example, the VirusTotal analyzer uses *VT*
+     as a namespace and *Score* as a predicate.
+    -   `level` intends to convey the maliciousness of the result:
+        :
+        -   `info` : the analyzer produced an information, and the
+            short report is shown in blue color in TheHive.
+        -   `safe` : the analyzer did not find anything suspicious
+            or the analyzed observable is safe according to
+            the analyzer. TheHive displays the short report in green
+            color.
+        -   `suspicious` : the analyzer found that the observable is
+            either suspicious or warrants further investigation. The
+            short report has an orange color in TheHive.
+        -   `malicious` : the analyzer found that the observable
+            is malicious. The short report is red colored in TheHive.
 
 For more information refer to [our blog](https://blog.thehive-project.org/2017/07/05/all-fresh-cortexutils-new-cortex-analyzers/).
 
