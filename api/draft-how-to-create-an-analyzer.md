@@ -13,13 +13,16 @@
     * [The Cortexutils Python Library](#the-cortexutils-python-library)
     * [Report Templates](#report-templates)
   * [Submitting an Analyzer](#submitting-an-analyzer)
-    * [Rule 1](#rule-1)
-    * [Rule 2](#rule-2)
-    * [Rule 3](#rule-3)
-    * [Rule 4](#rule-4)
-    * [Rule 5](#rule-5)
-    * [Rule 6](#rule-6)
-    * [Rule 7](#rule-7)
+    * [Open an Issue](#open-an-issue)
+    * [Review your Service Interaction
+    * File(s)](#review-your-service-interaction-files)
+    * [Provide the List of
+    * Requirements](#provide-the-list-of-requirements)
+    * [Check the Taxonomy](#check-the-taxonomy)
+    * [Provide Global Configuration
+    * Parameters](#provide-global-configuration-parameters)
+    * [Verify Execution](#verify-execution)
+    * [Create a Pull Request](#create-a-pull-request)
   * [Need Help?](#need-help)
 
 ## Writing an Analyzer
