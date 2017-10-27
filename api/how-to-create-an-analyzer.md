@@ -1,357 +1,579 @@
-# Overview
-The main goal of Cortex is to run analysis on a given observable, defined by its data type, and a value. This observable could be of any type: IP, domain, URL, email, file... 
+# How to Write and Submit an Analyzer
 
-The programs that Cortex invokes to analyze observables are called **Analyzers**. An **analyzer** could be written in any programming language supported by Linux as long as the resulting program is on the same machine as Cortex and is executable.
+## Table of Contents
+  * [Writing an Analyzer](#writing-an-analyzer)
+    * [The Program](#the-program)
+    * [Service Interaction Files (Flavors)](#service-interaction-files-flavors)
+    * [Python Requirements](#python-requirements)
+    * [Example: VirusTotal Analyzer Files](#example-virustotal-analyzer-files)
+    * [Input](#input)
+    * [Service Interaction Configuration Items](#service-interaction-configuration-items)
+    * [Analyzer Configuration in the Global Configuration File](#analyzer-configuration-in-the-global-configuration-file)
+    * [Output](#output)
+    * [The Cortexutils Python Library](#the-cortexutils-python-library)
+    * [Report Templates](#report-templates)
+  * [Submitting an Analyzer](#submitting-an-analyzer)
+    * [Check Existing Issues](#check-existing-issues)
+    * [Open an Issue](#open-an-issue)
+    * [Review your Service Interaction File(s)](#review-your-service-interaction-files)
+    * [Provide the List of Requirements](#provide-the-list-of-requirements)
+    * [Check the Taxonomy](#check-the-taxonomy)
+    * [Provide Global Configuration Parameters](#provide-global-configuration-parameters)
+    * [Verify Execution](#verify-execution)
+    * [Create a Pull Request](#create-a-pull-request)
+  * [Need Help?](#need-help)
 
-# Create a Basic Analyzer
-From a technical standpoint, a minimal **analyzer** would be defined by:
-- A JSON definition file
-- An executable script. As of this writing, all the available analyzers are written in Python. However, analyzers can be written in any programming language supported by Linux
+## Writing an Analyzer
+An analyzer is a program that takes an observable and
+configuration information as **raw input**, analyze the observable and
+produces a result as **raw output**. It is made of at least 2 types of files:
 
-Throughout this document, we will use the [Hippocampe_More](https://github.com/CERT-BDF/Cortex-Analyzers/tree/master/analyzers/Hippocampe) analyzer as an example to teach you how to write your own analyzer.
+- The program itself
+- One or several service interaction files or flavors
+- A Python requirements file, which is only necessary if the analyzer is
+written in Python.
 
-Our **analyzer** will be defined inside a folder called `Hippocampe`. We use a convention. The folder where the analyzer is located is named after the product or service it leverages to do its work: MISP, MaxMind, PassiveTotal, VirusTotal, DomainTools...
+### The Program
+The first type of files an analyzer is made of is the core program that
+performs actions. It can be written in any programming
+language that is supported by Linux.
 
-## The JSON Definition File
-As its name implies, the JSON definition file contain metadata describing the analyzer. The associated filename must be `<PRODUCT_NAME>_<SERVICE_NAME>.json`. For example: `Hippocampe_more.json` and `Hippocampe_hipposcore.json`.
+While many analyzers are written in Python (`*.py` files), you can write yours
+in Ruby, Perl or even Scala. However, the very handy `Cortexutils` library
+[described below](#the-cortexutils-python-library) is in Python. It greatly facilitates analyzer development and
+it also provides some methods to quickly format the output to make it compliant
+with the JSON schema expected by [TheHive](https://github.com/CERT-BDF/TheHive/).
 
-The structure of this file is described in the table below:
+### Service Interaction Files (Flavors)
+An analyzer must have at least one service interaction file. Such files
+contain key configuration information such as the analyzer's author
+information, the datatypes (IP, URL, hash, domain...) the analyzer accepts as
+input, the TLP above which it will refuse to execute to protect against data
+leakage and to enforce sane OPSEC practices and so on.
 
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| name | String, `REQUIRED` | The analyzer's name |
-| version | String `REQUIRED` | The analyzer's version |
-| description | String `REQUIRED`| The analyzer's description |
-| dataTypeList | String[] `REQUIRED` | An array of strings, listing the observable data types that could be analyzed |
-| command | String `REQUIRED` | The command to invoke the analyzer's script. It must be relative to the root directory that contain all the analyzer folders |
-| baseConfig* | String `OPTIONAL` | The name of the configuration attribute defined in the Cortex configuration file |
-| config* | Object `OPTIONAL` | A configuration object that will be passed to the analyzer's command |
+An analyzer can have two or more service interaction files to allow it to
+perform different actions.  We speak then of flavors. For example, a sandbox analyzer can analyze a file with or without an
+Internet connection. Another example could be an analyzer that can either
+send a file to VirusTotal for analysis or get the last report using its hash.
 
-**Note**: Fields marked with a star (*) will be described in depth later in this document. 
+### Python Requirements
+If the analyzer is written in Python, a `requirements.txt` must be provided
+with the list of all the dependencies.
 
-**Example**
+### Example: VirusTotal Analyzer Files
+Below is a directory listing of the files corresponding to the VirusTotal
+analyzer. You can see that the analyzer has two flavors: **GetReport** and
+**Scan**.
+
+```bash
+analyzers/VirusTotal
+|-- VirusTotal_GetReport.json
+|-- VirusTotal_Scan.json
+|-- requirements.txt
+|-- virustotal.py
+`-- virustotal_api.py
+```
+
+### Input
+The input of an analyzer is a JSON structure with different
+pieces of information. For example, to use the VirusTotal analyzer's
+**GetReport** flavor in order to obtain the latest available report for hash
+`d41d8cd98f00b204e9800998ecf8427e`, you must submit input such as:
+
+
 ```json
 {
-    "name": "HippoMore",
-    "version": "1.0",
-    "description": "Hippocampe detailed report: provides the last detailed report for an IP, domain or a URL",
-    "dataTypeList": ["ip", "domain", "fqdn", "url"],
-    "baseConfig": "Hippocampe",
-    "config": {
-        "check_tlp": false,
-        "max_tlp":3,
-        "service": "more"
-    },
-    "command": "Hippocampe/hippo.py"
-}
-```
-
-## The Script
-The analyzer script must be an executable script that Cortex runs using the `command` provided within the JSON definition file. The script could be written in any programming language, as long as it could be executed using a shell command.
-
-When running the analyzer's script file, Cortex provides some input data through the standard input, and expects an output through the standard output.
-
-### Analyzer Input
-In Cortex, we distinguish between two types of observables: 
-- Value-based observables 
-- File-based observables
-
-The input sent by Cortex to the analyzers depend on the observable type.
-
-*Note*: when using Cortex with [TheHive](https://github.com/CERT-BDF/TheHive/), we use some output conventions that allow us to normalize the way TheHive displays the analysis reports. 
-
-#### Input for Value-based Observables
-The input for value-based observables must have the following structure:
-
-```json
-{ 
-    "dataType": "ip", 
-    "data": "8.8.8.8", 
-    "config": {}
-}
-```
-
-The following table explains the JSON schema of the input:
-
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| dataType | String, `REQUIRED` | The observables's type |
-| data | String `REQUIRED` | The observable's value |
-| config* | Object `OPTIONAL` | A config object, representing the analyzer's options and parameters if any |
-
-
-#### Input for File-based Observables
-The input for file-based observables must have the following structure:
-```json
-{ 
-    "dataType": "file", 
-    "attachment": {
-        "name": "<file.extension>"
-    },
-    "file": "/path/to/file/observable",
-    "config": {}
-}
-```
-
-The following table explains the JSON schema of the input:
-
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| dataType | String, `REQUIRED` | The observable's type (`file` in this case) |
-| file | String `REQUIRED` | The observable's file path |
-| attachment.name | String `OPTIONAL` | The observable's file name |
-| config* | Object `OPTIONAL` | A config object, representing the analyzer's options and parameters if any |
-
-#### The Analyzer Configuration Object
-An analyzer can define a default configuration object in its JSON definition file. Cortex can override or add additional configuration properties using the Cortex's configuration file.
-
-Based on that, the `config` object passed to the analyzer's script results from the merge operation of three objects:
-- the `config` object defined in the analyzer's JSON definition file (defines the default values of the analyzer's config) 
-- the `baseConfig` object defined in the Cortex's configuration file using the `analyzer.config.<baseConfig>` property (used to hold sensitive properties like API keys or credentials)
-- the *global* analyzers configuration defined in the Cortex's configuration file using `analyzer.config.global` (generally contains proxy configuration information)
-
-
-### Analyzer Output
-The output from Cortex could technically be any JSON object. That said, Cortex's UI might rely on a specific attribute to decide if the job failed or succeeded. The property is named `success` and must be a Boolean value.
-
-In the existing analyzers we tried to stick to some conventions where we defined the formats defined below.
-
-#### Successful Analysis
-```json
-{
-    "success": true,
-    "summary": {},
-    "artifacts": [],
-    "full": {}
-}
-```
-
-The following table explains the JSON conventions of the output:
-
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| success | Boolean `REQUIRED` | The analysis success flag |
-| summary | Object `OPTIONAL` | The analysis summary: a small report |
-| full | Object `REQUIRED` | The analysis complete report |
-| artifacts | Array[`<Artifact>`] `OPTIONAL` | An array of artifacts discovered by the analyzer |
-
-The `<Artifact>` object has the following structure:
-
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| type | String `REQUIRED` | The artifact data type |
-| value | String `REQUIRED` | The artifact value |
-
-**Note**: the `artifacts` array will be used in the future by [TheHive](https://github.com/CERT-BDF/TheHive/) to display or import the extracted artifacts from an analysis report.
-
-#### Unsuccessful Analysis
-```json
-{
-    "success": false,
-    "errorMessage": ""
-}
-```
-
-# The Cortexutils Library
-`cortexutils` is a Python library available on `pip`. It provides a Python class that facilitates the creation of analyzer script files. It includes an abstract `Analyzer` class that a programmer may inherit and override in their script. It also provides some methods to quickly format the output to be compliant with the JSON schema expected by [TheHive](https://github.com/CERT-BDF/TheHive/).
-
-To create an analyzer class, developers have to:
-
-1. Create a subclass of `cortexutils.analyzer.Analyzer`
-2. Override the constructor, call the super constructor and if needed, read the specific analyzer's options (read specific configuration properties from the config object)
-3. Override the `run` method. It must either return a report, using the `report` method, or an error using the `error`method. If `run`is not overridden, the analyzer returns an empty report
-3. Optionally override the `summary` method. It should return a JSON object representing a summary of the analyzer report. If not overridden, the analyzer returns an empty summary
-3. Optionally override the `artifacts` method. It should return a JSON array representing a list of `artifact` objects (as described above). If not overridden, the analyzer returns the result of an `ioc-parser`, ran over the full JSON report.
-
-Below is an example of a basic analyzer that can handle IPs and domains:
-
-```python
-#!/usr/bin/env python
-# encoding: utf-8
-
-from cortexutils.analyzer import Analyzer
-
-# Define analyzer's class
-class BasicExampleAnalyzer(Analyzer):
-    # Analyzer's constructor
-    def __init__(self):
-        # Call the constructor of the super class
-        Analyzer.__init__(self)
-
-        # Read specific config options
-        self.optional_prop = self.getParam('config.optional_prop', '')
-        self.required_prop = self.getParam('config.required_prop', None, 'Error: Missing required_prop')
-
-    # Override the report method. This is the analyzer's entry point
-    def run(self):
-        # Put your analyzer's logic here
-        result = {}
-
-        # This is just an example
-        if self.data_type == 'ip':
-            result['findings'] = ['1.1.1.1', '2.2.2.2', '3.3.3.3']
-        elif self.data_type == 'domain':
-            result['findings'] = ['domain1.com', 'domain2.com', 'domain3.com']
-        else:
-            return self.error('Unsupported observable data type')
-
-        # Return the report
-        return self.report(result)
-
-    # Override the summary method
-    def summary(self, raw_report):
-        return {
-            'count': len(raw_report['findings'])
-        }
-
-    # Override the artifacts method
-    def artifacts(self, raw_report):
-        result = []
-        if 'findings' in raw_report:            
-            for item in raw_report['findings']:
-                result.append({'type': self.data_type, 'value': item})            
-
-        return result
-    
-# Invoke the analyzer
-if __name__ == '__main__':
-    BasicExampleAnalyzer().run()
-
-```
-
-To call this analyzer, we can run the following command:
-
-```
-python sample-analyzer.py <<< '{
-    "dataType":"ip", 
-    "data": "8.8.8.8", 
+    "data":"d41d8cd98f00b204e9800998ecf8427e",
+    "dataType":"hash",
+    "tlp":0,
     "config":{
-        "required_prop": "anyvalue"
-    }
-}'
-```
-
-This will generate the following output:
-
-```json
-{
-   "success" : true,
-   "artifacts" : [
-      {
-         "value" : "1.1.1.1",
-         "type" : "ip"
-      },
-      {
-         "value" : "2.2.2.2",
-         "type" : "ip"
-      },
-      {
-         "value" : "3.3.3.3",
-         "type" : "ip"
+        "key":"1234567890abcdef",
+        "max_tlp":3,
+        "check_tlp":true,
+        "service":"GetReport"
+        [..]
+    },
+    "proxy":{
+        "http":"http://myproxy:8080",
+        "https":"https://myproxy:8080"
       }
-   ],
-   "summary" : {
-      "count" : 3
-   },
-   "full" : {
-      "findings" : [
-         "1.1.1.1",
-         "2.2.2.2",
-         "3.3.3.3"
-      ]
-   }
-}
+  }
 ```
 
-And in Cortex ![](../images/cortex-report.png)
+`data`, `dataType` and `tlp` are the observable-related information generated by
+TheHive or any other program that is calling Cortex. `config` is the
+analyzer's specific configuration items, which are obtained from the
+Cortex configuration file - `/etc/cortex/application.conf` - and the service
+ interaction file, `VirusTotal_GetReport.json`.
 
-# TheHive and Cortex analyzers
-Using Cortex from an instance of [TheHive](https://github.com/CERT-BDF/TheHive/) helps the users improve the analysis report visualization. In fact, TheHive uses the outputs generated from Cortex analyzers in two ways:
+Let's take the **GetReport** flavor of the VirusTotal analyzer as an
+example again.
 
-- Store the `summary` content as part of the observable's data. This is available for successful analysis jobs only.
-- Display the `full`report using the report templates defined within TheHive.
-
-## Report templates
-[TheHive](https://github.com/CERT-BDF/TheHive/) is based on Angular 1 and report templates have to be Angular templates which we try to fill using the job's report data. 
-
-We distinguish 2 types of report templates:
-
-### Short reports
-Generates what we call **mini reports**, to be displayed in the observable's details page and observables list. Short report templates receive the following data:
-
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| name | String | Analyzer's ID |
-| content | Object | The job report's `summary` object |
-| artifact | Object | The observable details, as stored in TheHive |
-
-For example, if we want to create a short report template for the `BasicExampleAnalyzer`, we could write the following HTML short report file:
-
-```html
-<span class="label label-info">Basic: {{content.count || 0}} record(s)</span>
-```
-
-`content` being the following:
+#### Example: VirusTotal Get Report's Input
 
 ```json
 {
-    "count" : 3
+    "data":"d41d8cd98f00b204e9800998ecf8427e",
+    "dataType":"hash",
+    "tlp":0,
+    [..]
+  }
+```
+
+#### Example: Service Interaction File for VirusTotal GetReport
+The `<==` sign and anything after it are comments that do no appear in the
+original file.
+
+```json
+{
+    "name": "VirusTotal_GetReport",
+    "version": "3.0",
+    "author": "CERT-BDF",
+    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+    "license": "AGPL-V3",
+    "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
+    "dataTypeList": ["file", "hash", "domain", "ip"],
+    "baseConfig": "VirusTotal", <== name of base config in /etc/cortex/application.conf
+    "config": {
+        "check_tlp": true,
+        "max_tlp": 3,
+        "service": "get"
+    },
+    "command": "VirusTotal/virustotal.py" <= main program
 }
 ```
 
-The result in TheHive will be ![](../images/short-report.png)
+### Service Interaction Configuration Items
+#### name
+Name of the specific service (or flavor) of the analyzer.
 
-### Long reports
-Like short reports, the long reports are used to render the content of the `full` attribute of a job JSON report.
+If your analyzer has only one service interaction (i.e. performs only one
+action), it is the name of the analyzer's directory.
 
-Long report templates receive the following data:
+If your analyzer performs several actions (i.e. comes in several flavors),
+you have to give a specific and meaningful name to each flavor.
 
-| Attribute  | Type | Description |
-| ------------ | ------------- | ------------- |
-| name | String | Analyzer's ID |
-| status | String | The job's status: `Success`, `Failure`, `InProgress` |
-| success | Boolean | The job's success status |
-| content | Object | The job report's `full` object |
-| artifact | Object | The observable details, as stored in TheHive |
+Each flavor's name appear in TheHive's analyzer list and in MISP when you
+use Cortex for attribute enrichment.
+
+#### version
+The version of the analyzer.
+
+You **must** increase major version numbers when new features are added,
+modifications are made to take into account API changes, report output is
+modified or when report templates (more on this later) are updated.
+
+You must increase minor version numbers when bugs are fixed.
+
+The version number is also used in the folder name of the associated report
+templates ; e.g. *VirusTotal\_GetReport* and *3.0* on the JSON file should
+correspond a folder named *VirusTotal\_GetReport\_3\_0* for report templates.
+ Report templates are used by TheHive to display the analyzer's JSON output
+ in an analyst-friendly fashion.
+
+#### author
+You must provide your full name and/or your organization/team name when
+submitting an analyzer. Pseudos are not accepted. If you'd rather remain
+anonymous, please contact us at support@thehive-project.org prior to
+submitting your analyzer.
+
+#### url
+The URL where the analyzer is stored. This should ideally be
+`https://github.com/CERT-BDF/Cortex-Analyzers`
+
+#### license
+The license of the code. Ideally, we recommend using the AGPL-v3
+license.
+
+Make sure your code's license is compatible with the license(s) of the
+various components and libraries you use if applicable.
+
+#### description
+Description of the analyzer. Please be concise and clear. The description is
+ shown in the Cortex UI, TheHive and MISP.
+
+#### dataTypeList
+The list of TheHive datatypes supported by the analyzer. Currently TheHive
+accepts the following datatypes:
+
+- domain
+- file
+- filename
+- fqdn
+- hash
+- ip
+- mail
+- mail_subject
+- other
+- regexp
+- registry
+- uri_path
+- url
+- user-agent
+
+If you need additional datatypes for your analyzer, please let us know at
+[support@thehive-project.org](mailto:support@thehive-project.org).
+
+#### baseConfig
+Name used for the analyzer in the global Cortex configuration file
+(`/etc/cortex/application.conf`).
+
+#### config
+Configuration dedicated to the analyzer's flavor. This is where we
+ typically specify the TLP level of observables allowed to be analyzed with the
+ `check_tlp` and `max_tlp` parameters. For example, if `max_tlp` is set to `2` (TLP:AMBER),
+ TLP:RED observables cannot be analyzed.
+
+#####  max_tlp
+The TLP level above which the analyzer must not be executed.
+
+| TLP   |     max_tlp value     |
+|:----------:|:-------------:|
+| Unknown |  -1 |
+| WHITE |   0  |
+| GREEN | 1 |
+| AMBER | 2 |
+| RED | 3 |
 
 
-For example, if we want to create a long report template for the `BasicExampleAnalyzer`, we could write the following HTML long report file:
+##### check_tlp
+This is a boolean parameter. When `true`, `max_tlp` is checked. And if the
+input's TLP is above `max_tlp`, the analyzer is not executed.
+
+For consistency reasons, we do recommend setting both `check_tlp` and
+`max_tlp` even if `check_tlp` is set to `false`.
+
+##### command
+The command used to run the analyzer. That's typically the full, absolute
+path to the main program file.
+
+### Analyzer Configuration in the Global Configuration File
+An analyzer might need specific configuration parameters such as a username and
+password, an API key, a URL and so on. These items must be added to the
+relevant section in the Cortex global configuration file
+(`/etc/cortex/application.conf`).
+
+Please respect the following variable calling convention:
+
+| Type of data   |     Variable name     |
+|:----------:|:-------------:|
+| An API key |  `key` (lowercase) |
+| A username |   `username`  |
+| A password | `password` |
+| a URL | `url` |
+
+Here is how the configuration section of the VirusTotal analyzer looks in `/etc/cortex/application.conf`:
+
+```
+analyzer {
+    config {
+            global {
+                    proxy {
+                           http="http://myproxy:8080",
+                           https="https://myproxy:8080"
+                    }
+            [..]
+            VirusTotal {
+                key="1234567890abcdef"
+            }
+    [..]
+```
+
+### Output
+The output of an analyzer depends on the success or failure of its execution.
+
+If the analyzer **fails** to execute:
+
+    ```json
+    {
+        "success": false,
+        "errorMessage":".."
+    }
+    ```
+
+    -   When `success` is set to `false`, it indicates that something went wrong
+        during the execution.
+    -   `errorMessage` is free text - typically the error output message.
+
+If the analyzer **succeeds** (i.e. it runs without any error):
+
+    ```json
+    {
+        "success":true
+        "artifacts":[..],
+        "summary":{
+            "taxonomies":[..]
+        },
+        "full":{..}
+    }
+    ```
+
+    -   When `success` is set to `true`, it indicates that the analyzer ran
+        successfully.
+    -   `artifacts` is a list of indicators extracted from the produced report.
+    -   `full` is the full report of the analyzer. It is free form, as long
+    as it is JSON formatted.
+    -   `summary` is used in TheHive for short reports displayed in the
+        observable list and in the detailed page of each observable. It
+        contains a list of taxonomies.
+        -   `taxonomies`:
+
+        ```json
+        "taxonomies":[
+          {
+              "namespace": "NAME",
+              "predicate": "PREDICATE",
+              "value": "\"VALUE\"",
+              "level":"info"
+          }
+        ]
+        ```
+
+        -   `namespace` and `predicate` are free values but they should be as
+         concise as possible. For example, the VirusTotal analyzer uses *VT*
+         as a namespace and *Score* as a predicate.
+        -   `level` intends to convey the maliciousness of the result:
+            :
+            -   `info` : the analyzer produced an information, and the
+                short report is shown in blue color in TheHive.
+            -   `safe` : the analyzer did not find anything suspicious
+                or the analyzed observable is safe according to
+                the analyzer. TheHive displays the short report in green
+                color.
+            -   `suspicious` : the analyzer found that the observable is
+                either suspicious or warrants further investigation. The
+                short report has an orange color in TheHive.
+            -   `malicious` : the analyzer found that the observable
+                is malicious. The short report is red colored in TheHive.
+
+For more information refer to [our blog](https://blog.thehive-project.org/2017/07/05/all-fresh-cortexutils-new-cortex-analyzers/).
+
+
+### The Cortexutils Python Library
+So far, all the published analyzers have been written in Python. We
+released a special Python library called `cortexutils` to help developers easily write their programs. Note though that Python is not mandatory for analyzer coding and any language that runs on Linux can be used, though you won't have the benefits of the CortexUtils library.
+
+Cortexutils can be used with Python 2 and 3.
+To install it :
+
+```bash
+pip install cortexutils
+```
+
+or
+
+```bash
+pip3 install cortexutils
+```
+
+This library is already used by all the analyzers published in our [Github
+repository](https://github.com/CERT-BDF/Cortex-Analyzers). Feel free to
+start reading the code of some of them before writing your own.
+
+### Report Templates
+When using TheHive, analysts can submit an observable for analysis to one or
+several Cortex instances by a click of a button. Once finished,
+Cortex returns the result to TheHive. The TheHive displays that result
+using HTML templates for short and long reports.
+
+#### Cortex Result in TheHive
+TheHive receives the Cortex result which is simply the JSON formatted
+analyzer output described above:
+
+-   The `summary` section is read to display short reports in the observables
+list and in the detailed observable page. This is stored in a **dict** object
+named `content` within TheHive.
+-   The `full` section is read to display long reports when clicking the short
+    report in the observable list or when accessing a detailed observable
+    page. In TheHive application, it is stored in a **dict** object named
+    `content`.
+
+#### Displayed Information
+
+##### When No Template is Imported
+In the event that the analyzer report templates are not imported in TheHive
+(only administrators can do such an operation via the *Admin > Report
+Templates* menu):
+
+-   In the observable list, TheHive is able to display the analyzer `summary`
+    results using a builtin style sheet associated with the previously
+    described taxonomy.
+-   In the detailed observable page:
+      + the `full` result is displayed in raw format (the JSON output from
+      Cortex)
+      + the `summary` result is **not displayed**.
+
+##### When Templates are Imported
+If templates are imported into TheHive:
+
+-   Short reports are displayed in the observable list and in the detailed
+observable page.
+
+![VT short report](../images/sc-short-vt.png)
+
+-   Long reports are displayed when clicking on the short reports or in the
+detailed observable page.
+
+![VT long report](../images/sc-long-vt.jpg)
+
+
+#### Writing Templates
+
+To display results nicely in TheHive, write two HTML templates:
+
+- One for short reports
+- One for long reports
+
+When TheHive users import them in the application, they will be definitely
+more efficient at reading the analyzer reports and do their job accordingly.
+
+If the analyzer is made of different flavors (i.e. has different service
+interaction files with a `json` extension), you should provide two HTML
+templates (short and long reports) for each flavor.
+
+For example, the VirusTotal analyzer comes in two flavors hence it has 4 HTML
+ templates:
+
+```bash
+thehive-templates/VirusTotal_GetReport_3_0
+|-- long.html
+`-- short.html
+thehive-templates/VirusTotal_Scan_3_0
+|-- long.html
+`-- short.html
+```
+
+The folder's name is the concatenation of the `name` and the
+`version` values found in the service interaction files.
+
+TheHive uses Bootstrap and AngularJS so you can leverage them in your
+templates.
+
+##### Short Report Templates (short.html)
+
+The short report uses taxonomies and is built into the analyzers by the
+`summary()` function. Report templates read it as shown in the example below:
 
 ```html
-<!-- Success case -->
-<div class="panel panel-info" ng-if="success">
+<span class="label" ng-repeat="t in content.taxonomies"
+  ng-class="{'info': 'label-info', 'safe': 'label-success',
+  'suspicious': 'label-warning',
+  'malicious':'label-danger'}[t.level]">
+    {{t.namespace}}:{{t.predicate}}={{t.value}}
+</span>
+```
+
+If you want to change or add the information displayed in the short report in
+the detailed observable page, you have to update the
+`summary()` function in the analyzer's program and edit short.html as
+well. Basically, copy the code in your short.html template and it will
+do the job.
+
+##### Long Report Templates (long.html)
+Long report templates are more or less free form as long as it reads the
+content of the relevant section in the Cortex result (`full`). Feel
+free to check what has already been written for existing analyzers to write
+yours.
+
+A good start can be:
+
+```html
+<!-- Success -->
+<div class="panel panel-danger" ng-if="success">
     <div class="panel-heading">
-        <strong>{{name}}</strong>
+        ANALYZERNAME Report
     </div>
     <div class="panel-body">
-      <div>{{content.findings.length}} {{artifact.dataType | uppercase}}(s) found form {{artifact.data | fang}}</div>
-      <ul>
-          <li ng-repeat="finding in content.findings">{{finding}}</li>
-      </ul>
+        [...]                      <= code here
     </div>
 </div>
 
-<!-- Failure case -->
+<!-- General error  -->
 <div class="panel panel-danger" ng-if="!success">
     <div class="panel-heading">
-        <strong>{{artifact.data | fang}}</strong>
+        <strong>{{(artifact.data || artifact.attachment.name) | fang}}</strong>
     </div>
     <div class="panel-body">
-        {{content.errorMessage}}
+        <dl class="dl-horizontal" ng-if="content.errorMessage">
+            <dt><i class="fa fa-warning"></i> ANALYZERNAME: </dt>
+            <dd class="wrap">{{content.errorMessage}}</dd>
+        </dl>
     </div>
 </div>
 ```
 
-`content` being the following:
+## Submitting an Analyzer
+We **highly encourage you to share your analyzers** with the community through our Github repository. To do so, we invite you to follow a few steps before submitting a pull request.
+
+### Check Existing Issues
+Start by checking [if an issue already exists](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
+
+If you are short on ideas, check issues with a [**help wanted** label](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
+
+### Open an Issue
+If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/CERT-BDF/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
+
+You have to create an issue for each analyzer you'd like to submit.
+
+### Review your Service Interaction File(s)
+Review your service interaction files. For example, let's check the
+VirusTotal JSON analyzer configuration file(s):
 
 ```json
 {
-    "findings" : [
-        "1.1.1.1",
-        "2.2.2.2",
-        "3.3.3.3"
-    ]
+    "name": "VirusTotal_GetReport",
+    "version": "3.0",
+    "author": "CERT-BDF",
+    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+    "license": "AGPL-V3",
+    "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
+    "dataTypeList": ["file", "hash", "domain", "ip"],
+    "baseConfig": "VirusTotal",
+    "config": {
+        "check_tlp": true,
+        "max_tlp": 3,
+        "service": "get"
+    },
+    "command": "VirusTotal/virustotal.py"
 }
 ```
+Ensure that all information is correct and particularly the `author` and
+`license` parameters.
 
-The result in TheHive will be ![](../images/long-report.png)
+### Provide the List of Requirements
+If your analyzer is written in Python, make sure to complete the
+`requirements.txt` file with the list of all the external libraries that are
+needed to run the analyzer correctly.
+
+### Check the Taxonomy
+We chose to use a formatted summary report to match a taxonomy as
+described above. If you want your analyzer reports in the observable lists,
+ensure that your summary matches this format. If your analyzer is
+written in Python and you are using our `cortexutils` library,
+you can use the `summary()`and `build_taxonomy()` functions.
+
+### Provide Global Configuration Parameters
+When submitting your analyzer, please provide the necessary global
+configuration in `/etc/cortex/application.conf` if needed. You can provide this information in a `README` file.
+
+### Verify Execution
+Use these three simple checks before submtting your analyzer:
+
+-   Ensure it works with the expecyed configuration, TLP or dataType.
+-   Ensure it works with missing configuration, dataType or TLP: your
+analyzer must generate an explicit error message.
+-   Ensure the long report template handles error messages correctly.
+
+### Create a Pull Request
+Create one Pull Request per analyzer against the **develop** branch of the
+[Cortex-Analyzers](https://github.com/CERT-BDF/Cortex-Analyzers/) repository. Reference the issue you've created in your PR.
+
+We have to review your analyzers. Distinct PRs will allow us to review them
+more quickly and release them to the benefit of the whole community.
+
+## Need Help?
+Something does not work as expected? No worries, we got you covered. Please
+join our [user forum](https://groups.google.com/a/thehive-project.org/forum/#!forum/users),
+ contact us on [Gitter](https://gitter.im/TheHive-Project/TheHive), or send us
+ an email at [support@thehive-project.org](mailto:support@thehive-project
+ .org). We are here to help.
