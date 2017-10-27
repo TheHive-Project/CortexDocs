@@ -13,6 +13,7 @@
     * [The Cortexutils Python Library](#the-cortexutils-python-library)
     * [Report Templates](#report-templates)
   * [Submitting an Analyzer](#submitting-an-analyzer)
+    * [Check Existing Issues](#check-existing-issues)
     * [Open an Issue](#open-an-issue)
     * [Review your Service Interaction File(s)](#review-your-service-interaction-files)
     * [Provide the List of Requirements](#provide-the-list-of-requirements)
@@ -504,9 +505,15 @@ A good start can be:
 ## Submitting an Analyzer
 We **highly encourage you to share your analyzers** with the community through our Github repository. To do so, we invite you to follow a few steps before submitting a pull request.
 
+### Check Existing Issues
+Start by checking [if an issue already exists](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
+
+If you are short on ideas, check issues with a [**help wanted** label](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
+
 ### Open an Issue
-[Open an issue](https://github.com/CERT-BDF/Cortex-Analyzers/issues/new) for
-each analyzer you'd like to submit. Indicate that you are working on it to avoid having someone start coding it.
+If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/CERT-BDF/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
+
+You have to create an issue for each analyzer you'd like to submit.
 
 ### Review your Service Interaction File(s)
 Review your service interaction files. For example, let's check the
