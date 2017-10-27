@@ -246,7 +246,7 @@ Please respect the following variable calling convention:
 
 Here is how the configuration section of the VirusTotal analyzer looks:
 
-``` {.sourceCode .}
+``` {.sourceCode }
 analyzer {
     config {
             global {
@@ -366,7 +366,7 @@ TheHive receives the Cortex result which is simply the JSON formatted
 analyzer output described above:
 
 -   The `summary` section is read to display short reports in the observables
-list and in the detailed observable page. This stored in a **dict** object
+list and in the detailed observable page. This is stored in a **dict** object
 named `content` within TheHive.
 -   The `full` section is read to display long reports when clicking the short
     report in the observable list or when accessing a detailed observable
@@ -400,6 +400,7 @@ observable page.
 detailed observable page.
 
 ![VT long report](../images/sc-long-vt.jpg){width="600px"}
+
 
 #### Writing Templates
 
