@@ -14,13 +14,10 @@
     * [Report Templates](#report-templates)
   * [Submitting an Analyzer](#submitting-an-analyzer)
     * [Open an Issue](#open-an-issue)
-    * [Review your Service Interaction
-    * File(s)](#review-your-service-interaction-files)
-    * [Provide the List of
-    * Requirements](#provide-the-list-of-requirements)
+    * [Review your Service Interaction File(s)](#review-your-service-interaction-files)
+    * [Provide the List of Requirements](#provide-the-list-of-requirements)
     * [Check the Taxonomy](#check-the-taxonomy)
-    * [Provide Global Configuration
-    * Parameters](#provide-global-configuration-parameters)
+    * [Provide Global Configuration Parameters](#provide-global-configuration-parameters)
     * [Verify Execution](#verify-execution)
     * [Create a Pull Request](#create-a-pull-request)
   * [Need Help?](#need-help)
