@@ -1,3 +1,4 @@
+**This guide is deprecated**. Please check the [new guide](how-to-create-an-analyzer.md).
 # Overview
 The main goal of Cortex is to run analysis on a given observable, defined by its data type, and a value. This observable could be of any type: IP, domain, URL, email, file... 
 
