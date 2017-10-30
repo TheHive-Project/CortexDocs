@@ -1,4 +1,4 @@
-# WARNING: DRAFT
+# DRAFT -- WIP
 
 # Cortex Analyzer Requirements
 This document outlines the different information that needs to be provided for each analyzer, such as API keys, usernames, instances, etc. It will also specify whether the service is paid, free, or requires special access. This will assist users in deciding what analyzers they want to enable and what information they need to gather in order to enable them.
@@ -64,7 +64,8 @@ URLs, IPs and email addresses.
 The analyzer comes in only one flavor.
 
 #### Configuration
-None. The analyzer has no entry in the `config` section.
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box.
 
 ### CuckooSandbox
 #### Description
@@ -105,7 +106,8 @@ extract their source code, generate useful information on PE, PDF files and much
 The analyzer comes in only one flavor.
 
 #### Configuration
-None. The analyzer has no entry in the `config` section.
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box.
 
 
 ### FireHOLBlocklists 
@@ -140,19 +142,69 @@ Specify the directory where the lists have been downloaded using the
     }
 ```
 
-#### Fortiguard
+### Fortiguard
+#### Description
+Check the [Fortiguard](https://fortiguard.com/webfilter) category of a URL or
+ a domain.
 
-**Configuration Parameters**: None
+The analyzer comes in only one flavor called *Fortiguard_URLCategory*.
 
-### Google SafeBrowsing
-**Configuration Parameters**: API Key
+#### Configuration
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box.
 
-An account with Google is required to get an API key.
+### GoogleSafeBrowsing
+#### Description
+Check URLs against [Google Safebrowsing](https://www.google.com/transparencyreport/safebrowsing/).
+
+The analyzer comes in only one flavor. 
+
+#### Configuration
+##### Requirements
+You need to [obtain an API key](https://developers.google.com/safe-browsing/)
+ from Google.
+
+##### Parameters
+Provide your API key as a value of the `key` parameter.
+
+#### Example
+```text
+    GoogleSafebrowsing {
+      key = "MYKEY"
+    }
+```
 
 ### Hippocampe
-**Configuration Parameters**: Url
+#### Description
+Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe), 
+a FOSS tool from TheHive Project that centralizes feeds and allows you to 
+associate a confidence level to each one of them (that can be changed over time)
+ and get a score indicating the data quality.
+ 
+The analyzer comes in two flavors:
+- HippoMore: get the Hippocampe detailed report for an IP address, a domain or
+ a URL.
+- Hipposcore: get the Hippocampe Score report associated with an IP address, a
+ domain or a URL.
 
-The Hippocampe analyzer requires you to have a local instance of Hippocampe deployed/configured. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up Hippocampe can be found [here](https://github.com/CERT-BDF/Hippocampe).
+#### Configuration
+##### Requirements
+The Hippocampe analyzer requires you to have a local instance of Hippocampe 
+deployed/configured. It is an open source tool that is free for use but needs
+ to be manually deployed in your environment. Please go to [https://github.com/CERT-BDF/Hippocampe](https://github.com/CERT-BDF/Hippocampe)
+ for more in information on setting it up.
+
+##### Parameters
+To configure the analyzer you need to supply the URL of your local instance 
+using the `url` keyword.
+
+##### Example
+```text
+Hippocampe {
+    url = "http://my.hippocampe.instance"
+}
+```
+**PROGRESS_MARK**
 
 ### JoeSandbox
 **Configuration Parameters**: _TBD_
