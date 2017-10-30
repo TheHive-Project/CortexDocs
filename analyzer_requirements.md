@@ -4,7 +4,7 @@
 This document outlines the different information that needs to be provided for each analyzer, such as API keys, usernames, instances, etc. It will also specify whether the service is paid, free, or requires special access. This will assist users in deciding what analyzers they want to enable and what information they need to gather in order to enable them.
 
 All configuration settings must be made in the global Cortex configuration 
-file (`/etc/cortex/application.conf` by default).
+file (`/etc/cortex/application.conf` by default), in the `config` section.
 
 By default, all analyzers are enabled. If you want to disable some of them, 
 add a 
@@ -53,25 +53,95 @@ DomainTools_ReverseWhois_2_0
 DomainTools_WhoisHistory_2_0
 [...]
 ```
-## Free
+## Free Analyzers
 
 ### Abuse_Finder
-**Configuration Parameters**: None
+#### Description
+Use CERT-SG's [Abuse Finder](https://github.com/certsocietegenerale/abuse_finder) to fin abuse contacts associated with domain 
+names, 
+URLs, IPs and email addresses.
+
+The analyzer comes in only one flavor.
+
+#### Configuration
+None. The analyzer has no entry in the `config` section.
 
 ### CuckooSandbox
-**Configuration Parameters**: Url
+#### Description
+Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
 
-The CuckooSandbox analyzer requires you to have a local instance of Cuckoo Sandbox deployed. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up Cuckoo Sandbox can be found [here](https://cuckoosandbox.org/).
+The analyzer comes in two flavors:
+
+- CuckooSandbox_**File_Analysis_Inet**: submit files for analysis to a Cuckoo 
+Sandbox instance with Internet access.
+- CuckooSandbox_**Url_Analysis**: submit URLs for analysis to a Cuckoo Sandbox 
+instance.
+
+#### Configuration
+##### Requirements
+The CuckooSandbox analyzer requires you to have a local instance
+ of Cuckoo Sandbox deployed.
+It is an open source tool that is free for use but needs to be manually 
+deployed in your environment. Please go to 
+[https://cuckoosandbox.org/](https://cuckoosandbox.org/) 
+for more information on setting it up.
+
+##### Parameters
+To configure the analyzer you need to supply the URL of your local instance 
+using the `url` keyword.
+
+Example:
+```text
+CuckooSandbox {
+    url = "http://my.cuckoo.sandbox"
+}
+```
 
 ### File_Info
-**Configuration Parameters**: None
+#### Description
+Parse files in several formats such as OLE and OpenXML to detect VBA macros, 
+extract their source code, generate useful information on PE, PDF files and much more.
 
-### FireHOL Blocklist 
-**Configuration Parameters**: Path to FireHOL blocklists
+The analyzer comes in only one flavor.
 
-FireHOL blocklists can be downloaded from [here](https://iplists.firehol.org)
+#### Configuration
+None. The analyzer has no entry in the `config` section.
 
-### Fortiguard
+
+### FireHOLBlocklists 
+#### Description
+Check IP addresses against the [FireHOL blocklists](https://firehol.org/).
+
+The analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+This analyzer needs you to download the FireHOL block lists first to a 
+directory. Use `git` for that  purpose:
+```commandline
+$ mkdir /path/to/firehol
+$ cd /path/to/firehol
+$ git clone https://github.com/firehol/blocklist-ipsets 
+```
+
+We advise you to keep the lists fresh  by  adding  a  cron  entry  to 
+regularly download them for example (using `git pull`).
+
+#### Parameters
+Specify the directory where the lists have been downloaded using the 
+`blocklistpath` paramater and  an optional `ignoreolderthandays` parameter to
+ ignore all lists that have not been updated in the last N days.
+
+#### Example
+```text
+    FireHOLBlocklists {
+      blocklistpath = "/opt/firehol/blocklists"
+      ignoreolderthandays="7" # ignore all lists not updated in the last 7d
+    }
+```
+
+#### Fortiguard
+
 **Configuration Parameters**: None
 
 ### Google SafeBrowsing
