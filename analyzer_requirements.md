@@ -1,9 +1,49 @@
 # DRAFT -- WIP
 
 # Cortex Analyzer Requirements
-This document outlines the different information that needs to be provided for each analyzer, such as API keys, usernames, instances, etc. It will also specify whether the service is paid, free, or requires special access. This will assist users in deciding what analyzers they want to enable and what information they need to gather in order to enable them.
+This document outlines the different information that needs to be provided for 
+each analyzer, such as API keys, usernames, instances, etc. It will also 
+specify whether the service is paid, free, or requires special access. This 
+will assist users in deciding what analyzers they want to enable and what 
+information they need to gather in order to enable them.
 
-All configuration settings must be made in the global Cortex configuration 
+## Table of Contents
+
+  * [Introduction](#introduction)
+  * [Free Analyzers](#free-analyzers)
+    * [Abuse\_Finder](#abuse_finder)
+    * [CuckooSandbox](#cuckoosandbox)
+    * [File\_Info](#file_info)
+    * [FireHOLBlocklists](#fireholblocklists)
+    * [Fortiguard](#fortiguard)
+    * [GoogleSafeBrowsing](#googlesafebrowsing)
+    * [Hippocampe](#hippocampe)
+    * [JoeSandbox](#joesandbox)
+    * [MISP](#misp)
+    * [Msg\_Parser](#msg_parser)
+    * [OTXQuery](#otxquery)
+    * [PassiveTotal](#passivetotal)
+    * [PhishTank](#phishtank)
+    * [Phishing Intiative](#phishing-intiative)
+    * [VirusTotal](#virustotal)
+    * [Virusshare](#virusshare)
+    * [WOT](#wot)
+    * [Yara](#yara)
+    * [YETI](#yeti)
+  * [Paid](#paid)
+    * [DNSDB](#dnsdb)
+    * [DomainTools](#domaintools)
+    * [MaxMind](#maxmind)
+    * [Nessus](#nessus)
+    * [VMRay](#vmray)
+  * [Special Access](#special-access)
+    * [CERTatPassiveDNS](#certatpassivedns)
+    * [CIRCLPassiveDNS](#circlpassivedns)
+    * [CIRCLPassiveSSL](#circlpassivessl)
+
+## Introduction
+All configuration settings must be made in the global Cortex 
+configuration 
 file (`/etc/cortex/application.conf` by default), in the `config` section.
 
 By default, all analyzers are enabled. If you want to disable some of them, 
