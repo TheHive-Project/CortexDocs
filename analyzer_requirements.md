@@ -307,7 +307,7 @@ first one is accessed through HTTP while the second has HTTPS enabled.
 #### Description
 Parse Outlook message files automatically and show the key information it 
 contains such as headers, attachments etc. Please note that the analyzer 
-doesn't not extract attachments.
+doesn't extract attachments.
 
 The analyzer comes in only one flavor.
 
