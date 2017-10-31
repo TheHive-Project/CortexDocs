@@ -247,6 +247,26 @@ Hippocampe {
 }
 ```
 
+### MaxMind
+#### Description
+Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home) 
+GeoLite2 **free** City and Country databases.
+
+Cortex does not refresh those databases automatically. It is up to you to 
+create a cron job to refresh them at the frequency you want. The files to 
+update are:
+
+- `MaxMind/GeoLite2-City.mmdb`
+- `MaxMind/GeoLite2-Country.mmdb`
+
+You can fetch up-to-date versions from [https://dev.maxmind.com/geoip/geoip2/geolite2/](https://dev.maxmind.com/geoip/geoip2/geolite2/).
+
+The analyzer comes in only one flavor.
+
+#### Configuration
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box.
+
 ### MISP
 #### Description
 Query multiple MISP (Malware Information Sharing Platform )instances for 
@@ -364,17 +384,31 @@ as the value to the `key` configuration parameter for this analyzer to work.
     }
 ```
 
+### PhishingInitiative
+#### Description
+Query [Phishing Initiative](https://phishing-initiative.fr/contrib/) to 
+assess whether a URL has been flagged a phishing site.
+
+This analyzer comes in only one flavor called *PhishingInitiative_Lookup*.
+
+#### Configuration
+##### Requirements
+You need to sign up for a [Phishing Initiative](https://phishing-initiative.fr/register)
+ account or use an existing one.
+
+##### Parameters
+Log in to your Phishing Initiative account, click on the icon representing 
+your account details then on *API*. Retrieve the API key value and supply 
+it as the value to the `key` configuration parameter.
+
+##### Example
+```text
+    PhishingInitiative {
+      key="MYPHISHINGINITIATIVEAPIKEYGOESHERE"
+    }
+```
+
 **PROGRESS_MARK**
-
-### Phishing Intiative
-**Configuration Parameters**: API Key
-
-An account with Phishing Intiative is required to get an API key. You can sign up for an account [here](https://phishing-initiative.fr/register).
-
-### VirusTotal
-**Configuration Parameters**: API Key
-
-An account with VirusTotal is required to get an API key. You can sign up for an account [here](https://www.virustotal.com/en/).
 
 ### Virusshare
 **Configuration Parameters**: Path to Virusshare hash lists
@@ -391,18 +425,25 @@ An account with Web of Trust is required to get an API key. You can sign up for 
 
 You have to have Yara rules downloaded in order to use this analyzer. 
 
-### YETI
+### Yeti
 **Configuration Parameters**: Url 
 
 The YETI analyzer requires you to have a local instance of YETI deployed/configured. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up YETI can be found [here](https://yeti-platform.github.io/).
 
 ## Paid  
 
+- DNSDB
+- DomainTools
+- JoeSandbox
+- Nessus
+- PassiveTotal
+- VirusTotal
+- VMRay
+
 ### JoeSandbox
 **Configuration Parameters**: _TBD_
 
 JoeSandbox has both a free and a paid version. 
-
 
 ### PassiveTotal
 **Configuration Parameters**: Username, API Key
@@ -418,10 +459,6 @@ This is a paid service that can be purchased from [here](https://www.farsightsec
 
 This is a paid service that can be purchased from [here](https://www.domaintools.com/products/api-integration/). There is also a free API that can be used (needs to be set to free in analyzer config) and does not require a username/API key. 
 
-### MaxMind
-**Configuration Parameters**: _TBD_
-
-This is a paid service that can be purchased from [here](https://www.maxmind.com/en/home). 
 
 ### Nessus
 **Configuration Parameters**: Url, login, password, policy
@@ -433,6 +470,10 @@ This is a paid service that can be purchased from [here](https://www.tenable.com
 
 This is a paid service that can be purchased from [here](https://www.vmray.com/). 
 
+### VirusTotal
+**Configuration Parameters**: API Key
+
+An account with VirusTotal is required to get an API key. You can sign up for an account [here](https://www.virustotal.com/en/).
 
 
 ## Special Access
