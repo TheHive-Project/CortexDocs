@@ -324,9 +324,8 @@ The analyzer comes in only one flavor.
 
 #### Configuration
 ##### Requirements
-You need to sign up for an [OTX](https://otx.alienvault.com/) account. Once 
-you have done so, log in to the service, click on your username on the top 
-navigation bar then on *Settings* and retrieve t
+You need to sign up for an [OTX](https://otx.alienvault.com/) account or use 
+an existing one.
 
 ##### Parameters
 Log in to your OTX account, click on your username on the top 
