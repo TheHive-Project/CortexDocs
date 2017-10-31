@@ -316,14 +316,36 @@ None. The analyzer has no entry in the `config` section. It can be used out
 of the box.
 
 ### OTXQuery
-**Configuration Parameters**: API Key
+#### Description
+Query AlienVault [Open Threat Exchange](https://otx.alienvault.com/) for IPs, 
+domains, URLs, or file hashes.
 
-An account with AlienVault OTX is required to get an API key. You can sign up for an account [here](https://otx.alienvault.com).
+The analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+You need to sign up for an [OTX](https://otx.alienvault.com/) account. Once 
+you have done so, log in to the service, click on your username on the top 
+navigation bar then on *Settings* and retrieve t
+
+##### Parameters
+Log in to your OTX account, click on your username on the top 
+navigation bar then on *Settings* and retrieve your OTX key and use it as the 
+value of the `key` parameter.
+
+##### Example
+```text
+    OTXQuery {
+      key="MYUBERSEKRETOTXQUERYKEY"
+    }
+```
+
+**PROGRESS_MARK**
 
 ### PassiveTotal
 **Configuration Parameters**: Username, API Key
 
-**PROGRESS_MARK**
+
 
 An account with PassiveTotal is required to get an API key. You can sign up for an account [here](https://community.riskiq.com/registration).
 
