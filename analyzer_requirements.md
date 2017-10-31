@@ -317,7 +317,7 @@ of the box.
 
 ### OTXQuery
 #### Description
-Query AlienVault [Open Threat Exchange](https://otx.alienvault.com/) for IPs, 
+Query AlienVault's [Open Threat Exchange](https://otx.alienvault.com/) for IPs, 
 domains, URLs, or file hashes.
 
 The analyzer comes in only one flavor.
@@ -339,19 +339,32 @@ value of the `key` parameter.
     }
 ```
 
-**PROGRESS_MARK**
-
-### PassiveTotal
-**Configuration Parameters**: Username, API Key
-
-
-
-An account with PassiveTotal is required to get an API key. You can sign up for an account [here](https://community.riskiq.com/registration).
-
 ### PhishTank
-**Configuration Parameters**: API Key
+#### Description
+Query [PhishTank](https://www.phishtank.com/) to assess whether a URL has 
+been flagged a phishing site.
 
-An account with PhishTank is required to get an API key. You can sign up for an account [here](https://www.phishtank.com/index.php).
+The analyzer comes in only one flavor called *PhishTank_CheckURL*.
+
+#### Configuration
+##### Requirements
+You need to sign up for a [PhishTank](https://www.phishtank.com/register.php)
+ account or use an existing one.
+
+##### Parameters
+Log in to your PhishTank account, click on the *Developers* tab then on 
+*Manage Applications*, register an application by giving it a name and 
+entering a CAPTCHA code. You'll obtain an API key that you'll need to supply 
+as the value to the `key` configuration parameter for this analyzer to work.
+
+##### Example
+```text
+    PhishTank {
+      key="MYPHISHTANKAPIKEYGOESHERE"
+    }
+```
+
+**PROGRESS_MARK**
 
 ### Phishing Intiative
 **Configuration Parameters**: API Key
@@ -389,6 +402,12 @@ The YETI analyzer requires you to have a local instance of YETI deployed/configu
 **Configuration Parameters**: _TBD_
 
 JoeSandbox has both a free and a paid version. 
+
+
+### PassiveTotal
+**Configuration Parameters**: Username, API Key
+
+An account with PassiveTotal is required to get an API key. You can sign up for an account [here](https://community.riskiq.com/registration).
 ### DNSDB
 **Configuration Parameters**: Server name, API key
 
