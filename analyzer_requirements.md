@@ -151,7 +151,6 @@ The analyzer comes in only one flavor.
 None. The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
-
 ### FireHOLBlocklists 
 #### Description
 Check IP addresses against the [FireHOL blocklists](https://firehol.org/).
@@ -408,19 +407,56 @@ it as the value to the `key` configuration parameter.
     }
 ```
 
-**PROGRESS_MARK**
-
 ### Virusshare
-**Configuration Parameters**: Path to Virusshare hash lists
+#### Description
+Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
 
-Virusshare hash lists can be downloaded using the `download_hashes.py` program in the Virusshare analyzer directory.
+This analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+Prior to using the analyzer, you need to retrieve the Virusshare hash lists 
+using the `download_hashes.py` script that is located in the same directory 
+as the analyzer. To keep your lists fresh, you may want to regularly  
+download them using a cron entry or a similar system.
+
+##### Parameters
+Indicate the path where you have downloaded the hash lists using the `path` 
+parameter.
+
+##### Example
+```text
+    Virusshare {
+      path = "/path/to/virusshare/lists"
+    }
+```
 
 ### WOT
-**Configuration Parameters**: API Key
+#### Description
+Check a domain against [Web of Trust](https://www.mywot.com/), a website 
+reputation service.
 
-An account with Web of Trust is required to get an API key. You can sign up for an account [here](https://www.mywot.com/en/signup?destination=profile/api).
+#### Configuration
+##### Requirements
+An account with Web of Trust is required to get an API key, which is 
+necessary to configure the analyzer. You can sign up for an account at
+[https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api).
+
+##### Parameters
+Supply the API key you'll find under [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api)
+ as the value for the `key` parameter 
+
+##### Example
+```text
+    WOT {
+      key="myWOTAPIkey"
+    }
+```
+
+**PROGRESS_MARK**
 
 ### Yara
+#### Description
 **Configuration Parameters**: Path to Yara rules
 
 You have to have Yara rules downloaded in order to use this analyzer. 
