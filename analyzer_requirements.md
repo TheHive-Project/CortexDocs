@@ -246,20 +246,74 @@ Hippocampe {
     url = "http://my.hippocampe.instance"
 }
 ```
-**PROGRESS_MARK**
-
-### JoeSandbox
-**Configuration Parameters**: _TBD_
-
-JoeSandbox has both a free and a paid version. 
 
 ### MISP
-**Configuration Parameters**: Url, API key
+#### Description
+Query multiple MISP (Malware Information Sharing Platform )instances for 
+events containing an observable.
 
-The MISP analyzer requires you to have a local instance of MISP deployed/configured. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up MISP can be found [here](http://www.misp-project.org/).
+[MISP](http://www.misp-project.org/) is an open source threat sharing 
+platform and considered 
+the *de facto* standard in the field. You'd benefit greatly from using it in 
+conjunction to Cortex and TheHive as these 3 FOSS products make an 
+interesting Threat Intelligence, Incident Response and Digital Forensics 
+ecosystem.
+
+The analyzer comes in only one flavor. 
+
+#### Configuration
+##### Requirements
+The MISP analyzer requires you to have access to one or several [MISP](http://www.misp-project.org/) 
+ instances. You can also deploy your own instance.
+
+##### Parameters
+Four parameters are required:
+- `url`
+- `key`
+- `certpath`
+- `name`
+
+You need the URL for each MISP instance you'd like to search. Those URLs go
+in the `url` dict. You'll also need the authentication key associated with 
+your account on each of those instances. To obtain the key, log into the MISP
+ instance's Web UI, click on your username on the top navigation bar and 
+ retrieve the value of the `Authkey` parameter. Each `Authkey` must be added,
+  in the same order as the URLs to the `key` dict. 
+
+Another important parameter is the `certpath` dict. For each MISP instance:
+
+- Use `""` if you don't want to validate the instance's X.509 certificate or 
+if the instance use old plain HTTP.
+- Use `"/etc/ssl/certs"` or another file to validate the instance's X.509 
+certificate.
+
+Last but not least, give each instance a name and add it in the order you 
+specified URLs and keys above to the `name` dict.
+
+##### Example
+The example below shows the configuration of the MISP analyzer which will 
+search two MISP instances called MY-OWN-MISP and REMOTE-MISP. Note that the 
+first one is accessed through HTTP while the second has HTTPS enabled.
+
+```text
+    MISP {
+      url=["http://my.own.misp", "https://remote-misp.peercert.org"]
+      key=["my-own-misp-account-authkey", "remote-misp-account-authkey"]
+      certpath=["","/etc/ssl/certs"]
+      name=["MY-OWN-MISP","REMOTE-MISP"]
+```
 
 ### Msg_Parser
-**Configuration Parameters**: None
+#### Description
+Parse Outlook message files automatically and show the key information it 
+contains such as headers, attachments etc. Please note that the analyzer 
+doesn't not extract attachments.
+
+The analyzer comes in only one flavor.
+
+#### Configuration
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box.
 
 ### OTXQuery
 **Configuration Parameters**: API Key
@@ -268,6 +322,8 @@ An account with AlienVault OTX is required to get an API key. You can sign up fo
 
 ### PassiveTotal
 **Configuration Parameters**: Username, API Key
+
+**PROGRESS_MARK**
 
 An account with PassiveTotal is required to get an API key. You can sign up for an account [here](https://community.riskiq.com/registration).
 
@@ -307,6 +363,11 @@ You have to have Yara rules downloaded in order to use this analyzer.
 The YETI analyzer requires you to have a local instance of YETI deployed/configured. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up YETI can be found [here](https://yeti-platform.github.io/).
 
 ## Paid  
+
+### JoeSandbox
+**Configuration Parameters**: _TBD_
+
+JoeSandbox has both a free and a paid version. 
 ### DNSDB
 **Configuration Parameters**: Server name, API key
 
