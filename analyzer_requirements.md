@@ -528,37 +528,126 @@ as the value for the `password` parameter.
     }
 ```
 
-**PROGRESS_MARK**
+## Subscription and License-based Analyzers
+### DNSDB
+Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
 
-## Paid  
+This analyzer comes in three flavors:
+- DNSDB_**DomainName**: fetch historical records for a domain.
+- DNSDB_**IPHistory**: fetch historical records for an IP address.
+- DNSDB_**NameHistory**: fetch historical records for a fully-qualified domain
+ name.
 
-- DNSDB
-- DomainTools
-- JoeSandbox
-- Nessus
-- PassiveTotal
-- VirusTotal
-- VMRay
+#### Requirements
+You need a [valid subscription](https://www.farsightsecurity.com/order-services/)
+to Farsight Security's DNSDB service to use the analyzer. 
+
+Provide the URL of the DNSDB API service to the `server` parameter. The 
+default (`https://api.dnsdb.info`) should work. If not, contact Farsight 
+Security.
+
+Provide your API key as a value to the `key` parameter. 
+
+#### Example
+```text
+    DNSDB {
+      server="https://api.dnsdb.info"
+      key="MYDNSDBAPIKEY"
+    }
+```
+### DomainTools
+Look up domain names, IP addresses, WHOIS records, etc. using the popular 
+[DomainTools](http://domaintools.com/) service API.
+
+The analyzer comes in 5 flavors:
+- DomainTools_**ReverseIP**: get a list of domain names sharing the same IP 
+address.
+- DomainTools_**ReverseNameServer**: get a list of domain names that share 
+the same primary or secondary name server.
+- DomainTools_**ReverseWhois**: get a list of domain names which share the 
+same registrant information.
+- DomainTools_**WhoisHistory**: get a list of historical Whois records 
+associated with a domain name.
+- DomainTools_**WhoisLookup**: get the ownership record for a domain with 
+basic registration details.
+- DomainTools_**WhoisLookup_IP**: get the ownership record for an IP address 
+with basic registration details.
+
+#### Requirements
+You need a [valid DomainTools API integration subscription](https://www.domaintools.com/products/api-integration/)
+to use the analyzer.
+
+Provide your username as a value for the `username` parameter and API key as 
+a value for the `key` parameter.
+
+#### Example
+```text
+    DomainTools {
+      username="mightyhunter"
+      key="SOMELONGWEIRDSTRING"
+    }
+```
 
 ### JoeSandbox
-**Configuration Parameters**: _TBD_
+Analyze URLs and files using the powerful [Joe Sandbox](https://www.joesecurity.org/)
+malware analysis solution.
 
-JoeSandbox has both a free and a paid version. 
+Joe Sandbox is a commercial solution by Joe Security LLC. It comes in several 
+versions. The analyzer has been tested with [Joe Sandbox Cloud](https://www.joesecurity.org/joe-sandbox-cloud),
+[Joe Sandbox Ultimate](https://www.joesecurity.org/joe-sandbox-ultimate) and 
+[Joe Sandbox Complete](https://www.joesecurity.org/joe-sandbox-complete).
+
+The analyzer comes in 3 flavors:
+- JoeSandbox_**File_Analysis_Inet**: analyze files while providing Internet 
+access.
+- JoeSandbox_**File_Analysis_Noinet**: analyze files without providing 
+Internet access.
+- JoeSandbox_**Url_Analysis**: analyze URLs.
+
+#### Requirements
+Provide the URL of your on-premises Joe Sandbox instance or the cloud version
+ to the `url` parameter and supply the associated API key as a value for the 
+ `key` parameter.
+
+#### Example
+```text
+    JoeSandbox {
+      url = "https://my.cool.joe.sandbox"
+      key = "myJoeKey"
+    }
+``` 
 
 ### PassiveTotal
-**Configuration Parameters**: Username, API Key
+Leverage RiskIQ's [PassiveTotal service](https://www.passivetotal.org/) to 
+gain invaluable insight on observables, identify overlapping infrastructure 
+using Passive DNS, WHOIS, SSL certificates and more.
 
-An account with PassiveTotal is required to get an API key. You can sign up for an account [here](https://community.riskiq.com/registration).
-### DNSDB
-**Configuration Parameters**: Server name, API key
+The analyzer comes in 8 flavors:
+- PassiveTotal_**Enrichment**: enrichment Lookup.
+- PassiveTotal_**Malware**: malware Lookup.
+- PassiveTotal_**Osint**: OSINT Lookup.
+- PassiveTotal_**Passive_Dns**: passive DNS Lookup.
+- PassiveTotal_**Ssl_Certificate_Details**: SSL Certificate Details.
+- PassiveTotal_**Ssl_Certificate_History**: Ssl Certificate History Lookup.
+- PassiveTotal_**Unique_Resolutions**: Unique Resolutions Lookup.
+- PassiveTotal_**Whois_Details**: Whois Details Lookup.
 
-This is a paid service that can be purchased from [here](https://www.farsightsecurity.com/order-services/). 
+#### Requirements
+You need a PassiveTotal account to obtain the API key which is required to 
+use the analyzer. If you sign up for a [Community Edition Account](https://community.riskiq.com/registration),
+you'll have a very limited number of queries. You can purchase a 
+[PassiveTotal subscription](https://www.riskiq.com/contact/) for a higher 
+number of queries per day.
+ 
+Provide your account's username as the value of the `username` parameter and 
+the associated API key as value for the `key` parameter.
 
-### DomainTools
-**Configuration Parameters**: Username, API key
-
-This is a paid service that can be purchased from [here](https://www.domaintools.com/products/api-integration/). There is also a free API that can be used (needs to be set to free in analyzer config) and does not require a username/API key. 
-
+#### Example
+```text
+    PassiveTotal {
+      username="digitalhunter"
+      key="mypassivetotalAPIkey"
+```
 
 ### Nessus
 **Configuration Parameters**: Url, login, password, policy
