@@ -1,4 +1,4 @@
-# Cortex Analyzer Requirements
+# Cortex Analyzer Requirements Guide
 This document outlines the different information that needs to be provided for 
 each analyzer, such as API keys, usernames, instances, etc. It will also 
 specify whether the service is paid, free, or requires special access. This 
@@ -40,16 +40,19 @@ information they need to gather in order to enable them.
     * [VMRay](#vmray)
 
 ## Introduction
-All configuration settings must be made in the global Cortex 
+All analyzer configuration settings must be made in the global Cortex 
 configuration 
 file (`/etc/cortex/application.conf` by default), in the `config` section.
 
 By default, all analyzers are enabled. If you want to disable some of them, 
 add a 
 `disabled` list to `/etc/cortex.application.conf` with the full name of the 
-analyzer, including its version. For example, if you'd like to disable the 
-Abuse Finder (version 2.0 as of this writing) and DNSDB DomainName (same 
-version as of this writing), add the following line in the `analyzer` section:
+analyzer (or flavor), including its version. For example, if you'd like to 
+disable 
+the 
+Abuse_Finder (version 2.0 as of this writing) analyzer and the DNSDB DomainName 
+flavor (version 2.0 as of this writing) of the DNSDB analyzer, add the 
+following line to the `analyzer` section:
 ```text
 analyzer {
   # Absolute path where you have pulled the Cortex-Analyzers repository.
@@ -65,9 +68,9 @@ analyzer {
 }
 ```
 
-If you have troubles finding out the exact name of the analyzer you'd like to
- disable, you can use a command like the following to list the full names of 
- all the analyzers:
+If you have troubles finding out the exact name of the analyzer or flavor you'd 
+like to disable, you can use a command like the following to list the full 
+names of all the analyzers/flavors:
 
 ```commandline
 $ grep "Register analyzer" /var/log/cortex/application.log \
@@ -94,35 +97,31 @@ DomainTools_WhoisHistory_2_0
 ## Free Analyzers
 
 ### Abuse_Finder
-Use CERT-SG's [Abuse Finder](https://github.com/certsocietegenerale/abuse_finder) to fin abuse contacts associated with domain 
-names, 
-URLs, IPs and email addresses.
+Use CERT-SG's [Abuse Finder](https://github.com/certsocietegenerale/abuse_finder)
+to find abuse contacts associated with domain names, URLs, IPs and email addresses.
 
 The analyzer comes in only one flavor.
 
-The analyzer has no entry in the `config` section. It can be used out 
-of the box.
+No configuration is required. The analyzer has no entry in the `config` section. 
+It can be used out of the box.
 
 ### CuckooSandbox
 Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
 
 The analyzer comes in two flavors:
 
-- CuckooSandbox_**File_Analysis_Inet**: submit files for analysis to a Cuckoo 
-Sandbox instance with Internet access.
-- CuckooSandbox_**Url_Analysis**: submit URLs for analysis to a Cuckoo Sandbox 
-instance.
+- CuckooSandbox_**File_Analysis_Inet**: analyze files with Internet access.
+- CuckooSandbox_**Url_Analysis**: analyze URLs.
 
 #### Requirements
 The CuckooSandbox analyzer requires you to have a local instance
- of Cuckoo Sandbox deployed.
-It is an open source tool that is free for use but needs to be manually 
-deployed in your environment. Please go to 
+ of Cuckoo Sandbox deployed. It is a FOSS that is free for use but needs to 
+ be manually deployed in your environment. Please go to 
 [https://cuckoosandbox.org/](https://cuckoosandbox.org/) 
 for more information on setting it up.
 
 To configure the analyzer you need to supply the URL of your local instance 
-using the `url` keyword.
+as a value of the `url` parameter.
 
 #### Example:
 ```text
@@ -210,12 +209,12 @@ The analyzer comes in two flavors:
 
 #### Requirements
 The Hippocampe analyzer requires you to have a local instance of Hippocampe 
-deployed/configured. It is an open source tool that is free for use but needs
- to be manually deployed in your environment. Please go to [https://github.com/CERT-BDF/Hippocampe](https://github.com/CERT-BDF/Hippocampe)
- for more in information on setting it up.
+deployed/configured. It is a FOSS product that needs to be manually deployed 
+in your environment. Please go to [https://github.com/CERT-BDF/Hippocampe](https://github.com/CERT-BDF/Hippocampe)
+ for more information on setting it up.
 
 To configure the analyzer you need to supply the URL of your local instance 
-using the `url` keyword.
+using the `url` parameter.
 
 #### Example
 ```text
@@ -243,15 +242,14 @@ No configuration is required. The analyzer has no entry in the `config` section.
 of the box.
 
 ### MISP
-Query multiple MISP (Malware Information Sharing Platform )instances for 
-events containing an observable.
+Query multiple [MISP](http://www.misp-project.org/) (Malware Information 
+Sharing Platform) instances for events containing an observable.
 
-[MISP](http://www.misp-project.org/) is an open source threat sharing 
-platform and considered 
-the *de facto* standard in the field. You'd benefit greatly from using it in 
-conjunction to Cortex and TheHive as these 3 FOSS products make an 
-interesting Threat Intelligence, Incident Response and Digital Forensics 
-ecosystem.
+[MISP](http://www.misp-project.org/) is a FOSS threat sharing 
+platform. It is considered the *de facto* standard in the field. You'd benefit 
+greatly from using it in conjunction to Cortex and TheHive as these 3 
+products make an interesting Threat Intelligence, Incident Response and 
+Digital Forensics ecosystem.
 
 The analyzer comes in only one flavor. 
 
@@ -259,7 +257,7 @@ The analyzer comes in only one flavor.
 The MISP analyzer requires you to have access to one or several [MISP](http://www.misp-project.org/) 
  instances. You can also deploy your own instance.
 
-Four parameters are required:
+Four parameters are required to make the analyzer work:
 - `url`
 - `key`
 - `certpath`
@@ -328,7 +326,7 @@ value of the `key` parameter.
 
 ### PhishTank
 Query [PhishTank](https://www.phishtank.com/) to assess whether a URL has 
-been flagged a phishing site.
+been flagged as a phishing site.
 
 The analyzer comes in only one flavor called *PhishTank_CheckURL*.
 
@@ -350,7 +348,7 @@ as the value to the `key` configuration parameter for this analyzer to work.
 
 ### PhishingInitiative
 Query [Phishing Initiative](https://phishing-initiative.fr/contrib/) to 
-assess whether a URL has been flagged a phishing site.
+assess whether a URL has been flagged as a phishing site.
 
 This analyzer comes in only one flavor called *PhishingInitiative_Lookup*.
 
@@ -402,7 +400,7 @@ necessary to configure the analyzer. You can sign up for an account at
 [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api).
 
 Supply the API key you'll find under [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api)
- as the value for the `key` parameter 
+ as the value for the `key` parameter.
 
 #### Example
 ```text
@@ -539,7 +537,8 @@ You need a [valid subscription](https://www.farsightsecurity.com/order-services/
 to Farsight Security's DNSDB service to use the analyzer. 
 
 Provide the URL of the DNSDB API service to the `server` parameter. The 
-default (`https://api.dnsdb.info`) should work. If not, contact Farsight 
+default (`https://api.dnsdb.info`) should work. If it doesn't, contact 
+Farsight 
 Security.
 
 Provide your API key as a value to the `key` parameter. 
@@ -658,12 +657,12 @@ scan assets that do not belong to you, unless you really know what you are
 doing. That’s why safeguards were built in the analyzer’s configuration. 
 
 To configure the analyzer, you must supply four parameters:
-- `url`: URL of your Nessus scanner
-- `login`: username to log to the scanner
-- `password`: password of the scanner
-- `policy`: the scan policy to use
+- `url`: URL of your Nessus scanner.
+- `login`: username to log to the scanner.
+- `password`: password of your login account.
+- `policy`: the scan policy to use.
 - `ca_bundle`: an optional parameter to validate the X.509 certificate of the
- scanner. This parameter must be omitted if no validation is needed.
+ scanner. This parameter **must be omitted if no validation is needed**.
 - `allowed_networks`: a list of networks in CIDR notation that the scanner is
  allowed to probe.
 
@@ -692,8 +691,8 @@ You need a [VirusTotal](https://www.virustotal.com/#/join-us) community
 account or a [Private API](https://support.virustotal.com/hc/en-us/requests/new)
 subscription, a premium service.
 
-Please note that a community account is highly limited in API queries it can 
-make. If you can afford them, subscribe to the premium services.
+Please note that a community account is highly limited in the number of API 
+queries it can make. If you can afford them, subscribe to the premium services.
 
 Provide the API key associated with your account as a value to the `key` 
 parameter.
