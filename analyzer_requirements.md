@@ -683,12 +683,54 @@ To configure the analyzer, you must supply four parameters:
     }
 ```
 
-### VMRay
-**Configuration Parameters**: Url, API key
-
-This is a paid service that can be purchased from [here](https://www.vmray.com/). 
-
 ### VirusTotal
-**Configuration Parameters**: API Key
+Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
 
-An account with VirusTotal is required to get an API key. You can sign up for an account [here](https://www.virustotal.com/en/).
+The analyzer comes in two flavors:
+- VirusTotal_**GetReport**: get the latest VirusTotal report for a file, 
+hash, domain or an IP address.
+- VirusTotal_**Scan**: scan a file or URL.
+
+#### Requirements
+You need a [VirusTotal](https://www.virustotal.com/#/join-us) community 
+account or a [Private API](https://support.virustotal.com/hc/en-us/requests/new)
+subscription, a premium service.
+
+Please note that a community account is highly limited in API queries it can 
+make. If you can afford them, subscribe to the premium services.
+
+Provide the API key associated with your account as a value to the `key` 
+parameter.
+
+#### Example
+```text
+    VirusTotal {
+      key="myVTkey"
+    }
+```
+
+### VMRay
+Analyze files using the [VMRay Analyzer Platform](https://www.vmray.com/products/)
+commercial sandbox.
+
+The analyzer comes in only one flavor. It lets you run a file in a local or
+remote (cloud) VMRay sandbox. The analyzer also lets you check existing 
+analysis reports.
+
+#### Requirements
+You need a VMRay Analyzer Platform to use the analyzer.
+
+To configure the analyzer, provide the URL of the platform as a value for the
+`url` parameter and the API key as a value for the `key` parameter.
+
+To validate the X.509 certificate of your VMRay Analyzer Platform instance, 
+use the `certpath` parameter.
+
+#### Example
+```text
+    VMRay {
+      url = "https://my.vmray.analyzer.platform"
+      key = "myAssociatedApiKey"
+      certpath = "/etc/ssl/certs"
+ }
+``` 
