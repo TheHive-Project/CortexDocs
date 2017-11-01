@@ -1,7 +1,3 @@
-# DRAFT -- WIP
-Please do not make corrections or submit PRs at this time as the document is 
-undergoing changes.
-
 # Cortex Analyzer Requirements
 This document outlines the different information that needs to be provided for 
 each analyzer, such as API keys, usernames, instances, etc. It will also 
