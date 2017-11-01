@@ -650,9 +650,38 @@ the associated API key as value for the `key` parameter.
 ```
 
 ### Nessus
-**Configuration Parameters**: Url, login, password, policy
+Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
+a popular vulnerability scanner to scan an IP address or a FQDN.
 
-This is a paid service that can be purchased from [here](https://www.tenable.com/products/nessus-vulnerability-scanner). 
+The analyzer comes in only one flavor.
+
+#### Requirements
+You must have a locally deployed instance of Nessus Professional to use the 
+analyzer. The scanner must have at least a scan policy defined. You must not 
+scan assets that do not belong to you, unless you really know what you are 
+doing. That’s why safeguards were built in the analyzer’s configuration. 
+
+To configure the analyzer, you must supply four parameters:
+- `url`: URL of your Nessus scanner
+- `login`: username to log to the scanner
+- `password`: password of the scanner
+- `policy`: the scan policy to use
+- `ca_bundle`: an optional parameter to validate the X.509 certificate of the
+ scanner. This parameter must be omitted if no validation is needed.
+- `allowed_networks`: a list of networks in CIDR notation that the scanner is
+ allowed to probe.
+
+#### Example
+```text
+    Nessus {
+      url ="https://my.nessus.scanner"
+      login="bastardoperator"
+      password="secretpassword"
+      policy="MyScanPolicy"
+      ca_bundle="/etc/ssl/certs"
+      allowed_networks=[ '10.0.0.0/8', '192.168.1.0/24' ]
+    }
+```
 
 ### VMRay
 **Configuration Parameters**: Url, API key
