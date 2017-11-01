@@ -436,6 +436,8 @@ parameter.
 Check a domain against [Web of Trust](https://www.mywot.com/), a website 
 reputation service.
 
+This analyzer comes in only one flavor called *WOT_Lookup*.
+
 #### Configuration
 ##### Requirements
 An account with Web of Trust is required to get an API key, which is 
@@ -453,18 +455,136 @@ Supply the API key you'll find under [https://www.mywot.com/en/signup?destinatio
     }
 ```
 
-**PROGRESS_MARK**
-
 ### Yara
 #### Description
-**Configuration Parameters**: Path to Yara rules
+Check files against [YARA](https://virustotal.github.io/yara/) rules using 
+[yara-python](https://github.com/VirusTotal/yara-python).
 
-You have to have Yara rules downloaded in order to use this analyzer. 
+The analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+You need to point your analyzer to multiple files and/or directories 
+containing your YARA rules. If you supply a directory, the analyzer expects to
+find an *index.yar* or *index.yas* file. The index file can include other rule 
+files. An example can be found in the [Yara-rules](https://github.com/Yara-Rules/rules/blob/master/index.yar)
+repository.
+
+##### Parameters
+Add each file and/or directory containing YARA rules to the `rules` dict. 
+
+##### Example
+In the example shown below, the first two locations are directories. As such,
+ the analyzer will expect to find an *index.yar* or *index.yas* file in these
+  directories:
+
+```text
+Yara {
+    rules=["/path/dirA", "/path/dirB", "/path/my/rules.yar"]
+}
+```
 
 ### Yeti
-**Configuration Parameters**: Url 
+#### Description
+[YETI](https://yeti-platform.github.io/) is a FOSS platform meant to organize
+ observables, indicators of compromise, TTPs, and knowledge on threats in a 
+ single, unified repository. The analyzer for this platform lets you make API 
+ calls to YETI and retrieve all available information pertaining to a domain, 
+ a fully qualified domain name, an IP address, a URL or a hash.
 
-The YETI analyzer requires you to have a local instance of YETI deployed/configured. It is an open-source tool that is free for use but needs to be manually deployed in your environment. More information on setting up YETI can be found [here](https://yeti-platform.github.io/).
+This analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+The Yeti analyzer requires you to have a local instance of [YETI](https://yeti-platform.github.io/) 
+deployed/configured. It is an open source tool that is free for use but needs
+ to be manually deployed in your environment.
+
+##### Parameters
+Provide the URL of your YETI instance as a value for the `url` parameter.
+
+##### Example
+```text
+Yeti {
+    url = "http://my.yeti.instance:5000"
+}
+```
+
+## Analyzers Requiring Special Access
+### CERTatPassiveDNS
+#### Description
+Check CERT.at Passive DNS Service for a given domain.
+
+This analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+Access to the CERT.at service is allowed to trusted partners only. If you 
+think you qualify, please contact [CERT.at](http://www.cert.at/index_en.html)
+.
+
+##### Parameters
+None. The analyzer has no entry in the `config` section. It can be used out 
+of the box if CERT.at positively answers your access request.
+
+### CIRCLPassiveDNS
+#### Description
+Check [CIRCL's Passive DNS](https://www.circl.lu/services/passive-dns/) for a
+ given domain.
+
+This analyzer comes in only one flavor.
+ 
+#### Configuration
+##### Requirements
+Access to CIRCL Passive DNS is only allowed to trusted partners in Luxembourg
+and abroad. [Contact CIRCL](https://www.circl.lu/contact/) if you would like
+access. Include your affiliation and the foreseen use of the Passive DNS 
+data.
+
+If the CIRCL positively answers your access request, you'll obtain a username
+ and password which are needed to make the analyzer work.
+
+##### Parameters
+supply your username as the value for the `user` parameter and your password 
+as the value for the `password` parameter.
+
+##### Example
+```text
+    CIRCLPassiveDNS {
+      user= "myusername"
+      password= "mypassword"
+    }
+```
+
+### CIRCLPassiveSSL
+#### Description
+Check [CIRCL's Passive SSL](https://www.circl.lu/services/passive-ssl/) 
+service for a given IP address or certificate hash.
+
+This analyzer comes in only one flavor.
+
+#### Configuration
+##### Requirements
+ccess to CIRCL Passive SSL is allowed to partners including security 
+researchers or incident analysts worldwide. [Contact CIRCL](https://www.circl.lu/contact/)
+if you would like access.
+
+If the CIRCL positively answers your access request, you'll obtain a username
+ and password which are needed to make the analyzer work.
+
+##### Parameters
+supply your username as the value for the `user` parameter and your password 
+as the value for the `password` parameter.
+
+##### Example
+```text
+    CIRCLPassiveSSL {
+      user= "myusername"
+      password= "mypassword"
+    }
+```
+
+**PROGRESS_MARK**
 
 ## Paid  
 
@@ -510,39 +630,3 @@ This is a paid service that can be purchased from [here](https://www.vmray.com/)
 **Configuration Parameters**: API Key
 
 An account with VirusTotal is required to get an API key. You can sign up for an account [here](https://www.virustotal.com/en/).
-
-
-## Special Access
-
-### CERTatPassiveDNS
-**Configuration Parameters**: None
-
-From [TheHive blog](https://blog.thehive-project.org/2017/07/05/all-fresh-cortexutils-new-cortex-analyzers/):
-```
-Access to the CERT.at service is allowed to trusted partners only.  
-If you think you qualify, please contact CERT.at.  You do not need to add specific information 
-into the Cortex configuration file to benefit from this analyzer as it calls the whois system 
-command to perform the pDNS requests.
-```
-
-### CIRCLPassiveDNS
-**Configuration Parameters**: Username, Password
-
-From [CIRCL](https://www.circl.lu/services/passive-dns/)
-```
-Access to CIRCL Passive DNS is only allowed to trusted partners in Luxembourg and abroad. 
-Contact us if you would like access. Include your affiliation and the foreseen use of the 
-Passive DNS data.
-```
-
-### CIRCLPassiveSSL
-**Configuration Parameters**: Username, Password
-
-From [CIRCL](https://www.circl.lu/services/passive-ssl/)
-```
-Access to CIRCL Passive SSL is allowed to partners including security researchers or 
-incident analysts worldwide. Contact us if you would like to obtain access.
-```
-
-
-**NOTE**: If there are any errors on this page or changes you would like to see, please submit a pull request or email megansroddie[at]gmail.com
