@@ -13,6 +13,7 @@ physical machine with similar specifications.
 
 ## What's New
 
+- [How to Configure Analyzers](analyzer_requirements.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 - [Training Material](https://github.com/CERT-BDF/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/CERT-BDF/Cortex/blob/master/CHANGELOG.md)
@@ -30,6 +31,10 @@ Cortex can be installed using:
 Cortex can also be [built from sources](installation/build-guide.md).
 
 Once you have installed Cortex, you need to [install the analyzers](installation/analyzers.md).
+
+## User Guides
+
+- [Cortex Analyzer Requirements Guide](analyzer_requirements.md)
 
 ## Developer Guides
 
