@@ -98,19 +98,16 @@ DomainTools_WhoisHistory_2_0
 ## Free Analyzers
 
 ### Abuse_Finder
-#### Description
 Use CERT-SG's [Abuse Finder](https://github.com/certsocietegenerale/abuse_finder) to fin abuse contacts associated with domain 
 names, 
 URLs, IPs and email addresses.
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-None. The analyzer has no entry in the `config` section. It can be used out 
+The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
 ### CuckooSandbox
-#### Description
 Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
 
 The analyzer comes in two flavors:
@@ -120,8 +117,7 @@ Sandbox instance with Internet access.
 - CuckooSandbox_**Url_Analysis**: submit URLs for analysis to a Cuckoo Sandbox 
 instance.
 
-#### Configuration
-##### Requirements
+#### Requirements
 The CuckooSandbox analyzer requires you to have a local instance
  of Cuckoo Sandbox deployed.
 It is an open source tool that is free for use but needs to be manually 
@@ -129,11 +125,10 @@ deployed in your environment. Please go to
 [https://cuckoosandbox.org/](https://cuckoosandbox.org/) 
 for more information on setting it up.
 
-##### Parameters
 To configure the analyzer you need to supply the URL of your local instance 
 using the `url` keyword.
 
-Example:
+#### Example:
 ```text
 CuckooSandbox {
     url = "http://my.cuckoo.sandbox"
@@ -141,24 +136,20 @@ CuckooSandbox {
 ```
 
 ### File_Info
-#### Description
 Parse files in several formats such as OLE and OpenXML to detect VBA macros, 
 extract their source code, generate useful information on PE, PDF files and much more.
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-None. The analyzer has no entry in the `config` section. It can be used out 
+No configuration is required. The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
 ### FireHOLBlocklists 
-#### Description
 Check IP addresses against the [FireHOL blocklists](https://firehol.org/).
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 This analyzer needs you to download the FireHOL block lists first to a 
 directory. Use `git` for that  purpose:
 ```commandline
@@ -170,7 +161,6 @@ $ git clone https://github.com/firehol/blocklist-ipsets
 We advise you to keep the lists fresh  by  adding  a  cron  entry  to 
 regularly download them for example (using `git pull`).
 
-#### Parameters
 Specify the directory where the lists have been downloaded using the 
 `blocklistpath` paramater and  an optional `ignoreolderthandays` parameter to
  ignore all lists that have not been updated in the last N days.
@@ -184,28 +174,23 @@ Specify the directory where the lists have been downloaded using the
 ```
 
 ### Fortiguard
-#### Description
 Check the [Fortiguard](https://fortiguard.com/webfilter) category of a URL or
  a domain.
 
 The analyzer comes in only one flavor called *Fortiguard_URLCategory*.
 
-#### Configuration
-None. The analyzer has no entry in the `config` section. It can be used out 
+No configuration is required. The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
 ### GoogleSafeBrowsing
-#### Description
 Check URLs against [Google Safebrowsing](https://www.google.com/transparencyreport/safebrowsing/).
 
 The analyzer comes in only one flavor. 
 
-#### Configuration
-##### Requirements
+#### Requirements
 You need to [obtain an API key](https://developers.google.com/safe-browsing/)
  from Google.
 
-##### Parameters
 Provide your API key as a value of the `key` parameter.
 
 #### Example
@@ -216,7 +201,6 @@ Provide your API key as a value of the `key` parameter.
 ```
 
 ### Hippocampe
-#### Description
 Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe), 
 a FOSS tool from TheHive Project that centralizes feeds and allows you to 
 associate a confidence level to each one of them (that can be changed over time)
@@ -228,18 +212,16 @@ The analyzer comes in two flavors:
 - Hipposcore: get the Hippocampe Score report associated with an IP address, a
  domain or a URL.
 
-#### Configuration
-##### Requirements
+#### Requirements
 The Hippocampe analyzer requires you to have a local instance of Hippocampe 
 deployed/configured. It is an open source tool that is free for use but needs
  to be manually deployed in your environment. Please go to [https://github.com/CERT-BDF/Hippocampe](https://github.com/CERT-BDF/Hippocampe)
  for more in information on setting it up.
 
-##### Parameters
 To configure the analyzer you need to supply the URL of your local instance 
 using the `url` keyword.
 
-##### Example
+#### Example
 ```text
 Hippocampe {
     url = "http://my.hippocampe.instance"
@@ -247,7 +229,6 @@ Hippocampe {
 ```
 
 ### MaxMind
-#### Description
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home) 
 GeoLite2 **free** City and Country databases.
 
@@ -262,12 +243,10 @@ You can fetch up-to-date versions from [https://dev.maxmind.com/geoip/geoip2/geo
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-None. The analyzer has no entry in the `config` section. It can be used out 
+No configuration is required. The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
 ### MISP
-#### Description
 Query multiple MISP (Malware Information Sharing Platform )instances for 
 events containing an observable.
 
@@ -280,12 +259,10 @@ ecosystem.
 
 The analyzer comes in only one flavor. 
 
-#### Configuration
-##### Requirements
+#### Requirements
 The MISP analyzer requires you to have access to one or several [MISP](http://www.misp-project.org/) 
  instances. You can also deploy your own instance.
 
-##### Parameters
 Four parameters are required:
 - `url`
 - `key`
@@ -309,7 +286,7 @@ certificate.
 Last but not least, give each instance a name and add it in the order you 
 specified URLs and keys above to the `name` dict.
 
-##### Example
+#### Example
 The example below shows the configuration of the MISP analyzer which will 
 search two MISP instances called MY-OWN-MISP and REMOTE-MISP. Note that the 
 first one is accessed through HTTP while the second has HTTPS enabled.
@@ -323,35 +300,30 @@ first one is accessed through HTTP while the second has HTTPS enabled.
 ```
 
 ### Msg_Parser
-#### Description
 Parse Outlook message files automatically and show the key information it 
 contains such as headers, attachments etc. Please note that the analyzer 
 doesn't extract attachments.
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-None. The analyzer has no entry in the `config` section. It can be used out 
+No configuration is required. The analyzer has no entry in the `config` section. It can be used out 
 of the box.
 
 ### OTXQuery
-#### Description
 Query AlienVault's [Open Threat Exchange](https://otx.alienvault.com/) for IPs, 
 domains, URLs, or file hashes.
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 You need to sign up for an [OTX](https://otx.alienvault.com/) account or use 
 an existing one.
 
-##### Parameters
 Log in to your OTX account, click on your username on the top 
 navigation bar then on *Settings* and retrieve your OTX key and use it as the 
 value of the `key` parameter.
 
-##### Example
+#### Example
 ```text
     OTXQuery {
       key="MYUBERSEKRETOTXQUERYKEY"
@@ -359,24 +331,21 @@ value of the `key` parameter.
 ```
 
 ### PhishTank
-#### Description
 Query [PhishTank](https://www.phishtank.com/) to assess whether a URL has 
 been flagged a phishing site.
 
 The analyzer comes in only one flavor called *PhishTank_CheckURL*.
 
-#### Configuration
-##### Requirements
+#### Requirements
 You need to sign up for a [PhishTank](https://www.phishtank.com/register.php)
  account or use an existing one.
 
-##### Parameters
 Log in to your PhishTank account, click on the *Developers* tab then on 
 *Manage Applications*, register an application by giving it a name and 
 entering a CAPTCHA code. You'll obtain an API key that you'll need to supply 
 as the value to the `key` configuration parameter for this analyzer to work.
 
-##### Example
+#### Example
 ```text
     PhishTank {
       key="MYPHISHTANKAPIKEYGOESHERE"
@@ -384,23 +353,20 @@ as the value to the `key` configuration parameter for this analyzer to work.
 ```
 
 ### PhishingInitiative
-#### Description
 Query [Phishing Initiative](https://phishing-initiative.fr/contrib/) to 
 assess whether a URL has been flagged a phishing site.
 
 This analyzer comes in only one flavor called *PhishingInitiative_Lookup*.
 
-#### Configuration
-##### Requirements
+#### Requirements
 You need to sign up for a [Phishing Initiative](https://phishing-initiative.fr/register)
  account or use an existing one.
 
-##### Parameters
 Log in to your Phishing Initiative account, click on the icon representing 
 your account details then on *API*. Retrieve the API key value and supply 
 it as the value to the `key` configuration parameter.
 
-##### Example
+#### Example
 ```text
     PhishingInitiative {
       key="MYPHISHINGINITIATIVEAPIKEYGOESHERE"
@@ -408,23 +374,20 @@ it as the value to the `key` configuration parameter.
 ```
 
 ### Virusshare
-#### Description
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
 
 This analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 Prior to using the analyzer, you need to retrieve the Virusshare hash lists 
 using the `download_hashes.py` script that is located in the same directory 
 as the analyzer. To keep your lists fresh, you may want to regularly  
 download them using a cron entry or a similar system.
 
-##### Parameters
 Indicate the path where you have downloaded the hash lists using the `path` 
 parameter.
 
-##### Example
+#### Example
 ```text
     Virusshare {
       path = "/path/to/virusshare/lists"
@@ -432,23 +395,20 @@ parameter.
 ```
 
 ### WOT
-#### Description
 Check a domain against [Web of Trust](https://www.mywot.com/), a website 
 reputation service.
 
 This analyzer comes in only one flavor called *WOT_Lookup*.
 
-#### Configuration
-##### Requirements
+#### Requirements
 An account with Web of Trust is required to get an API key, which is 
 necessary to configure the analyzer. You can sign up for an account at
 [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api).
 
-##### Parameters
 Supply the API key you'll find under [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api)
  as the value for the `key` parameter 
 
-##### Example
+#### Example
 ```text
     WOT {
       key="myWOTAPIkey"
@@ -456,24 +416,21 @@ Supply the API key you'll find under [https://www.mywot.com/en/signup?destinatio
 ```
 
 ### Yara
-#### Description
 Check files against [YARA](https://virustotal.github.io/yara/) rules using 
 [yara-python](https://github.com/VirusTotal/yara-python).
 
 The analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 You need to point your analyzer to multiple files and/or directories 
 containing your YARA rules. If you supply a directory, the analyzer expects to
 find an *index.yar* or *index.yas* file. The index file can include other rule 
 files. An example can be found in the [Yara-rules](https://github.com/Yara-Rules/rules/blob/master/index.yar)
 repository.
 
-##### Parameters
 Add each file and/or directory containing YARA rules to the `rules` dict. 
 
-##### Example
+#### Example
 In the example shown below, the first two locations are directories. As such,
  the analyzer will expect to find an *index.yar* or *index.yas* file in these
   directories:
@@ -485,7 +442,6 @@ Yara {
 ```
 
 ### Yeti
-#### Description
 [YETI](https://yeti-platform.github.io/) is a FOSS platform meant to organize
  observables, indicators of compromise, TTPs, and knowledge on threats in a 
  single, unified repository. The analyzer for this platform lets you make API 
@@ -494,16 +450,14 @@ Yara {
 
 This analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 The Yeti analyzer requires you to have a local instance of [YETI](https://yeti-platform.github.io/) 
 deployed/configured. It is an open source tool that is free for use but needs
  to be manually deployed in your environment.
 
-##### Parameters
 Provide the URL of your YETI instance as a value for the `url` parameter.
 
-##### Example
+#### Example
 ```text
 Yeti {
     url = "http://my.yeti.instance:5000"
@@ -512,30 +466,24 @@ Yeti {
 
 ## Analyzers Requiring Special Access
 ### CERTatPassiveDNS
-#### Description
 Check CERT.at Passive DNS Service for a given domain.
 
 This analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 Access to the CERT.at service is allowed to trusted partners only. If you 
-think you qualify, please contact [CERT.at](http://www.cert.at/index_en.html)
-.
+think you qualify, please contact [CERT.at](http://www.cert.at/index_en.html).
 
-##### Parameters
-None. The analyzer has no entry in the `config` section. It can be used out 
+No configuration is required. The analyzer has no entry in the `config` section. It can be used out 
 of the box if CERT.at positively answers your access request.
 
 ### CIRCLPassiveDNS
-#### Description
 Check [CIRCL's Passive DNS](https://www.circl.lu/services/passive-dns/) for a
  given domain.
 
 This analyzer comes in only one flavor.
  
-#### Configuration
-##### Requirements
+#### Requirements
 Access to CIRCL Passive DNS is only allowed to trusted partners in Luxembourg
 and abroad. [Contact CIRCL](https://www.circl.lu/contact/) if you would like
 access. Include your affiliation and the foreseen use of the Passive DNS 
@@ -544,11 +492,10 @@ data.
 If the CIRCL positively answers your access request, you'll obtain a username
  and password which are needed to make the analyzer work.
 
-##### Parameters
 supply your username as the value for the `user` parameter and your password 
 as the value for the `password` parameter.
 
-##### Example
+#### Example
 ```text
     CIRCLPassiveDNS {
       user= "myusername"
@@ -557,14 +504,12 @@ as the value for the `password` parameter.
 ```
 
 ### CIRCLPassiveSSL
-#### Description
 Check [CIRCL's Passive SSL](https://www.circl.lu/services/passive-ssl/) 
 service for a given IP address or certificate hash.
 
 This analyzer comes in only one flavor.
 
-#### Configuration
-##### Requirements
+#### Requirements
 Access to CIRCL Passive SSL is allowed to partners including security 
 researchers or incident analysts worldwide. [Contact CIRCL](https://www.circl.lu/contact/)
 if you would like access.
@@ -572,11 +517,10 @@ if you would like access.
 If the CIRCL positively answers your access request, you'll obtain a username
  and password which are needed to make the analyzer work.
 
-##### Parameters
 supply your username as the value for the `user` parameter and your password 
 as the value for the `password` parameter.
 
-##### Example
+#### Example
 ```text
     CIRCLPassiveSSL {
       user= "myusername"
