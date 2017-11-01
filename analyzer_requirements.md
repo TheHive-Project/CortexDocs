@@ -565,7 +565,7 @@ This analyzer comes in only one flavor.
 
 #### Configuration
 ##### Requirements
-ccess to CIRCL Passive SSL is allowed to partners including security 
+Access to CIRCL Passive SSL is allowed to partners including security 
 researchers or incident analysts worldwide. [Contact CIRCL](https://www.circl.lu/contact/)
 if you would like access.
 
