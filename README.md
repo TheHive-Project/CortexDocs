@@ -31,7 +31,7 @@ Cortex can be installed using:
 Cortex can also be [built from sources](installation/build-guide.md).
 
 Once you have installed Cortex, you need to [install the analyzers](installation/analyzers.md)
-and [configure them](analyzer_requirements.md).:
+and [configure them](analyzer_requirements.md).
 
 ## User Guides
 
