@@ -1,9 +1,20 @@
 # Cortex Analyzer Requirements Guide
-This document outlines the different information that needs to be provided for 
-each analyzer, such as API keys, usernames, instances, etc. It will also 
-specify whether the service is paid, free, or requires special access. This 
-will assist users in deciding what analyzers they want to enable and what 
-information they need to gather in order to enable them.
+Analyzers are autonomous applications managed by and run through the Cortex core
+engine. Analyzers allow analysts and security researchers to analyze 
+observables and IOCs such as 
+domain names, IP addresses, hashes, files, URLs at scale. While many 
+analyzers are free to use, some require special access while others 
+necessitate a valid service subscription or product license, even though the
+analyzers themselves are released under an the [AGPL](https://github.com/CERT-BDF/Cortex-analyzers/blob/master/LICENSE)
+(Affero General Public License).
+  
+This document outlines the information needed to:
+- install the Cortex analyzers.
+- update them when needed.
+- configure them.
+
+This documents also specifies whether the service that the analyzer is based 
+on is free or requires special access or valid subscription or product license.
 
 ## Table of Contents
 
@@ -218,9 +229,32 @@ using the `url` parameter.
 
 #### Example
 ```text
-Hippocampe {
-    url = "http://my.hippocampe.instance"
-}
+    Hippocampe {
+      url = "http://my.hippocampe.instance"
+    }
+```
+
+### HybridAnalysis
+Fetch [Hybrid Analysis](https://www.hybrid-analysis.com/)
+reports associated with hashes and filenames.
+
+This analyzer comes in only one flavor called *HybridAnalysis_GetReport*.
+
+#### Requirements
+You need to have or create a free Hybrid Analysis [account](https://www.hybrid-analysis.com/signup). 
+
+Follow the instructions outlined on the [Hybrid Analysis API](https://www.hybrid-analysis.com/apikeys/info) page to generate 
+an API key/secret pair.
+
+Provide the API key as a value for the `key` parameter and the secret as a 
+value to the `secret` parameter.
+
+#### Example
+```text
+    HybridAnalysis {
+      secret = "mysecret"
+      key = "myAPIkey"
+    }
 ```
 
 ### MaxMind
@@ -291,6 +325,7 @@ first one is accessed through HTTP while the second has HTTPS enabled.
       key=["my-own-misp-account-authkey", "remote-misp-account-authkey"]
       certpath=["","/etc/ssl/certs"]
       name=["MY-OWN-MISP","REMOTE-MISP"]
+    }
 ```
 
 ### Msg_Parser
@@ -522,6 +557,27 @@ as the value for the `password` parameter.
     }
 ```
 
+### Shodan
+Retrieve key [Shodan](https://www.shodan.io/) information on domains and IP addresses. 
+
+This analyzer comes in two flavors:
+- Shodan_**Host**: get Shodan information on a host.
+- Shodan_**Search**: get Shodan information on a domain.
+
+### Requirements
+You need to create a Shodan account and retrieve the associated API Key. For 
+best results, it is advised to get a [Membership](https://enterprise.shodan.io/product-comparison)
+level account, otherwise a free one can be used. 
+
+Supply the API key as the value for the `key` parameter.
+
+#### Example
+```text
+    Shodan {
+      key = "myawesomeapikey"
+    }
+```
+
 ## Subscription and License-based Analyzers
 ### DNSDB
 Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
@@ -582,6 +638,30 @@ a value for the `key` parameter.
       key="SOMELONGWEIRDSTRING"
     }
 ```
+
+### EmergingThreats
+Leverage Proofpoint's [Emerging Threats Intelligence](https://threatintel.proofpoint.com/)
+to assess the reputation of various observables and obtain additional and 
+valuable information on malware.
+
+The service comes in three flavors:
+- EmergingThreats_**DomainInfo**: retrieve ET reputation, related malware, and IDS requests for a given domain.
+- EmergingThreats_**IPInfo**: retrieve ET reputation, related malware, and IDS requests for a given IP address.
+- EmergingThreats_**MalwareInfo**: retrieve ET details and info related to a malware hash.
+
+#### Requirements
+You need a valid Proofpoint [Emerging Threats Intelligence](https://www.proofpoint.com/us/products/et-intelligence)
+subscription to use the analyzer. 
+
+Retrieve the API key associated with your account and provide it as a value 
+to the `key` parameter.
+
+#### Example
+```text
+    EmergingThreats {
+      key = "MYETINTELKEYGOESHERE"
+    }
+```   
 
 ### JoeSandbox
 Analyze URLs and files using the powerful [Joe Sandbox](https://www.joesecurity.org/)
