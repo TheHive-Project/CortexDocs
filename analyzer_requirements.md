@@ -17,7 +17,6 @@ This documents also specifies whether the service that the analyzer is based
 on is free or requires special access or valid subscription or product license.
 
 ## Table of Contents
-
   * [Introduction](#introduction)
   * [Free Analyzers](#free-analyzers)
     * [Abuse\_Finder](#abuse_finder)
@@ -27,6 +26,7 @@ on is free or requires special access or valid subscription or product license.
     * [Fortiguard](#fortiguard)
     * [GoogleSafeBrowsing](#googlesafebrowsing)
     * [Hippocampe](#hippocampe)
+    * [HybridAnalysis](#hybridanalysis)
     * [MaxMind](#maxmind)
     * [MISP](#misp)
     * [Msg\_Parser](#msg_parser)
@@ -41,9 +41,11 @@ on is free or requires special access or valid subscription or product license.
     * [CERTatPassiveDNS](#certatpassivedns)
     * [CIRCLPassiveDNS](#circlpassivedns)
     * [CIRCLPassiveSSL](#circlpassivessl)
+    * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
+    * [EmergingThreats](#emergingthreats)
     * [JoeSandbox](#joesandbox)
     * [PassiveTotal](#passivetotal)
     * [Nessus](#nessus)
@@ -564,7 +566,7 @@ This analyzer comes in two flavors:
 - Shodan_**Host**: get Shodan information on a host.
 - Shodan_**Search**: get Shodan information on a domain.
 
-### Requirements
+#### Requirements
 You need to create a Shodan account and retrieve the associated API Key. For 
 best results, it is advised to get a [Membership](https://enterprise.shodan.io/product-comparison)
 level account, otherwise a free one can be used. 
