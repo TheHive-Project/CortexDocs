@@ -1,9 +1,12 @@
 # Cortex Analyzers
 
 Analyzers are autonomous applications managed by and run through the Cortex core engine. Analyzers have their
-[own dedicated GitHub repository](https://github.com/CERT-BDF/Cortex-Analyzers). They are included in the Cortex binary
-package but you have to get them from the repository if you decide to build Cortex from sources or if you need to update
-them.
+[own dedicated GitHub repository](https://github.com/CERT-BDF/Cortex-Analyzers).
+They are included in the Cortex binary, RPM and DEB packages but you have to 
+get them from the repository if you need to update them after installing one 
+of those packages (which is necessary when new analyzers are released or new 
+versions of existing ones are made available) ordecide to build Cortex from 
+sources.
 
 ## Pre-requisites
 Currently, all provided analyzers are written in Python. They don't require any build phase but their dependencies have
@@ -23,7 +26,7 @@ sudo pip install $(sort -u */requirements.txt)
 ```
 
 ## From repository
-If you want to get up-to-date analyzers, you can clone the GitHub repository:
+If you want to use up-to-date analyzers, you can clone the GitHub repository:
 
 ```
 git clone https://github.com/CERT-BDF/Cortex-Analyzers
