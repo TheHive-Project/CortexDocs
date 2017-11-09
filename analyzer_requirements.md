@@ -308,7 +308,7 @@ your account on each of those instances. To obtain the key, log into the MISP
 
 Another important parameter is the `certpath` dict. For each MISP instance:
 
-- Use `""` if you don't want to validate the instance's X.509 certificate or 
+- Use `false` if you don't want to validate the instance's X.509 certificate or 
 if the instance use old plain HTTP.
 - Use `"/etc/ssl/certs"` or another file to validate the instance's X.509 
 certificate.
@@ -325,7 +325,7 @@ first one is accessed through HTTP while the second has HTTPS enabled.
     MISP {
       url=["http://my.own.misp", "https://remote-misp.peercert.org"]
       key=["my-own-misp-account-authkey", "remote-misp-account-authkey"]
-      certpath=["","/etc/ssl/certs"]
+      certpath=[ false, "/etc/ssl/certs" ]
       name=["MY-OWN-MISP","REMOTE-MISP"]
     }
 ```
