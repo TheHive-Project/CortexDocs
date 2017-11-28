@@ -59,7 +59,7 @@ file (`/etc/cortex/application.conf` by default), in the `config` section.
 
 By default, all analyzers are enabled. If you want to disable some of them, 
 add a 
-`disabled` list to `/etc/cortex.application.conf` with the full name of the 
+`disabled` list to `/etc/cortex/application.conf` with the full name of the 
 analyzer (or flavor), including its version. For example, if you'd like to 
 disable 
 the 
