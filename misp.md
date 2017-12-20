@@ -1,17 +1,17 @@
 # MISP Integration
 Starting from version 1.1.1, Cortex can be integrated in two ways with [MISP](http://www.misp-project.org/):
 
-- Cortex can [invoke MISP modules](misp.md#invoke-misp-modules-within-cortex)
-- MISP can [invoke Cortex analyzers](misp.md#invoke-cortex-analyzers-within-misp)
+- Cortex can [invoke MISP modules](#invoke-misp-modules-within-cortex)
+- MISP can [invoke Cortex analyzers](#invoke-cortex-analyzers-within-misp)
 
 ##### Important Note
 To use Cortex with MISP, you need MISP version 2.4.73 or better. Earlier versions cannot invoke Cortex analyzers. 
 
 ## Invoke MISP Modules Within Cortex
-Besides its [regular analyzers](https://github.com/CERT-BDF/Cortex/#analyzers), Cortex 1.1.1 and above can analyze observables using
+Besides its [regular analyzers](https://github.com/thehive-project/cortex/#analyzers), Cortex 1.1.1 and above can analyze observables using
 [MISP expansion modules](https://github.com/MISP/misp-modules#expansion-modules).
 
-Obviously, there are some overlap between Cortex native analyzers and MISP expansion modules. For example, you could query the CIRCL's Passive DNS service using a [native Cortex analyzer](https://github.com/CERT-BDF/Cortex-Analyzers/tree/master/analyzers/CIRCLPassiveDNS) or a [MISP expansion module](https://github.com/MISP/misp-modules/blob/master/misp_modules/modules/expansion/circl_passivedns.py). When there's overlap, we highly recommend you rely on the Cortex analyzer. That way, we will be able to better help you in case you encounter issues or need help to make it work.
+Obviously, there are some overlap between Cortex native analyzers and MISP expansion modules. For example, you could query the CIRCL's Passive DNS service using a [native Cortex analyzer](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/analyzers/CIRCLPassiveDNS) or a [MISP expansion module](https://github.com/MISP/misp-modules/blob/master/misp_modules/modules/expansion/circl_passivedns.py). When there's overlap, we highly recommend you rely on the Cortex analyzer. That way, we will be able to better help you in case you encounter issues or need help to make it work.
 
 In order to invoke MISP expansion modules within Cortex, they need to be installed on the same host that Cortex runs on. To install the modules, follow the [MISP documentation](https://github.com/MISP/misp-modules#how-to-install-and-start-misp-modules) pertaining to this topic. 
 

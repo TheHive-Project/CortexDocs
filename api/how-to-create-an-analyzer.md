@@ -42,7 +42,7 @@ While many analyzers are written in Python (`*.py` files), you can write yours
 in Ruby, Perl or even Scala. However, the very handy `Cortexutils` library
 [described below](#the-cortexutils-python-library) is in Python. It greatly facilitates analyzer development and
 it also provides some methods to quickly format the output to make it compliant
-with the JSON schema expected by [TheHive](https://github.com/CERT-BDF/TheHive/).
+with the JSON schema expected by [TheHive](https://github.com/TheHive-Project/TheHive/).
 
 ### Service Interaction Files (Flavors)
 An analyzer must have at least one service interaction file. Such files
@@ -367,7 +367,7 @@ pip3 install cortexutils
 ```
 
 This library is already used by all the analyzers published in our [Github
-repository](https://github.com/CERT-BDF/Cortex-Analyzers). Feel free to
+repository](https://github.com/TheHive-Project/Cortex-Analyzers). Feel free to
 start reading the code of some of them before writing your own.
 
 ### Report Templates
@@ -506,12 +506,12 @@ A good start can be:
 We **highly encourage you to share your analyzers** with the community through our Github repository. To do so, we invite you to follow a few steps before submitting a pull request.
 
 ### Check Existing Issues
-Start by checking [if an issue already exists](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
+Start by checking [if an issue already exists](https://github.com/TheHive-Project/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
 
-If you are short on ideas, check issues with a [**help wanted** label](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
+If you are short on ideas, check issues with a [**help wanted** label](https://github.com/TheHive-Project/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
 
 ### Open an Issue
-If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/CERT-BDF/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
+If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/TheHive-Project/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
 
 You have to create an issue for each analyzer you'd like to submit.
 
@@ -566,7 +566,7 @@ analyzer must generate an explicit error message.
 
 ### Create a Pull Request
 Create one Pull Request per analyzer against the **develop** branch of the
-[Cortex-Analyzers](https://github.com/CERT-BDF/Cortex-Analyzers/) repository. Reference the issue you've created in your PR.
+[Cortex-Analyzers](https://github.com/TheHive-Project/Cortex-Analyzers/) repository. Reference the issue you've created in your PR.
 
 We have to review your analyzers. Distinct PRs will allow us to review them
 more quickly and release them to the benefit of the whole community.

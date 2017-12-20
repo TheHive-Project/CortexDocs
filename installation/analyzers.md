@@ -1,7 +1,7 @@
 # Cortex Analyzers
 
 Analyzers are autonomous applications managed by and run through the Cortex core engine. Analyzers have their
-[own dedicated GitHub repository](https://github.com/CERT-BDF/Cortex-Analyzers).
+[own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers).
 They are included in the Cortex binary, RPM and DEB packages but you have to 
 get them from the repository if you need to update them after installing one 
 of those packages (which is necessary when new analyzers are released or new 

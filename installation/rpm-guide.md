@@ -1,6 +1,6 @@
 # Cortex Installation Using an RPM package
 
-RPM packages are published on Bintray repository. All packages are signed using the key [562CBC1C](/PGP-PUBLIC-KEY)
+RPM packages are published on Bintray repository. All packages are signed using the key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY)
 (fingerprint: 0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C)
 
 First install rpm release package:

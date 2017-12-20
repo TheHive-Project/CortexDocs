@@ -1,4 +1,4 @@
-This API call returns the details of a given analyzer when you supply its ID. If you don't know the ID of the analyzer, you can get a list of all the available analyzers and the corresponding IDs by referring to the [List analyzers](List-analyzers-API) page.
+This API call returns the details of a given analyzer when you supply its ID. If you don't know the ID of the analyzer, you can get a list of all the available analyzers and the corresponding IDs by referring to the [List analyzers](list-analyzers.md) page.
 
 **URL** 
 ```

@@ -1,4 +1,4 @@
-This API call returns the details of a given job, identified by its ID. It doesn't include the job's report, which can be fetched using the [Get job report API](Get-job-report-API).
+This API call returns the details of a given job, identified by its ID. It doesn't include the job's report, which can be fetched using the [Get job report API](get-job-report.md).
 
 **URL** 
 ```

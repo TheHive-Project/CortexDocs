@@ -11,7 +11,7 @@ docker run certbdf/cortex
 
 Starting from Cortex version 1.1.0, we no longer provide the all-in-one docker (an image which contained TheHive and Cortex). If you want to
 run TheHive and Cortex using Docker, follow the
-[TheHive Docker Guide](https://github.com/CERT-BDF/TheHiveDocs/blob/master/installation/docker-guide.md).
+[TheHive Docker Guide](https://github.com/TheHive-Project/TheHiveDocs/blob/master/installation/docker-guide.md).
 
 ## Analyzers
 

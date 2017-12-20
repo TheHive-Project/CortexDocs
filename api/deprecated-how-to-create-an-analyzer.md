@@ -9,7 +9,7 @@ From a technical standpoint, a minimal **analyzer** would be defined by:
 - A JSON definition file
 - An executable script. As of this writing, all the available analyzers are written in Python. However, analyzers can be written in any programming language supported by Linux
 
-Throughout this document, we will use the [Hippocampe_More](https://github.com/CERT-BDF/Cortex-Analyzers/tree/master/analyzers/Hippocampe) analyzer as an example to teach you how to write your own analyzer.
+Throughout this document, we will use the [Hippocampe_More](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/analyzers/Hippocampe) analyzer as an example to teach you how to write your own analyzer.
 
 Our **analyzer** will be defined inside a folder called `Hippocampe`. We use a convention. The folder where the analyzer is located is named after the product or service it leverages to do its work: MISP, MaxMind, PassiveTotal, VirusTotal, DomainTools...
 
@@ -59,7 +59,7 @@ In Cortex, we distinguish between two types of observables:
 
 The input sent by Cortex to the analyzers depend on the observable type.
 
-*Note*: when using Cortex with [TheHive](https://github.com/CERT-BDF/TheHive/), we use some output conventions that allow us to normalize the way TheHive displays the analysis reports. 
+*Note*: when using Cortex with [TheHive](https://github.com/TheHive-Project/TheHive/), we use some output conventions that allow us to normalize the way TheHive displays the analysis reports. 
 
 #### Input for Value-based Observables
 The input for value-based observables must have the following structure:
@@ -143,7 +143,7 @@ The `<Artifact>` object has the following structure:
 | type | String `REQUIRED` | The artifact data type |
 | value | String `REQUIRED` | The artifact value |
 
-**Note**: the `artifacts` array will be used in the future by [TheHive](https://github.com/CERT-BDF/TheHive/) to display or import the extracted artifacts from an analysis report.
+**Note**: the `artifacts` array will be used in the future by [TheHive](https://github.com/TheHive-Project/TheHive/) to display or import the extracted artifacts from an analysis report.
 
 #### Unsuccessful Analysis
 ```json
@@ -154,7 +154,7 @@ The `<Artifact>` object has the following structure:
 ```
 
 # The Cortexutils Library
-`cortexutils` is a Python library available on `pip`. It provides a Python class that facilitates the creation of analyzer script files. It includes an abstract `Analyzer` class that a programmer may inherit and override in their script. It also provides some methods to quickly format the output to be compliant with the JSON schema expected by [TheHive](https://github.com/CERT-BDF/TheHive/).
+`cortexutils` is a Python library available on `pip`. It provides a Python class that facilitates the creation of analyzer script files. It includes an abstract `Analyzer` class that a programmer may inherit and override in their script. It also provides some methods to quickly format the output to be compliant with the JSON schema expected by [TheHive](https://github.com/TheHive-Project/TheHive/).
 
 To create an analyzer class, developers have to:
 
@@ -267,13 +267,13 @@ This will generate the following output:
 And in Cortex ![](../images/cortex-report.png)
 
 # TheHive and Cortex analyzers
-Using Cortex from an instance of [TheHive](https://github.com/CERT-BDF/TheHive/) helps the users improve the analysis report visualization. In fact, TheHive uses the outputs generated from Cortex analyzers in two ways:
+Using Cortex from an instance of [TheHive](https://github.com/TheHive-Project/TheHive/) helps the users improve the analysis report visualization. In fact, TheHive uses the outputs generated from Cortex analyzers in two ways:
 
 - Store the `summary` content as part of the observable's data. This is available for successful analysis jobs only.
 - Display the `full`report using the report templates defined within TheHive.
 
 ## Report templates
-[TheHive](https://github.com/CERT-BDF/TheHive/) is based on Angular 1 and report templates have to be Angular templates which we try to fill using the job's report data. 
+[TheHive](https://github.com/TheHive-Project/TheHive/) is based on Angular 1 and report templates have to be Angular templates which we try to fill using the job's report data. 
 
 We distinguish 2 types of report templates:
 

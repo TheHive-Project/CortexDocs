@@ -5,7 +5,7 @@ observables and IOCs such as
 domain names, IP addresses, hashes, files, URLs at scale. While many 
 analyzers are free to use, some require special access while others 
 necessitate a valid service subscription or product license, even though the
-analyzers themselves are released under an the [AGPL](https://github.com/CERT-BDF/Cortex-analyzers/blob/master/LICENSE)
+analyzers themselves are released under an the [AGPL](https://github.com/TheHive-Project/Cortex-analyzers/blob/master/LICENSE)
 (Affero General Public License).
   
 This document outlines the information needed to:
@@ -223,7 +223,7 @@ The analyzer comes in two flavors:
 #### Requirements
 The Hippocampe analyzer requires you to have a local instance of Hippocampe 
 deployed/configured. It is a FOSS product that needs to be manually deployed 
-in your environment. Please go to [https://github.com/CERT-BDF/Hippocampe](https://github.com/CERT-BDF/Hippocampe)
+in your environment. Please go to [https://github.com/TheHive-Project/Hippocampe](https://github.com/TheHive-Project/Hippocampe)
  for more information on setting it up.
 
 To configure the analyzer you need to supply the URL of your local instance 

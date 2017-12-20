@@ -1,5 +1,5 @@
 
-If you are using [TheHive](https://github.com/CERT-BDF/TheHive) as a SIRP (Security Incident Response Platform), you
+If you are using [TheHive](https://github.com/TheHive-Project/TheHive) as a SIRP (Security Incident Response Platform), you
 don't need to master the Cortex REST API. If you have a different SIRP or would like to interface other tools with
 Cortex, please read on.
 

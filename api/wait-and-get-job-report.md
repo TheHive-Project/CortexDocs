@@ -1,4 +1,4 @@
-This API call is almost the same as [Get Job Report API](Get-job-report-API) but introduces an asynchronous behavior. It means that this API can wait for a given amount of time until the job completes. It also supports a timeout parameter.
+This API call is almost the same as [Get Job Report API](get-job-report.md) but introduces an asynchronous behavior. It means that this API can wait for a given amount of time until the job completes. It also supports a timeout parameter.
 
 Instead of returning the details of an in-progress job, it will wait until it finishes then returns the report, provided it doesn't timeout.
 
@@ -18,7 +18,7 @@ If `atMost`query parameter is not specified, it defaults to *Infinite* (which ca
 
 **Output**
 
-Same output as [Get Job Report API](Get-job-report-API).
+Same output as [Get Job Report API](get-job-report.md).
 
 **How to use it**
 
