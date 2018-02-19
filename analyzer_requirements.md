@@ -423,7 +423,7 @@ No configuration is required. The analyzer has no entry in the `config` section.
 of the box.
 
 ### Onyphe
-Get publicly available information from [Onyphe](https://www.onyphe.com) for IP addresses.
+Get publicly available information from [Onyphe](https://www.onyphe.io) for IP addresses.
 
 The analyzer comes in five one flavors :
 
