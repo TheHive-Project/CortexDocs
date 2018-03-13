@@ -13,6 +13,15 @@ physical machine with similar specifications.
 
 ## What's New
 
+**2.0.0**
+ - User must be authenticated to access to Cortex.
+ - Cortex can manage multiple tenants (organizations) with several role level (analyst, organization administrator, super administrator).
+ - Analyzers are enabled and configured by the organization administrators. The same analyzer can be configured differently in each organization.
+ - Analysis jobs are cached (cf. `job.cache` in configuration file), if the same analysis is asked, the previous report is replied without rerun the analysis. It is still possible to force to rerun the same job by setting parameter `force` to `true`.
+ -
+
+**1.0.0**
+
 - [How to Configure Analyzers](analyzer_requirements.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
@@ -43,7 +52,6 @@ and [configure them](analyzer_requirements.md).
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 
 ## Other
-- [MISP Integration](misp.md)
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [FAQ](FAQ.md)
 
