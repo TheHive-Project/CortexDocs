@@ -14,11 +14,28 @@ physical machine with similar specifications.
 ## What's New
 
 **2.0.0**
- - User must be authenticated to access to Cortex.
- - Cortex can manage multiple tenants (organizations) with several role level (analyst, organization administrator, super administrator).
- - Analyzers are enabled and configured by the organization administrators. The same analyzer can be configured differently in each organization.
- - Analysis jobs are cached (cf. `job.cache` in configuration file), if the same analysis is asked, the previous report is replied without rerun the analysis. It is still possible to force to rerun the same job by setting parameter `force` to `true`.
- -
+ 
+- Cortex 2.0.0 is introducing organizations and users management.  User must be authenticated to access the WebUI or the API.
+- Cortex can manage multiple tenants (organizations) with several role levels
+
+| Actions\\Roles           | Analyst | Organization Administrator | Super Administrator |
+| ------------------------ | ------- | -------------------------- | ------------------- |
+| Read reports             |    X    |             X              |                     |
+| Run jobs                 |    X    |             X              |                     |
+| Enable/Disable analyzer  |         |             X              |                     |
+| Configure analyzer       |         |             X              |                     |
+| Create org analyst       |         |             X              |          X          |
+| Delete org analyst       |         |             X              |          X          |
+| Create org admin         |         |             X              |          X          |
+| Delete org admin         |         |             X              |          X          |
+| Create Org               |         |                            |          X          |
+| Delete Org               |         |                            |          X          |
+| Create Cortex admin user |         |                            |          X          |
+
+- Cortex can be configured with multiple sets of analyzers
+- Analyzers are enabled and configured by the organization administrators. The same analyzer can be configured differently in each organization.
+- Analysis jobs are cached (cf. `job.cache` in configuration file), if the same analysis is asked, the previous report is replied without rerun the analysis. It is still possible to force to rerun the same job by setting parameter `force` to `true`.
+-
 
 **1.0.0**
 

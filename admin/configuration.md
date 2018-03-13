@@ -30,5 +30,19 @@ analyzers, refer to their [guide](../installation/analyzers.md).
 Cortex using a non-privileged user, you can't bind a port under 1024. If you run TheHive on the same system, make sure that you
 are using two different TCP ports.
 
+# Cortex application
+
+## Initial configuration
+
+### Elasticsearch configuration
+
+## HTTPS
+
+# First access
+
+See [](userManagement#first_access_configure_cortex_administrator)
+
 # Important Note
-Cortex does not support authentication. Please make sure that it is isolated using a firewall or any other filtering device and only authorized IP addresses can access it.
+
+With introduction of users management, a key API is henceforth mandatory to request Cortex from TheHive or any other solution.  
+
