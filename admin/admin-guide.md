@@ -1,8 +1,27 @@
+# Administration Guide
 This administration guide applies to Cortex 2 only. 
 
-**Important Note**: please note that to use Cortex 2 through TheHive, you must use Cerana 0.7 (TheHive 3.0.7) or later.
+Please note that to use Cortex 2 from TheHive, you must use Cerana 0.7 (TheHive 3.0.7) or later.
 
-# User Roles
+## Table of Contents
+  * [User Roles](#user-roles)
+    * [On First Access](#on-first-access)
+  * [Organizations, Users and Analyzers](#organizations-users-and-analyzers)
+    * [Organizations](#organizations)
+      * [Can Organizations be Deleted?](#can-organizations-be-deleted)
+    * [Users](#users)
+      * [Can Users be Deleted?](#can-users-be-deleted)
+    * [Analyzers](#analyzers)
+  * [Application Configuration](#application-configuration)
+    * [Database](#database)
+    * [Analyzers](#analyzers-1)
+    * [Authentication](#authentication)
+    * [Cache](#cache)
+    * [Streaming (a\.k\.a The Flow)](#streaming-aka-the-flow)
+      * [Entity Size Limit](#entity-size-limit)
+    * [HTTPS](#https)
+
+## User Roles
 Cortex 2 introduces a number of significant changes over Cortex 1. One of them is role-based access control. Cortex 2 defines four roles: 
  - `read`: the user can access all the jobs that have been performed by the Cortex 2 instance, including their results. However, this role **cannot** submit jobs. Moreover, this role **cannot** be used in the default `cortex` organization. This organization can only contain super administrators.
  - `analyze`: the `analyze` role implies the `read` role, described above. A user who has a `analyze` role can submit a new job using one of the
@@ -28,7 +47,7 @@ The chart below lists the roles and what they can and cannot do:
 | Delete Org               |      |         |          |     X      |
 | Create Cortex admin user |      |         |          |     X      |
 
-## On First Access
+### On First Access
 If the database is not yet initialized (or initialized with obsolete data), Cortex will ask you to migrate the database. This operation ensures that its schema is up-to-date, then retrieves previous data (if any) and update
 its format for the new schema.
 
@@ -38,35 +57,35 @@ At the end of this process, Cortex asks for the first user creation. Please reme
 
 ![first user creation](../images/first_user_creation.png)
 
-# Organizations, Users and Analyzers
+## Organizations, Users and Analyzers
 Upon installation, Cortex 2 creates a default organization called `cortex`. The `cortex` organization cannot be used for any other purpose than managing organizations and their users. It contains the user that is created on first access and any other user that is created with a `superAdmin` role. All other users (`read`, `analyze` and `orgAdmins` must belong to organizations other than `cortex`). Those users can only see items within their own organization. 
 
 Analyzers are enabled then configured using the Web user interface for each organization. That way, an analyzer can
 be configured using different API keys for each organization. Analyzer rate limiting, when applicable, can also be configured per organization.
 
-## Organizations
+### Organizations
 Users with the `superAdmin` role can create organizations. Organization management is performed through the *Organizations* menu.
 
 As stated earlier, the `cortex` organization has a special meaning. It is automatically created when Cortex is initialized and can only contain `superAdmin` users. Normal organizations hold users and analyzer configuration.
 
-### Can Organizations be Deleted?
+#### Can Organizations be Deleted?
 Administrators, beware! An organization cannot be deleted once created but it can be disabled by a `superAdmin`. In that case, all operations users in that organization would try to perform will be rejected. 
 
 If needed, a `superAdmin` can re-enable a disabled organization.
 
-## Users
+### Users
 User accounts can be managed by a `superAdmin` in any organization that exists in the Cortex instance. Users can also be managed for a specific organization by those who possess the `orgAdmin` role in **that** organization. 
 
 User management is done in the *Organizations* > *Users* tab.
 
 ![users](../images/users.png)
 
-### Can Users be Deleted?
+#### Can Users be Deleted?
 User accounts cannot be deleted once created but they can be locked by an `orgAdmin` or a `superAdmin`. Once locked, they cannot be used. 
 
 If needed, an `orgAdmin` or a `superAdmin` can unlock a locked user account.
 
-## Analyzers
+### Analyzers
 Analyzers can be enabled, disabled and configured only by `orgAdmin` users. `superAdmins` roles cannot do that.
 
 Analyzer management is done in two locations:
@@ -88,10 +107,10 @@ Under the *Organization* > *Analyzers* tab, analyzers and their flavors can be e
 **Important Note**:
 Please note that, by default, no analyzer is enabled nor configured, even the free ones or those that do not need any configuration. It is up to each `orgAdmin` to enable the analyzers for their organization, configure them when applicable and apply rate limits if they want to do so. 
 
-# Application Configuration
+## Application Configuration
 As described in the section above, Analyzers can only be configured using the Web interface and their associated configuration is stored in the underlying Elasticsearch database. However, the Cortex appplication configuration is stored in the `/etc/cortex/application.conf` file.
 
-## Database
+### Database
 
 Cortex relies on the Elasticsearch 5.x search engine to store all persistent data.
 Elasticsearch 5.x is not part of the Cortex package. It must be installed and configured
@@ -154,7 +173,7 @@ feature: the results are retrieved through pagination. You can specify the size
 of the page (`search.pagesize`) and how long pages are kept in Elasticsearch
 ((`search.keepalive`) before purging.
 
-## Analyzers
+### Analyzers
 Cortex looks for installed analyzers by scanning directories configured in
 `analyzer.path`. This item is multi-valued.
 
@@ -184,7 +203,7 @@ analyzer {
   }
 }
 ```
-## Authentication
+### Authentication
 Like TheHive, Cortex supports local, LDAP, Active Directory (AD), X.509 SSO and/or API keys for authentication and soon OAuth2.
 
 Please note that API keys can only be used to interact with the Cortex API (for example when TheHive is interfaced with a Cortex instance, it must use an API key to authenticate to it). API keys cannot be used to authenticate to the Web UI. By default, Cortex relies on local credentials stored in Elasticsearch.
@@ -252,7 +271,7 @@ session {
 }
 ```
 
-## Cache
+### Cache
 In order to increase Cortex performance, a cache is configured to prevent
 repetitive database solicitation. Cache retention time can be configured for
 users and organizations (default is 5 minutes). If a user is updated, the cache is
@@ -269,7 +288,7 @@ cache {
 }
 ```
 
-## Streaming (a.k.a The Flow)
+### Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the
 back-end. To do this, the back-end sends events to all the connected front-ends.
 The mechanism used to notify the front-end is called long polling and its
@@ -298,7 +317,7 @@ stream.longpolling {
 }
 ```
 
-### Entity Size Limit
+#### Entity Size Limit
 The Play framework used by Cortex sets the HTTP body size limit to 100KB by
 default for textual content (json, xml, text, form data) and 10MB for file
 uploads. This could be too small in some cases so you may want to change it with
@@ -317,7 +336,7 @@ also set the `client_max_body_size` parameter in your NGINX server configuration
 to the highest value among the two: file upload and text size as defined in Cortex
 `application.conf` file.
 
-## HTTPS
+### HTTPS
 To enable HTTPS in the application, add the following lines to
 `/etc/cortex/application.conf`:
 ```
