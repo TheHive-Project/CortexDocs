@@ -1,6 +1,17 @@
 # Quick Start Guide
 This is the Quick Start guide for Cortex 2. For further details and configuration options, please refer to the [Administration Guide](admin-guide.md).
 
+## Table of Contents
+  * [Step 1: Setup Cortex](#step-1-setup-cortex)
+  * [Step 2: Update the Database](#step-2-update-the-database)
+    * [Step 3: Create the Cortex Super Administrator](#step-3-create-the-cortex-super-administrator)
+  * [Step 4: Create an Organization](#step-4-create-an-organization)
+  * [Step 5: Create a Organization Administrator](#step-5-create-a-organization-administrator)
+  * [Step 6: Enable and Configure Analyzers](#step-6-enable-and-configure-analyzers)
+  * [Step 7 (Optional): Create an Account for TheHive integration](#step-7-optional-create-an-account-for-thehive-integration)
+  * [Migrating from Cortex 1\.x?](#migrating-from-cortex-1x)
+  * [Need to Go Further?](#need-to-go-further)
+
 ## Step 1: Setup Cortex
 The Cortex back-end configuration file is `/etc/cortex/application.conf` by default. In order to start Cortex and provided Elasticsearch is running on the same machine, the only required parameter to get up and running is the key of the server
 (`play.http.secret.key`). This key is used to authenticate the cookies that
