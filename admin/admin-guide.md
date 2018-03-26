@@ -8,9 +8,9 @@ configured analyzer for its organization. This role can't be used in `cortex`
 organization.
  - `orgAdmin` (implies analyze role): with this role, the user can manage users
 of its organization. He can add user with role `read`, `analyze` and `orgAdmin`.
-This role also permit to configure analyzers. This role can't be used in
+This role also permits to configure analyzers. This role can't be used in
 `cortex` organization.
- - `superAdmin` (incompatible with other roles): this role only permit to manage
+ - `superAdmin` (incompatible with other roles): this role only permits to manage
 organizations and users. The first user is created with this role. Several users
 can have this role but only on the `cortex` organization (which is automatically
 created during installation).
@@ -37,7 +37,7 @@ its format for the new schema.
 
 ![update](../images/update.png)
 
-At the end of this process, Cortex ask for the first user creation.
+At the end of this process, Cortex asks for the first user creation.
 
 ![first user creation](../images/first_user_creation.png)
 
@@ -63,9 +63,9 @@ all operation done by users in that organization are rejected. And disabled
 organization can be reactivated by a superAdmin.
 
 ## User
-User can be created by superAdmins (for all organizations) and by orgAdmin (only
+Users can be created by superAdmins (for all organizations) and by orgAdmin (only
 for his organization). User management is done in "Users" tab under
-"Organization".
+"Organization" menu.
 
 ![users](../images/users.png)
 
@@ -112,7 +112,7 @@ Three settings are required to connect to Elasticsearch:
  * the name of the cluster
  * the address(es) and port(s) of the Elasticsearch instance
 
-The Defaults settings are:
+Defaults settings are:
 
 ```
 # Elasticsearch
@@ -207,7 +207,7 @@ multi-valued. When a user logs in, each authentication method is tried in order
 until one succeeds. If no authentication method works, an error is returned and
 the user cannot log in.
 
-The Default values within the configuration file are:
+Default values within the configuration file are:
 ```
 auth {
 	# "provider" parameter contains authentication provider. It can be multi-valued (useful for migration)
