@@ -2,10 +2,13 @@
 
 [![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive)
 
-Cortex tries to solve a common problem frequently encountered by SOCs, CSIRTs and security researchers in the course of threat intelligence, digital forensics and incident response: how to analyze observables they have collected, **at scale, by querying a single tool** instead of several?
+Cortex solves a common problem frequently encountered by SOCs, CSIRTs and security researchers in the course of threat intelligence, digital forensics and incident response: how to analyze observables they have collected, **at scale, by querying a single tool** instead of several? Thanks to its many analyzers and to its RESTful API, Cortex makes observable analysis a breeze, particularly if called from [TheHive](https://github.com/TheHive-Project/TheHive/), our highly popular, free and open source Security Incident Response Platform.
+
+Starting from Cortex version 2, you can create and manage multiple organizations (i.e multi-tenancy), manage the associated users and give them different roles. You can also specify per-org analyzer configuration and rate limits to avoid consuming all your quotas at once. We have also added a cache so that an analysis is not re-executed for the same observable if a given analyzer is called on that observable several times within a specific timespan (10 minutes by default).
 
 **Note:**  This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/Cortex/](https://github.com/TheHive-Project/Cortex/).
 
+**Note:** [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the Python lib to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, does not support Cortex 2 yet. It will be updated soon. 
 
 ## Hardware Pre-requisites
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
@@ -13,17 +16,7 @@ physical machine with similar specifications.
 
 ## What's New
 
-**2.0.0**
- 
-- Cortex 2.0.0 is introducing organizations and users management.  User must be authenticated to access the WebUI or the API.
-- Cortex can manage multiple tenants (organizations) with several role levels
-- Cortex can be configured with multiple sets of analyzers
-- Analyzers are enabled and configured by the organization administrators. The same analyzer can be configured differently in each organization.
-- Analysis jobs are cached (cf. `job.cache` in configuration file), if the same analysis is asked, the previous report is replied without rerun the analysis. It is still possible to force to rerun the same job by setting parameter `force` to `true`.
--
-
-**1.0.0**
-
+- [Quick Start Guide](quick-start.md)
 - [How to Configure Analyzers](analyzer_requirements.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
@@ -36,8 +29,6 @@ Cortex can be installed using:
 - A [DEB package](installation/deb-guide.md)
 - [Docker](installation/docker-guide.md)
 - [Binary](installation/binary-guide.md)
-- [Ansible script](https://github.com/drewstinnett/ansible-cortex) contributed by
-[@drewstinnett](https://github.com/drewstinnett)
 
 Cortex can also be [built from sources](installation/build-guide.md).
 
@@ -50,7 +41,7 @@ and [configure them](analyzer_requirements.md).
 
 ## Developer Guides
 
-- [API Documentation](api/README.md)
+- [API Documentation](api/README.md) (**OUTDATED**, will be updated soon)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 
 ## Other
@@ -77,7 +68,7 @@ If you need to contact the Project's team, send an email to <support@thehive-pro
 
 - If you have troubles with a Cortex analyzer or would like to request a new one or an improvement to an existing analyzer, please open an issue on the [analyzers' dedicated GitHub repository](https://github.com/TheHive-Project/cortex-analyzers/issues/new).
 - If you encounter an issue with TheHive or would like to request the addition of a feature in it, please [open an issue on its dedicated GitHub repository](https://github.com/TheHive-Project/TheHive/issues/new).
-- If you have problems with [TheHive4py](https://github.com/TheHive-Project/TheHive4py), please [open an issue on its dedicated repository](https://github.com/TheHive-Project/TheHive4py/issues/new).
+- If you have problems with [Cortex4py](https://github.com/TheHive-Project/Cortex4py), please [open an issue on its dedicated repository](https://github.com/TheHive-Project/Cortex4py/issues/new).
 
 # Community Discussions
 We have set up a Google forum at <https://groups.google.com/a/thehive-project.org/d/forum/users>. To request access, you need a Google account. You may create one [using a Gmail address](https://accounts.google.com/SignUp?hl=en) or [without it](https://accounts.google.com/SignUpWithoutGmail?hl=en).
