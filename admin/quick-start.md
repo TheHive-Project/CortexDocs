@@ -1,10 +1,10 @@
 # Quick Start Guide
-This is the Quick Start guide for Cortex 2. For further details and configuration options, please refer to the [Administration Guide](admin-guide.md).
+This is the Quick Start guide for Cortex 2. It assumes that Cortex [has been installed](../installation), and that [the analyzers](../installation/analyzers.md) have been installed as well.Please read the For further details and configuration options, please refer to the [Administration Guide](admin-guide.md).
 
 ## Table of Contents
   * [Step 1: Setup Cortex](#step-1-setup-cortex)
   * [Step 2: Update the Database](#step-2-update-the-database)
-    * [Step 3: Create the Cortex Super Administrator](#step-3-create-the-cortex-super-administrator)
+  * [Step 3: Create the Cortex Super Administrator](#step-3-create-the-cortex-super-administrator)
   * [Step 4: Create an Organization](#step-4-create-an-organization)
   * [Step 5: Create a Organization Administrator](#step-5-create-a-organization-administrator)
   * [Step 6: Enable and Configure Analyzers](#step-6-enable-and-configure-analyzers)
@@ -54,13 +54,11 @@ You will then be able to log in using this user account. You will note that the 
 
 ![Cortex administrator Account](../images/cortex_admin_login.png)
 
-
 ## Step 4: Create an Organization
 
 The default `cortex` organization cannot be used for any other purpose than managing global administrators (users with the `superAdmin` role), organizations and their associated users. It cannot be used to enable/disable or configure analyzers. To do so, you need to create your own organization inside Cortex by clicking on the `Add organization`  button.
 
 ![Add Organization](../images/new_org.png)
-
 
 ## Step 5: Create a Organization Administrator
 
@@ -72,6 +70,8 @@ Then, specify a password for this user. After doing so,  log out and log in with
 
 ## Step 6: Enable and Configure Analyzers
 Enable the analyzers you need, configure them using the **Organization** > **Configuration** and **Organization** > **Analyzers** tabs. All analyzer configuration is done using the Web UI, including adding API keys and configuring rate limits.
+
+The analyzer configuration requirements are detailed in the [Analyzer Requirements](../analyzer_requirements.md) page.
 
 ## Step 7 (Optional): Create an Account for TheHive integration
 
