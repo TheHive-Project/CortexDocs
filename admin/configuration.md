@@ -1,6 +1,6 @@
 # Configuration
 
-The Cortex back-end and analyzers look for their configuration in the same file (`/etc/cortex/application.conf` by default).
+The Cortex back-end looks for its configuration in the same file (`/etc/cortex/application.conf` by default).
 
 In order to start Cortex, the only required parameter is the key of the server
 (`play.http.secret.key`). This key is used to authenticate the cookies that
