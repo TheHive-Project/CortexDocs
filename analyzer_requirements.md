@@ -630,7 +630,7 @@ value to the `secret` parameter. the `url` parameter should be the address of yo
 
 ### Nessus
 Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
-a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version
+a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version.
 
 The analyzer comes in only one flavor.
 
