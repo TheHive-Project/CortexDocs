@@ -85,10 +85,8 @@ search.host = ['127.0.0.1:9300']
 analyzer.path = ['/opt/Cortex-Analyzers/analyzers']
 ```
 
-As there is no migration tool for analyzers configuration, as OrgAdmin, you need to anable and configure every analyzer in the UI.
+As there is no migration tool for analyzers configuration, as OrgAdmin, you need to enable and configure every analyzer in the UI.
 
 
 ![Enable and configure analyzers](../images/configure_analyzers.png)
 
-
-there is no migration tool and 
