@@ -29,7 +29,7 @@ sudo pip install $(sort -u */requirements.txt)
 If you want to use up-to-date analyzers, you can clone the GitHub repository:
 
 ```
-git clone https://github.com/CERT-BDF/Cortex-Analyzers
+git clone https://github.com/TheHive-Project/Cortex-Analyzers
 ```
 
 Next, you'll need to tell Cortex where to find the analyzers. Currently, all the analyzers must be in the same
