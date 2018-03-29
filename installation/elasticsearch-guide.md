@@ -36,7 +36,7 @@ If ElasticSearch and Cortex run on the same host (and not in a docker), edit `/e
 set `network.host` parameter with `127.0.0.1`.
 Cortex use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: on`.
 
-The cluster name must also be set ("cortex" for example).
+The cluster name must also be set ("hive" for example).
 
 Threadpool queue size must be set with a high value (100000). The default size will get the queue easily overloaded.
 
@@ -45,7 +45,7 @@ Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 ```
 network.host: 127.0.0.1
 script.inline: on
-cluster.name: cortex
+cluster.name: hive
 thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
 thread_pool.bulk.queue_size: 100000
@@ -82,7 +82,7 @@ docker run \
 	-e "http.host=0.0.0.0" \
 	-e "transport.host=0.0.0.0" \
 	-e "xpack.security.enabled=false" \
-	-e "cluster.name=cortex" \
+	-e "cluster.name=hive" \
   -e "script.inline=true" \
   -e "thread_pool.index.queue_size=100000" \
   -e "thread_pool.search.queue_size=100000" \

@@ -1,5 +1,5 @@
 # Administration Guide
-This administration guide applies to Cortex 2 only. 
+This administration guide applies to Cortex 2 only.
 
 Please note that to use Cortex 2 from TheHive, you must use Cerana 0.7 (TheHive 3.0.7) or later.
 
@@ -22,7 +22,7 @@ Please note that to use Cortex 2 from TheHive, you must use Cerana 0.7 (TheHive 
     * [HTTPS](#https)
 
 ## User Roles
-Cortex 2 introduces a number of significant changes over Cortex 1. One of them is role-based access control. Cortex 2 defines four roles: 
+Cortex 2 introduces a number of significant changes over Cortex 1. One of them is role-based access control. Cortex 2 defines four roles:
  - `read`: the user can access all the jobs that have been performed by the Cortex 2 instance, including their results. However, this role **cannot** submit jobs. Moreover, this role **cannot** be used in the default `cortex` organization. This organization can only contain super administrators.
  - `analyze`: the `analyze` role implies the `read` role, described above. A user who has a `analyze` role can submit a new job using one of the
 configured analyzers for their organization. This role **cannot** be used in the default `cortex` organization. This organization can only contain super administrators.
@@ -30,7 +30,7 @@ configured analyzers for their organization. This role **cannot** be used in the
 within their organization. They can add users and give them `read`, `analyze` and/or `orgAdmin` roles.
 This role also permits to configure analyzers for the organization. This role **cannot** be used in the default  `cortex` organization. This organization can only contain super administrators.
  - `superAdmin`: this role is incompatible with all the other roles listed above (see chart below for examples). It can be used solely for managing organizations and their associated users. When you install Cortex, the first user that is created will have this role. Several users can have it as well but only in the default `cortex` organization, which is automatically created during installation.
- 
+
 The chart below lists the roles and what they can and cannot do:
 
 | Actions                  | read | analyze | orgAdmin | superAdmin |
@@ -58,7 +58,7 @@ At the end of this process, Cortex asks for the first user creation. Please reme
 ![first user creation](../images/first_user_creation.png)
 
 ## Organizations, Users and Analyzers
-Upon installation, Cortex 2 creates a default organization called `cortex`. The `cortex` organization cannot be used for any other purpose than managing organizations and their users. It contains the user that is created on first access and any other user that is created with a `superAdmin` role. All other users (`read`, `analyze` and `orgAdmins` must belong to organizations other than `cortex`). Those users can only see items within their own organization. 
+Upon installation, Cortex 2 creates a default organization called `cortex`. The `cortex` organization cannot be used for any other purpose than managing organizations and their users. It contains the user that is created on first access and any other user that is created with a `superAdmin` role. All other users (`read`, `analyze` and `orgAdmins` must belong to organizations other than `cortex`). Those users can only see items within their own organization.
 
 Analyzers are enabled then configured using the Web user interface for each organization. That way, an analyzer can
 be configured using different API keys for each organization. Analyzer rate limiting, when applicable, can also be configured per organization.
@@ -69,19 +69,19 @@ Users with the `superAdmin` role can create organizations. Organization manageme
 As stated earlier, the `cortex` organization has a special meaning. It is automatically created when Cortex is initialized and can only contain `superAdmin` users. Normal organizations hold users and analyzer configuration.
 
 #### Can Organizations be Deleted?
-Administrators, beware! An organization cannot be deleted once created but it can be disabled by a `superAdmin`. In that case, all operations users in that organization would try to perform will be rejected. 
+Administrators, beware! An organization cannot be deleted once created but it can be disabled by a `superAdmin`. In that case, all operations users in that organization would try to perform will be rejected.
 
 If needed, a `superAdmin` can re-enable a disabled organization.
 
 ### Users
-User accounts can be managed by a `superAdmin` in any organization that exists in the Cortex instance. Users can also be managed for a specific organization by those who possess the `orgAdmin` role in **that** organization. 
+User accounts can be managed by a `superAdmin` in any organization that exists in the Cortex instance. Users can also be managed for a specific organization by those who possess the `orgAdmin` role in **that** organization.
 
 User management is done in the *Organizations* > *Users* tab.
 
 ![users](../images/users.png)
 
 #### Can Users be Deleted?
-User accounts cannot be deleted once created but they can be locked by an `orgAdmin` or a `superAdmin`. Once locked, they cannot be used. 
+User accounts cannot be deleted once created but they can be locked by an `orgAdmin` or a `superAdmin`. Once locked, they cannot be used.
 
 If needed, an `orgAdmin` or a `superAdmin` can unlock a locked user account.
 
@@ -90,10 +90,10 @@ Analyzers can be enabled, disabled and configured only by `orgAdmin` users. `sup
 
 Analyzer management is done in two locations:
 
-- Under the *Organization* > *Configurations* tab, `orgAdmin` users can define the configuration for all the available analyzers, including settings which are common to all the flavors of a given analyzer. 
+- Under the *Organization* > *Configurations* tab, `orgAdmin` users can define the configuration for all the available analyzers, including settings which are common to all the flavors of a given analyzer.
 - Under the *Organization* > *Analyzers* tab, `orgAdmin` users can disable, enable and configure specific analyzer flavors. They can override the global configuration inherited from the *Organization* > *Configuration* tab and add additional, non-global configuration that some analyzer flavors might need to work correctly.
 
-**Important Note**: 
+**Important Note**:
 
 ![analyzer configuration](../images/analyzer_config.png)
 
@@ -105,7 +105,7 @@ organization. `superAdmin` users cannot view analyzer configuration.
 Under the *Organization* > *Analyzers* tab, analyzers and their flavors can be enabled, disabled and configured for the current organization. For each one of them, you can define a rate limit, i.e. the maximum number of analysis jobs that can be executed for that specific analyzer/flavor in the specified period of time, and the maximum acceptable observable TLP the analyzer can process.
 
 **Important Note**:
-Please note that, by default, no analyzer is enabled nor configured, even the free ones or those that do not need any configuration. It is up to each `orgAdmin` to enable the analyzers for their organization, configure them when applicable and apply rate limits if they want to do so. 
+Please note that, by default, no analyzer is enabled nor configured, even the free ones or those that do not need any configuration. It is up to each `orgAdmin` to enable the analyzers for their organization, configure them when applicable and apply rate limits if they want to do so.
 
 ## Application Configuration
 As described in the section above, Analyzers can only be configured using the Web interface and their associated configuration is stored in the underlying Elasticsearch database. However, the Cortex appplication configuration is stored in the `/etc/cortex/application.conf` file.
@@ -130,7 +130,7 @@ search {
   # Name of the index
   index = cortex
   # Name of the Elasticsearch cluster
-  cluster = cortex
+  cluster = hive
   # Address of the Elasticsearch instance
   host = ["127.0.0.1:9300"]
   # Scroll keepalive
