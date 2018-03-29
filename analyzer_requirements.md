@@ -63,60 +63,10 @@ on is free or requires special access or valid subscription or product license.
     * [VMRay](#vmray)
 
 ## Introduction
-All analyzer configuration settings must be made in the global Cortex
-configuration
-file (`/etc/cortex/application.conf` by default), in the `config` section.
+All analyzer configuration settings must be made using the Cortex Web UI. Please refer to the [Administration Guide](admin/admin-guide.md) for further details.
 
-By default, all analyzers are enabled. If you want to disable some of them,
-add a
-`disabled` list to `/etc/cortex/application.conf` with the full name of the
-analyzer (or flavor), including its version. For example, if you'd like to
-disable
-the
-Abuse_Finder (version 2.0 as of this writing) analyzer and the DNSDB DomainName
-flavor (version 2.0 as of this writing) of the DNSDB analyzer, add the
-following line to the `analyzer` section:
-```text
-analyzer {
-  # Absolute path where you have pulled the Cortex-Analyzers repository.
-  path = "/opt/Cortex-Analyzers/analyzers"
+By default, and within every freshly created organization, all analyzers are disabled. If you want to enable and configure them, use the Web UI (**Organization** > **Configurations** and **Organization** > **Analyzers** tabs).
 
-  disabled = ["Abuse_Finder_2_0", "DNSDB_DomainName_2_0"]
-
-  # Sane defaults. Do not change unless you know what you are doing.
-  fork-join-executor {
-  [...]
-  }
-  [...]
-}
-```
-
-If you have troubles finding out the exact name of the analyzer or flavor you'd
-like to disable, you can use a command like the following to list the full
-names of all the analyzers/flavors:
-
-```commandline
-$ grep "Register analyzer" /var/log/cortex/application.log \
-| sed -e 's/.*(\([0-9a-zA-Z_]\+\))$/\1/' | sort -u
-```
-
-The output should look like the following:
-```commandline
-Abuse_Finder_2_0
-CERTatPassiveDNS_2_0
-CIRCLPassiveDNS_2_0
-CIRCLPassiveSSL_2_0
-CuckooSandbox_File_Analysis_Inet_1_0
-CuckooSandbox_Url_Analysis_1_0
-DNSDB_DomainName_2_0
-DNSDB_IPHistory_2_0
-DNSDB_NameHistory_2_0
-DomainTools_ReverseIP_2_0
-DomainTools_ReverseNameServer_2_0
-DomainTools_ReverseWhois_2_0
-DomainTools_WhoisHistory_2_0
-[...]
-```
 ## Free Analyzers
 
 ### Abuse_Finder
@@ -125,16 +75,14 @@ to find abuse contacts associated with domain names, URLs, IPs and email address
 
 The analyzer comes in only one flavor.
 
-No configuration is required. The analyzer has no entry in the `config` section.
-It can be used out of the box.
+No configuration is required. It can be used out of the box.
 
 ### Bluecoat
 Check the [Symantec WebPulse](https://sitereview.bluecoat.com/) (ex. Bluecoat) rating of a URL, a domain or a FQDN.
 
 The analyzer comes in only one flavor.
 
-No specific configuration is needed for this analyzer. The analyzer has no entry in the `config` section.
-It can be used out of the box.
+No specific configuration is needed for this analyzer. It can be used out of the box.
 
 
 ### C1fApp
@@ -147,30 +95,13 @@ This analyzer requires you to have an account on [c1fapp.com](https://www.c1fapp
 
 To configure the analyzer you need to supply the key as a value of the `key` parameter.
 
-#### Example
-```text
-C1fApp {
-    service="query"
-    key="MYKEY"
-    url="https://www.c1fapp.com/cifapp/api/"
-}
-```
-
 ### Censys.io
 Get [Censys.io](https://censys.io) information about certificates using the associated IP, domain or hash.
 
 The analyzer comes in only one flavor.
 
 #### Requirements
-Provide your API ID and the API secret as values for  `uid` and `key` parameters :
-
-#### Example
-```text
-Censys {
-    uid="MYUID"
-    key="MYKEY"
-}
-```
+Provide your API ID and the API secret as values for  `uid` and `key` parameters.
 
 ### CuckooSandbox
 Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
@@ -190,21 +121,13 @@ for more information on setting it up.
 To configure the analyzer you need to supply the URL of your local instance
 as a value of the `url` parameter.
 
-#### Example:
-```text
-CuckooSandbox {
-    url = "http://my.cuckoo.sandbox"
-}
-```
-
 ### File_Info
 Parse files in several formats such as OLE and OpenXML to detect VBA macros,
 extract their source code, generate useful information on PE, PDF files and much more.
 
 The analyzer comes in only one flavor.
 
-No configuration is required. The analyzer has no entry in the `config` section. It can be used out
-of the box.
+No configuration is required. It can be used out of the box.
 
 ### FireHOLBlocklists
 Check IP addresses against the [FireHOL blocklists](https://firehol.org/).
@@ -227,22 +150,13 @@ Specify the directory where the lists have been downloaded using the
 `blocklistpath` paramater and  an optional `ignoreolderthandays` parameter to
  ignore all lists that have not been updated in the last N days.
 
-#### Example
-```text
-    FireHOLBlocklists {
-      blocklistpath = "/opt/firehol/blocklists"
-      ignoreolderthandays="7" # ignore all lists not updated in the last 7d
-    }
-```
-
 ### Fortiguard
 Check the [Fortiguard](https://fortiguard.com/webfilter) category of a URL or
  a domain.
 
 The analyzer comes in only one flavor called *Fortiguard_URLCategory*.
 
-No configuration is required. The analyzer has no entry in the `config` section. It can be used out
-of the box.
+No configuration is required. It can be used out of the box.
 
 ### GoogleSafeBrowsing
 Check URLs against [Google Safebrowsing](https://www.google.com/transparencyreport/safebrowsing/).
@@ -254,13 +168,6 @@ You need to [obtain an API key](https://developers.google.com/safe-browsing/)
  from Google.
 
 Provide your API key as a value of the `key` parameter.
-
-#### Example
-```text
-    GoogleSafebrowsing {
-      key = "MYKEY"
-    }
-```
 
 ### Hippocampe
 Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe),
@@ -283,13 +190,6 @@ in your environment. Please go to [https://github.com/TheHive-Project/Hippocampe
 To configure the analyzer you need to supply the URL of your local instance
 using the `url` parameter.
 
-#### Example
-```text
-    Hippocampe {
-      url = "http://my.hippocampe.instance"
-    }
-```
-
 ### HybridAnalysis
 Fetch [Hybrid Analysis](https://www.hybrid-analysis.com/)
 reports associated with hashes and filenames.
@@ -304,14 +204,6 @@ an API key/secret pair.
 
 Provide the API key as a value for the `key` parameter and the secret as a
 value to the `secret` parameter.
-
-#### Example
-```text
-    HybridAnalysis {
-      secret = "mysecret"
-      key = "myAPIkey"
-    }
-```
 
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
@@ -328,8 +220,7 @@ You can fetch up-to-date versions from [https://dev.maxmind.com/geoip/geoip2/geo
 
 The analyzer comes in only one flavor.
 
-No configuration is required. The analyzer has no entry in the `config` section. It can be used out
-of the box.
+No configuration is required. It can be used out of the box.
 
 ### MISP
 Query multiple [MISP](http://www.misp-project.org/) (Malware Information
@@ -370,20 +261,6 @@ certificate.
 Last but not least, give each instance a name and add it in the order you
 specified URLs and keys above to the `name` dict.
 
-#### Example
-The example below shows the configuration of the MISP analyzer which will
-search two MISP instances called MY-OWN-MISP and REMOTE-MISP. Note that the
-first one is accessed through HTTP while the second has HTTPS enabled.
-
-```text
-    MISP {
-      url=["http://my.own.misp", "https://remote-misp.peercert.org"]
-      key=["my-own-misp-account-authkey", "remote-misp-account-authkey"]
-      certpath=[ false, "/etc/ssl/certs" ]
-      name=["MY-OWN-MISP","REMOTE-MISP"]
-    }
-```
-
 ### MISP Warninglists
 Check IP addresses, hashes, domains, FQDNs and URLs against [MISP WarningLists](https://github.com/MISP/misp-warninglists).
 
@@ -402,15 +279,7 @@ $ git clone https://github.com/MISP/misp-warninglists
 We advise you to keep the lists fresh by adding a cron entry to regularly download them for example (using `git pull`).
 
 Specify the directory where the WarningLists have been downloaded or updated using the
-`path` paramater :
-
-
-#### Example
-```text
-MISPWarningLists {
-    path = "/path/to/misp-warninglists/repository"
-}
-```
+`path` paramater.
 
 ### Msg_Parser
 Parse Outlook message files automatically and show the key information it
@@ -419,8 +288,7 @@ doesn't extract attachments.
 
 The analyzer comes in only one flavor.
 
-No configuration is required. The analyzer has no entry in the `config` section. It can be used out
-of the box.
+No configuration is required. It can be used out of the box.
 
 ### Onyphe
 Get publicly available information from [Onyphe](https://www.onyphe.com) for IP addresses.
@@ -437,12 +305,6 @@ The analyzer comes in five one flavors :
 #### Requirements
 Provide the API key as a value for the `key` parameter :
 
-```text
-Onyphe {
-    key = "ONYPHEAPIKEY"
-}
-```
-
 ### OTXQuery
 Query AlienVault's [Open Threat Exchange](https://otx.alienvault.com/) for IPs,
 domains, URLs, or file hashes.
@@ -456,13 +318,6 @@ an existing one.
 Log in to your OTX account, click on your username on the top
 navigation bar then on *Settings* and retrieve your OTX key and use it as the
 value of the `key` parameter.
-
-#### Example
-```text
-    OTXQuery {
-      key="MYUBERSEKRETOTXQUERYKEY"
-    }
-```
 
 ### PhishTank
 Query [PhishTank](https://www.phishtank.com/) to assess whether a URL has
@@ -479,13 +334,6 @@ Log in to your PhishTank account, click on the *Developers* tab then on
 entering a CAPTCHA code. You'll obtain an API key that you'll need to supply
 as the value to the `key` configuration parameter for this analyzer to work.
 
-#### Example
-```text
-    PhishTank {
-      key="MYPHISHTANKAPIKEYGOESHERE"
-    }
-```
-
 ### PhishingInitiative
 Query [Phishing Initiative](https://phishing-initiative.fr/contrib/) to
 assess whether a URL has been flagged as a phishing site.
@@ -500,12 +348,6 @@ Log in to your Phishing Initiative account, click on the icon representing
 your account details then on *API*. Retrieve the API key value and supply
 it as the value to the `key` configuration parameter.
 
-#### Example
-```text
-    PhishingInitiative {
-      key="MYPHISHINGINITIATIVEAPIKEYGOESHERE"
-    }
-```
 ### Robtex
 Query Robtex database and retreive information about a domain, a FQDN or an IP address.
 
@@ -517,7 +359,6 @@ This analyzer comes in three flavors :
 
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits regarding rates and amount of data returned.
 
-
 ### Tor Blutmagie
 Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torstatus.blutmagie.de/) to be linked to a Tor node.
 
@@ -525,34 +366,12 @@ Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torsta
 In order to check if an IP, domain or FQDN is a Tor exit node, this analyzer queries the Tor status service at Blutmagie.de.
 The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
 
-#### Example
-
-```text
-TorBlutmagie {
-    cache {
-        duration=3600
-        root=/tmp/cortex/tor_project
-    }
-}
-```
-
 ### Tor Project
 Check if an IP address is known to be a Tor node. The information source is the official Tor network status.
 
 #### Requirements
 The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
 This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
-
-#### Example
-```text
-TorProject {
-    cache {
-        duration=3600
-        root=/tmp/cortex/tor_project
-        ttl=86400
-    }
-}
-```
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
@@ -568,13 +387,6 @@ download them using a cron entry or a similar system.
 Indicate the path where you have downloaded the hash lists using the `path`
 parameter.
 
-#### Example
-```text
-    Virusshare {
-      path = "/path/to/virusshare/lists"
-    }
-```
-
 ### WOT
 Check a domain against [Web of Trust](https://www.mywot.com/), a website
 reputation service.
@@ -588,13 +400,6 @@ necessary to configure the analyzer. You can sign up for an account at
 
 Supply the API key you'll find under [https://www.mywot.com/en/signup?destination=profile/api](https://www.mywot.com/en/signup?destination=profile/api)
  as the value for the `key` parameter.
-
-#### Example
-```text
-    WOT {
-      key="myWOTAPIkey"
-    }
-```
 
 ### Yara
 Check files against [YARA](https://virustotal.github.io/yara/) rules using
@@ -610,17 +415,6 @@ files. An example can be found in the [Yara-rules](https://github.com/Yara-Rules
 repository.
 
 Add each file and/or directory containing YARA rules to the `rules` dict.
-
-#### Example
-In the example shown below, the first two locations are directories. As such,
- the analyzer will expect to find an *index.yar* or *index.yas* file in these
-  directories:
-
-```text
-Yara {
-    rules=["/path/dirA", "/path/dirB", "/path/my/rules.yar"]
-}
-```
 
 ### Yeti
 [YETI](https://yeti-platform.github.io/) is a FOSS platform meant to organize
@@ -638,13 +432,6 @@ deployed/configured. It is an open source tool that is free for use but needs
 
 Provide the URL of your YETI instance as a value for the `url` parameter.
 
-#### Example
-```text
-Yeti {
-    url = "http://my.yeti.instance:5000"
-}
-```
-
 ## Analyzers Requiring Special Access
 ### CERTatPassiveDNS
 Check CERT.at Passive DNS Service for a given domain.
@@ -655,8 +442,7 @@ This analyzer comes in only one flavor.
 Access to the CERT.at service is allowed to trusted partners only. If you
 think you qualify, please contact [CERT.at](http://www.cert.at/index_en.html).
 
-No configuration is required. The analyzer has no entry in the `config` section. It can be used out
-of the box if CERT.at positively answers your access request.
+No configuration is required. It can be used out of the box if CERT.at positively answers your access request.
 
 ### CIRCLPassiveDNS
 Check [CIRCL's Passive DNS](https://www.circl.lu/services/passive-dns/) for a
@@ -676,14 +462,6 @@ If the CIRCL positively answers your access request, you'll obtain a username
 supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
 
-#### Example
-```text
-    CIRCLPassiveDNS {
-      user= "myusername"
-      password= "mypassword"
-    }
-```
-
 ### CIRCLPassiveSSL
 Check [CIRCL's Passive SSL](https://www.circl.lu/services/passive-ssl/)
 service for a given IP address or certificate hash.
@@ -701,14 +479,6 @@ If the CIRCL positively answers your access request, you'll obtain a username
 supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
 
-#### Example
-```text
-    CIRCLPassiveSSL {
-      user= "myusername"
-      password= "mypassword"
-    }
-```
-
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
 
@@ -717,15 +487,6 @@ SinkDB is a private service provided by [abuse.ch](https://abuse.ch) which colle
 Access to this service is restricted to trusted partners. Request an access using the form available on the [SinkDB website](https://sinkdb.abuse.ch/) if you would like access.
 
 Provide the API key as a value for the `key` parameter.
-
-#### Example
-
-```text
-SinkDB {
-    key="SINKDBAPIKEY"
-}
-```
-
 
 ### Shodan
 Retrieve key [Shodan](https://www.shodan.io/) information on domains and IP addresses.
@@ -740,13 +501,6 @@ best results, it is advised to get a [Membership](https://enterprise.shodan.io/p
 level account, otherwise a free one can be used.
 
 Supply the API key as the value for the `key` parameter.
-
-#### Example
-```text
-    Shodan {
-      key = "myawesomeapikey"
-    }
-```
 
 ## Subscription and License-based Analyzers
 ### DNSDB
@@ -769,13 +523,6 @@ Security.
 
 Provide your API key as a value to the `key` parameter.
 
-#### Example
-```text
-    DNSDB {
-      server="https://api.dnsdb.info"
-      key="MYDNSDBAPIKEY"
-    }
-```
 ### DomainTools
 Look up domain names, IP addresses, WHOIS records, etc. using the popular
 [DomainTools](http://domaintools.com/) service API.
@@ -801,14 +548,6 @@ to use the analyzer.
 Provide your username as a value for the `username` parameter and API key as
 a value for the `key` parameter.
 
-#### Example
-```text
-    DomainTools {
-      username="mightyhunter"
-      key="SOMELONGWEIRDSTRING"
-    }
-```
-
 ### EmergingThreats
 Leverage Proofpoint's [Emerging Threats Intelligence](https://threatintel.proofpoint.com/)
 to assess the reputation of various observables and obtain additional and
@@ -825,13 +564,6 @@ subscription to use the analyzer.
 
 Retrieve the API key associated with your account and provide it as a value
 to the `key` parameter.
-
-#### Example
-```text
-    EmergingThreats {
-      key = "MYETINTELKEYGOESHERE"
-    }
-```
 
 ### JoeSandbox
 Analyze URLs and files using the powerful [Joe Sandbox](https://www.joesecurity.org/)
@@ -853,14 +585,6 @@ Internet access.
 Provide the URL of your on-premises Joe Sandbox instance or the cloud version
  to the `url` parameter and supply the associated API key as a value for the
  `key` parameter.
-
-#### Example
-```text
-    JoeSandbox {
-      url = "https://my.cool.joe.sandbox"
-      key = "myJoeKey"
-    }
-```
 
 ### PassiveTotal
 Leverage RiskIQ's [PassiveTotal service](https://www.passivetotal.org/) to
@@ -887,13 +611,6 @@ number of queries per day.
 Provide your account's username as the value of the `username` parameter and
 the associated API key as value for the `key` parameter.
 
-#### Example
-```text
-    PassiveTotal {
-      username="digitalhunter"
-      key="mypassivetotalAPIkey"
-```
-
 ### PayloadSecurity
 Submit File or URL to an on premise [PayloadSecurity](https://www.payload-security.com/) sandbox and fetch
  associated reports.
@@ -911,19 +628,6 @@ Five parameters are required to make the analyzer work:
 Provide the API key as a value for the `key` parameter and the secret as a
 value to the `secret` parameter. the `url` parameter should be the address of your on premise service en `environmentid` should also be gathered from your custom configuration.
 
-
-#### Example
-```text
-PayloadSecurity {
-    url = "<insert URL here>"
-    key="<insert API key here>"
-    secret="<insert secret here>"
-    environmentid="<insert environmentid here>"
-    verifyssl=True
-}
-```
-
-
 ### Nessus
 Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
 a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version.
@@ -931,7 +635,7 @@ a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer w
 The analyzer comes in only one flavor.
 
 #### Requirements
-You must have a locally deployed instance of Nessus Professional to use the
+You must have a locally deployed instance of Nessus Professional 6 or earlier to use the
 analyzer. The scanner must have at least a scan policy defined. You must not
 scan assets that do not belong to you, unless you really know what you are
 doing. That’s why safeguards were built in the analyzer’s configuration.
@@ -945,18 +649,6 @@ To configure the analyzer, you must supply four parameters:
  scanner. This parameter **must be omitted if no validation is needed**.
 - `allowed_networks`: a list of networks in CIDR notation that the scanner is
  allowed to probe.
-
-#### Example
-```text
-    Nessus {
-      url ="https://my.nessus.scanner"
-      login="bastardoperator"
-      password="secretpassword"
-      policy="MyScanPolicy"
-      ca_bundle="/etc/ssl/certs"
-      allowed_networks=[ '10.0.0.0/8', '192.168.1.0/24' ]
-    }
-```
 
 ### VirusTotal
 Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
@@ -977,13 +669,6 @@ queries it can make. If you can afford them, subscribe to the premium services.
 Provide the API key associated with your account as a value to the `key`
 parameter.
 
-#### Example
-```text
-    VirusTotal {
-      key="myVTkey"
-    }
-```
-
 ### VMRay
 Analyze files using the [VMRay Analyzer Platform](https://www.vmray.com/products/)
 commercial sandbox.
@@ -1000,12 +685,3 @@ To configure the analyzer, provide the URL of the platform as a value for the
 
 To validate the X.509 certificate of your VMRay Analyzer Platform instance,
 use the `certpath` parameter.
-
-#### Example
-```text
-    VMRay {
-      url = "https://my.vmray.analyzer.platform"
-      key = "myAssociatedApiKey"
-      certpath = "/etc/ssl/certs"
- }
-```

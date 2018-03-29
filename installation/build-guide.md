@@ -12,10 +12,6 @@ The following softwares are required to download and build Cortex.
   * Use the system package or downloadable it from http://www.git-scm.com/downloads
 * NodeJs with its package manager (NPM)
   * downloadable from https://nodejs.org/en/download/
-* Grunt
-  * After NodeJs installation, run `sudo npm install -g grunt-cli`
-* Bower
-  * After NodeJs installation, run `sudo npm install -g bower`
 
 
 # 2. Quick Build Guide
@@ -52,12 +48,6 @@ Then, you can install NodeJs:
 sudo yum -y install nodejs
 ```
 
-### 2.1.4. Installation of bower and grunt
-
-```
-sudo npm install -g bower grunt-cli
-```
-
 ## 2.2. Ubuntu
 
 ### 2.2.1. Packages
@@ -79,14 +69,8 @@ sudo apt-get install oracle-java8-installer
 
 ```
 sudo apt-get install wget
-wget -qO- https://deb.nodesource.com/setup_4.x | sudo bash -
+wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt-get install nodejs
-```
-
-### 2.2.4. Installation of bower and grunt
-
-```
-sudo npm install -g bower grunt-cli
 ```
 
 ## 2.3. Cortex
@@ -106,7 +90,7 @@ bin/activator clean stage
 
 It will download all dependencies (could be long) then build the back-end.
 This command clean previous build files and create an autonomous package in `target/universal/stage` directory. This
-packages contains Cortex binaries with required libraries (`/lib`), analyzers (`/analyzers`), configuration files
+packages contains Cortex binaries with required libraries (`/lib`), configuration files
 (`/conf`) and startup scripts (`/bin`).
 
 Binaries are built and stored in `Cortex/target/universal/stage/`. Install them in `/opt/cortex` for example.
@@ -129,15 +113,14 @@ for troubleshooting or in order to install front-end in a reverse proxy.
 
 Go to front-end directory:
 ```
-cd Cortex/ui
+cd Cortex/www
 ```
 
 Install NodeJs libraries (required by building step), bower libraries (javascript libraries downloaded by browser). Then
 build the front-end :
 ```
 npm install
-bower install
-grunt build
+npm run build
 ```
 
 This step generates static files (html, javascript and related resources) in `dist` directory. These files are ready to
