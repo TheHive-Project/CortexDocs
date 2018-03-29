@@ -10,6 +10,8 @@ Starting from Cortex version 2, you can create and manage multiple organizations
 
 **Note:** [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the Python lib to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, does not support Cortex 2 yet. It will be updated soon.
 
+**Note:** If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
+
 ## Hardware Pre-requisites
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
 physical machine with similar specifications.
@@ -42,7 +44,7 @@ and [configure them](analyzer_requirements.md).
 ## Developer Guides
 
 - [API Documentation](api/README.md) (**OUTDATED**, will be updated soon)
-- [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
+- [How to Create an Analyzer](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
 
 ## Other
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
