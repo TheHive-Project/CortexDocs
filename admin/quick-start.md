@@ -90,7 +90,7 @@ If you are migrating from Cortex 1.x, we recommend that you:
 ```
 play.http.secret.key="..."
 search.host = ['127.0.0.1:9300']
-analyzer.path = ['/opt/Cortex-Analyzers/analyzers']
+analyzer.path = ["/opt/Cortex-Analyzers/analyzers"]
 ```
 
 ![Enable and configure analyzers](../images/configure_analyzers.png)
