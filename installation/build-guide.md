@@ -85,7 +85,7 @@ git clone https://github.com/CERT-BDF/Cortex.git
 
 ```
 cd Cortex
-bin/activator clean stage
+./sbt clean stage
 ```
 
 It will download all dependencies (could be long) then build the back-end.
