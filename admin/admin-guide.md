@@ -279,8 +279,7 @@ automatically invalidated.
 
 Job report can also be cached. If an analyzer is executed against the same observable,
 the previous report can be returned without re-executing the analyzer. The cache is used only
-if the second job occurs within `cache.job` (the default is 10 minutes). This setting
-can be overridden by analyzer in analyzer's configuration.
+if the second job occurs within `cache.job` (the default is 10 minutes).
 ```
 cache {
   job = 10 minutes
@@ -288,6 +287,8 @@ cache {
   organization = 5 minutes
 }
 ```
+**Note**:
+The global `cache.job` value can be overridden for each analyzer in the analyzer configuration Web dialog.
 
 ### Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the
