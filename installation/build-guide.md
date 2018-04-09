@@ -99,7 +99,7 @@ Binaries are built and stored in `Cortex/target/universal/stage/`. Install them 
 sudo cp -r Cortex/target/universal/stage /opt/cortex
 ```
 
-Follow the [configuration guide](../admin/configuration.md) to run Cortex.
+Follow the [admin guide](../admin/admin-guide.md) to run Cortex.
 
 
 ### First start

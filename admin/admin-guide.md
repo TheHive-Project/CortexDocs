@@ -279,7 +279,8 @@ automatically invalidated.
 
 Job report can also be cached. If an analyzer is executed against the same observable,
 the previous report can be returned without re-executing the analyzer. The cache is used only
-if the second job occurs within `cache.job` (the default is 10 minutes).
+if the second job occurs within `cache.job` (the default is 10 minutes). This setting
+can be overridden by analyzer in analyzer's configuration.
 ```
 cache {
   job = 10 minutes

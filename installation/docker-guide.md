@@ -53,7 +53,7 @@ volumes:
 ### Manual Installation of ElasticSearch
 
 ElasticSearch can be installed on the same server as TheHive or on a different one. You can then configure TheHive according to the
-[documentation](../admin/configuration.md) and run TheHive docker as follow:
+[documentation](../admin/admin-guide.md) and run TheHive docker as follow:
 ```
 docker run --volume /path/to/thehive/application.conf:/etc/thehive/application.conf certbdf/thehive:latest --no-config
 ```
