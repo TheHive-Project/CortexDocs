@@ -20,7 +20,6 @@ on is free or requires special access or valid subscription or product license.
   * [Introduction](#introduction)
   * [Free Analyzers](#free-analyzers)
     * [Abuse\_Finder](#abuse_finder)
-    * [Bluecoat](#Bluecoat)
     * [C1fApp](#C1fApp)
     * [Censys.io](#Censys)
     * [CuckooSandbox](#cuckoosandbox)
@@ -76,14 +75,6 @@ to find abuse contacts associated with domain names, URLs, IPs and email address
 The analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
-
-### Bluecoat
-Check the [Symantec WebPulse](https://sitereview.bluecoat.com/) (ex. Bluecoat) rating of a URL, a domain or a FQDN.
-
-The analyzer comes in only one flavor.
-
-No specific configuration is needed for this analyzer. It can be used out of the box.
-
 
 ### C1fApp
 Get [C1fApp](https://www.c1fapp.com/) information related to an IP address, a domain or a URL.
