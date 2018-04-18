@@ -22,7 +22,8 @@ following commands:
 
 ```
 cd analyzers
-sudo pip install $(sort -u */requirements.txt)
+sort -u */requirements.txt > /tmp/requirements.txt && \
+sudo -H pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
 ```
 
 ## From repository
