@@ -24,7 +24,8 @@ sudo pip install -U pip setuptools && sudo pip3 install -U pip setuptools
 
 Once finished, clone the Cortex-analyzers repository in the directory of your choosing:
 ```
-git clone https://github.com/CERT-BDF/Cortex-Analyzers.git
+git clone https://github.com/TheHive-Project/Cortex-Analyzers
+
 ```
 
 Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the
