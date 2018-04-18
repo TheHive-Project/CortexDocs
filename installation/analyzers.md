@@ -5,32 +5,34 @@ Analyzers are autonomous applications managed by and run through the Cortex core
 They are included in the Cortex binary, RPM and DEB packages but you have to
 get them from the repository if you need to update them after installing one
 of those packages (which is necessary when new analyzers are released or new
-versions of existing ones are made available) ordecide to build Cortex from
+versions of existing ones are made available) or if you decide to build Cortex from
 sources.
 
-## Pre-requisites
-Currently, all provided analyzers are written in Python. They don't require any build phase but their dependencies have
+## Installation
+Currently, all provided analyzers are written in Python 2 or 3. They don't require any build phase but their dependencies have
 to be installed. Before proceeding, you'll need to install the system package dependencies that are required by some of
 them:
 
 ```
-apt-get install python-pip python2.7-dev ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl libmagic1 build-essential libssl-dev
+sudo apt-get install -y --no-install-recommends python-pip python2.7-dev python3-pip python3-dev ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl libmagic1 build-essential git libssl-dev
+```
+
+You may need to install Python's `setuptools` and update pip/pip3:
+```
+sudo pip install -U pip setuptools && sudo pip3 install -U pip setuptools
+```
+
+Once finished, clone the Cortex-analyzers repository in the directory of your choosing:
+```
+git clone https://github.com/CERT-BDF/Cortex-Analyzers.git
 ```
 
 Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the
 following commands:
 
 ```
-cd analyzers
-sort -u */requirements.txt > /tmp/requirements.txt && \
-sudo -H pip install -r /tmp/requirements.txt && rm /tmp/requirements.txt
-```
-
-## From repository
-If you want to use up-to-date analyzers, you can clone the GitHub repository:
-
-```
-git clone https://github.com/CERT-BDF/Cortex-Analyzers
+for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
+for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
 ```
 
 Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be in different directories as shown in this dummy example of the Cortex configuration file (`application.conf`):
