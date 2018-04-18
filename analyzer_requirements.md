@@ -112,6 +112,14 @@ for more information on setting it up.
 To configure the analyzer you need to supply the URL of your local instance
 as a value of the `url` parameter.
 
+### Cymon
+Checks IP addresses against [Cymon.io](https://cymon.io/).
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
+
 ### File_Info
 Parse files in several formats such as OLE and OpenXML to detect VBA macros,
 extract their source code, generate useful information on PE, PDF files and much more.
