@@ -292,19 +292,18 @@ The analyzer comes in only one flavor.
 No configuration is required. It can be used out of the box.
 
 ### Onyphe
-Get publicly available information from [Onyphe](https://www.onyphe.com) for IP addresses.
+Get publicly available information related to IP addresses from [Onyphe](https://www.onyphe.com).
 
-The analyzer comes in five one flavors :
+The analyzer comes in five flavors:
 
-- Onyphe_**Forward**: retrieve forward DNS lookup information we have for the given IPv{4,6} address with history of changes.
+- Onyphe_**Forward**: retrieve forward DNS lookup information Onyphe has for the given IPv{4,6} address with history of changes.
 - Onyphe_**Geolocate**: retrieve geolocation information for the given IPv{4,6} address.
-- Onyphe_**Ports**: retrieve synscan information we have for the given IPv{4,6} address with history of changes.
-- Onyphe_**Reverse**: retrieve reverse DNS lookup information we have for the given IPv{4,6} address with history of changes.
-- Onyphe_**Threats**: retrieve Onyphe threats information on an IPv{4,6} address with history.
-
+- Onyphe_**Ports**: retrieve SYN scan information Onyphe has for the given IPv{4,6} address with history of changes.
+- Onyphe_**Reverse**: retrieve reverse DNS lookup information Onyphe has for the given IPv{4,6} address with history of changes.
+- Onyphe_**Threats**: retrieve Onyphe threat information for the given IPv{4,6} address with history.
 
 #### Requirements
-Provide the API key as a value for the `key` parameter :
+Provide the API key as a value for the `key` parameter.
 
 ### OTXQuery
 Query AlienVault's [Open Threat Exchange](https://otx.alienvault.com/) for IPs,
@@ -350,15 +349,15 @@ your account details then on *API*. Retrieve the API key value and supply
 it as the value to the `key` configuration parameter.
 
 ### Robtex
-Query Robtex database and retreive information about a domain, a FQDN or an IP address.
+Query the [Robtex](https://www.robtex.com/) database and retrieve information about a domain, a FQDN or an IP address.
 
-This analyzer comes in three flavors :
+This analyzer comes in three flavors:
 
 - Robtex_**Forward_PDNS_Query**: check domains/FQDNs using the Robtex passive DNS database.
-- Robtex_**IP_Query**: make IP lookup.
-- Robtex_**Reverse_PDNS_Query**: check IPs in Robtex reverse passive dns database
+- Robtex_**IP_Query**: make IP lookups against the Robtex DB.
+- Robtex_**Reverse_PDNS_Query**: check IPs in Robtex reverse passive DNS database.
 
-The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits regarding rates and amount of data returned.
+The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
 
 ### Tor Blutmagie
 Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torstatus.blutmagie.de/) to be linked to a Tor node.
@@ -624,8 +623,7 @@ Provide your account's username as the value of the `username` parameter and
 the associated API key as value for the `key` parameter.
 
 ### PayloadSecurity
-Submit File or URL to an on premise [PayloadSecurity](https://www.payload-security.com/) sandbox and fetch
- associated reports.
+Submit files or URLs to an on premise [PayloadSecurity](https://www.payload-security.com/) sandbox and fetch the associated reports.
 
 This analyzer comes in only one flavor.
 
@@ -638,7 +636,7 @@ Five parameters are required to make the analyzer work:
 - `verifyssl`
 
 Provide the API key as a value for the `key` parameter and the secret as a
-value to the `secret` parameter. the `url` parameter should be the address of your on premise service en `environmentid` should also be gathered from your custom configuration.
+value to the `secret` parameter. the `url` parameter should be the address of your on premise service. `environmentid` should also be gathered from your custom configuration.
 
 ### Nessus
 Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
