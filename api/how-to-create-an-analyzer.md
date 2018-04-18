@@ -42,7 +42,7 @@ While many analyzers are written in Python (`*.py` files), you can write yours
 in Ruby, Perl or even Scala. However, the very handy `Cortexutils` library
 [described below](#the-cortexutils-python-library) is in Python. It greatly facilitates analyzer development and
 it also provides some methods to quickly format the output to make it compliant
-with the JSON schema expected by [TheHive](https://github.com/CERT-BDF/TheHive/).
+with the JSON schema expected by [TheHive](https://github.com/TheHive-Project/TheHive/).
 
 ### Service Interaction Files (Flavors)
 An analyzer must have at least one service interaction file. Such files
@@ -123,23 +123,37 @@ example again.
 #### Example: Service Interaction File for VirusTotal GetReport
 The `<==` sign and anything after it are comments that do no appear in the
 original file.
-
 ```json
 {
-    "name": "VirusTotal_GetReport",
-    "version": "3.0",
-    "author": "CERT-BDF",
-    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
-    "license": "AGPL-V3",
-    "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
-    "dataTypeList": ["file", "hash", "domain", "ip"],
-    "baseConfig": "VirusTotal", <== name of base config in /etc/cortex/application.conf
-    "config": {
-        "check_tlp": true,
-        "max_tlp": 3,
-        "service": "get"
+  "name": "VirusTotal_GetReport",
+  "version": "3.0",
+  "author": "CERT-BDF",
+  "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
+  "license": "AGPL-V3",
+  "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address.",
+  "dataTypeList": ["file", "hash", "domain", "ip"],
+  "command": "VirusTotal/virustotal.py", <== Program to run when invoking the analyzer
+  "baseConfig": "VirusTotal", <== name of base config in Cortex application.conf (/etc/cortex/application.conf)
+  "config": {
+    "service": "get"
+  },
+  "configurationItems": [ <== list of configuration items the analyzer needs to operate (api key etc.)
+    {
+      "name": "key",
+      "description": "API key for Virustotal",
+      "type": "string", <== defines what kind of data type the configuration item is (string, number)
+      "multi": false, <== setting multi to true allows to pass a list of items (e.g. MISP analyzer)
+      "required": true 
     },
-    "command": "VirusTotal/virustotal.py" <= main program
+    {
+      "name": "polling_interval",
+      "description": "Define time interval between two requests attempts for the report",
+      "type": "number",
+      "multi": false,
+      "required": false,
+      "defaultValue": 60
+    }
+  ]
 }
 ```
 
@@ -246,6 +260,17 @@ For consistency reasons, we do recommend setting both `check_tlp` and
 ##### command
 The command used to run the analyzer. That's typically the full, absolute
 path to the main program file.
+
+#### configurationItems
+The list of configurationItems is necessary in order to be able to set all configuration variables for analyzers directly in the Cortex 2 user interface. As in the VirusTotal example above can be seen, every item is a json object that defines:
+- name (string)
+- description (string)
+- type (string)
+- multi (boolean)
+- required (boolean)
+- defaultValue (according to type, optional)
+
+The `multi` parameter allows to pass a list as configuration variable instead of a single string or number. This is used e.g. in the MISP analyzer that queries multiple servers in one run and needs different parameters for that.
 
 ### Analyzer Configuration in the Global Configuration File
 An analyzer might need specific configuration parameters such as a username and
@@ -367,7 +392,7 @@ pip3 install cortexutils
 ```
 
 This library is already used by all the analyzers published in our [Github
-repository](https://github.com/CERT-BDF/Cortex-Analyzers). Feel free to
+repository](https://github.com/TheHive-Project/Cortex-Analyzers). Feel free to
 start reading the code of some of them before writing your own.
 
 ### Report Templates
@@ -506,12 +531,12 @@ A good start can be:
 We **highly encourage you to share your analyzers** with the community through our Github repository. To do so, we invite you to follow a few steps before submitting a pull request.
 
 ### Check Existing Issues
-Start by checking [if an issue already exists](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
+Start by checking [if an issue already exists](https://github.com/TheHive-Project/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22feature%20request%22%20label%3Aanalyzer) for the analyzer you'd like to write and contribute. Verify that nobody is working on it. If an issue exists and has the **in progress**, **under review** or **pr-submitted** label, it means somebody is already working on the code or has finished it.
 
-If you are short on ideas, check issues with a [**help wanted** label](https://github.com/CERT-BDF/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
+If you are short on ideas, check issues with a [**help wanted** label](https://github.com/TheHive-Project/Cortex-Analyzers/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aopen%20label%3A%22help%20wanted%22). If one of those issues interest you, indicate that you are working on it.
 
 ### Open an Issue
-If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/CERT-BDF/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
+If there's no issue open for the analyzer you'd like to contribute, [open one](https://github.com/TheHive-Project/Cortex-Analyzers/issues/new). Indicate that you are working on it to avoid having someone start coding it.
 
 You have to create an issue for each analyzer you'd like to submit.
 
@@ -566,7 +591,7 @@ analyzer must generate an explicit error message.
 
 ### Create a Pull Request
 Create one Pull Request per analyzer against the **develop** branch of the
-[Cortex-Analyzers](https://github.com/CERT-BDF/Cortex-Analyzers/) repository. Reference the issue you've created in your PR.
+[Cortex-Analyzers](https://github.com/TheHive-Project/Cortex-Analyzers/) repository. Reference the issue you've created in your PR.
 
 We have to review your analyzers. Distinct PRs will allow us to review them
 more quickly and release them to the benefit of the whole community.
