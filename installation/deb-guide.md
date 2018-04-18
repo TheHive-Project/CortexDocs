@@ -13,4 +13,4 @@ sudo apt-get install cortex
 If the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` fails (because your infrastructure
 refuses the acccess to pgp.mit.edu server key), you can run with the equivalent command: `curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
-Once the package is installed, please [configure Cortex](../admin/configuration.md).
+Once the package is installed, please [configure Cortex](../admin/admin-guide.md).

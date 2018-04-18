@@ -123,23 +123,37 @@ example again.
 #### Example: Service Interaction File for VirusTotal GetReport
 The `<==` sign and anything after it are comments that do no appear in the
 original file.
-
 ```json
 {
-    "name": "VirusTotal_GetReport",
-    "version": "3.0",
-    "author": "CERT-BDF",
-    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
-    "license": "AGPL-V3",
-    "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
-    "dataTypeList": ["file", "hash", "domain", "ip"],
-    "baseConfig": "VirusTotal", <== name of base config in /etc/cortex/application.conf
-    "config": {
-        "check_tlp": true,
-        "max_tlp": 3,
-        "service": "get"
+  "name": "VirusTotal_GetReport",
+  "version": "3.0",
+  "author": "CERT-BDF",
+  "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
+  "license": "AGPL-V3",
+  "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address.",
+  "dataTypeList": ["file", "hash", "domain", "ip"],
+  "command": "VirusTotal/virustotal.py", <== Program to run when invoking the analyzer
+  "baseConfig": "VirusTotal", <== name of base config in Cortex application.conf (/etc/cortex/application.conf)
+  "config": {
+    "service": "get"
+  },
+  "configurationItems": [ <== list of configuration items the analyzer needs to operate (api key etc.)
+    {
+      "name": "key",
+      "description": "API key for Virustotal",
+      "type": "string", <== defines what kind of data type the configuration item is (string, number)
+      "multi": false, <== setting multi to true allows to pass a list of items (e.g. MISP analyzer)
+      "required": true 
     },
-    "command": "VirusTotal/virustotal.py" <= main program
+    {
+      "name": "polling_interval",
+      "description": "Define time interval between two requests attempts for the report",
+      "type": "number",
+      "multi": false,
+      "required": false,
+      "defaultValue": 60
+    }
+  ]
 }
 ```
 
@@ -246,6 +260,17 @@ For consistency reasons, we do recommend setting both `check_tlp` and
 ##### command
 The command used to run the analyzer. That's typically the full, absolute
 path to the main program file.
+
+#### configurationItems
+The list of configurationItems is necessary in order to be able to set all configuration variables for analyzers directly in the Cortex 2 user interface. As in the VirusTotal example above can be seen, every item is a json object that defines:
+- name (string)
+- description (string)
+- type (string)
+- multi (boolean)
+- required (boolean)
+- defaultValue (according to type, optional)
+
+The `multi` parameter allows to pass a list as configuration variable instead of a single string or number. This is used e.g. in the MISP analyzer that queries multiple servers in one run and needs different parameters for that.
 
 ### Analyzer Configuration in the Global Configuration File
 An analyzer might need specific configuration parameters such as a username and
