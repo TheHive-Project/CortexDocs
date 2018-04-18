@@ -204,18 +204,6 @@ an API key/secret pair.
 Provide the API key as a value for the `key` parameter and the secret as a
 value to the `secret` parameter.
 
-### Malpedia
-Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
-
-If a rule matches, the analyzer tries to retrieve more info from Malpedia such as the malware family (currently more than 600) and the actor group (tracked through [MISP Galaxies](https://github.com/MISP/misp-galaxy)).
-
-This analyzer comes in only one flavor.
-
-#### Requirements
-You need access to Malpedia to use this analyzer. Please note that Malpedia does not feature open registration. It is operated as an invite-only trust group. If you believe you qualify for an account, please see Malpedia's [Terms of Services](https://malpedia.caad.fkie.fraunhofer.de/terms_of_service) for contact details.
-
-If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
-
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
 GeoLite2 **free** City and Country databases.
@@ -490,6 +478,17 @@ If the CIRCL positively answers your access request, you'll obtain a username
 supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
 
+### Malpedia
+Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
+
+If a rule matches, the analyzer tries to retrieve more info from Malpedia such as the malware family (currently more than 600) and the actor group (tracked through [MISP Galaxies](https://github.com/MISP/misp-galaxy)).
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need access to Malpedia to use this analyzer. Please note that Malpedia does not feature open registration. It is operated as an invite-only trust group. If you believe you qualify for an account, please see Malpedia's [Terms of Services](https://malpedia.caad.fkie.fraunhofer.de/terms_of_service) for contact details.
+
+If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
 
