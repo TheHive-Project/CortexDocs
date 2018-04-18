@@ -33,15 +33,29 @@ If you want to use up-to-date analyzers, you can clone the GitHub repository:
 git clone https://github.com/CERT-BDF/Cortex-Analyzers
 ```
 
-Next, you'll need to tell Cortex where to find the analyzers. Currently, all the analyzers must be in the same
-directory. Add the following to the Cortex configuration file (`application.conf`):
+Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be in different directories as shown in this dummy example of the Cortex configuration file (`application.conf`):
 
 ```
 analyzer {
-  path = ["path/to/analyzers"]
+  # Directory that holds analyzers
+  path = [
+    "/path/to/default/analyzers",
+    "/path/to/my/own/analyzers"
+  ]
+
+  fork-join-executor {
+    # Min number of threads available for analyze
+    parallelism-min = 2
+    # Parallelism (threads) ... ceil(available processors * factor)
+    parallelism-factor = 2.0
+    # Max number of threads available for analyze
+    parallelism-max = 4
+  }
 }
 ```
 ## Configuration
+All analyzers must be configured using the Web UI.
 
-Analyzers are configured using web interface. You need orgAdmin role to
-configure and enable analyzers.
+Please read the [Quick Start Guide](../admin/quick-start.md) to create at least one organization then let a user with the `orgAdmin` role configure and enable analyzers for that organization.
+
+Some analyzers can be used out of the box, without any configuration, while others may require various parameters. Please check the [Analyzer Requirements Guide](../analyzer_requirements.md) for further details.
