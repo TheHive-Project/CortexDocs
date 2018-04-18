@@ -292,7 +292,8 @@ The analyzer comes in only one flavor.
 No configuration is required. It can be used out of the box.
 
 ### Onyphe
-Get publicly available information related to IP addresses from [Onyphe](https://www.onyphe.com).
+
+Get publicly available information from [Onyphe](https://www.onyphe.io) for IP addresses.
 
 The analyzer comes in five flavors:
 
