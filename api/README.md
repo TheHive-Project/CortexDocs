@@ -1,4 +1,20 @@
-TODO add documentation on REST API
+# Cortex APIs
+
+Cortex comes with a bunch of REST APIs (also used by the UI) to manipulate all the application's data.
+
+## Available APIs
+
+The exposed Cortex APIs share the same request and authentication strategies as described below:
+
+- [HTTP request format](request.md)
+- [Authentication](authentication.md)
+
+and allow handling
+
+- [Organizations](organization.md)
+- [Users](user.md)
+- [Jobs](job.md)
+- [Analyzers](analyzer.md)
 
 ## How to create an analyzer
 
