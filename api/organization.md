@@ -31,18 +31,7 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/or
 }'
 ```
 
-Both APIs allow sorting and pagination.
-
-### Query params
-
-- `range`: `all` or `x-y` where `x` and `y` are numbers (ex: 0-10)
-- `sort`: you can provide multiple sort criteria ex: `-createdAt` or `+status`
-
-```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user?range=0-10&sort=-createdAt&sort=+status -d {
-  query: {}
-}'
-```
+Both APIs supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
 
 ## Create API (**Required Roles**: `superadmin`)
 
@@ -103,9 +92,9 @@ and should return
 }
 ```
 
-## List organization users (**Required Roles**: `orgadmin`)
+## List organization users (**Required Roles**: `orgadmin`, `superadmin`)
 
-This API returns the list of **all** the users declared withing an organization. It supports the `range` and `sort` query params declared [above](#query-params)
+This API returns the list of **all** the users declared withing an organization. It supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
 
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user'
@@ -121,13 +110,13 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/or
 }'
 ```
 
-It alse supports the `range` and `sort` query params declared [above](#query-params)
+It alse supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
 
 ## List organization anlayzers (**Required Roles**: `orgadmin`)
 
 This API returns the list of the analyzers that have been enabled within an organization. Analyzers that are not enabled, are not listed by this API.
 
-It also supports the `range` and `sort` query params declared [above](#query-params)
+It also supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/analyzer' -d '{
