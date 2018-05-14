@@ -38,7 +38,7 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/jo
 
 It supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
 
-## Get API (**Required Roles**: `read`, `analyze`, `orgadmin`)
+## Get job details API (**Required Roles**: `read`, `analyze`, `orgadmin`)
 
 This API allows a user to get the details of a job, without fetching the job's report.
 
@@ -71,7 +71,7 @@ It returns a JSON response with the following structure:
 }
 ```
 
-## Get report API (**Required Roles**: `read`, `analyze`, `orgadmin`)
+## Get job report API (**Required Roles**: `read`, `analyze`, `orgadmin`)
 
 This API allows a user to get the details of a job including the job's report.
 
@@ -129,6 +129,29 @@ It returns a JSON response with the following structure:
     "artifacts": []
   }
 }
+```
+
+## Get job artifacts API (**Required Roles**: `read`, `analyze`, `orgadmin`)
+
+This API allows a user to get the extracted observables from a job.
+
+```bash
+curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/job/JOB_ID/artifacts'
+```
+
+It returns a JSON array with the following structure:
+
+```json
+[
+  {
+    "dataType": "ip",
+    "createdBy": "demo",
+    "data": "8.8.8.8",
+    "tlp": °,
+    "createdAt": 1525432900553,
+    "id": "AWMq4tvLjidKq_asiwcl"
+  }
+]
 ```
 
 ## Delete API (**Required Roles**: `analyze`, `orgadmin`)
