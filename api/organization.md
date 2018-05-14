@@ -12,8 +12,8 @@ An organization is defined by the following attributes
 - `description`: (*writable*) the organization description
 - `createdAt`: (*generated*) the creation date
 - `createdBy`:  (*generated*) the user who created the organization
-- `updatedBy`:  (*generated*) the last update date
-- `updatedAt`:  (*generated*) the latest user who updated the organization
+- `updatedAt`:  (*generated*) the last update date
+- `updatedBy`:  (*generated*) the latest user who updated the organization
 
 ## List API (**Required Roles**: `superadmin`)
 

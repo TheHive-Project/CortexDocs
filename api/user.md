@@ -13,8 +13,8 @@ A User is defined by the following attributes
 - `organization`: (*readonly*) the user's organization name, should be set during the creation
 - `createdAt`: (*generated*) the creation date
 - `createdBy`:  (*generated*) the user who created the user
-- `updatedBy`:  (*generated*) the last update date
-- `updatedAt`:  (*generated*) the latest user who updated the user
+- `updatedAt`:  (*generated*) the last update date
+- `updatedBy`:  (*generated*) the latest user who updated the user
 - `hasKey`: (*computed*) true when the user has a defined api key
 - `hasPassword`: (*computed*) true if the user has a password
 
