@@ -4,7 +4,7 @@
 
 - `id`: (*generated*) the job's generated ID
 - `organization`: (*readonly*) the job's organization
-- `analyzerDefinitionId`: (*readonly*) the job's analyzer full name
+- `analyzerDefinitionId`: (*readonly*) the job's analyzer definition name
 - `analyzerId`: (*readonly*) the job's analyzer's instance ID
 - `analyzerName`: (*readonly*) the job's analyzer's name
 - `dataType`: (*readonly*) the job's analyzed observable type
@@ -17,9 +17,9 @@
 - `startDate`: (*generated*) the job start date
 - `endDate`: (*generated*) the job end date
 - `createdAt`: (*generated*) the creation date
-- `createdBy`:  (*generated*) the user who started the job
-- `updatedAt`:  (*generated*) the last update date
-- `updatedBy`:  (*generated*) the latest user who updated the job
+- `createdBy`: (*generated*) the user who started the job
+- `updatedAt`: (*generated*) the last update date
+- `updatedBy`: (*generated*) the latest user who updated the job
 
 ## List API (**Required Roles**: `read`, `analyze`, `orgadmin`)
 
@@ -79,7 +79,7 @@ This API allows a user to get the details of a job including the job's report.
 curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/job/JOB_ID/report'
 ```
 
-It returns a JSON response with the following structure:
+It returns a JSON response with the structure below. If the job is not yet completed, the `report` field contains a string representing the job status:
 
 ```json
 {
@@ -131,6 +131,16 @@ It returns a JSON response with the following structure:
 }
 ```
 
+## Wait and get job report API (**Required Roles**: `read`, `analyze`, `orgadmin`)
+
+This API is similar the one above but allows the user to provide a timeout to wait for the job's report:
+
+```bash
+curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/job/JOB_ID/waitreport?atMost=1minute'
+```
+
+the `atMost` is a duration using the format `Xhour`, `Xminute`, `Xsecond`
+
 ## Get job artifacts API (**Required Roles**: `read`, `analyze`, `orgadmin`)
 
 This API allows a user to get the extracted observables from a job.
@@ -147,7 +157,7 @@ It returns a JSON array with the following structure:
     "dataType": "ip",
     "createdBy": "demo",
     "data": "8.8.8.8",
-    "tlp": °,
+    "tlp": 0,
     "createdAt": 1525432900553,
     "id": "AWMq4tvLjidKq_asiwcl"
   }
