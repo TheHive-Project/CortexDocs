@@ -65,11 +65,46 @@ curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/
 
 It returns a JSON array of analyzer objects as described in [Analyzer Model section](#analyzer-model) without the `configuration` attribute, which could contain sensitive data.
 
-## Run API
+## Update API (**Required Roles**: `orgadmin`)
 
-This API allows running analyzers
+This API allows an `orgadmin` user to update the `name`, `configuration` and `jobCache` of an enabled analyzer.
 
-POST /api/analyzer/:id/run
+```bash
+curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID' -d '{
+  "configuration": {
+    "key": "XXXXXXXXXXXXXXXXXXXXXXXXXXXx",
+    "polling_interval": 60,
+    "proxy_http": "http://localhost:8080",
+    "proxy_https": "http://localhost:8080",
+    "auto_extract_artifacts": true,
+    "check_tlp": true,
+    "max_tlp": 1
+  },
+  "name": "Shodan_Host_1_0",
+  "jobCache": null
+}'
+```
+
+It returns a JSON object describing the analyzer as defined in [Analyzer Model section](#analyzer-model)
+
+## Run API (**Required Roles**: `analyze`, `orgadmin`)
+
+This API allows running analyzers on observables of different data types.
+
+For `files`, the API call must be made as described below:
+
+```bash
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' \
+  -F 'attachment=@/path/to/observable-file' \
+  -F '_json=<-;type=application/json' << _EOF_
+  {
+    "dataType":"file",
+    "tlp":0
+  }
+_EOF_
+```
+
+for other observable types the request is:
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' -d '{
@@ -101,18 +136,10 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/an
 }'
 ```
 
-## Update API
+## Delete API (**Required Roles**: `orgadmin`)
 
-PATCH /api/analyzer/:id
+This API allows an `orgadmin` to disable and delete an existing analyzer instance.
 
-## Delete API
-
-DELETE /api/analyzer/:id
-
-## Misc APIs
-
-GET   /api/analyzerdefinition
-POST  /api/analyzerdefinition/scan
-GET   /api/analyzerconfig/:analyzerConfigName
-GET   /api/analyzerconfig
-PATCH /api/analyzerconfig/:analyzerConfigName
+```bash
+curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID'
+```
