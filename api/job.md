@@ -62,7 +62,7 @@ It returns a JSON response with the following structure:
   "dataType": "ip",
   "organization": "demo",
   "startDate": 1526299593923,
-  "endDate": 1526299597064
+  "endDate": 1526299597064,
   "date": 1526299593633,
   "createdAt": 1526299593633,
   "createdBy": "demo",
