@@ -79,9 +79,10 @@ It returns a JSON object representing the created user as described at [above](#
 }
 ```
 
-## Update user (**Required Roles**: `superadmin`, `orgadmin`)
+## Update user
 
-This API allows updating the writable users' fields.
+This API allows updating the writable users' fields. It's accessible to users with `superadmin` or `orgadmin` roles.
+Every user can also call it to update its own details.
 
 ```bash
 curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN' -d '{
@@ -96,9 +97,10 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/u
 
 It returns a JSON object representing the updated user as described at [above](#user-model)
 
-## Get user details (**Required Roles**: `superadmin`, `orgadmin`)
+## Get user details
 
-This API returns the user details.
+This API returns the user details. It's accessible to users with `superadmin` or `orgadmin` roles.
+Every user can also call it to read its own details.
 
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN'
@@ -106,9 +108,10 @@ curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER
 
 It returns a JSON object representing the user as described at [above](#user-model)
 
-## Set user password (**Required Roles**: `superadmin`, `orgadmin`)
+## Set user password
 
-This API allows setting a user's password
+This API allows setting a user's password. It's accessible to users with `superadmin` or `orgadmin` roles.
+Every user can also call it to set its own password.
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/set' -d '{
@@ -118,9 +121,9 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/us
 
 and returns 204 response if it succeeds.
 
-## Change user password (**Required Roles**: `read`)
+## Change user password
 
-This API allows a given user to change only his own existing password.
+This API allows a given user to change only his own existing password. Every user can also call it to change its own password.
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/change' -d '{
@@ -131,9 +134,10 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/us
 
 and returns 204 response if it succeeds.
 
-## Set and renew user api key (**Required Roles**: `superadmin`, `orgadmin`)
+## Set and renew user api key
 
-This API allows setting and renewing a user API key
+This API allows setting and renewing a user API key. It's accessible to users with `superadmin` or `orgadmin` roles.
+Every user can also call it to renew its own API key.
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/key/renew'
@@ -141,9 +145,10 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/us
 
 and returns the generated API key as `text/plain`response
 
-## Get user api key (**Required Roles**: `superadmin`, `orgadmin`)
+## Get user api key
 
-This API allows getting a user API key
+This API allows getting a user API key. It's accessible to users with `superadmin` or `orgadmin` roles.
+Every user can also call it to get its own API key.
 
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/key'
@@ -153,7 +158,7 @@ and returns the generated API key as `text/plain`response
 
 ## Revoke user api key (**Required Roles**: `superadmin`, `orgadmin`)
 
-This API allows removing a user API key
+This API allows removing a user API key.
 
 ```bash
 curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/key'
