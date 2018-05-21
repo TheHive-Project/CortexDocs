@@ -12,19 +12,19 @@ Hence, the requests shown below are equivalent.
 ## Query String
 
 ```bash
-curl -XPOST 'http://127.0.0.1:9001/api/login?user=me&password=secret'
+curl -XPOST 'http://CORTEX_APP_URL:9001/api/login?user=me&password=secret'
 ```
 
 ## URL-encoded Form
 
 ```bash
-curl -XPOST 'http://127.0.0.1:9001/api/login' -d user=me -d password=secret
+curl -XPOST 'http://CORTEX_APP_URL:9001/api/login' -d user=me -d password=secret
 ```
 
 ## JSON
 
 ```bash
-curl -XPOST http://127.0.0.1:9001/api/login -H 'Content-Type: application/json' -d '{
+curl -XPOST http://CORTEX_APP_URL:9001/api/login -H 'Content-Type: application/json' -d '{
   "user": "me",
   "password": "secret"
 }'
@@ -33,7 +33,7 @@ curl -XPOST http://127.0.0.1:9001/api/login -H 'Content-Type: application/json' 
 ## Multi-part
 
 ```bash
-curl -XPOST http://127.0.0.1:9001/api/login -F '_json=<-;type=application/json' << _EOF_
+curl -XPOST http://CORTEX_APP_URL:9001/api/login -F '_json=<-;type=application/json' << _EOF_
 {
   "user": "me",
   "password": "secret"
