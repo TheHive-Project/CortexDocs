@@ -43,4 +43,9 @@ _EOF_
 
 ## Response Format
 
-For each request submitted to Cortex, the response is JSON data.
+For each request submitted to Cortex, the response is JSON data. For example, if the authentication request is successful, Cortex should return the following output:
+
+
+```json
+{"id":"me","name":"me","roles":["read","analyze","orgadmin"]}
+```
