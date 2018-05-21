@@ -45,7 +45,12 @@ _EOF_
 
 For each request submitted to Cortex, the response is JSON data. For example, if the authentication request is successful, Cortex should return the following output:
 
-
 ```json
 {"id":"me","name":"me","roles":["read","analyze","orgadmin"]}
+```
+
+If not, Cortex should return an authentication error:
+
+```json
+{"type":"AuthenticationError","message":"Authentication failure"}
 ```
