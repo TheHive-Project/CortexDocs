@@ -1,13 +1,13 @@
-# Request formats
+# Request Formats
 
 Cortex accepts several parameter formats within a HTTP request. They can be used indifferently. Input data can be:
 
-- a query string
-- URL-encoded form
-- multi-part
+- A query string
+- A URL-encoded form
+- A multi-part
 - JSON
 
-Hence, the requests below are equivalent.
+Hence, the requests shown below are equivalent.
 
 ## Query String
 
@@ -43,4 +43,4 @@ _EOF_
 
 ## Response Format
 
-Cortex outputs JSON data.
+For each request submitted to Cortex, the response is JSON data.
