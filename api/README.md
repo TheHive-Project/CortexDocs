@@ -16,8 +16,8 @@ and allow handling
 - [Jobs](job.md)
 - [Analyzers](analyzer.md)
 
-There are also some transversal details and [Utility APIs](misc.md)
+There are also some transverse details and [utility APIs](misc.md).
 
 ## How to create an analyzer
 
-If you want to create an analyzer, follow this [guide](how-to-create-an-analyzer.md).
+If you want to create an analyzer, read the [How to Write and Submit an Analyzer ](how-to-create-an-analyzer.md) guide.
