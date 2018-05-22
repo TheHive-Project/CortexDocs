@@ -34,7 +34,7 @@ curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/orga
 
 You can also search for all active users under that organization using the following query:
 
-**THE_FOLLOWING_EXAMPLE_DOES_NOT_WORK: ERROR curl: (3) [globbing] nested brace in column 70**
+**FIXME** THE_FOLLOWING_EXAMPLE_DOES_NOT_WORK: ERROR curl: (3) [globbing] nested brace in column 70
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user -d {
   query: {"status": "Active"}
@@ -57,6 +57,7 @@ curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/a
 ## Update
 You can update an organization's description and status (`Active` or `Locked`) using the following API call which requires the API key associated with a `superAdmin` account:
 
+**FIXME**
 ```bash
 curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID' -d '{
   "description": "New Demo organization",
@@ -64,6 +65,7 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/
 ```
 or
 
+**FIXME**
 ```bash
 curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID' -d '{
   "status": "Active",
@@ -73,6 +75,7 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/
 ## Delete
 Deleting an organization just marks it as `Locked` and doesn't remove the associated data from the DB. To "delete" an organization, you can use the API call shown below. It requires the API key associated with a `superAdmin` account.
 
+**FIXME**
 ```bash
 curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
 ```
@@ -80,12 +83,14 @@ curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001
 ## Obtain Details
 This API call returns the details of an organization as described in the [Organization model](#organization-model) section.
 
+**FIXME**
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
 ```
 
 Let's assume that the organization we are seeking to obtain details about is called *demo*. The `curl` command would be:
 
+**FIXME**
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
 ```
@@ -116,6 +121,7 @@ and should return a list of [Users](user.md#user-model).
 
 If one wants to filter/search for some users (Active ones for example), there is a search API to use as below:
 
+**FIXME**
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user/_search' -d '{
   query: {}
@@ -127,6 +133,7 @@ It also supports the `range` and `sort` query parameters declared in [paging and
 ## List Analyzers (**Required Roles**: `orgadmin`)
 To list the analyzers that have been enabled within an organization, use the following API call with the API key of an `orgAdmin` user:
 
+**FIXME**
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/analyzer' -d '{
   query: {}
