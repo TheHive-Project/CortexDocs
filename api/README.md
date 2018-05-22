@@ -9,7 +9,7 @@ The exposed APIs share the same request and authentication strategies as describ
 - [HTTP request format](request.md)
 - [Authentication](authentication.md)
 
-and allow handling
+And allow handling:
 
 - [Organizations](organization.md)
 - [Users](user.md)
