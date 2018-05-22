@@ -29,8 +29,8 @@ curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user'
 or
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/_search' -d '{
-  query: {}
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/user/_search' -d '{
+  "query": {}
 }'
 ```
 
@@ -47,7 +47,7 @@ This APIs allows user creation. If it's called by a `superadmin` user, it allows
 If called by a `orgadmin` user, the `organization` field's value must be the same as the user who calls the API: `orgadmin` users are allowed to create users only in their organization.
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/user' -d '{
   "name": "Demo org Admin",
   "roles": [
     "read",
@@ -85,13 +85,13 @@ This API allows updating the writable users' fields. It's accessible to users wi
 Every user can also call it to update its own details.
 
 ```bash
-curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN' -d '{
+curl -XPATCH -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/user/USER_LOGIN' -d '{
   "name": "John Doe",
   "roles": [
     "read",
     "analyze"
   ],
-  status: "Locked"
+  "status": "Locked"
 }'
 ```
 
@@ -114,7 +114,7 @@ This API allows setting a user's password. It's accessible to users with `supera
 Every user can also call it to set its own password.
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/set' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/set' -d '{
   "password": "ANY_PASSWORD"
 }'
 ```
@@ -126,7 +126,7 @@ and returns 204 response if it succeeds.
 This API allows a given user to change only his own existing password. Every user can also call it to change its own password.
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/change' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/user/USER_LOGIN/password/change' -d '{
   "currentPassword": "password",
   "password": "new-password"
 }'

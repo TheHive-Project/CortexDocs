@@ -34,8 +34,8 @@ curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer'
 or
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/_search' -d '{
-  query: {}
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/analyzer/_search' -d '{
+  "query": {}
 }'
 ```
 
@@ -70,7 +70,7 @@ It returns a JSON array of analyzer objects as described in [Analyzer Model sect
 This API allows an `orgadmin` user to update the `name`, `configuration` and `jobCache` of an enabled analyzer.
 
 ```bash
-curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID' -d '{
+curl -XPATCH -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID' -d '{
   "configuration": {
     "key": "XXXXXXXXXXXXXXXXXXXXXXXXXXXx",
     "polling_interval": 60,
@@ -94,7 +94,7 @@ This API allows running analyzers on observables of different data types.
 For `files`, the API call must be made as described below:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' \
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' \
   -F 'attachment=@/path/to/observable-file' \
   -F '_json=<-;type=application/json' << _EOF_
   {
@@ -107,7 +107,7 @@ _EOF_
 for other observable types the request is:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run' -d '{
   "data":"8.8.8.8",
   "dataType":"ip",
   "tlp":0,
@@ -124,7 +124,7 @@ This call will fetch a similar job from the cache, and if it finds one, it retur
 To force bypassing the cache, one can add the following query param: `force=1`
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run?force=1' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/analyzer/ANALYZER_ID/run?force=1' -d '{
   "data":"8.8.8.8",
   "dataType":"ip",
   "tlp":0,

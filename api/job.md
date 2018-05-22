@@ -26,8 +26,8 @@
 This API allows a user with `read` or `analyzer` role to list and search all the analysis jobs made by its organization:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/job/_search' -d '{
-  query: {
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://127.0.0.1:9001/api/job/_search' -d '{
+  "query": {
     "_and": [
       {"status": "Success"},
       {"dataType": "ip"}

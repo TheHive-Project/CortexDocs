@@ -21,6 +21,7 @@ curl -H 'Authorization: Bearer ***API*KEY***' http://CORTEX_APP_URL:9001/api/job
 ```
 
 ## Basic Authentication
+
 Cortex also supports basic authentication which is disabled by default. If you absolutely need to use it, you can enable it by adding `auth.method.basic=true` in the configuration file (`/etc/cortex/application.conf` by default) and restarting the Cortex service.
 
 Once this is done, you can, for example, list the Cortex jobs using the following `curl` command:

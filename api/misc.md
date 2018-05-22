@@ -12,6 +12,6 @@ The followings are query parameters:
 Example:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user?range=0-10&sort=-createdAt&sort=+status -d {
-  query: {}
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user?range=0-10&sort=-createdAt&sort=+status' -d '{
+  "query": {}
 }'
