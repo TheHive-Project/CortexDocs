@@ -1,83 +1,96 @@
 # Organization APIs
 
-This is the set of APIs that allow creating, updating and listing Cortex organizations
+Cortex offers a set of APIs to create, update and list organizations.
 
-## Organization model
+## Organization Model
 
-An organization is defined by the following attributes
+An organization (org) is defined by the following attributes:
 
-- `id`: (*readonly*) it is a copy of the name
-- `name`: (*readonly*) the organization name
-- `status`: (*writable*) the organization status: `Active` or `Locked`
-- `description`: (*writable*) the organization description
-- `createdAt`: (*generated*) the creation date
-- `createdBy`:  (*generated*) the user who created the organization
-- `updatedAt`:  (*generated*) the last update date
-- `updatedBy`:  (*generated*) the latest user who updated the organization
+| Attribute | Description | Type |
+| --------- | ----------- | ---- |
+|`id` | Copy of the org's name | readonly |
+|`name` | Org's name | readonly |
+|`status` | Org's status (`Active` or `Locked`) | writable |
+|`description` | Org's description | writable |
+|`createdAt` | Creation date of the org | generated |
+|`createdBy` | User who created the org | generated |
+|`updatedAt` | Last update date of the org | generated |
+|`updatedBy` | User who last updated the org | generated |
 
-## List API (**Required Roles**: `superadmin`)
+Please note that `id` and `name` are essentially the same. Also, `createdAt` and `updatedAt` are in *epoch*.
 
-It's possible to list all the organizations
+## List
+It is possible to list all the organizations using the following API call, which requires the API key associated with a `superAdmin` account:
 
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user'
+curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization'
 ```
 
-or search for a list using a query
+If instead, you'd like to display all the users belonging to the organization which `id` is `ORG_ID`:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user -d {
+curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user'
+```
+
+You can also search for all active users under that organization using the following query:
+
+**THE_FOLLOWING_EXAMPLE_DOES_NOT_WORK: ERROR curl: (3) [globbing] nested brace in column 70**
+```bash
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user -d {
   query: {"status": "Active"}
 }'
 ```
 
-Both APIs supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
+Both APIs supports the `range` and `sort` query parameters described in [paging and sorting details](misc.md#paging-and-sorting).
 
-## Create API (**Required Roles**: `superadmin`)
+## Create API
+It is possible to create an organization using the following API call, which requires the API key associated with a `superAdmin` account:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization' -d '{
   "name": "demo",
   "description": "Demo organization",
   "status": "Active"
 }'
 ```
 
-## Update API (**Required Roles**: `superadmin`)
-
-Only the organization description and status are updatable
+## Update
+You can update an organization's description and status (`Active` or `Locked`) using the following API call which requires the API key associated with a `superAdmin` account:
 
 ```bash
-curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID' -d '{
+curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID' -d '{
   "description": "New Demo organization",
 }'
 ```
-
 or
 
 ```bash
-curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID' -d '{
+curl -XPATCH -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID' -d '{
   "status": "Active",
 }'
 ```
 
-## Delete API (**Required Roles**: `superadmin`)
-
-Deleting an organization just marks it as `Locked` and doesn't remove the data from the DB
-
-```bash
-curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID'
-```
-
-## Get orgnization details (**Required Roles**: `orgadmin`)
-
-This API returns the details of an organization as described in the [Organization model](#organization-model) section
+## Delete
+Deleting an organization just marks it as `Locked` and doesn't remove the associated data from the DB. To "delete" an organization, you can use the API call shown below. It requires the API key associated with a `superAdmin` account.
 
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID'
+curl -XDELETE -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
 ```
 
-and should return
+## Obtain Details
+This API call returns the details of an organization as described in the [Organization model](#organization-model) section.
+
+```bash
+curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
+```
+
+Let's assume that the organization we are seeking to obtain details about is called *demo*. The `curl` command would be:
+
+```bash
+curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID'
+```
+
+and it should return:
 
 ```json
 {
@@ -92,12 +105,11 @@ and should return
 }
 ```
 
-## List organization users (**Required Roles**: `orgadmin`, `superadmin`)
-
-This API returns the list of **all** the users declared withing an organization. It supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
+## List Users
+As mentioned above, you can use the API to return the list of **all** the users declared withing an organization. For that purpose, use the API call shown below with the API key of an `orgAdmin` or `superAdmin` account. It supports the `range` and `sort` query parameters declared in [paging and sorting details](misc.md#paging-and-sorting).
 
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user'
+curl -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user'
 ```
 
 and should return a list of [Users](user.md#user-model).
@@ -105,23 +117,23 @@ and should return a list of [Users](user.md#user-model).
 If one wants to filter/search for some users (Active ones for example), there is a search API to use as below:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/ORG_ID/user/_search' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/ORG_ID/user/_search' -d '{
   query: {}
 }'
 ```
 
-It alse supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
+It also supports the `range` and `sort` query parameters declared in [paging and sorting details](misc.md#paging-and-sorting).
 
-## List organization anlayzers (**Required Roles**: `orgadmin`)
-
-This API returns the list of the analyzers that have been enabled within an organization. Analyzers that are not enabled, are not listed by this API.
-
-It also supports the `range` and `sort` query params declared in [paging and sorting details](misc.md#paging-and-sorting)
+## List Analyzers (**Required Roles**: `orgadmin`)
+To list the analyzers that have been enabled within an organization, use the following API call with the API key of an `orgAdmin` user:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://127.0.0.1:9001/api/organization/analyzer' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'http://CORTEX_APP_URL:9001/api/organization/analyzer' -d '{
   query: {}
 }'
 ```
 
-and should return a list of [Analyzers](analyzer.md#analyzer-model).
+It should return a list of [Analyzers](analyzer.md#analyzer-model).
+
+Please note that this API call does not display analyzers that are disabled. It supports the `range` and `sort` query parameters declared in [paging and sorting details](misc.md#paging-and-sorting).
+
