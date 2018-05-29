@@ -1,7 +1,7 @@
 # Administration Guide
 This administration guide applies to Cortex 2 only.
 
-Please note that to use Cortex 2 from TheHive, you must use Cerana 0.7 (TheHive 3.0.7) or later.
+**Note**: you will need TheHive 3.0.7 or later to call Cortex 2 from TheHive. Earlier versions support only Cortex 1. 
 
 ## Table of Contents
   * [User Roles](#user-roles)
