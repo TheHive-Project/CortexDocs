@@ -626,6 +626,7 @@ The following section describes the APIs that allow manipulating analyzers.
 
 ### Analyzer Model
 An analyzer is defined by the following attributes:
+
 | Attribute | Description | Type |
 | --------- | ----------- | ---- |
 | `id` | Analyzer ID once enabled within an organization | readonly |
