@@ -252,9 +252,9 @@ As mentioned above, you can use the API to return the list of **all** the users 
 curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/organization/ORG_ID/user'
 ```
 
-and should return a list of [Users](user-model).
+and should return a list of [users](#user-model).
 
-If one wants to filter/search for some users (sctive ones for example), there is a search API to use as below:
+If one wants to filter/search for some users (active ones for example), there is a search API to use as below:
 
 ```bash
 curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'https://CORTEX_APP_URL:9001/api/organization/ORG_ID/user/_search' -d '{
@@ -271,7 +271,7 @@ To list the analyzers that have been enabled within an organization, use the fol
 curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/analyzer'
 ```
 
-It should return a list of [Analyzers](analyzer-model).
+It should return a list of [Analyzers](#analyzer-model).
 
 Please note that this API call does not display analyzers that are disabled. It supports the `range` and `sort` query parameters declared in [paging and sorting details](#paging-and-sorting).
 
@@ -302,7 +302,7 @@ This API call allows a `superAdmin` to list and search all the users of all defi
 curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/user'
 ```
 
-This call supports the `range` and `sort` query parameters declared in [paging and sorting details](#paging-and-sorting)
+This call supports the `range` and `sort` query parameters declared in [paging and sorting details](#paging-and-sorting).
 
 ### List Users within an Organization
 This call is described in [Organization APIs](#organization-apis).
