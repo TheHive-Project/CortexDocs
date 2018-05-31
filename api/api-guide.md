@@ -305,7 +305,7 @@ curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/use
 This call supports the `range` and `sort` query parameters declared in [paging and sorting details](#paging-and-sorting).
 
 ### List Users within an Organization
-This call is described in [Organization APIs](#organization-apis).
+This call is described in [organization APIs](#organization-apis).
 
 ### Search
 This API call allows a `superAdmin` to perform search on the user accounts created in a Cortex instance:
