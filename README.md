@@ -19,8 +19,9 @@ physical machine with similar specifications.
 ## What's New
 
 - [Quick Start Guide](admin/quick-start.md)
+- [API Documentation](api/api-guide.md) (updated for Cortex 2)
 - [How to Configure Analyzers](analyzer_requirements.md)
-- [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
+
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/TheHive-Project/Cortex/blob/master/CHANGELOG.md)
 
@@ -43,7 +44,7 @@ and [configure them](analyzer_requirements.md).
 
 ## Developer Guides
 
-- [API Documentation](api/README.md) (**OUTDATED**, will be updated soon)
+- [API Documentation](api/api-guide.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
 
 ## Other
