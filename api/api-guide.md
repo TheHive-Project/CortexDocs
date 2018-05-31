@@ -55,7 +55,7 @@ Cortex 2 offers a REST API that can be leveraged by various applications and pro
 
 All the exposed APIs share the same [request & response formats](#request--response-formats) and [authentication strategies](#authentication) as described below.
 
-There are also some transverse parameters supported by several calls, in addition to [utility APIs](ADD LINK IN THE DOC).
+There are also some transverse parameters supported by several calls, in addition to [utility APIs](#miscellaneous-apis).
 
 If you want to create an analyzer, please read the [How to Write and Submit an Analyzer ](how-to-create-an-analyzer.md) guide.
 
