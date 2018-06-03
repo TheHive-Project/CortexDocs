@@ -43,6 +43,7 @@ on is free or requires special access or valid subscription or product license.
     * [Robtex](#robtex)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
+    * [Unshortenlink](#unshortenlink)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -392,6 +393,13 @@ Check if an IP address is known to be a Tor node. The information source is the 
 #### Requirements
 The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
 This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
+
+### Unshortenlink
+Use [Unshortenlink](https://unshorten.link/) to reveal the real URL hidden behind a shortened one.
+
+This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
