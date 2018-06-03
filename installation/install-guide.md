@@ -276,7 +276,8 @@ sudo yum -y install git bzip2
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-**2.1.3. Installation of Node.js**
+**Installation of Node.js**
+
 Install the EPEL repository. You should have the *extras* repository enabled, then:  
 ```
 sudo yum -y install epel-release
