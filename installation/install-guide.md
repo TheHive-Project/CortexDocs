@@ -1,7 +1,8 @@
 # Installation Guide
+This guide applies to Cortex 2 only.
+
 Before installing Cortex, you need to choose the installation option which suits your environment as described below, install the analyzers then proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
-Please not that this guide applies to Cortex 2 only.
 
 ## Table of Contents
   * [Installation Options](#installation-options)
@@ -27,8 +28,7 @@ Cortex is available as:
 - a [Docker image](#docker)
 - a [binary package](#binary)
 
-In addition, Cortex can be deployed using an [Ansible script](https://github.com/drewstinnett/ansible-cortex) contributed by
-[@drewstinnett](https://github.com/drewstinnett) or [built from the sources](#build-it-yourself).
+In addition, Cortex can be also be [built from the source code](#build-it-yourself).
 
 ### RPM
 RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
@@ -71,7 +71,7 @@ Once the package is installed, [install the analyzers](#analyzers-1) as outlined
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
 
-Cortex 2 requires Elasticsearch to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
+Cortex 2 requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
 
 #### Use Docker-compose
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
@@ -149,7 +149,7 @@ The image accepts more options:
 | `--es-hostname <host>` | Resolve this hostname to find Elasticsearch instances |
 | `--secret <secret>` | Cryptographic secret needed to secure sessions |
 
-**Note**: please remember that you **must install and configure Elasticsearch**.
+**Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
 
 #### Analyzers
 Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzers`. To use new analyzers or get updates for the existing ones, you should
@@ -231,7 +231,7 @@ sudo service cortex start
 
 Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
 
-#### 5. Plug analyzers
+#### 5. Plug Analyzers
 Now that Cortex has successfully started, download `Cortex-Analyzers`, edit the configuration file then set the analyzer path to
 `Cortex-Analyzers/analyzers` as described in [the section below](#analyzers-1).
 
