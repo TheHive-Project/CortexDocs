@@ -17,6 +17,8 @@ This administration guide applies to Cortex 2 only.
     * [Analyzers](#analyzers-1)
     * [Authentication](#authentication)
     * [Cache](#cache)
+       * [Performance](#performance)
+       * [Analyzer Results](#analyzer-results)
     * [Streaming (a\.k\.a The Flow)](#streaming-aka-the-flow)
       * [Entity Size Limit](#entity-size-limit)
     * [HTTPS](#https)
@@ -272,12 +274,14 @@ session {
 ```
 
 ### Cache
+#### Performance
 In order to increase Cortex performance, a cache is configured to prevent
 repetitive database solicitation. Cache retention time can be configured for
 users and organizations (default is 5 minutes). If a user is updated, the cache is
 automatically invalidated.
 
-Job report can also be cached. If an analyzer is executed against the same observable,
+#### Analyzer Results
+Analyzer results (job reports) can also be cached. If an analyzer is executed against the same observable,
 the previous report can be returned without re-executing the analyzer. The cache is used only
 if the second job occurs within `cache.job` (the default is 10 minutes).
 ```
@@ -287,8 +291,9 @@ cache {
   organization = 5 minutes
 }
 ```
-**Note**:
-The global `cache.job` value can be overridden for each analyzer in the analyzer configuration Web dialog.
+**Note**: the global `cache.job` value can be overridden for each analyzer in the analyzer configuration Web dialog.
+
+**Note**: it is possible to bypass the cache altogether (for example to get extra fresh results) only through the API as explained in the [API Guide](../api/api-guide.md#run). This option is not currently available in the Web UI or when calling Cortex through TheHive.
 
 ### Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the
