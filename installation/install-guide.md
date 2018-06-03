@@ -17,7 +17,7 @@ Please not that this guide applies to Cortex 2 only.
   * [Elasticsearch Installation](#elasticsearch-installation)
     * [System Package](#system-package)
     * [Start the Service](#start-the-service)
-    * [ElasticSearch inside a Docker](#elasticsearch-inside-a-docker)
+    * [Elasticsearch inside a Docker](#elasticsearch-inside-a-docker)
 
 ## Installation Options
 Cortex is available as:
@@ -71,13 +71,13 @@ Once the package is installed, [install the analyzers](#analyzers-1) as outlined
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
 
-Cortex 2 requires ElasticSearch to run. You can use `docker-compose` to start them together in Docker or install and configure ElasticSearch manually.
+Cortex 2 requires Elasticsearch to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
 
 #### Use Docker-compose
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
 
 The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/cortex/docker-compose.yml)
-file starts ElasticSearch and Cortex:
+file starts Elasticsearch and Cortex:
 ```
 version: "2"
 services:
@@ -102,7 +102,7 @@ services:
 
 Put this file in an empty folder and run `docker-compose up`. Cortex is exposed on 9001/tcp port. These ports can be changed by modifying the `docker-compose` file.
 
-You can also use TheHive [docker-compose](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml) file which contains TheHive, Cortex and ElasticSearch, as documented in [TheHive's Docker installation instructions](https://github.com/TheHive-Project/TheHiveDocs/blob/master/installation/docker-guide.md).
+You can also use TheHive [docker-compose](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml) file which contains TheHive, Cortex and Elasticsearch, as documented in [TheHive's Docker installation instructions](https://github.com/TheHive-Project/TheHiveDocs/blob/master/installation/docker-guide.md).
 
 You can specify a custom Cortex configuration file (`application.conf`) by adding the following lines in the `cortex` section of your docker-compose file:
 
@@ -111,14 +111,14 @@ volumes:
     - /path/to/application.conf:/etc/cortex/application.conf
 ```
 
-You should define where the data (i.e. the ElasticSearch database) will be located on your operating system by adding the following lines in the `elasticsearch` section of your docker-compose file:
+You should define where the data (i.e. the Elasticsearch database) will be located on your operating system by adding the following lines in the `elasticsearch` section of your docker-compose file:
 ```
 volumes:
     - /path/to/data:/usr/share/elasticsearch/data
 ```
 
-#### Manual Installation of ElasticSearch
-ElasticSearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
+#### Manual Installation of Elasticsearch
+Elasticsearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
 [documentation](../admin/admin-guide.md) and run Cortex docker as follow:
 ```
 docker run --volume /path/to/cortex/application.conf:/etc/cortex/application.conf certbdf/cortex:latest --no-config
@@ -129,7 +129,7 @@ You can add the `--publish` docker option to expose the Cortex HTTP service.
 #### Customize the Docker Image
 By default, the Cortex Docker image has minimal configuration:
  - choose a random secret (`play.http.secret.key`)
- - search for the ElasticSearch instance (host named `elasticsearch`) and add it to configuration
+ - search for the Elasticsearch instance (host named `elasticsearch`) and add it to configuration
 
 This behavior can be disabled by adding `--no-config` to the Docker command line:
 
@@ -149,7 +149,7 @@ The image accepts more options:
 | `--es-hostname <host>` | Resolve this hostname to find Elasticsearch instances |
 | `--secret <secret>` | Cryptographic secret needed to secure sessions |
 
-**Note**: please remember that you **must install and configure ElasticSearch**.
+**Note**: please remember that you **must install and configure Elasticsearch**.
 
 #### Analyzers
 Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzers`. To use new analyzers or get updates for the existing ones, you should
@@ -421,10 +421,10 @@ The following analyzers are not supported by THeHive Project at this time:
 - [Analyzers written in Go](https://github.com/Rostelecom-CERT/go-cortex-analyzers) by Rosetelecom-CERT
 
 ## Elasticsearch Installation
-If, for some reason, you need to install ElasticSearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
+If, for some reason, you need to install Elasticsearch, it can be installed using a system package or a Docker image. The latter is preferred as its installation and update are easier.
 
 ### System Package
-Install the ElasticSearch package provided by Elastic:
+Install the Elasticsearch package provided by Elastic:
 ```
 # PGP key installation
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
@@ -438,19 +438,19 @@ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee 
 # Install https support for apt
 sudo apt install apt-transport-https
 
-# ElasticSearch installation
+# Elasticsearch installation
 sudo apt update && sudo apt install elasticsearch
 ```
 
 The Debian package does not start up the service by default,  to prevent the instance from accidentally joining a cluster, without being configured appropriately.
 
-If you prefer using ElasticSearch inside a docker, see
-[ElasticSearch inside a Docker](#elasticsearch-inside-a-docker).
+If you prefer using Elasticsearch inside a docker, see
+[Elasticsearch inside a Docker](#elasticsearch-inside-a-docker).
 
 #### Configuration
 It is **highly recommended** to avoid exposing this service to an untrusted zone.
 
-If ElasticSearch and Cortex run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
+If Elasticsearch and Cortex run on the same host (and not in a docker), edit `/etc/elasticsearch/elasticsearch.yml` and
 set `network.host` parameter with `127.0.0.1`. Cortex use dynamic scripts to make partial updates. Hence, they must be activated using `script.inline: on`.
 
 The cluster name must also be set (`hive` for example). Threadpool queue size must be set with a high value (`100000`). The default size will get the queue easily overloaded.
@@ -467,7 +467,7 @@ thread_pool.bulk.queue_size: 100000
 ```
 
 ### Start the Service
-Now that ElasticSearch is configured, start it as a service and check whether it's running:
+Now that Elasticsearch is configured, start it as a service and check whether it's running:
 ```
 sudo systemctl enable elasticsearch.service
 sudo systemctl start elasticsearch.service
@@ -481,8 +481,8 @@ sudo journalctl -u elasticsearch.service
 
 Note that by default, the database is stored in `/var/lib/elasticsearch` and the logs in `/var/log/elasticsearch`
 
-### ElasticSearch inside a Docker
-You can also start ElasticSearch inside a docker. Use the following command and do not forget to specify the absolute path for persistent data on your host :
+### Elasticsearch inside a Docker
+You can also start Elasticsearch inside a docker. Use the following command and do not forget to specify the absolute path for persistent data on your host :
 
 ```
 docker run \
