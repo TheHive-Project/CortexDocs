@@ -56,6 +56,7 @@ on is free or requires special access or valid subscription or product license.
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
     * [EmergingThreats](#emergingthreats)
+    * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
     * [PassiveTotal](#passivetotal)
     * [PayloadSecurity](#payloadsecurity)
@@ -491,8 +492,11 @@ This analyzer comes in only one flavor.
 You need access to Malpedia to use this analyzer. Please note that Malpedia does not feature open registration. It is operated as an invite-only trust group. If you believe you qualify for an account, please see Malpedia's [Terms of Services](https://malpedia.caad.fkie.fraunhofer.de/terms_of_service) for contact details.
 
 If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
+
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
+
+This analyzer comes in only one flavor.
 
 #### Requirements
 SinkDB is a private service provided by [abuse.ch](https://abuse.ch) which collects sinkholed IPs.
@@ -576,6 +580,19 @@ subscription to use the analyzer.
 
 Retrieve the API key associated with your account and provide it as a value
 to the `key` parameter.
+
+### FireEye iSIGHT
+Leverage FireEye [iSIGHT Threat Intelligence](https://www.fireeye.com/solutions/isight-cyber-threat-intelligence-subscriptions.html)
+to qualify domains, IP addresses, hashes and URLs.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need a valid FireEye [iSIGHT Threat Intelligence](https://www.fireeye.com/solutions/isight-cyber-threat-intelligence-subscriptions.html)
+subscription to use the analyzer.
+
+Retrieve the API key associated with your account and provide it as a value
+to the `key` parameter. Obtain the password associated with the API key and provide it as a value to the `pwd` parameter.
 
 ### JoeSandbox
 Analyze URLs and files using the powerful [Joe Sandbox](https://www.joesecurity.org/)
