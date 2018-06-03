@@ -53,6 +53,7 @@ on is free or requires special access or valid subscription or product license.
     * [CIRCLPassiveSSL](#circlpassivessl)
     * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
+    * [Malwares](#malwares)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
@@ -519,6 +520,19 @@ This analyzer comes in only one flavor.
 You need access to Malpedia to use this analyzer. Please note that Malpedia does not feature open registration. It is operated as an invite-only trust group. If you believe you qualify for an account, please see Malpedia's [Terms of Services](https://malpedia.caad.fkie.fraunhofer.de/terms_of_service) for contact details.
 
 If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
+
+### Malwares
+Query [Malwares.com](https://www.malwares.com/) and get reports on files, hashes, domain names and IP addresses.
+
+The analyzer comes in two flavors:
+- Malwares_**GetReport**: get the latest Malwares report for a file,
+hash, domain or an IP address.
+- Malwares_**Scan**: scan a file or URL.
+
+#### Requirements
+You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account. 
+
+An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
 
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
