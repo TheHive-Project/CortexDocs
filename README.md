@@ -20,30 +20,18 @@ physical machine with similar specifications.
 
 - [Quick Start Guide](admin/quick-start.md)
 - [API Documentation](api/api-guide.md) (updated for Cortex 2)
+- [New Installation Guide](installation/install-guide.md)
 - [How to Configure Analyzers](analyzer_requirements.md)
-
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/TheHive-Project/Cortex/blob/master/CHANGELOG.md)
 
 ## Installation Guides
-
-Cortex can be installed using:
-- An [RPM package](installation/rpm-guide.md)
-- A [DEB package](installation/deb-guide.md)
-- [Docker](installation/docker-guide.md)
-- [Binary](installation/binary-guide.md)
-
-Cortex can also be [built from sources](installation/build-guide.md).
-
-Once you have installed Cortex, you need to [install the analyzers](installation/analyzers.md)
-and [configure them](analyzer_requirements.md).
+- [Installation Guide](installation/install-guide.md)
 
 ## User Guides
-
 - [Cortex Analyzer Requirements Guide](analyzer_requirements.md)
 
 ## Developer Guides
-
 - [API Documentation](api/api-guide.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
 
