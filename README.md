@@ -25,17 +25,16 @@ physical machine with similar specifications.
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/TheHive-Project/Cortex/blob/master/CHANGELOG.md)
 
-## Installation Guides
+## Guides
 - [Installation Guide](installation/install-guide.md)
-
-## User Guides
 - [Cortex Analyzer Requirements Guide](analyzer_requirements.md)
+- [Quick Start Guide](admin/quick-start.md)
+- [Administration Guide](admin/admin-guide.md)
+- [Updating](admin/updating.md)
+- [API Guide](api/api-guide.md)
+- [Analyzer Development](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
 
-## Developer Guides
-- [API Documentation](api/api-guide.md)
-- [How to Create an Analyzer](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
-
-## Other
+## Miscellaneous Information
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [FAQ](FAQ.md)
 
