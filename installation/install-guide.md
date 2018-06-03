@@ -257,7 +257,7 @@ The following software are required to download and build Cortex:
 
 * [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
 * git: use the system package or [download it](http://www.git-scm.com/downloads)
-* [NodeJs](https://nodejs.org/en/download/) with its package manager (NPM)
+* [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
 
 ##### 2. Build
 To install the requirements and build Cortex from sources, please follow the instructions below depending on your operating system.
@@ -276,13 +276,13 @@ __2.1.2. Installation of OpenJDK__
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-__2.1.3. Installation of NodeJs__
+__2.1.3. Installation of Node.js__
 Install the EPEL repository. You should have the *extras* repository enabled, then:  
 ```
 sudo yum -y install epel-release
 ```
 
-Then, you can install NodeJs:
+Then, you can install Node.js:
 
 ```
 sudo yum -y install nodejs
@@ -305,7 +305,7 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-__2.2.3. Installation of NodeJs__
+__2.2.3. Installation of Node.js__
 
 ```
 sudo apt-get install wget
@@ -350,7 +350,7 @@ Go to the front-end directory:
 cd Cortex/www
 ```
 
-Install NodeJs libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
+Install Node.js libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
 build the front-end :
 ```
 npm install
