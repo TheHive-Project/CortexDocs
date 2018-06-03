@@ -264,19 +264,19 @@ To install the requirements and build Cortex from sources, please follow the ins
 
 ###### 2.1. CentOS/RHEL
 
-__2.1.1. Packages__
+**Packages**
 
 ```
 sudo yum -y install git bzip2
 ```
 
-__2.1.2. Installation of OpenJDK__
+**Installation of OpenJDK**
 
 ```
 sudo yum -y install java-1.8.0-openjdk-devel
 ```
 
-__2.1.3. Installation of Node.js__
+**2.1.3. Installation of Node.js**
 Install the EPEL repository. You should have the *extras* repository enabled, then:  
 ```
 sudo yum -y install epel-release
@@ -290,13 +290,13 @@ sudo yum -y install nodejs
 
 ###### 2.2. Ubuntu
 
-__2.2.1. Packages__
+**Packages**
 
 ```
 sudo apt-get install git wget
 ```
 
-__2.2.2. Installation of Oracle JDK__
+**Installation of Oracle JDK**
 
 ```
 echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
@@ -305,7 +305,7 @@ sudo apt-get update
 sudo apt-get install oracle-java8-installer
 ```
 
-__2.2.3. Installation of Node.js__
+**Installation of Node.js**
 
 ```
 sudo apt-get install wget
@@ -314,14 +314,13 @@ sudo apt-get install nodejs
 ```
 
 ###### 2.3. Cortex
-
-__2.3.1 Download The Source__
+**Download The Source**
 
 ```
 git clone https://github.com/CERT-BDF/Cortex.git
 ```
 
-__2.3.2. Build the Project__
+**Build the Project**
 
 ```
 cd Cortex
