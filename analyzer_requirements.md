@@ -55,6 +55,7 @@ on is free or requires special access or valid subscription or product license.
     * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
     * [Malwares](#malwares)
+    * [Mnemonic](#mnemonic)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
@@ -541,6 +542,18 @@ hash, domain or an IP address.
 You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account. 
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
+
+### Mnemonic
+Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
+
+This analyzer comes in two flavors:
+- Mnemonic_**Public**: query Mnemonic's public service.
+- Mnemonic_**Closed**: query Mnemonic's closed service.
+
+#### Requirements
+When using the public service, the analyzer can be used out of the box with no further configuration.
+
+When using the closed service, you need to contact Mnemonic to get an API key which you'll need to supply as the value of the `key` parameter.
 
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
