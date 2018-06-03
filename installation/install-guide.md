@@ -47,7 +47,7 @@ Then you will able to install the package using `yum`:
 yum install cortex
 ```
 
-Once the package is installed, [install the analyzers](#install-the-analyzers) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ### DEB
 Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
@@ -66,7 +66,7 @@ Some environments may block access to the `pgp.mit.edu` key server. As a result,
 
 `curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
-Once the package is installed, [install the analyzers](#install-the-analyzers) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
@@ -153,7 +153,7 @@ The image accepts more options:
 
 #### Analyzers
 Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzers`. To use new analyzers or get updates for the existing ones, you should
-[install them](#install-the-analyzers) outside of Docker and overwrite the existing ones by adding the following parameter:
+[install them](#analyzers-1) outside of Docker and overwrite the existing ones by adding the following parameter:
 
 ```
 --volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro certbdf/cortex:latest  
@@ -233,7 +233,7 @@ Please note that the service may take some time to start. Once it is started, yo
 
 #### 5. Plug analyzers
 Now that Cortex has successfully started, download `Cortex-Analyzers`, edit the configuration file then set the analyzer path to
-`Cortex-Analyzers/analyzers` as described in [the section below](#install-the-analyzers).
+`Cortex-Analyzers/analyzers` as described in [the section below](#analyzers-1).
 
 #### 6. Update
 To update Cortex from binaries, just stop the service, download the latest package, rebuild the link `/opt/cortex` and
@@ -337,7 +337,7 @@ Binaries are built and stored under `Cortex/target/universal/stage/`. You caniIn
 sudo cp -r Cortex/target/universal/stage /opt/cortex
 ```
 
-Proceed to [installing the analyzers](#install-the-analyzers) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Proceed to [installing the analyzers](#analyzers-1) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ##### 3. First start
 Follow the [first start](#4-first-start) section of the binary installation method above to start using Cortex.
