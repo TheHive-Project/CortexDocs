@@ -41,9 +41,11 @@ on is free or requires special access or valid subscription or product license.
     * [PhishTank](#phishtank)
     * [PhishingInitiative](#phishinginitiative)
     * [Robtex](#robtex)
+    * [StopForumSpam](#stopforumspam)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
     * [Unshortenlink](#unshortenlink)
+    * [URLHaus](#urlhaus)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -381,19 +383,27 @@ This analyzer comes in three flavors:
 
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
 
+### StopForumSpam
+Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email address is a known spammer.
+
+#### Requirements
+You need to define the tresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
+
 ### Tor Blutmagie
 Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torstatus.blutmagie.de/) to be linked to a Tor node.
 
+This analyzer comes in only one flavor.
+
 #### Requirements
-In order to check if an IP, domain or FQDN is a Tor exit node, this analyzer queries the Tor status service at Blutmagie.de.
-The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
+In order to check if an IP, domain or FQDN is a Tor exit node, this analyzer queries the Tor status service at Blutmagie.de. The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
 
 ### Tor Project
 Check if an IP address is known to be a Tor node. The information source is the official Tor network status.
 
+This analyzer comes in only one flavor.
+
 #### Requirements
-The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
-This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
+The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching. This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
 
 ### Unshortenlink
 Use [Unshortenlink](https://unshorten.link/) to reveal the real URL hidden behind a shortened one.
@@ -401,6 +411,14 @@ Use [Unshortenlink](https://unshorten.link/) to reveal the real URL hidden behin
 This analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
+
+### URLHaus
+Search domains, URLs or hashes on [URLhaus](https://urlhaus.abuse.ch/), a service run by Abuse.ch.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+By default, the results will be cached for 3600 seconds (1 hour). If you need to change the default value, see the `cache.duration` parameter. You must also define the path where the cached data will be stored as value for the `cache.root` parameter. 
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
