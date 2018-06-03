@@ -51,6 +51,7 @@ on is free or requires special access or valid subscription or product license.
     * [CERTatPassiveDNS](#certatpassivedns)
     * [CIRCLPassiveDNS](#circlpassivedns)
     * [CIRCLPassiveSSL](#circlpassivessl)
+    * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
@@ -494,8 +495,18 @@ if you would like access.
 If the CIRCL positively answers your access request, you'll obtain a username
  and password which are needed to make the analyzer work.
 
-supply your username as the value for the `user` parameter and your password
+Supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
+
+### IBM X-Force
+Query domains, IPs, hashes and URLs against [IBM X-Force](https://exchange.xforce.ibmcloud.com/) Threat Intelligence sharing platform.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+Access to IBM X-Force Threat Exchange requires an [IBM ID](https://www.ibm.com/account/reg/signup?formid=urx-30243).
+
+Once you have access to the service, supply the URL of the service as value for the `url` parameter, the API key associated with your account as value for the `key` parameter and the associated password as the value of the `pwd` parameter.
 
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
