@@ -97,6 +97,13 @@ The analyzer comes in only one flavor.
 #### Requirements
 Provide your API ID and the API secret as values for  `uid` and `key` parameters.
 
+### Crtsh
+Get [Crt.sh](https://crt.sh/) certificate transparency lists associated with a domain name. Crt.sh is an online service operated by the Comodo Certificate Authority.
+
+The analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
+
 ### CuckooSandbox
 Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
 
