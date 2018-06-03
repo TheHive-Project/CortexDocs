@@ -6,11 +6,11 @@ Cortex solves a common problem frequently encountered by SOCs, CSIRTs and securi
 
 Starting from Cortex version 2, you can create and manage multiple organizations (i.e multi-tenancy), manage the associated users and give them different roles. You can also specify per-org analyzer configuration and rate limits to avoid consuming all your quotas at once. We have also added a cache so that an analysis is not re-executed for the same observable if a given analyzer is called on that observable several times within a specific timespan (10 minutes by default).
 
-**Note:**  This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/Cortex/](https://github.com/TheHive-Project/Cortex/).
+**Notes:**
 
-**Note:** [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the Python lib to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, does not support Cortex 2 yet. It will be updated soon.
-
-**Note:** If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
+- This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/Cortex/](https://github.com/TheHive-Project/Cortex/).
+- [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the Python lib to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, does not support Cortex 2 yet. It will be updated soon.
+- If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
 
 ## Hardware Pre-requisites
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
