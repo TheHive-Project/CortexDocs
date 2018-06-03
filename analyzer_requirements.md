@@ -22,7 +22,9 @@ on is free or requires special access or valid subscription or product license.
     * [Abuse\_Finder](#abuse_finder)
     * [C1fApp](#c1fapp)
     * [Censys\.io](#censysio)
+    * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
+    * [Cybercrimetracker](#cybercrimetracker)
     * [Cymon](#cymon)
     * [File\_Info](#file_info)
     * [FireHOLBlocklists](#fireholblocklists)
@@ -121,6 +123,13 @@ for more information on setting it up.
 
 To configure the analyzer you need to supply the URL of your local instance
 as a value of the `url` parameter.
+
+### Cybercrimetracker
+Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
+
+This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
 
 ### Cymon
 Checks IP addresses against [Cymon.io](https://cymon.io/).
