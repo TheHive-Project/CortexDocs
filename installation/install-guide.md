@@ -421,13 +421,18 @@ Existing Cortex analyzers are regularly updated and new ones are added. To benef
 
 ```bash
 $ cd /path/to/Cortex-Analyzers
-$ git pull
+$ sudo git pull
 ```
 Then install any missing requirements:
 
 ```bash
 for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
 for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
+```
+
+And restart Cortex:
+```bash
+$ sudo service cortex restart
 ```
 
 If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip) and import them into TheHive.
