@@ -60,7 +60,7 @@ on is free or requires special access or valid subscription or product license.
     * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
     * [Malwares](#malwares)
-    * [Mnemonic](#mnemonic)
+    * [MnemonicPDNS](#mnemonicpdns)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
@@ -596,12 +596,12 @@ You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.co
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
 
-### Mnemonic
+### MnemonicPDNS
 Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
 
 This analyzer comes in two flavors:
-- Mnemonic_**Public**: query Mnemonic's public service.
-- Mnemonic_**Closed**: query Mnemonic's closed service.
+- Mnemonic_PDNS_**Public**: query Mnemonic's public service.
+- Mnemonic_**closed**: query Mnemonic's closed service.
 
 #### Requirements
 When using the public service, the analyzer can be used out of the box with no further configuration.
