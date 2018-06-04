@@ -600,8 +600,8 @@ An API key to use the service's API should be associated with your account. Supp
 Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
 
 This analyzer comes in two flavors:
-- Mnemonic_PDNS_**Public**: query Mnemonic's public service.
-- Mnemonic_**closed**: query Mnemonic's closed service.
+- Mnemonic_pDNS_**Public**: query Mnemonic's public service.
+- Mnemonic_pDNS_**Closed**: query Mnemonic's closed service.
 
 #### Requirements
 When using the public service, the analyzer can be used out of the box with no further configuration.
