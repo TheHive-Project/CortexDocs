@@ -405,7 +405,7 @@ You need to install an Anomali STAXX instance or to have access to one to use th
 Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email address is a known spammer.
 
 #### Requirements
-You need to define the tresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
+You need to define the thresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
 
 ### ThreatCrowd
 Look up domains, mail and IP addresses on [ThreatCrowd](https://www.threatcrowd.org/), a service powered by AlienVault.
