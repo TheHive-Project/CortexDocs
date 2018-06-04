@@ -41,7 +41,9 @@ on is free or requires special access or valid subscription or product license.
     * [PhishTank](#phishtank)
     * [PhishingInitiative](#phishinginitiative)
     * [Robtex](#robtex)
+    * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
+    * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
     * [Unshortenlink](#unshortenlink)
@@ -54,6 +56,7 @@ on is free or requires special access or valid subscription or product license.
     * [CERTatPassiveDNS](#certatpassivedns)
     * [CIRCLPassiveDNS](#circlpassivedns)
     * [CIRCLPassiveSSL](#circlpassivessl)
+    * [GreyNoise](#greynoise)
     * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
     * [Malwares](#malwares)
@@ -383,11 +386,33 @@ This analyzer comes in three flavors:
 
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
 
+### StaxxSearch
+Fetch observable details from an [Anomali STAXX](https://www.anomali.com/platform/staxx) instance.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to install an Anomali STAXX instance or to have access to one to use the analyzer. Supply the following parameters to the analyzer in order to use it:
+
+- `auth_url`: URL of the authentication endpoint.
+- `query_url`: URL of the intelligence endpoint.
+- `username`: the STAXX user name.
+- `password`: the STAXX password.
+- `cert_check`: boolean indicating whether the certificate of the endpoint must be checked or not.
+- `cert_path`: path to the CA on the system to validate the endpoint's certificate if `cert_check` is true.
+
 ### StopForumSpam
 Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email address is a known spammer.
 
 #### Requirements
 You need to define the tresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
+
+### ThreatCrowd
+Look up domains, mail and IP addresses on [ThreatCrowd](https://www.threatcrowd.org/), a service powered by AlienVault.
+
+This analyzer comes in only one flavor.
+
+No configuration is needed. It can be used out of the box.
 
 ### Tor Blutmagie
 Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torstatus.blutmagie.de/) to be linked to a Tor node.
@@ -525,6 +550,16 @@ If the CIRCL positively answers your access request, you'll obtain a username
 
 Supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
+
+### GreyNoise
+Determine whether an IP has known scanning activity using [GreyNoise](https://greynoise.io/).
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to obtain an API key to use the service. Please [contact GreyNoise](https://greynoise.io/contact/) to ask for one.
+
+Once you get the API key, provide it as the value of the `key` parameter. 
 
 ### IBM X-Force
 Query domains, IPs, hashes and URLs against [IBM X-Force](https://exchange.xforce.ibmcloud.com/) Threat Intelligence sharing platform.
