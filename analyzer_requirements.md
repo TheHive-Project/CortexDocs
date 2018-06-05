@@ -47,7 +47,6 @@ on is free or requires special access or valid subscription or product license.
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
     * [Unshortenlink](#unshortenlink)
-    * [URLhaus](#urlhaus)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -436,14 +435,6 @@ Use [Unshortenlink](https://unshorten.link/) to reveal the real URL hidden behin
 This analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
-
-### URLhaus
-Search domains, URLs or hashes on [URLhaus](https://urlhaus.abuse.ch/), a service run by Abuse.ch.
-
-This analyzer comes in only one flavor.
-
-#### Requirements
-By default, the results will be cached for 3600 seconds (1 hour). If you need to change the default value, see the `cache.duration` parameter. You must also define the path where the cached data will be stored as value for the `cache.root` parameter. 
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
