@@ -47,7 +47,7 @@ on is free or requires special access or valid subscription or product license.
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
     * [Unshortenlink](#unshortenlink)
-    * [URLHaus](#urlhaus)
+    * [URLhaus](#urlhaus)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -437,7 +437,7 @@ This analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
 
-### URLHaus
+### URLhaus
 Search domains, URLs or hashes on [URLhaus](https://urlhaus.abuse.ch/), a service run by Abuse.ch.
 
 This analyzer comes in only one flavor.
