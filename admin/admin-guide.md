@@ -293,7 +293,7 @@ cache {
 ```
 **Note**: the global `cache.job` value can be overridden for each analyzer in the analyzer configuration Web dialog.
 
-**Note**: it is possible to bypass the cache altogether (for example to get extra fresh results) only through the API as explained in the [API Guide](../api/api-guide.md#run). This option is not currently available in the Web UI or when calling Cortex through TheHive.
+**Note**: it is possible to bypass the cache altogether (for example to get extra fresh results) through the API as explained in the [API Guide](../api/api-guide.md#run) or by setting the cache to *Custom* in the Cortex UI for each analyzer and specifying `0` as the number of minutes.
 
 ### Streaming (a.k.a The Flow)
 The user interface is automatically updated when data is changed in the
