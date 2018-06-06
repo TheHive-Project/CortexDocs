@@ -14,6 +14,7 @@ Before installing Cortex, you need to choose the installation option which suits
   * [Analyzers](#analyzers-1)
     * [Installation](#installation)
     * [Configuration](#configuration)
+    * [Updating](#updating)
     * [Additional Analyzers](#additional-analyzers)
   * [Elasticsearch Installation](#elasticsearch-installation)
     * [System Package](#system-package)
@@ -414,6 +415,23 @@ analyzer {
 All analyzers must be configured using the Web UI. Please read the [Quick Start Guide](../admin/quick-start.md) to create at least one organization then let a user with the `orgAdmin` role configure and enable analyzers for that organization.
 
 Some analyzers can be used out of the box, without any configuration, while others may require various parameters. Please check the [Analyzer Requirements Guide](../analyzer_requirements.md) for further details.
+
+### Updating
+Existing Cortex analyzers are regularly updated and new ones are added. To benefit from the latest bug fixes, enhancements and additions, run the following commands:
+
+```bash
+$ cd /path/to/Cortex-Analyzers
+$ sudo git pull
+```
+Then install any missing requirements:
+
+```bash
+for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
+for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
+```
+After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
+
+If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip) and import them into TheHive.
 
 ### Additional Analyzers
 The following analyzers are not supported by THeHive Project at this time:

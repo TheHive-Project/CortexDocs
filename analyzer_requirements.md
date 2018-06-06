@@ -22,7 +22,9 @@ on is free or requires special access or valid subscription or product license.
     * [Abuse\_Finder](#abuse_finder)
     * [C1fApp](#c1fapp)
     * [Censys\.io](#censysio)
+    * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
+    * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cymon](#cymon)
     * [File\_Info](#file_info)
     * [FireHOLBlocklists](#fireholblocklists)
@@ -39,8 +41,12 @@ on is free or requires special access or valid subscription or product license.
     * [PhishTank](#phishtank)
     * [PhishingInitiative](#phishinginitiative)
     * [Robtex](#robtex)
+    * [StaxxSearch](#staxxsearch)
+    * [StopForumSpam](#stopforumspam)
+    * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
+    * [Unshortenlink](#unshortenlink)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -49,13 +55,18 @@ on is free or requires special access or valid subscription or product license.
     * [CERTatPassiveDNS](#certatpassivedns)
     * [CIRCLPassiveDNS](#circlpassivedns)
     * [CIRCLPassiveSSL](#circlpassivessl)
+    * [GreyNoise](#greynoise)
+    * [IBM X-Force](#ibm-x-force)
     * [Malpedia](#malpedia)
+    * [Malwares](#malwares)
+    * [MnemonicPDNS](#mnemonicpdns)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
     * [EmergingThreats](#emergingthreats)
+    * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
     * [PassiveTotal](#passivetotal)
     * [PayloadSecurity](#payloadsecurity)
@@ -96,6 +107,13 @@ The analyzer comes in only one flavor.
 #### Requirements
 Provide your API ID and the API secret as values for  `uid` and `key` parameters.
 
+### Crtsh
+Get [Crt.sh](https://crt.sh/) certificate transparency lists associated with a domain name. Crt.sh is an online service operated by the Comodo Certificate Authority.
+
+The analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
+
 ### CuckooSandbox
 Analyze URLs and files using [Cuckoo Sandbox](https://cuckoosandbox.org/).
 
@@ -113,6 +131,13 @@ for more information on setting it up.
 
 To configure the analyzer you need to supply the URL of your local instance
 as a value of the `url` parameter.
+
+### Cybercrime-Tracker
+Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
+
+This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
 
 ### Cymon
 Checks IP addresses against [Cymon.io](https://cymon.io/).
@@ -360,19 +385,58 @@ This analyzer comes in three flavors:
 
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
 
+### StaxxSearch
+Fetch observable details from an [Anomali STAXX](https://www.anomali.com/platform/staxx) instance.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to install an Anomali STAXX instance or to have access to one to use the analyzer. Supply the following parameters to the analyzer in order to use it:
+
+- `auth_url`: URL of the authentication endpoint.
+- `query_url`: URL of the intelligence endpoint.
+- `username`: the STAXX user name.
+- `password`: the STAXX password.
+- `cert_check`: boolean indicating whether the certificate of the endpoint must be checked or not.
+- `cert_path`: path to the CA on the system to validate the endpoint's certificate if `cert_check` is true.
+
+### StopForumSpam
+Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email address is a known spammer.
+
+#### Requirements
+You need to define the thresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
+
+### ThreatCrowd
+Look up domains, mail and IP addresses on [ThreatCrowd](https://www.threatcrowd.org/), a service powered by AlienVault.
+
+This analyzer comes in only one flavor.
+
+No configuration is needed. It can be used out of the box.
+
 ### Tor Blutmagie
 Check if an IP address, a domain or a FQDN is known by [Blutmagie](http://torstatus.blutmagie.de/) to be linked to a Tor node.
 
+This analyzer comes in only one flavor.
+
 #### Requirements
-In order to check if an IP, domain or FQDN is a Tor exit node, this analyzer queries the Tor status service at Blutmagie.de.
-The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
+In order to check if an IP, domain or FQDN is a Tor exit node, this analyzer queries the Tor status service at Blutmagie.de. The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
 
 ### Tor Project
 Check if an IP address is known to be a Tor node. The information source is the official Tor network status.
 
+This analyzer comes in only one flavor.
+
 #### Requirements
-The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching.
-This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
+The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching. This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
+
+### Unshortenlink
+Follow redirects of shortened URLs to reveal the real ones.
+
+This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
+
+**Warning**: using this analyzer without **extra caution** might lead to unexpected consequences. For example, if the URL you are seeking to unshorten is an attacker-controlled one, you may end up leaving undesired traces in the threat actor's infrastructure logs. The TLP values Cortex allows you to configure to prevent the use of an analyzer if the TLP associated with an observable is above the authorized level won't be of much help since Unshortenlink have to access the shortened URL. Please do not activate this analyzer unless you (and your fellow analysts) know what they are doing.
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
@@ -477,8 +541,28 @@ if you would like access.
 If the CIRCL positively answers your access request, you'll obtain a username
  and password which are needed to make the analyzer work.
 
-supply your username as the value for the `user` parameter and your password
+Supply your username as the value for the `user` parameter and your password
 as the value for the `password` parameter.
+
+### GreyNoise
+Determine whether an IP has known scanning activity using [GreyNoise](https://greynoise.io/).
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to obtain an API key to use the service. Please [contact GreyNoise](https://greynoise.io/contact/) to ask for one.
+
+Once you get the API key, provide it as the value of the `key` parameter. 
+
+### IBM X-Force
+Query domains, IPs, hashes and URLs against [IBM X-Force](https://exchange.xforce.ibmcloud.com/) Threat Intelligence sharing platform.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+Access to IBM X-Force Threat Exchange requires an [IBM ID](https://www.ibm.com/account/reg/signup?formid=urx-30243).
+
+Once you have access to the service, supply the URL of the service as value for the `url` parameter, the API key associated with your account as value for the `key` parameter and the associated password as the value of the `pwd` parameter.
 
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
@@ -491,8 +575,36 @@ This analyzer comes in only one flavor.
 You need access to Malpedia to use this analyzer. Please note that Malpedia does not feature open registration. It is operated as an invite-only trust group. If you believe you qualify for an account, please see Malpedia's [Terms of Services](https://malpedia.caad.fkie.fraunhofer.de/terms_of_service) for contact details.
 
 If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
+
+### Malwares
+Query [Malwares.com](https://www.malwares.com/) and get reports on files, hashes, domain names and IP addresses.
+
+The analyzer comes in two flavors:
+- Malwares_**GetReport**: get the latest Malwares report for a file,
+hash, domain or an IP address.
+- Malwares_**Scan**: scan a file or URL.
+
+#### Requirements
+You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account. 
+
+An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
+
+### MnemonicPDNS
+Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
+
+This analyzer comes in two flavors:
+- Mnemonic_pDNS_**Public**: query Mnemonic's public service.
+- Mnemonic_pDNS_**Closed**: query Mnemonic's closed service.
+
+#### Requirements
+When using the public service, the analyzer can be used out of the box with no further configuration.
+
+When using the closed service, you need to contact Mnemonic to get an API key which you'll need to supply as the value of the `key` parameter.
+
 ### SinkDB
 Check SinkDB service from [abuse.ch](https://abuse.ch) fort a given IP address.
+
+This analyzer comes in only one flavor.
 
 #### Requirements
 SinkDB is a private service provided by [abuse.ch](https://abuse.ch) which collects sinkholed IPs.
@@ -576,6 +688,19 @@ subscription to use the analyzer.
 
 Retrieve the API key associated with your account and provide it as a value
 to the `key` parameter.
+
+### FireEye iSIGHT
+Leverage FireEye [iSIGHT Threat Intelligence](https://www.fireeye.com/solutions/isight-cyber-threat-intelligence-subscriptions.html)
+to qualify domains, IP addresses, hashes and URLs.
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need a valid FireEye [iSIGHT Threat Intelligence](https://www.fireeye.com/solutions/isight-cyber-threat-intelligence-subscriptions.html)
+subscription to use the analyzer.
+
+Retrieve the API key associated with your account and provide it as a value
+to the `key` parameter. Obtain the password associated with the API key and provide it as a value to the `pwd` parameter.
 
 ### JoeSandbox
 Analyze URLs and files using the powerful [Joe Sandbox](https://www.joesecurity.org/)
