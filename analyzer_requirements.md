@@ -430,11 +430,13 @@ This analyzer comes in only one flavor.
 The analyzer uses a caching mechanism in order to save some time when doing multiple queries, so the configuration includes parameter regarding the cache directory and the duration of caching. This analyzer also accepts a `ttl` parameter, which is the threshold in seconds for exit nodes before they get discarded.
 
 ### Unshortenlink
-Use [Unshortenlink](https://unshorten.link/) to reveal the real URL hidden behind a shortened one.
+Follow redirects of shortened URLs to reveal the real ones.
 
 This analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
+
+**Warning**: using this analyzer without **extra caution** might lead to unexpected consequences. For example, if the URL you are seeking to unshorten is an attacker-controlled one, you may end up leaving undesired traces in the threat actor's infrastructure logs. The TLP values Cortex allows you to configure to prevent the use of an analyzer if the TLP associated with an observable is above the authorized level won't be of much help since Unshortenlink have to access the shortened URL. Please do not activate this analyzer unless you (and your fellow analysts) know what they are doing.
 
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
