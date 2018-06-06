@@ -429,7 +429,7 @@ Then install any missing requirements:
 for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
 for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
 ```
-After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
+After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 
 If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip) and import them into TheHive.
 
