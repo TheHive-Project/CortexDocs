@@ -550,7 +550,7 @@ Determine whether an IP has known scanning activity using [GreyNoise](https://gr
 This analyzer comes in only one flavor.
 
 #### Requirements
-You need to obtain an API key to use the service. Please [contact GreyNoise](https://greynoise.io/contact/) to ask for one.
+The analyzer can be used out of the box without configuration. However, if you make many requests, you need to obtain an API key. Please [contact GreyNoise](https://greynoise.io/contact/) to ask for one.
 
 Once you get the API key, provide it as the value of the `key` parameter. 
 
