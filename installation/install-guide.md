@@ -379,7 +379,7 @@ Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 ```
 network.host: 127.0.0.1
 script.inline: on
-cluster.name: cortex
+cluster.name: hive
 threadpool.index.queue_size: 100000
 threadpool.search.queue_size: 100000
 threadpool.bulk.queue_size: 1000
