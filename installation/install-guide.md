@@ -351,7 +351,7 @@ To install Elasticsearch, please read the [Elasticsearch Installation](#elastics
 **Download The Source**
 
 ```
-git clone https://github.com/CERT-BDF/Cortex.git
+git clone https://github.com/TheHiveProject/Cortex.git
 ```
 
 **Build the Project**
