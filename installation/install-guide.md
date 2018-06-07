@@ -372,6 +372,25 @@ sudo cp -r Cortex/target/universal/stage /opt/cortex
 
 Proceed to [installing the analyzers](#analyzers-1) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+##### 2.4 Configure and Start Elasticsearch
+
+Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
+
+```
+network.host: 127.0.0.1
+script.inline: on
+cluster.name: cortex
+threadpool.index.queue_size: 100000
+threadpool.search.queue_size: 100000
+threadpool.bulk.queue_size: 1000
+```
+
+Start the service:
+
+```
+service elasticsearch restart
+```
+
 ##### 3. First start
 Follow the [first start](#4-first-start) section of the binary installation method above to start using Cortex.
 
