@@ -170,6 +170,7 @@ The following section contains the instructions to manually install Cortex using
 Install a minimal Ubuntu 16.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
+- Elasticsearch 5.x
 
 Make sure your system is up-to-date:
 
