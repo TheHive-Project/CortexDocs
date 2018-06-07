@@ -214,12 +214,6 @@ ln -s cortex-x.x.x cortex
 ```
 
 #### 5. First start
-Change your current directory to the Cortex installation directory (`/opt/cortex` in this guide), then execute:
-
-```
-bin/cortex -Dconfig.file=/etc/cortex/application.conf
-```
-
 It is recommended to use a dedicated, non-privileged user account to start Cortex. If so, make sure that the chosen account can create log files in `/opt/cortex/logs`.
 
 If you'd rather start the application as a service, use the following commands:
@@ -232,6 +226,28 @@ sudo chgrp cortex /etc/cortex/application.conf
 sudo chmod 640 /etc/cortex/application.conf
 sudo systemctl enable cortex
 sudo service cortex start
+```
+The only required parameter in order to start Cortex is the key of the server (`play.http.secret.key`). This key is used
+to authenticate cookies that contain data. If Cortex runs in cluster mode, all instances must share the same key.
+You can generate the minimal configuration with the following commands (they assume that you have created a
+dedicated user for Cortex, named `cortex`):
+
+```
+sudo mkdir /etc/cortex
+(cat << _EOF_
+# Secret key
+# ~~~~~
+# The secret key is used to secure cryptographics functions.
+# If you deploy your application to several instances be sure to use the same key!
+play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
+_EOF_
+) | sudo tee -a /etc/cortex/application.conf
+```
+
+Now you can start Cortex. To do so, change your current directory to the Cortex installation directory (`/opt/cortex` in this guide), then execute:
+
+```
+bin/cortex -Dconfig.file=/etc/cortex/application.conf
 ```
 
 Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9001/`.
