@@ -315,6 +315,7 @@ sudo yum -y install nodejs
 ```
 
 **Installation of Elasticsearch**
+
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.2. Ubuntu
@@ -341,6 +342,10 @@ sudo apt-get install wget
 wget -qO- https://deb.nodesource.com/setup_8.x | sudo bash -
 sudo apt-get install nodejs
 ```
+
+**Installation of Elasticsearch**
+
+To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.3. Cortex
 **Download The Source**
