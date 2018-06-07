@@ -282,6 +282,7 @@ The following software are required to download and build Cortex:
 * [Java Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) (JDK)
 * git: use the system package or [download it](http://www.git-scm.com/downloads)
 * [Node.js](https://nodejs.org/en/download/) with its package manager (NPM)
+* [Elasticsearch 5.6](https://www.elastic.co/downloads/past-releases/elasticsearch-5-6-9)
 
 ##### 2. Build
 To install the requirements and build Cortex from sources, please follow the instructions below depending on your operating system.
@@ -312,6 +313,9 @@ Then, you can install Node.js:
 ```
 sudo yum -y install nodejs
 ```
+
+**Installation of Elasticsearch**
+To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 ###### 2.2. Ubuntu
 
