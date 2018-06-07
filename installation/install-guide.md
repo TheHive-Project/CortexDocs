@@ -270,6 +270,9 @@ chown -R cortex:cortex /opt/cortex /opt/cortex-x.x.x
 service cortex start
 ```
 
+#### 8. Configuration
+To configure Cortex, read the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
 ### Build it Yourself
 The following section contains a step-by-step guide to build Cortex from its sources.
 
