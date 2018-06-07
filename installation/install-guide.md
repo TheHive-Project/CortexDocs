@@ -364,7 +364,7 @@ cd Cortex
 This operation may take some time to complete as it will download all dependencies then build the back-end.
 This command cleans any previous build files and create an autonomous package under the `target/universal/stage` directory. This package contains Cortex binaries with the required libraries (`/lib`), configuration files (`/conf`) and startup scripts (`/bin`).
 
-Binaries are built and stored under `Cortex/target/universal/stage/`. You caniInstall them for example in `/opt/cortex`.
+Binaries are built and stored under `Cortex/target/universal/stage/`. You can install them in `/opt/cortex` for example.
 
 ```
 sudo cp -r Cortex/target/universal/stage /opt/cortex
