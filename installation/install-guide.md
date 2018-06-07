@@ -198,7 +198,10 @@ sudo apt-get install openjdk-8-jre-headless
 
 ```
 
-#### 3. Install Cortex
+#### 3. Install Elasticsearch
+To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
+
+#### 4. Install Cortex
 Binary packages can be downloaded from [Bintray](https://dl.bintray.com/cert-bdf/cortex/). The latest version is called [cortex-latest.zip](https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip).
 
 Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
@@ -210,7 +213,7 @@ unzip cortex-latest.zip
 ln -s cortex-x.x.x cortex
 ```
 
-#### 4. First start
+#### 5. First start
 Change your current directory to the Cortex installation directory (`/opt/cortex` in this guide), then execute:
 
 ```
@@ -231,13 +234,13 @@ sudo systemctl enable cortex
 sudo service cortex start
 ```
 
-Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9000/`.
+Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9001/`.
 
-#### 5. Plug Analyzers
+#### 6. Plug Analyzers
 Now that Cortex has successfully started, download `Cortex-Analyzers`, edit the configuration file then set the analyzer path to
 `Cortex-Analyzers/analyzers` as described in [the section below](#analyzers-1).
 
-#### 6. Update
+#### 7. Update
 To update Cortex from binaries, just stop the service, download the latest package, rebuild the link `/opt/cortex` and
 restart the service.
 
