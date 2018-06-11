@@ -639,8 +639,10 @@ An analyzer is defined by the following attributes:
 | `license` | License of the analyzer | readonly |
 | `dataTypeList` | Allowed datatypes | readonly |
 | `baseConfig` | Base configuration name. This identifies the shared set of configuration with all the analyzer's flavors | readonly |
-| `jobCache` | Report cache timeout in minutes | writable |
-| `configuration` |  A JSON object where key/value pairs represent the config names, and their values. It includes the default properties `proxy_http`, `proxy_https`, `auto_extract_artifacts`, `check_tlp`, and `max_tlp` | writable |
+| `jobCache` | Report cache timeout in minutes, visible for `orgAdmin` users only | writable |
+| `rate` | Numeric amount of analyzer calls authorized for the specified `rateUnit`, visible for `orgAdmin` users only | writable |
+| `rateUnit` | Period of availability of the rate limite: `Day` or `Month`, visible for `orgAdmin` users only | writable |
+| `configuration` |  A JSON object where key/value pairs represent the config names, and their values. It includes the default properties `proxy_http`, `proxy_https`, `auto_extract_artifacts`, `check_tlp`, and `max_tlp`, visible for `orgAdmin` users only | writable |
 | `createdBy` | User who enabled the analyzer | computed |
 | `updatedAt` | Last update date | computed |
 | `updatedBy` | User who last updated the analyzer | computed |
@@ -649,7 +651,21 @@ An analyzer is defined by the following attributes:
 This call allows a user with an `orgAdmin` role to enable an analyzer.
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/organization/analyzer/:analyzerId'
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/organization/analyzer/:analyzerId' -d '{
+  "name": "Censys_1_0",
+  "configuration": {
+    "uid": "XXXX",
+    "key": "XXXXXXXXXXXXXXXXXXXX",
+    "proxy_http": "http://proxy:9999",
+    "proxy_https": "http://proxy:9999",
+    "auto_extract_artifacts": false,
+    "check_tlp": true,
+    "max_tlp": 2
+  },
+  "rate": 1000,
+  "rateUnit": "Day",
+  "jobCache": 5
+}'
 ```
 
 ### List and Search
@@ -706,6 +722,8 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: applicatio
     "max_tlp": 1
   },
   "name": "Shodan_Host_1_0",
+  "rate": 1000,
+  "rateUnit": "Day",
   "jobCache": null
 }'
 ```
