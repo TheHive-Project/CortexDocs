@@ -392,7 +392,7 @@ service elasticsearch restart
 ```
 
 ##### 3. First start
-Follow the [first start](#4-first-start) section of the binary installation method above to start using Cortex.
+Follow the [first start](#5-first-start) section of the binary installation method above to start using Cortex.
 
 ##### 4. Build the Front-end Only
 Building the back-end builds also the front-end, so you don't need to build it separately. This section is useful only for troubleshooting or for installing the front-end on a reverse proxy.
