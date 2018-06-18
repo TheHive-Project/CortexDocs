@@ -20,7 +20,7 @@ physical machine with similar specifications.
 
 - [Quick Start Guide](admin/quick-start.md)
 - [API Guide](api/api-guide.md) (updated for Cortex 2)
-- [New Installation Guide](installation/install-guide.md)
+- [Installation Guide](installation/install-guide.md)
 - [How to Configure Analyzers](analyzer_requirements.md)
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [Changelog](https://github.com/TheHive-Project/Cortex/blob/master/CHANGELOG.md)
