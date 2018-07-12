@@ -684,6 +684,8 @@ associated with a domain name.
 basic registration details.
 - DomainTools_**WhoisLookup_IP**: get the ownership record for an IP address
 with basic registration details.
+- DomainTools_**Risk**: get a risk score for a given domain name.
+- DomainTools_**Reputation**: get a reputation score for a given domain name.
 
 #### Requirements
 You need a [valid DomainTools API integration subscription](https://www.domaintools.com/products/api-integration/)
