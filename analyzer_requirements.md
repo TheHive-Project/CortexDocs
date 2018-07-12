@@ -26,10 +26,11 @@ on is free or requires special access or valid subscription or product license.
     * [CuckooSandbox](#cuckoosandbox)
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cymon](#cymon)
-    * [File\_Info](#file_info)
+    * [FileInfo](#fileinfo)
     * [FireHOLBlocklists](#fireholblocklists)
     * [Fortiguard](#fortiguard)
     * [GoogleSafeBrowsing](#googlesafebrowsing)
+    * [Hashdd](#hashdd)
     * [Hippocampe](#hippocampe)
     * [HybridAnalysis](#hybridanalysis)
     * [MaxMind](#maxmind)
@@ -46,6 +47,7 @@ on is free or requires special access or valid subscription or product license.
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
+    * [URLHaus](#urlhaus)
     * [Unshortenlink](#unshortenlink)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
@@ -147,9 +149,9 @@ This analyzer comes in only one flavor.
 #### Requirements
 You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
 
-### File_Info
+### FileInfo
 Parse files in several formats such as OLE and OpenXML to detect VBA macros,
-extract their source code, generate useful information on PE, PDF files and much more.
+extract their source code, generate useful information on PE, PDF and Microsoft Office documents, Outlook `msg` files and much more.
 
 The analyzer comes in only one flavor.
 
@@ -194,6 +196,17 @@ You need to [obtain an API key](https://developers.google.com/safe-browsing/)
  from Google.
 
 Provide your API key as a value of the `key` parameter.
+
+### Hashdd
+Check file hashes against [Hashdd web service](https://www.hashdd.com/).
+
+The analyzer comes in two flavors:
+- Status: query hashdd without an API key for the threat level only.
+- Detail: use an API key and receive more meta information about the sample.
+
+#### Requirements
+
+As long as you are using _Status_ flavor you don't need API key. If you want more detail using _Detail_ flavor, you need to [sign up for a hashdd.com account and obtain an API](https://www.hashdd.com/).
 
 ### Hippocampe
 Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe),
@@ -438,6 +451,13 @@ No configuration is required. It can be used out of the box.
 
 **Warning**: using this analyzer without **extra caution** might lead to unexpected consequences. For example, if the URL you are seeking to unshorten is an attacker-controlled one, you may end up leaving undesired traces in the threat actor's infrastructure logs. The TLP values Cortex allows you to configure to prevent the use of an analyzer if the TLP associated with an observable is above the authorized level won't be of much help since Unshortenlink have to access the shortened URL. Please do not activate this analyzer unless you (and your fellow analysts) know what they are doing.
 
+### URLHaus
+Check if a domain, url or hash is known by Abuse.ch and stored in [URLHaus](https://urlhaus.abuse.ch/) database, and get a report about its maliciousness.
+
+This analyzer comes in only one flavor.
+
+No configuration is needed. It can be used out of the box.
+
 ### Virusshare
 Check whether a file or hash is available on [VirusShare.com](https://virusshare.com/).
 
@@ -552,7 +572,7 @@ This analyzer comes in only one flavor.
 #### Requirements
 The analyzer can be used out of the box without configuration. However, if you make many requests, you need to obtain an API key. Please [contact GreyNoise](https://greynoise.io/contact/) to ask for one.
 
-Once you get the API key, provide it as the value of the `key` parameter. 
+Once you get the API key, provide it as the value of the `key` parameter.
 
 ### IBM X-Force
 Query domains, IPs, hashes and URLs against [IBM X-Force](https://exchange.xforce.ibmcloud.com/) Threat Intelligence sharing platform.
@@ -585,7 +605,7 @@ hash, domain or an IP address.
 - Malwares_**Scan**: scan a file or URL.
 
 #### Requirements
-You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account. 
+You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account.
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
 
@@ -791,7 +811,7 @@ Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
 
 The analyzer comes in two flavors:
 - VirusTotal_**GetReport**: get the latest VirusTotal report for a file,
-hash, domain or an IP address.
+hash, domain, URL or an IP address.
 - VirusTotal_**Scan**: scan a file or URL.
 
 #### Requirements
