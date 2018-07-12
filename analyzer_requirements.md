@@ -47,7 +47,7 @@ on is free or requires special access or valid subscription or product license.
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
-    * [URLHaus](#urlhaus)
+    * [URLhaus](#urlhaus)
     * [Unshortenlink](#unshortenlink)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
@@ -198,15 +198,14 @@ You need to [obtain an API key](https://developers.google.com/safe-browsing/)
 Provide your API key as a value of the `key` parameter.
 
 ### Hashdd
-Check file hashes against [Hashdd web service](https://www.hashdd.com/).
+Check file hashes against the [Hashdd web service](https://www.hashdd.com/).
 
 The analyzer comes in two flavors:
-- Status: query hashdd without an API key for the threat level only.
-- Detail: use an API key and receive more meta information about the sample.
+- **Status**: query hashdd without an API key for the threat level only.
+- **Detail**: use an API key and obtain additional meta data about the sample.
 
 #### Requirements
-
-As long as you are using _Status_ flavor you don't need API key. If you want more detail using _Detail_ flavor, you need to [sign up for a hashdd.com account and obtain an API](https://www.hashdd.com/).
+As long as you are using the **Status** flavor you don't need API key. If you want more details using the **Detail** flavor, you need to [sign up for a hashdd.com account and obtain an API](https://www.hashdd.com/).
 
 ### Hippocampe
 Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe),
@@ -451,8 +450,8 @@ No configuration is required. It can be used out of the box.
 
 **Warning**: using this analyzer without **extra caution** might lead to unexpected consequences. For example, if the URL you are seeking to unshorten is an attacker-controlled one, you may end up leaving undesired traces in the threat actor's infrastructure logs. The TLP values Cortex allows you to configure to prevent the use of an analyzer if the TLP associated with an observable is above the authorized level won't be of much help since Unshortenlink have to access the shortened URL. Please do not activate this analyzer unless you (and your fellow analysts) know what they are doing.
 
-### URLHaus
-Check if a domain, url or hash is known by Abuse.ch and stored in [URLHaus](https://urlhaus.abuse.ch/) database, and get a report about its maliciousness.
+### URLhaus
+Check if a domain, URL or hash is known by Abuse.ch and stored in the [URLhaus](https://urlhaus.abuse.ch/) database, and get a report about its 'maliciousness'.
 
 This analyzer comes in only one flavor.
 
@@ -671,7 +670,7 @@ Provide your API key as a value to the `key` parameter.
 Look up domain names, IP addresses, WHOIS records, etc. using the popular
 [DomainTools](http://domaintools.com/) service API.
 
-The analyzer comes in 5 flavors:
+The analyzer comes in 7 flavors:
 - DomainTools_**ReverseIP**: get a list of domain names sharing the same IP
 address.
 - DomainTools_**ReverseNameServer**: get a list of domain names that share
