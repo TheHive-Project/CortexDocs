@@ -193,7 +193,7 @@ submitting your analyzer.
 
 #### url
 The URL where the analyzer is stored. This should ideally be
-`https://github.com/CERT-BDF/Cortex-Analyzers`
+`https://github.com/TheHive-Project/Cortex-Analyzers`
 
 #### license
 The license of the code. Ideally, we recommend using the AGPL-v3
@@ -549,7 +549,7 @@ VirusTotal JSON analyzer configuration file(s):
     "name": "VirusTotal_GetReport",
     "version": "3.0",
     "author": "CERT-BDF",
-    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+    "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
     "license": "AGPL-V3",
     "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
     "dataTypeList": ["file", "hash", "domain", "ip"],

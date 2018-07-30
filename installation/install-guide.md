@@ -38,7 +38,7 @@ RPM packages are published on a Bintray repository. All packages are signed usin
 
 First install the RPM release package:
 ```
-yum install https://dl.bintray.com/cert-bdf/rpm/thehive-project-release-1.0.0-3.noarch.rpm
+yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
 ```
 This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`.
@@ -50,6 +50,9 @@ yum install cortex
 
 Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+#### Pre-release versions
+The RPM release package install two repositories `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release version and is disabled by default. If you want to install them and help us to find bugs, you can enable the repository by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
+
 ### DEB
 Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
@@ -57,7 +60,7 @@ Debian packages are published on a Bintray repository. All packages are signed u
 
 To install the Cortex Debian package, use the following commands:
 ```
-echo 'deb https://dl.bintray.com/cert-bdf/debian any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
 sudo apt-get update
 sudo apt-get install cortex
@@ -68,6 +71,12 @@ Some environments may block access to the `pgp.mit.edu` key server. As a result,
 `curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
 Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+#### Pre-release versions
+If you want to install pre-release version of packages and help us to find bugs, you can add the pre-release repository with the command:
+```bash
+echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+```
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
@@ -94,7 +103,7 @@ services:
       - thread_pool.search.queue_size=100000
       - thread_pool.bulk.queue_size=100000
   cortex:
-    image: certbdf/cortex:latest
+    image: thehiveproject/cortex:latest
     depends_on:
       - elasticsearch
     ports:
@@ -122,7 +131,7 @@ volumes:
 Elasticsearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
 [documentation](../admin/admin-guide.md) and run Cortex docker as follow:
 ```
-docker run --volume /path/to/cortex/application.conf:/etc/cortex/application.conf certbdf/cortex:latest --no-config
+docker run --volume /path/to/cortex/application.conf:/etc/cortex/application.conf thehiveproject/cortex:latest --no-config
 ```
 
 You can add the `--publish` docker option to expose the Cortex HTTP service.
@@ -134,7 +143,7 @@ By default, the Cortex Docker image has minimal configuration:
 
 This behavior can be disabled by adding `--no-config` to the Docker command line:
 
-`docker run certbdf/cortex:latest --no-config`
+`docker run thehiveproject/cortex:latest --no-config`
 
 Or by adding the line `command: --no-config` in the `cortex` section of
 docker-compose file.
@@ -157,7 +166,7 @@ Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzer
 [install them](#analyzers-1) outside of Docker and overwrite the existing ones by adding the following parameter:
 
 ```
---volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro certbdf/cortex:latest  
+--volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro thehiveproject/cortex:latest  
 ```
 
 #### What to Do Next?
@@ -202,13 +211,13 @@ sudo apt-get install openjdk-8-jre-headless
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 #### 4. Install Cortex
-Binary packages can be downloaded from [Bintray](https://dl.bintray.com/cert-bdf/cortex/). The latest version is called [cortex-latest.zip](https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip).
+Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [cortex-latest.zip](https://dl.bintray.com/thehive-project/binary/cortex-latest.zip).
 
 Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
 ```
 cd /opt
-wget https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip
+wget https://dl.bintray.com/thehive-project/binary/cortex-latest.zip
 unzip cortex-latest.zip
 ln -s cortex-x.x.x cortex
 ```
@@ -263,7 +272,7 @@ restart the service.
 ```
 service cortex stop
 cd /opt
-wget https://dl.bintray.com/cert-bdf/cortex/cortex-latest.zip
+wget https://dl.bintray.com/thehive-project/binary/cortex-latest.zip
 unzip cortex-latest.zip
 rm /opt/cortex && ln -s cortex-x.x.x cortex
 chown -R cortex:cortex /opt/cortex /opt/cortex-x.x.x
@@ -482,7 +491,7 @@ for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3
 ```
 After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 
-If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/cert-bdf/thehive/report-templates.zip) and import them into TheHive.
+If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/thehive-project/binary/report-templates.zip) and import them into TheHive.
 
 ### Additional Analyzers
 The following analyzers are not supported by THeHive Project at this time:

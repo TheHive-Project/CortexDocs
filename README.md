@@ -8,7 +8,7 @@ Starting from Cortex version 2, you can create and manage multiple organizations
 
 **Notes:**
 
-- This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/CERT-BDF/Cortex/](https://github.com/TheHive-Project/Cortex/).
+- This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/Cortex/](https://github.com/TheHive-Project/Cortex/).
 - [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the FOSS Python library we provide to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, is compatible with Cortex 2 starting from v 2.0.0.
 - If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
 
