@@ -214,7 +214,7 @@ The analyzer comes in two flavors:
 As long as you are using the **Status** flavor you don't need API key. If you want more details using the **Detail** flavor, you need to [sign up for a hashdd.com account and obtain an API](https://www.hashdd.com/).
 
 ### Hippocampe
-Query threat feeds through [Hippocampe](https://github.com/CERT-BDF/Hippocampe),
+Query threat feeds through [Hippocampe](https://github.com/TheHive-Project/Hippocampe),
 a FOSS tool from TheHive Project that centralizes feeds and allows you to
 associate a confidence level to each one of them (that can be changed over time)
  and get a score indicating the data quality.
