@@ -26,6 +26,7 @@ on is free or requires special access or valid subscription or product license.
     * [CuckooSandbox](#cuckoosandbox)
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cymon](#cymon)
+    * [EmlParser](#emlparser)
     * [FileInfo](#fileinfo)
     * [FireHOLBlocklists](#fireholblocklists)
     * [Fortiguard](#fortiguard)
@@ -148,6 +149,11 @@ This analyzer comes in only one flavor.
 
 #### Requirements
 You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
+
+### EmlParser
+Use the [eml_parser python library](https://github.com/GOVCERT-LU/eml_parser) to parse EML email and extract useful information.
+
+No configuration is required. It can be used out of the box.
 
 ### FileInfo
 Parse files in several formats such as OLE and OpenXML to detect VBA macros,
