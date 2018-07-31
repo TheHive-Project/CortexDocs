@@ -21,8 +21,7 @@
   * [Need Help?](#need-help)
 
 ## Writing a Responder
-A responder is a program that takes JSON input and do an action and produces a basic result of that action.
-It is made of at least 2 types of files:
+A responder is a program that takes JSON input and do an action and produces a basic result of that action. Responders are very similar to analyzers though they have different purposes. Responders are made of at least 2 types of files:
 
 - The program itself
 - One or several service interaction files or flavors
@@ -31,32 +30,29 @@ written in Python.
 
 ### The Program
 The first type of files a responder is made of is the core program that
-performs actions. It can be written in any programming
-language that is supported by Linux.
+performs actions. It can be written in any programming language that is supported by Linux.
 
-While many responders are written in Python (`*.py` files), you can write yours
-in Ruby, Perl or even Scala. However, the very handy `Cortexutils` library
-[described below](#the-cortexutils-python-library) is in Python. It greatly facilitates responder development and
+you can write your responders in Python, Ruby, Perl or even Scala. However, the very handy `Cortexutils` library [described below](#the-cortexutils-python-library) is in Python. It greatly facilitates responder development and
 it also provides some methods to quickly format the output to make it compliant
 with the JSON schema expected by [TheHive](https://github.com/TheHive-Project/TheHive/).
 
 ### Service Interaction Files (Flavors)
 A responder must have at least one service interaction file. Such files
 contain key configuration information such as the responder's author
-information, the datatypes (thehive:case, thehive:alert, ...) the responder accepts as
-input, the TLP and PAP above which it will refuse to execute to protect against data
+information, the datatypes (`thehive:case`, `thehive:alert`, ...) the responder accepts as
+input and to which it applies to if used from TheHive, the TLP and PAP (or [Permissible Actions Protocol](https://www.misp-project.org/taxonomies.html#_pap)) above which it will refuse to execute to protect against data
 leakage and to enforce sane OPSEC practices and so on.
 
 A responder can have two or more service interaction files to allow it to
-perform different actions.  We speak then of flavors. For example, a mailer
-responder can send message using several body template.
+perform different actions.  We speak then of flavors. For example, a Mailer
+responder can send message using several body templates.
 
 ### Python Requirements
 If the responder is written in Python, a `requirements.txt` must be provided
 with the list of all the dependencies.
 
 ### Example: Mailer Responder Files
-Below is a directory listing of the files corresponding to the Mailer
+Below is a directory listing of the files corresponding to a Mailer
 responder.
 
 ```bash
@@ -70,8 +66,7 @@ responders/Mailer
 The input of a responder can be any JSON data, even a simple string. The submitter must send data with
 the structure expected by the program. The acceptable datatypes described in the
 Service Interaction files indicate what kind of data is expected.
-For example, if the program requires a `thehive:case`, input must be comply with
-TheHive case. Below an example of `thehive:case` input.
+For example, if the program requires a `thehive:case` (i.e. it applies at the case level in TheHive), input must comply with TheHive case. Below an example of `thehive:case` input.
 
 ```json
 	{
@@ -113,10 +108,9 @@ TheHive case. Below an example of `thehive:case` input.
 	}
 ```
 
-From the input send by the submitter, Cortex add `config` which is the responder's specific
-configuration provided by org admin when the responder has been enabled. 
+In the addition to the input sent by the submitter, Cortex adds the `config` section which is the responder's specific configuration provided by an `orgAdmin` user when the responder is enabled in the Cortex UI. 
 
-#### Example: Service Interaction File for VirusTotal GetReport
+#### Example: Service Interaction File for the Mailer Responder
 The `<==` sign and anything after it are comments that do no appear in the
 original file.
 ```json
@@ -194,28 +188,27 @@ various components and libraries you use if applicable.
 
 #### description
 Description of the responder. Please be concise and clear. The description is
- shown in the Cortex UI, TheHive and MISP.
+ shown in the Cortex UI and TheHive.
 
 #### dataTypeList
 The list of TheHive datatypes supported by the responder. Currently TheHive
 accepts the following datatypes:
 
-- thehive:case
-- thehive:case_artifact
-- thehive:alert
-- thehive:case_task
-- thehive:log
+- `thehive:case`
+- `thehive:case_artifact` (i.e. observable)
+- `thehive:alert`
+- `thehive:case_task`
+- `thehive:log` (i.e. task log)
 
 #### baseConfig
 Name used to group configuration items common to several responders. This
 prevent the user to enter the same API key for all responder flavors.
-The Cortex responder config page group configuration items by there baseConfig.
+The Cortex responder config page group configuration items by their `baseConfig`.
 
 #### config
 Configuration dedicated to the responder's flavor. This is where we
  typically specify the TLP level of observables allowed to be analyzed with the
- `check_tlp` and `max_tlp` parameters. For example, if `max_tlp` is set to `2` (TLP:AMBER),
- TLP:RED observables cannot be analyzed.
+ `check_tlp` and `max_tlp` parameters. For example, if `max_tlp` is set to `2` (TLP:AMBER), TLP:RED observables cannot be analyzed.
 
 #####  max_tlp
 The TLP level above which the responder must not be executed.
@@ -301,14 +294,14 @@ If the responder **succeeds** (i.e. it runs without any error):
 -   `full` is the full report of the responder. It must contain at least
     a message.
 -   `operations` is a list what the submitter system should execute.
-    Currently, TheHive accepts the following operations:
+    As of version 3.1.0, TheHive accepts the following operations:
     -    `AddTagToCase` (`{ "type": "AddTagToCase", "tag": "tag to add" }`): add
          a tag to the case related to the object
-    The list of acceptable operation will increase in future release of TheHive.
+   
+  The list of acceptable operations will increase in future releases of TheHive.
 
 ### The Cortexutils Python Library
-So far, all the published responders have been written in Python. We
-released a special Python library called `cortexutils` to help developers easily write their programs. Note though that Python is not mandatory for responder coding and any language that runs on Linux can be used, though you won't have the benefits of the CortexUtils library.
+So far, all the published responders have been written in Python. We provide a Python library called `cortexutils` to help developers easily write their programs. Note though that Python is not mandatory for responder coding and any language that runs on Linux can be used, though you won't have the benefits of the CortexUtils library.
 
 Cortexutils can be used with Python 2 and 3.
 To install it :
@@ -324,8 +317,7 @@ pip3 install cortexutils
 ```
 
 This library is already used by all the responders published in our [Github
-repository](https://github.com/TheHive-Project/Cortex-Analyzers). Feel free to
-start reading the code of some of them before writing your own.
+repository](https://github.com/TheHive-Project/Cortex-Analyzers). Feel free to start reading the code of some of them before writing your own.
 
 ## Submitting a Responder
 We **highly encourage you to share your responders** with the community through our Github repository. To do so, we invite you to follow a few steps before submitting a pull request.
@@ -387,12 +379,11 @@ If your responder is written in Python, make sure to complete the
 needed to run the responder correctly.
 
 ### Verify Execution
-Use these three simple checks before submtting your responder:
+Use these three simple checks before submitting your responder:
 
--   Ensure it works with the expecyed configuration, TLP or dataType.
--   Ensure it works with missing configuration, dataType or TLP: your
+-   Ensure it works with the expected configuration, TLP, PAP or datatype.
+-   Ensure it works with missing configuration, PAP, datatype or TLP: your
 responder must generate an explicit error message.
--   Ensure the long report template handles error messages correctly.
 
 ### Create a Pull Request
 Create one Pull Request per responder against the **develop** branch of the
