@@ -2,7 +2,12 @@
 
 [![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive)
 
-Cortex solves a common problem frequently encountered by SOCs, CSIRTs and security researchers in the course of threat intelligence, digital forensics and incident response: how to analyze observables they have collected, **at scale, by querying a single tool** instead of several? Thanks to its many analyzers and to its RESTful API, Cortex makes observable analysis a breeze, particularly if called from [TheHive](https://github.com/TheHive-Project/TheHive/), our highly popular, free and open source Security Incident Response Platform.
+Cortex solves two common problems frequently encountered by SOCs, CSIRTs and security researchers in the course of threat intelligence, digital forensics and incident response:
+
+- How to analyze observables they have collected, **at scale, by querying a single tool** instead of several?
+- How to actively respond to threats and interact with the constituency and other teams?
+
+Thanks to its many analyzers and to its RESTful API, Cortex makes observable analysis a breeze, particularly if called from [TheHive](https://github.com/TheHive-Project/TheHive/), our highly popular, free and open source Security Incident Response Platform (SIRP). TheHive can also leverage Cortex responders to perform specific actions on alerts, cases, tasks and observables collected in the course of the investigation: send an email to the constituents, block an IP address at the proxy level, notify team members that an alert needs to be taken care of urgently and much more.
 
 Starting from Cortex version 2, you can create and manage multiple organizations (i.e multi-tenancy), manage the associated users and give them different roles. You can also specify per-org analyzer configuration and rate limits to avoid consuming all your quotas at once. We have also added a cache so that an analysis is not re-executed for the same observable if a given analyzer is called on that observable several times within a specific timespan (10 minutes by default, can be adjusted for each analyzer).
 
@@ -10,6 +15,7 @@ Starting from Cortex version 2, you can create and manage multiple organizations
 
 - This is the Cortex documentation repository. If you are looking for its source code, please visit [https://github.com/TheHive-Project/Cortex/](https://github.com/TheHive-Project/Cortex/).
 - [Cortex4py](https://github.com/TheHive-Project/Cortex4py), the FOSS Python library we provide to submit observables in bulk mode through the Cortex REST API from alternative SIRP platforms & custom scripts, is compatible with Cortex 2 starting from v 2.0.0.
+- Active Response is a new feature that was introduced in TheHive 3.1.0 and Cortex 2.1.0.
 - If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
 
 ## Hardware Pre-requisites
@@ -32,7 +38,8 @@ physical machine with similar specifications.
 - [Administration Guide](admin/admin-guide.md)
 - [Updating](admin/updating.md)
 - [API Guide](api/api-guide.md)
-- [Analyzer Development](api/how-to-create-an-analyzer.md) (**OUTDATED**, will be updated soon)
+- [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
+- [How to Create a Responder](api/how-to-create-an-responder.md)
 
 ## Miscellaneous Information
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
