@@ -5,13 +5,14 @@ Before installing Cortex, you need to choose the installation option which suits
 
 
 ## Table of Contents
+   * [Table of Contents](#table-of-contents)
   * [Installation Options](#installation-options)
     * [RPM](#rpm)
     * [DEB](#deb)
     * [Docker](#docker)
     * [Binary](#binary)
     * [Build it Yourself](#build-it-yourself)
-  * [Analyzers](#analyzers-1)
+  * [Analyzers and Responders](#analyzers-and-responders)
     * [Installation](#installation)
     * [Configuration](#configuration)
     * [Updating](#updating)
@@ -20,6 +21,7 @@ Before installing Cortex, you need to choose the installation option which suits
     * [System Package](#system-package)
     * [Start the Service](#start-the-service)
     * [Elasticsearch inside a Docker](#elasticsearch-inside-a-docker)
+
 
 ## Installation Options
 Cortex is available as:
@@ -48,7 +50,7 @@ Then you will able to install the package using `yum`:
 yum install cortex
 ```
 
-Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release versions
 The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
@@ -70,7 +72,7 @@ Some environments may block access to the `pgp.mit.edu` key server. As a result,
 
 `curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
-Once the package is installed, [install the analyzers](#analyzers-1) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release versions
 If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
@@ -163,15 +165,15 @@ The image accepts more options:
 
 #### Analyzers
 Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzers`. To use new analyzers or get updates for the existing ones, you should
-[install them](#analyzers-1) outside of Docker and overwrite the existing ones by adding the following parameter:
+[install them](#analyzers-and-responders) outside of Docker and overwrite the existing ones by adding the following parameter:
 
 ```
 --volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro thehiveproject/cortex:latest  
 ```
 
 #### Responders
-Like analyzers, responnders are embedded in the docker image under `/opt/Cortex-Analyzers/reponders`. To use new analyzers or get updates for the existing ones, you should
-[install them](#analyzers-1) outside of Docker and overwrite the existing ones by adding the following parameter:
+Like analyzers, responders are embedded in the docker image under `/opt/Cortex-Analyzers/responders`. To use new responders or get updates for the existing ones, you should
+[install them](#analyzers-and-responders) outside of Docker and overwrite the existing ones by adding the following parameter:
 
 ```
 --volume /path/to/responders:/opt/Cortex-Analyzers/responders:ro thehiveproject/cortex:latest  
@@ -392,7 +394,7 @@ Binaries are built and stored under `Cortex/target/universal/stage/`. You can in
 sudo cp -r Cortex/target/universal/stage /opt/cortex
 ```
 
-Proceed to [installing the analyzers](#analyzers-1) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+Proceed to [installing the analyzers](#analyzers-and-responders) as outlined in the next section and configure Cortex using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 ##### 2.4 Configure and Start Elasticsearch
 
@@ -436,7 +438,7 @@ This step generates static files (HTML, JavaScript and related resources) in  th
 ## Analyzers and Responders
 Analyzers and Responders are autonomous applications managed by and run through the Cortex core engine. They have their
 [own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers). 
-They are included in the Docker image but must be installed separately in binary, RPM and DEB packages.
+They are included in the Docker image but must be installed separately if you are using binary, RPM or DEB packages.
 
 ### Installation
 Currently, all the analyzers and responders supported by TheHive Project are written in Python 2 or 3. They don't require any build phase but their dependencies have

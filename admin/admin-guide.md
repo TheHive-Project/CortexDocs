@@ -205,11 +205,11 @@ feature: the results are retrieved through pagination. You can specify the size
 of the page (`search.pagesize`) and how long pages are kept in Elasticsearch
 ((`search.keepalive`) before purging.
 
-XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
+XPack and SearchGuard are optional and exclusive. If Cortex finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ### Analyzers and Responders
 Cortex looks for installed analyzers and responders by scanning directories configured in
-`analyzer.path` and in `responder.path`. This item is multi-valued.
+`analyzer.path` and in `responder.path` respectively. This item is multi-valued.
 
 These paths should contain directories with the corresponding analyzer JSON files. These files describe each
 flavor (name, version, license...) and how to run them.
@@ -219,7 +219,7 @@ You can control the number of simultaneous jobs that Cortex executes in parallel
 number of CPU cores (`parallelism-factor` * nbCores), with a minimum
 (`parallelism-min`) and a maximum (`parallelism-max`).
 
-Same settings also exists for responders
+Similar settings can also be applied to responders.
 
 ```
 analyzer {
