@@ -169,6 +169,14 @@ Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzer
 --volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro thehiveproject/cortex:latest  
 ```
 
+#### Responders
+Like analyzers, responnders are embedded in the docker image under `/opt/Cortex-Analyzers/reponders`. To use new analyzers or get updates for the existing ones, you should
+[install them](#analyzers-1) outside of Docker and overwrite the existing ones by adding the following parameter:
+
+```
+--volume /path/to/responders:/opt/Cortex-Analyzers/responders:ro thehiveproject/cortex:latest  
+```
+
 #### What to Do Next?
 Once the Docker image is up and running, proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
@@ -266,9 +274,9 @@ bin/cortex -Dconfig.file=/etc/cortex/application.conf
 
 Please note that the service may take some time to start. Once it is started, you may launch your browser and connect to `http://YOUR_SERVER_ADDRESS:9001/`.
 
-#### 6. Plug Analyzers
+#### 6. Plug Analyzers and Responders
 Now that Cortex has successfully started, download `Cortex-Analyzers`, edit the configuration file then set the analyzer path to
-`Cortex-Analyzers/analyzers` as described in [the section below](#analyzers-1).
+`Cortex-Analyzers/analyzers` and `Cortex-Analyzers/responders` as described in [the section below](#analyzers-and-responders).
 
 #### 7. Update
 To update Cortex from binaries, just stop the service, download the latest package, rebuild the link `/opt/cortex` and
@@ -425,13 +433,13 @@ npm run build
 
 This step generates static files (HTML, JavaScript and related resources) in  the `dist` directory. They can be readily imported on a HTTP server.
 
-## Analyzers
-Analyzers are autonomous applications managed by and run through the Cortex core engine. Analyzers have their
+## Analyzers and Responders
+Analyzers and Responders are autonomous applications managed by and run through the Cortex core engine. They have their
 [own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers). 
-They are included in the Cortex binary, RPM and DEB packages and in the Docker image as well. However, you to get them from the repository if you need to update them after installing one of those packages. This operation is is necessary when new analyzers are released or new versions of existing ones are made available, or if you decide to build Cortex from sources.
+They are included in the Docker image but must be installed separately in binary, RPM and DEB packages.
 
 ### Installation
-Currently, all the analyzers supported by TheHive Project are written in Python 2 or 3. They don't require any build phase but their dependencies have
+Currently, all the analyzers and responders supported by TheHive Project are written in Python 2 or 3. They don't require any build phase but their dependencies have
 to be installed. Before proceeding, you'll need to install the system package dependencies that are required by some of them:
 
 ```
@@ -452,8 +460,8 @@ git clone https://github.com/TheHive-Project/Cortex-Analyzers
 Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the following commands:
 
 ```
-for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
-for I in Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
+for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -r $I; done && \
+for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -r $I || true; done
 ```
 
 Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be in different directories as shown in this dummy example of the Cortex configuration file (`application.conf`):
@@ -475,9 +483,26 @@ analyzer {
     parallelism-max = 4
   }
 }
+
+responder {
+  # Directory that holds responders
+  path = [
+    "/path/to/default/responder",
+    "/path/to/my/own/responder"
+  ]
+
+  fork-join-executor {
+    # Min number of threads available for analyze
+    parallelism-min = 2
+    # Parallelism (threads) ... ceil(available processors * factor)
+    parallelism-factor = 2.0
+    # Max number of threads available for analyze
+    parallelism-max = 4
+  }
+}
 ```
 ### Configuration
-All analyzers must be configured using the Web UI. Please read the [Quick Start Guide](../admin/quick-start.md) to create at least one organization then let a user with the `orgAdmin` role configure and enable analyzers for that organization.
+All analyzers and responders must be configured using the Web UI. Please read the [Quick Start Guide](../admin/quick-start.md) to create at least one organization then let a user with the `orgAdmin` role configure and enable analyzers for that organization.
 
 Some analyzers can be used out of the box, without any configuration, while others may require various parameters. Please check the [Analyzer Requirements Guide](../analyzer_requirements.md) for further details.
 
@@ -491,8 +516,8 @@ $ sudo git pull
 Then install any missing requirements:
 
 ```bash
-for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip2 install -r $I; done && \
-for I in /path/to/Cortex-Analyzers/analyzers/*/requirements.txt; do sudo -H pip3 install -r $I || true; done
+for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -r $I; done && \
+for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -r $I || true; done
 ```
 After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 

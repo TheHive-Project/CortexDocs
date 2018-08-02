@@ -87,19 +87,21 @@ User accounts cannot be deleted once created but they can be locked by an `orgAd
 
 If needed, an `orgAdmin` or a `superAdmin` can unlock a locked user account.
 
-### Analyzers
-Analyzers can be enabled, disabled and configured only by `orgAdmin` users. `superAdmins` roles cannot do that.
+### Analyzers and Responders
+Analyzers and responders can be enabled, disabled and configured only by `orgAdmin` users. `superAdmins` roles cannot do that.
 
 Analyzer management is done in two locations:
 
-- Under the *Organization* > *Configurations* tab, `orgAdmin` users can define the configuration for all the available analyzers, including settings which are common to all the flavors of a given analyzer.
-- Under the *Organization* > *Analyzers* tab, `orgAdmin` users can disable, enable and configure specific analyzer flavors. They can override the global configuration inherited from the *Organization* > *Configuration* tab and add additional, non-global configuration that some analyzer flavors might need to work correctly.
+- Under the *Organization* > *Analyzers Config* tab, `orgAdmin` users can define the configuration for all the available analyzers, including settings which are common to all the flavors of a given analyzer.
+- Under the *Organization* > *Analyzers* tab, `orgAdmin` users can disable, enable and configure specific analyzer flavors. They can override the global configuration inherited from the *Organization* > *Analyzers Config* tab and add additional, non-global configuration that some analyzer flavors might need to work correctly.
+- Under the *Organization* > *Responders Config* tab, `orgAdmin` users can define the configuration for all the available responders, including settings which are common to all the flavors of a given responders.
+- Under the *Organization* > *Responders* tab, `orgAdmin` users can disable, enable and configure specific responder flavors. They can override the global configuration inherited from the *Organization* > *Responders Config* tab and add additional, non-global configuration that some responder flavors might need to work correctly.
 
 **Important Note**:
 
 ![analyzer configuration](../images/analyzer_config.png)
 
-The analyzer configuration can only be seen by `orgAdmin` users of a given
+The configuration can only be seen by `orgAdmin` users of a given
 organization. `superAdmin` users cannot view analyzer configuration.
 
 ![analyzers](../images/analyzers.png)
@@ -148,6 +150,34 @@ search {
     # Maximum number of nested fields
     mapping.nested_fields.limit = 100
   }
+  
+  ### XPack SSL configuration
+  # Username for XPack authentication
+  #search.username
+  # Password for XPack authentication
+  #search.password
+  # Enable SSL to connect to ElasticSearch
+  search.ssl.enabled = false
+  # Path to certificate authority file
+  #search.ssl.ca
+  # Path to certificate file
+  #search.ssl.certificate
+  # Path to key file
+  #search.ssl.key
+
+  ### SearchGuard configuration
+  # Path to JKS file containing client certificate
+  #search.guard.keyStore.path
+  # Password of the keystore
+  #search.guard.keyStore.password
+  # Path to JKS file containing certificate authorities
+  #search.guard.trustStore.path
+  ## Password of the truststore
+  #search.guard.trustStore.password
+  # Enforce hostname verification
+  #search.guard.hostVerification
+  # If hostname verification is enabled specify if hostname should be resolved
+  #search.guard.hostVerificationResolveHostname
 }
 ```
 
@@ -175,17 +205,21 @@ feature: the results are retrieved through pagination. You can specify the size
 of the page (`search.pagesize`) and how long pages are kept in Elasticsearch
 ((`search.keepalive`) before purging.
 
-### Analyzers
-Cortex looks for installed analyzers by scanning directories configured in
-`analyzer.path`. This item is multi-valued.
+XPack and SearchGuard are optional and exclusive. If TheHive finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
-Analyzer paths should contain directories with the corresponding analyzer JSON files. These files describe each
-analyzer flavor (name, version, license...) and how to run them.
+### Analyzers and Responders
+Cortex looks for installed analyzers and responders by scanning directories configured in
+`analyzer.path` and in `responder.path`. This item is multi-valued.
+
+These paths should contain directories with the corresponding analyzer JSON files. These files describe each
+flavor (name, version, license...) and how to run them.
 
 You can control the number of simultaneous jobs that Cortex executes in parallel using the
 `analyzer.fork-join-executor` configuration item. The value depends on the
 number of CPU cores (`parallelism-factor` * nbCores), with a minimum
 (`parallelism-min`) and a maximum (`parallelism-max`).
+
+Same settings also exists for responders
 
 ```
 analyzer {
@@ -204,7 +238,25 @@ analyzer {
     parallelism-max = 4
   }
 }
+
+responder {
+  # Directory that holds responders
+  path = [
+    "/path/to/default/responders",
+    "/path/to/my/own/responders"
+  ]
+
+  fork-join-executor {
+    # Min number of threads available for analyze
+    parallelism-min = 2
+    # Parallelism (threads) ... ceil(available processors * factor)
+    parallelism-factor = 2.0
+    # Max number of threads available for analyze
+    parallelism-max = 4
+  }
+}
 ```
+
 ### Authentication
 Like TheHive, Cortex supports local, LDAP, Active Directory (AD), X.509 SSO and/or API keys for authentication and soon OAuth2.
 
