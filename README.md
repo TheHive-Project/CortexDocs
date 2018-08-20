@@ -39,7 +39,7 @@ physical machine with similar specifications.
 - [Updating](admin/updating.md)
 - [API Guide](api/api-guide.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
-- [How to Create a Responder](api/how-to-create-an-responder.md)
+- [How to Create a Responder](api/how-to-create-a-responder.md)
 
 ## Miscellaneous Information
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
