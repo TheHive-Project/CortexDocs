@@ -75,7 +75,7 @@ The analyzer configuration requirements are detailed in the [Analyzer Requiremen
 
 ## Step 7 (Optional): Create an Account for TheHive integration
 
-If you are using TheHive, create a new account inside your organisation with the `read, analyze` role and generate an API key that you will need to add to TheHive's configuration. Please note that you need at least TheHive 3.0.7 (Cerana 0.7) to use Cortex 2 from TheHive.
+If you are using TheHive, create a new account inside your organisation with the `read, analyze` role and generate an API key that you will need to add to TheHive's configuration as described in TheHive's [Configuration Guide](https://github.com/TheHive-Project/TheHiveDocs/blob/master/admin/configuration.md#6-cortex). Please note that you need at least TheHive 3.0.7 (Cerana 0.7) to use Cortex 2 from TheHive.
 
 ![Read/Analyze user](../images/thehive_account.png)
 
