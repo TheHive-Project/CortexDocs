@@ -132,7 +132,7 @@ The CuckooSandbox analyzer requires you to have a local instance
 [https://cuckoosandbox.org/](https://cuckoosandbox.org/)
 for more information on setting it up.
 
-To configure the analyzer you need to supply the URL of your local instance
+To configure the analyzer you need to supply the **API URL** of your local instance
 as a value of the `url` parameter.
 
 ### Cybercrime-Tracker
