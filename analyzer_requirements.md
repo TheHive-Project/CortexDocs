@@ -26,6 +26,7 @@ on is free or requires special access or valid subscription or product license.
     * [CuckooSandbox](#cuckoosandbox)
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cymon](#cymon)
+    * [DShield](#dshield)
     * [EmlParser](#emlparser)
     * [FileInfo](#fileinfo)
     * [FireHOLBlocklists](#fireholblocklists)
@@ -34,6 +35,7 @@ on is free or requires special access or valid subscription or product license.
     * [Hashdd](#hashdd)
     * [Hippocampe](#hippocampe)
     * [HybridAnalysis](#hybridanalysis)
+    * [Hunterio_DomainSearch](#hunterio_domainSearch)
     * [MaxMind](#maxmind)
     * [MISP](#misp)
     * [MISP Warninglists](#misp-warninglists)
@@ -42,6 +44,7 @@ on is free or requires special access or valid subscription or product license.
     * [OTXQuery](#otxquery)
     * [PhishTank](#phishtank)
     * [PhishingInitiative](#phishinginitiative)
+    * [Pulsedive](#pusledive)
     * [Robtex](#robtex)
     * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
@@ -150,6 +153,13 @@ This analyzer comes in only one flavor.
 #### Requirements
 You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
 
+### DShield
+Checks IP addresses against SANS ISC [DShield](https://www.dshield.org/) database.
+
+The analyzer comes in only one flavor called *DShield_lookup*.
+
+No configuration is required. It can be used out of the box.
+
 ### EmlParser
 Use the [eml_parser python library](https://github.com/GOVCERT-LU/eml_parser) to parse EML email and extract useful information.
 
@@ -161,7 +171,12 @@ extract their source code, generate useful information on PE, PDF and Microsoft 
 
 The analyzer comes in only one flavor.
 
-No configuration is required. It can be used out of the box.
+#### Requirements
+Some configuration is required for the [Manalyze](https://github.com/JusticeRage/Manalyze) submodule.
+This submodule needs to run binary program of Manalyze. There are two differents ways to do this:
+
+- Compile binary program by following instructions on the [Github pages](https://github.com/JusticeRage/Manalyze). Then enable `manalyze_enable`, `manalyze_enable_binary` and specify `manalyze_binary_path` options in Cortex.
+- Use docker on your Cortex server by setting up `manalyze_enable` and `manalyze_enable_docker` options in Cortex. The submodule program use the `evanowe/manalyze` container when running with Docker. The first analysis using this option could be long unless you first run `docker pull evanowe/manalyze` on your Cortex server.
 
 ### FireHOLBlocklists
 Check IP addresses against the [FireHOL blocklists](https://firehol.org/).
@@ -190,7 +205,8 @@ Check the [Fortiguard](https://fortiguard.com/webfilter) category of a URL or
 
 The analyzer comes in only one flavor called *Fortiguard_URLCategory*.
 
-No configuration is required. It can be used out of the box.
+#### Reaquirements
+This anlyzer comes with a default configuration regarding categories and their maliciousness. If needed, this can be customized your own by [selecting the categories from the Fortiguard website](https://fortiguard.com/webfilter/categories). Select which categories you want to be considered malicious or suspicious, and others will be considered by the analyzer as info. Analyzed observables that are not categorised by Fortigard service is considered as safe.
 
 ### GoogleSafeBrowsing
 Check URLs against [Google Safebrowsing](https://www.google.com/transparencyreport/safebrowsing/).
@@ -248,6 +264,16 @@ an API key/secret pair.
 
 Provide the API key as a value for the `key` parameter and the secret as a
 value to the `secret` parameter.
+
+### Hunterio_DomainSearch
+Query [https://hunter.io/](https://hunter.io/) and find emails associated with a given domain name.
+
+This analyzer comes in only one flavor called *Hunterio_DomainSearch*.
+
+#### Requirements
+You need to have or create a free Hunter.io [account](https://hunter.io/). 
+
+Provide the [API key](https://hunter.io/api_keys) as a value for the `key` parameter.
 
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
@@ -382,7 +408,7 @@ as the value to the `key` configuration parameter for this analyzer to work.
 Query [Phishing Initiative](https://phishing-initiative.fr/contrib/) to
 assess whether a URL has been flagged as a phishing site.
 
-This analyzer comes in only one flavor called *PhishingInitiative_Lookup*.
+This analyzer comes in two flavors called *PhishingInitiative_Lookup* and *PhishingInitiative_Scan*.
 
 #### Requirements
 You need to sign up for a [Phishing Initiative](https://phishing-initiative.fr/register)
@@ -391,6 +417,17 @@ You need to sign up for a [Phishing Initiative](https://phishing-initiative.fr/r
 Log in to your Phishing Initiative account, click on the icon representing
 your account details then on *API*. Retrieve the API key value and supply
 it as the value to the `key` configuration parameter.
+
+### Pulsedive
+Query [Pulsedive](https://pulsedive.com/) and get information about a domain name,  hash, IP or URL.
+
+This analyzer comes in only one flavor called *Pulsedive_GetIndicator*.
+
+#### Requirements
+You need to sign up for a [Pulsedive](https://pulsedive.com/)
+ account or use an existing one.
+
+Provide the [API key](https://pulsedive.com/api/) as a value for the `key` parameter.
 
 ### Robtex
 Query the [Robtex](https://www.robtex.com/) database and retrieve information about a domain, a FQDN or an IP address.
