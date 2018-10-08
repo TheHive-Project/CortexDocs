@@ -463,17 +463,17 @@ This call allows a user with `read`,`analyze` or `orgAdmin` role to list and sea
 
 If you want to list all the jobs:
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search?range=all'
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search?range=all'
 ```
 
 If you want to list 10 jobs:
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search'
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search'
 ```
 
 If you want to list 100 jobs:
 ```bash
-curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search?range=0-100'
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/job/_search?range=0-100'
 ```
 
 If you want to search jobs according to various criteria:
