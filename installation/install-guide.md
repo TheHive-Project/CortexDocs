@@ -429,7 +429,7 @@ cd Cortex/www
 Install Node.js libraries, which are required by this step, bower libraries (JavaScript libraries downloaded by the browser). Then
 build the front-end :
 ```
-npm install
+npm install --ignore-scripts
 npm run build
 ```
 
