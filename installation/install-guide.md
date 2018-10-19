@@ -518,8 +518,8 @@ $ sudo git pull
 Then install any missing requirements:
 
 ```bash
-for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -r $I; done && \
-for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -r $I || true; done
+for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -U -r $I; done && \
+for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -U -r $I || true; done
 ```
 After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 
