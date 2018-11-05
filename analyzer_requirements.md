@@ -31,6 +31,7 @@ on is free or requires special access or valid subscription or product license.
     * [FileInfo](#fileinfo)
     * [FireHOLBlocklists](#fireholblocklists)
     * [Fortiguard](#fortiguard)
+    * [GoogleDNS](#googledns)
     * [GoogleSafeBrowsing](#googlesafebrowsing)
     * [Hashdd](#hashdd)
     * [Hippocampe](#hippocampe)
@@ -53,6 +54,7 @@ on is free or requires special access or valid subscription or product license.
     * [Tor Project](#tor-project)
     * [URLhaus](#urlhaus)
     * [Unshortenlink](#unshortenlink)
+    * [UrlScan.io](#urlscanio)
     * [Virusshare](#virusshare)
     * [WOT](#wot)
     * [Yara](#yara)
@@ -74,8 +76,10 @@ on is free or requires special access or valid subscription or product license.
     * [EmergingThreats](#emergingthreats)
     * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
+    * [Investigate](#investigate)
     * [PassiveTotal](#passivetotal)
     * [PayloadSecurity](#payloadsecurity)
+    * RecordedFuture(#recordedfuture)
     * [Nessus](#nessus)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
@@ -205,8 +209,13 @@ Check the [Fortiguard](https://fortiguard.com/webfilter) category of a URL or
 
 The analyzer comes in only one flavor called *Fortiguard_URLCategory*.
 
-#### Reaquirements
+#### Requirements
 This anlyzer comes with a default configuration regarding categories and their maliciousness. If needed, this can be customized your own by [selecting the categories from the Fortiguard website](https://fortiguard.com/webfilter/categories). Select which categories you want to be considered malicious or suspicious, and others will be considered by the analyzer as info. Analyzed observables that are not categorised by Fortigard service is considered as safe.
+
+### GoogleDNS
+Query Google DNS information regarding a domain, FQDN or IP address.
+
+The analyzer comes in only one flavor called *GoogleDNS*. No configuration is required. It can be used out of the box.
 
 ### GoogleSafeBrowsing
 Check URLs against [Google Safebrowsing](https://www.google.com/transparencyreport/safebrowsing/).
@@ -371,6 +380,8 @@ The analyzer comes in five flavors:
 - Onyphe_**Ports**: retrieve SYN scan information Onyphe has for the given IPv{4,6} address with history of changes.
 - Onyphe_**Reverse**: retrieve reverse DNS lookup information Onyphe has for the given IPv{4,6} address with history of changes.
 - Onyphe_**Threats**: retrieve Onyphe threat information for the given IPv{4,6} address with history.
+- Onyphe_**Inetnum**: retrieve Onyphe information about network information about an IPv4 or IPv6
+- Onyphe_**Datascan**: retrieve Onyphe datascan information about a given IPv4, IPv6 or a any other string, with history of changes
 
 #### Requirements
 Provide the API key as a value for the `key` parameter.
@@ -492,6 +503,13 @@ This analyzer comes in only one flavor.
 No configuration is required. It can be used out of the box.
 
 **Warning**: using this analyzer without **extra caution** might lead to unexpected consequences. For example, if the URL you are seeking to unshorten is an attacker-controlled one, you may end up leaving undesired traces in the threat actor's infrastructure logs. The TLP values Cortex allows you to configure to prevent the use of an analyzer if the TLP associated with an observable is above the authorized level won't be of much help since Unshortenlink have to access the shortened URL. Please do not activate this analyzer unless you (and your fellow analysts) know what they are doing.
+
+### UrlScan.io
+Search IPs, domains, hashes or URLs on [urlscan.io](https://urlscan.io).
+
+This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
 
 ### URLhaus
 Check if a domain, URL or hash is known by Abuse.ch and stored in the [URLhaus](https://urlhaus.abuse.ch/) database, and get a report about its 'maliciousness'.
@@ -787,6 +805,38 @@ Provide the URL of your on-premises Joe Sandbox instance or the cloud version
  to the `url` parameter and supply the associated API key as a value for the
  `key` parameter.
 
+### Investigate
+Leverage Cisco [Umbrella Investigate](https://umbrella.cisco.com/) to qualify a domain, a FQDN or a hash.
+
+The analyzer comes in 2 flavors:
+- Investigate_**Categorization**: analyze domain or FQDN
+- Investigate_**Sample**: analyze a hash.
+
+#### Requirements
+Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
+
+### Nessus
+Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
+a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version.
+
+The analyzer comes in only one flavor.
+
+#### Requirements
+You must have a locally deployed instance of Nessus Professional 6 or earlier to use the
+analyzer. The scanner must have at least a scan policy defined. You must not
+scan assets that do not belong to you, unless you really know what you are
+doing. That’s why safeguards were built in the analyzer’s configuration.
+
+To configure the analyzer, you must supply four parameters:
+- `url`: URL of your Nessus scanner.
+- `login`: username to log to the scanner.
+- `password`: password of your login account.
+- `policy`: the scan policy to use.
+- `ca_bundle`: an optional parameter to validate the X.509 certificate of the
+ scanner. This parameter **must be omitted if no validation is needed**.
+- `allowed_networks`: a list of networks in CIDR notation that the scanner is
+ allowed to probe.
+
 ### PassiveTotal
 Leverage RiskIQ's [PassiveTotal service](https://www.passivetotal.org/) to
 gain invaluable insight on observables, identify overlapping infrastructure
@@ -828,27 +878,13 @@ Five parameters are required to make the analyzer work:
 Provide the API key as a value for the `key` parameter and the secret as a
 value to the `secret` parameter. the `url` parameter should be the address of your on premise service. `environmentid` should also be gathered from your custom configuration.
 
-### Nessus
-Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
-a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version.
+### RecordedFuture
+Get the latest risk data from [RecordedFuture](https://www.recordedfuture.com/) for a hash, domain or an IP address.
 
-The analyzer comes in only one flavor.
+This analyzer comes in only one flavor **RecordedFuture**.
 
 #### Requirements
-You must have a locally deployed instance of Nessus Professional 6 or earlier to use the
-analyzer. The scanner must have at least a scan policy defined. You must not
-scan assets that do not belong to you, unless you really know what you are
-doing. That’s why safeguards were built in the analyzer’s configuration.
-
-To configure the analyzer, you must supply four parameters:
-- `url`: URL of your Nessus scanner.
-- `login`: username to log to the scanner.
-- `password`: password of your login account.
-- `policy`: the scan policy to use.
-- `ca_bundle`: an optional parameter to validate the X.509 certificate of the
- scanner. This parameter **must be omitted if no validation is needed**.
-- `allowed_networks`: a list of networks in CIDR notation that the scanner is
- allowed to probe.
+Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
 
 ### VirusTotal
 Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
