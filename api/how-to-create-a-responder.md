@@ -198,7 +198,7 @@ accepts the following datatypes:
 - `thehive:case_artifact` (i.e. observable)
 - `thehive:alert`
 - `thehive:case_task`
-- `thehive:log` (i.e. task log)
+- `thehive:case_task_log` (i.e. task log)
 
 #### baseConfig
 Name used to group configuration items common to several responders. This
