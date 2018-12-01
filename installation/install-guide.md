@@ -526,7 +526,7 @@ After running these commands, read the Analyzer Requirements Guide,  log into 
 If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/thehive-project/binary/report-templates.zip) and import them into TheHive.
 
 ### Additional Analyzers
-The following analyzers are not supported by THeHive Project at this time:
+The following analyzers are not supported by TheHive Project at this time:
 
 - [Analyzers written in Go](https://github.com/Rostelecom-CERT/go-cortex-analyzers) by Rosetelecom-CERT
 
