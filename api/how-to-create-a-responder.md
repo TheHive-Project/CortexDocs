@@ -295,6 +295,8 @@ If the responder **succeeds** (i.e. it runs without any error):
     a message.
 -   `operations` is a list what the submitter system should execute.
     As of version 3.1.0, TheHive accepts the following operations:
+    -    `AddTagToArtifact` (`{ "type": "AddTagToArtifact", "tag": "tag to add" }`): add
+         a tag to the artifact related to the object
     -    `AddTagToCase` (`{ "type": "AddTagToCase", "tag": "tag to add" }`): add
          a tag to the case related to the object
    
