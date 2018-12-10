@@ -299,6 +299,8 @@ If the responder **succeeds** (i.e. it runs without any error):
          a tag to the artifact related to the object
     -    `AddTagToCase` (`{ "type": "AddTagToCase", "tag": "tag to add" }`): add
          a tag to the case related to the object
+    -    `MarkAlertAsRead`: mark the alert related to the object as read
+    -    `AddCustomField` (`{"name": "key", "value": "value", "tpe": "type"`): add a custom field to the case related to the object
    
   The list of acceptable operations will increase in future releases of TheHive.
 
