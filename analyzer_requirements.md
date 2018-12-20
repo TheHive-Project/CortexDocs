@@ -25,6 +25,7 @@ on is free or requires special access or valid subscription or product license.
     * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
     * [Cybercrime-Tracker](#cybercrime-tracker)
+    * [Cyberprotect](#cyberprotect)
     * [Cymon](#cymon)
     * [DShield](#dshield)
     * [EmlParser](#emlparser)
@@ -34,6 +35,7 @@ on is free or requires special access or valid subscription or product license.
     * [GoogleDNS](#googledns)
     * [GoogleSafeBrowsing](#googlesafebrowsing)
     * [Hashdd](#hashdd)
+    * [HIBP](#hibp)
     * [Hippocampe](#hippocampe)
     * [HybridAnalysis](#hybridanalysis)
     * [Hunterio_DomainSearch](#hunterio_domainSearch)
@@ -43,6 +45,7 @@ on is free or requires special access or valid subscription or product license.
     * [Msg\_Parser](#msg_parser)
     * [Onyphe](#onyphe)
     * [OTXQuery](#otxquery)
+    * [Patrowl](#patrowl)
     * [PhishTank](#phishtank)
     * [PhishingInitiative](#phishinginitiative)
     * [Pulsedive](#pusledive)
@@ -52,7 +55,7 @@ on is free or requires special access or valid subscription or product license.
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
-    * [URLhaus](#urlhaus)
+    * [URLhaus](#urlhaus)    
     * [Unshortenlink](#unshortenlink)
     * [UrlScan.io](#urlscanio)
     * [Virusshare](#virusshare)
@@ -77,10 +80,12 @@ on is free or requires special access or valid subscription or product license.
     * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
     * [Investigate](#investigate)
+    * [Nessus](#nessus)
     * [PassiveTotal](#passivetotal)
     * [PayloadSecurity](#payloadsecurity)
-    * RecordedFuture(#recordedfuture)
-    * [Nessus](#nessus)
+    * [RecordedFuture](#recordedfuture)
+    * [SecurityTrails](#securitytrails)
+    * [Umbrella](#umbrella)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
 
@@ -146,6 +151,13 @@ as a value of the `url` parameter.
 Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
 
 This analyzer comes in only one flavor.
+
+No configuration is required. It can be used out of the box.
+
+### Cyberprotect
+Use the [Cyberprotect](https://threatscore.cyberprotect.fr/) ThreatScore service to get the cyber threat score of a domain or IP address, based on Cyberprotect sysyem.
+
+This analyzer comes in only one flavor **Cyberprotect_ThreatScore**.
 
 No configuration is required. It can be used out of the box.
 
@@ -237,6 +249,14 @@ The analyzer comes in two flavors:
 
 #### Requirements
 As long as you are using the **Status** flavor you don't need API key. If you want more details using the **Detail** flavor, you need to [sign up for a hashdd.com account and obtain an API](https://www.hashdd.com/).
+
+### HIBP
+Check email addresses against [Have I Been Pwned](https://haveibeenpwned.com).
+
+The analyzer comes in only one flavor. **HIBP_Query**
+
+#### Requirements
+This comes with an optional parameter to include unverified breaches within search result.
 
 ### Hippocampe
 Query threat feeds through [Hippocampe](https://github.com/TheHive-Project/Hippocampe),
@@ -399,6 +419,19 @@ an existing one.
 Log in to your OTX account, click on your username on the top
 navigation bar then on *Settings* and retrieve your OTX key and use it as the
 value of the `key` parameter.
+
+### Patrowl
+Get the current [Patrowl](https://github.com/Patrowl/PatrowlManager) report for a fdqn, a domain or an IP address.
+
+The analyzer comes in only one flavor. **Patrowl_GetReport**
+
+#### Requirements
+You need a running [Patrowl](https://github.com/Patrowl/PatrowlManager)
+
+You need to install a [Patrowl](https://github.com/Patrowl/PatrowlManager) instance or to have access to one to use the analyzer. Supply the following parameters to the analyzer in order to use it:
+
+- `url`: The PatrowlManager service URL
+- `api_key`: A valid API Key of a Patrowl user
 
 ### PhishTank
 Query [PhishTank](https://www.phishtank.com/) to assess whether a URL has
@@ -695,9 +728,13 @@ Provide the API key as a value for the `key` parameter.
 ### Shodan
 Retrieve key [Shodan](https://www.shodan.io/) information on domains and IP addresses.
 
-This analyzer comes in two flavors:
+This analyzer comes in 6 flavors:
 - Shodan_**Host**: get Shodan information on a host.
-- Shodan_**Search**: get Shodan information on a domain.
+- Shodan_**Search**: get Shodan serch result on a domain.
+- Shodan_**DNSResolve**: get Shodan domain resolutions.
+- Shodan_**Host_History**: get Shodan history scan results for an IP.
+- Shodan_**InfoDomain**: get Shodan information on a domain.
+- Shodan_**ReverseDNS**: get Shodan reverse DNS resolutions on an IP.
 
 #### Requirements
 You need to create a Shodan account and retrieve the associated API Key. For
@@ -731,19 +768,15 @@ Provide your API key as a value to the `key` parameter.
 Look up domain names, IP addresses, WHOIS records, etc. using the popular
 [DomainTools](http://domaintools.com/) service API.
 
-The analyzer comes in 7 flavors:
-- DomainTools_**ReverseIP**: get a list of domain names sharing the same IP
-address.
-- DomainTools_**ReverseNameServer**: get a list of domain names that share
-the same primary or secondary name server.
-- DomainTools_**ReverseWhois**: get a list of domain names which share the
-same registrant information.
-- DomainTools_**WhoisHistory**: get a list of historical Whois records
-associated with a domain name.
-- DomainTools_**WhoisLookup**: get the ownership record for a domain with
-basic registration details.
-- DomainTools_**WhoisLookup_IP**: get the ownership record for an IP address
-with basic registration details.
+The analyzer comes in 10 flavors:
+- DomainTools_**HostingHistory**: get a list of historical registrant, name servers and IP addresses for a domain.
+- DomainTools_**ReverseIP**: get a list of domain names sharing the same IP address.
+- DomainTools_**ReverseIPWhois**: get a list of IP addresses which share the same registrant information, applies to a mail, IP, domain.
+- DomainTools_**ReverseNameServer**: get a list of domain names that share the same primary or secondary name server.
+- DomainTools_**ReverseWhois**: get a list of domain names which share the same registrant information.
+- DomainTools_**WhoisHistory**: get a list of historical Whois records associated with a domain name.
+- DomainTools_**WhoisLookup**: get the ownership record for a domain with basic registration details parsed.
+- DomainTools_**WhoisLookupUnparsed**: get the ownership record for an IP address with basic registration details without parsing.
 - DomainTools_**Risk**: get a risk score for a given domain name.
 - DomainTools_**Reputation**: get a reputation score for a given domain name.
 
@@ -885,6 +918,32 @@ This analyzer comes in only one flavor **RecordedFuture**.
 
 #### Requirements
 Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
+
+### SecurityTrails
+Get Whois and Passive DNS details from [SecurityTrails](https://securitytrails.com/) services
+
+The analyzer comes in 2 flavors:
+- SecurityTrails_**Passive_Dns**: Passive DNS Lookup.
+- SecurityTrails_**Whois**: Whois Details Lookup.
+
+#### Requirements
+You need a SecurityTrails account to obtain the API key which is required to use the analyzer.
+
+Provide your account's API Key as the value of the `api_key` parameter.
+
+### Umbrella
+Query the [Umbrella Reporting API](https://docs.umbrella.com/umbrella-api/docs/reporting-destinations-most-recent-requests) for recent DNS queries and their status, for a domain.
+
+This analyzer comes in only one flavor **Umbrella_Report**.
+
+#### Requirements
+Four parameters are required to make the analyzer work:
+- `api_key`
+- `api_secret`
+- `organization_id`
+- `query_limit`, defaults to 20
+
+Provide the API key as a value for the `api_key` parameter and the secret as a value to the `api_secret` parameter. The `organization_id` parameter should be  provided by Umbrella Admin Console. `query_limit` is optional, and represents the maximum number of results to return.
 
 ### VirusTotal
 Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
