@@ -155,9 +155,9 @@ This analyzer comes in only one flavor.
 No configuration is required. It can be used out of the box.
 
 ### Cyberprotect
-Use the [Cyberprotect](https://threatscore.cyberprotect.fr/) ThreatScore service to get the cyber threat score of a domain or IP address, based on Cyberprotect sysyem.
+Use the [Cyberprotect](https://threatscore.cyberprotect.fr/) ThreatScore service to get the cyber threat score of a domain or IP address, based on the Cyberprotect system.
 
-This analyzer comes in only one flavor **Cyberprotect_ThreatScore**.
+This analyzer comes in only one flavor called **Cyberprotect_ThreatScore**.
 
 No configuration is required. It can be used out of the box.
 
@@ -253,10 +253,10 @@ As long as you are using the **Status** flavor you don't need API key. If you wa
 ### HIBP
 Check email addresses against [Have I Been Pwned](https://haveibeenpwned.com).
 
-The analyzer comes in only one flavor. **HIBP_Query**
+The analyzer comes in only one flavor called **HIBP_Query**.
 
 #### Requirements
-This comes with an optional parameter to include unverified breaches within search result.
+The analyzer comes with an optional parameter to include unverified breaches within search results. If you do not want to include the optional parameter, the analyzer can be used out of the box.
 
 ### Hippocampe
 Query threat feeds through [Hippocampe](https://github.com/TheHive-Project/Hippocampe),
@@ -423,12 +423,10 @@ value of the `key` parameter.
 ### Patrowl
 Get the current [Patrowl](https://github.com/Patrowl/PatrowlManager) report for a fdqn, a domain or an IP address.
 
-The analyzer comes in only one flavor. **Patrowl_GetReport**
+The analyzer comes in only one flavor called **Patrowl_GetReport**.
 
 #### Requirements
-You need a running [Patrowl](https://github.com/Patrowl/PatrowlManager)
-
-You need to install a [Patrowl](https://github.com/Patrowl/PatrowlManager) instance or to have access to one to use the analyzer. Supply the following parameters to the analyzer in order to use it:
+You need a running [Patrowl](https://github.com/Patrowl/PatrowlManager) instance or to have access to one to use the analyzer. Supply the following parameters to the analyzer in order to use it:
 
 - `url`: The PatrowlManager service URL
 - `api_key`: A valid API Key of a Patrowl user
@@ -730,7 +728,7 @@ Retrieve key [Shodan](https://www.shodan.io/) information on domains and IP addr
 
 This analyzer comes in 6 flavors:
 - Shodan_**Host**: get Shodan information on a host.
-- Shodan_**Search**: get Shodan serch result on a domain.
+- Shodan_**Search**: get Shodan search result on a domain.
 - Shodan_**DNSResolve**: get Shodan domain resolutions.
 - Shodan_**Host_History**: get Shodan history scan results for an IP.
 - Shodan_**InfoDomain**: get Shodan information on a domain.
@@ -759,8 +757,7 @@ to Farsight Security's DNSDB service to use the analyzer.
 
 Provide the URL of the DNSDB API service to the `server` parameter. The
 default (`https://api.dnsdb.info`) should work. If it doesn't, contact
-Farsight
-Security.
+Farsight Security.
 
 Provide your API key as a value to the `key` parameter.
 
@@ -771,12 +768,12 @@ Look up domain names, IP addresses, WHOIS records, etc. using the popular
 The analyzer comes in 10 flavors:
 - DomainTools_**HostingHistory**: get a list of historical registrant, name servers and IP addresses for a domain.
 - DomainTools_**ReverseIP**: get a list of domain names sharing the same IP address.
-- DomainTools_**ReverseIPWhois**: get a list of IP addresses which share the same registrant information, applies to a mail, IP, domain.
+- DomainTools_**ReverseIPWhois**: get a list of IP addresses which share the same registrant information. It applies to a mail, IP, or domain.
 - DomainTools_**ReverseNameServer**: get a list of domain names that share the same primary or secondary name server.
 - DomainTools_**ReverseWhois**: get a list of domain names which share the same registrant information.
 - DomainTools_**WhoisHistory**: get a list of historical Whois records associated with a domain name.
-- DomainTools_**WhoisLookup**: get the ownership record for a domain with basic registration details parsed.
-- DomainTools_**WhoisLookupUnparsed**: get the ownership record for an IP address with basic registration details without parsing.
+- DomainTools_**WhoisLookup**: get the ownership record for a domain or IP address with basic registration details parsed.
+- DomainTools_**WhoisLookupUnparsed**: get the ownership record for an IP address or domain with basic registration details without parsing.
 - DomainTools_**Risk**: get a risk score for a given domain name.
 - DomainTools_**Reputation**: get a reputation score for a given domain name.
 
@@ -920,7 +917,7 @@ This analyzer comes in only one flavor **RecordedFuture**.
 Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
 
 ### SecurityTrails
-Get Whois and Passive DNS details from [SecurityTrails](https://securitytrails.com/) services
+Get Whois and Passive DNS details using [SecurityTrails](https://securitytrails.com/).
 
 The analyzer comes in 2 flavors:
 - SecurityTrails_**Passive_Dns**: Passive DNS Lookup.
@@ -943,7 +940,7 @@ Four parameters are required to make the analyzer work:
 - `organization_id`
 - `query_limit`, defaults to 20
 
-Provide the API key as a value for the `api_key` parameter and the secret as a value to the `api_secret` parameter. The `organization_id` parameter should be  provided by Umbrella Admin Console. `query_limit` is optional, and represents the maximum number of results to return.
+Provide the API key as a value for the `api_key` parameter and the secret as a value to the `api_secret` parameter. The `organization_id` parameter should be provided by the Umbrella Admin Console. `query_limit` is optional, and represents the maximum number of results to return.
 
 ### VirusTotal
 Look up files, URLs and hashes in [VirusTotal](https://www.virustotal.com/).
