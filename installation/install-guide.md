@@ -509,17 +509,17 @@ All analyzers and responders must be configured using the Web UI. Please read th
 Some analyzers can be used out of the box, without any configuration, while others may require various parameters. Please check the [Analyzer Requirements Guide](../analyzer_requirements.md) for further details.
 
 ### Updating
-Existing Cortex analyzers are regularly updated and new ones are added. To benefit from the latest bug fixes, enhancements and additions, run the following commands:
+Existing Cortex analyzers are regularly updated and new ones are added. To benefit from the latest bug fixes, enhancements and additions, run the following commands (we assume that you have installed them under `/opt/Cortex-Analyzers`):
 
 ```bash
-$ cd /path/to/Cortex-Analyzers
+$ cd /opt/Cortex-Analyzers
 $ sudo git pull
 ```
 Then install any missing requirements:
 
 ```bash
-for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -U -r $I; done && \
-for I in $(find /path/to/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -U -r $I || true; done
+for I in $(find /opt/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -U -r $I; done && \
+for I in $(find /opt/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -U -r $I || true; done
 ```
 After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 
