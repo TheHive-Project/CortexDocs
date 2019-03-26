@@ -1,5 +1,5 @@
-# Cortex Analyzer Requirements Guide
-Analyzers are autonomous applications managed by and run through the Cortex core
+# Cortex Analyzer & Responder Requirements Guide
+Analyzers and Responders are autonomous applications managed by and run through the Cortex core
 engine. Analyzers allow analysts and security researchers to analyze
 observables and IOCs such as
 domain names, IP addresses, hashes, files, URLs at scale. While many
@@ -8,8 +8,11 @@ necessitate a valid service subscription or product license, even though the
 analyzers themselves are released under an the [AGPL](https://github.com/TheHive-Project/Cortex-analyzers/blob/master/LICENSE)
 (Affero General Public License).
 
+Responders are programs that perform different actions and apply to alerts, cases, tasks, task logs, and observables.
+
 This document outlines the information needed to:
-- install the Cortex analyzers.
+
+- install the Cortex analyzers and responders.
 - update them when needed.
 - configure them.
 
@@ -20,6 +23,8 @@ on is free or requires special access or valid subscription or product license.
   * [Introduction](#introduction)
   * [Free Analyzers](#free-analyzers)
     * [Abuse\_Finder](#abuse_finder)
+    * [AbuseIPDB](#abuseipdb)
+    * [Backscatter.io](#backscatterio)
     * [C1fApp](#c1fapp)
     * [Censys\.io](#censysio)
     * [Crtsh](#crtsh)
@@ -85,12 +90,16 @@ on is free or requires special access or valid subscription or product license.
     * [PayloadSecurity](#payloadsecurity)
     * [RecordedFuture](#recordedfuture)
     * [SecurityTrails](#securitytrails)
+    * [SoltraEdge](#soltraedge)
     * [Umbrella](#umbrella)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
+* [Subscription and License-based Responders](#subscription-and-license-based-responders)
+  * [Crownstrike Falcon](#crowdstrike-falcon)
+  * [Umbrella blacklister](#umbrella-blacklister)
 
 ## Introduction
-All analyzer configuration settings must be made using the Cortex Web UI. Please refer to the [Administration Guide](admin/admin-guide.md) for further details.
+All analyzer and Responder configuration settings must be made using the Cortex Web UI. Please refer to the [Administration Guide](admin/admin-guide.md) for further details.
 
 By default, and within every freshly created organization, all analyzers are disabled. If you want to enable and configure them, use the Web UI (**Organization** > **Configurations** and **Organization** > **Analyzers** tabs).
 
@@ -104,7 +113,35 @@ The analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
 
+### AbuseIPDB
+
+Get AbuseIPDB information related to an IP address.
+
+This analyzer comes in only on flavor.
+
+#### Requirements
+
+This analyzer requires you to have an account on  [AbuseIPDB](https://www.abuseipdb.com/) and an API key.
+
+To configure the analyzer you need to supply the key as a value of the `key` parameter.
+
+### Bascatter.io
+
+Brings observations and enrichment data from Backscatter.io scanning service.
+
+This analyzer comes in 2 flavors:
+
+- BackscatterIO_**GetObservations**: determine whether a value has a known scanning activity.
+- BackscatterIO_**Enrichment**: enrich values.
+
+#### Requirements
+
+This analyzer requires you to have an account on [Backscatter.io](https://backscatter.io/) and an API key.
+
+To configure the analyzer you need to supply the key as a value of the `key` parameter.
+
 ### C1fApp
+
 Get [C1fApp](https://www.c1fapp.com/) information related to an IP address, a domain or a URL.
 
 The analyzer comes in only one flavor.
@@ -928,7 +965,16 @@ You need a SecurityTrails account to obtain the API key which is required to use
 
 Provide your account's API Key as the value of the `api_key` parameter.
 
+### SoltraEdge
+
+Get information about any observable dataType from a SoltraEdge server. 
+
+#### Requirements
+
+An account an a token from a SoltraEdge server are required to use this analyzer. Provide this information as values of `account`,`token` and `base_url` parameters. 
+
 ### Umbrella
+
 Query the [Umbrella Reporting API](https://docs.umbrella.com/umbrella-api/docs/reporting-destinations-most-recent-requests) for recent DNS queries and their status, for a domain.
 
 This analyzer comes in only one flavor **Umbrella_Report**.
@@ -977,3 +1023,21 @@ To configure the analyzer, provide the URL of the platform as a value for the
 
 To validate the X.509 certificate of your VMRay Analyzer Platform instance,
 use the `certpath` parameter.
+
+## Subscription and License-based Responders
+
+### Crowdstrike Falcon
+
+Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC API.
+
+### Requirements
+
+To configure the responder, provide the URL of the plateform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
+
+### Umbrella Blacklister
+
+Add domain from observables in cases to Umbrella blacklist. 
+
+#### Requirements
+
+To configure the responder, provide the url of the service as a value for the `integration_url` parameter.
