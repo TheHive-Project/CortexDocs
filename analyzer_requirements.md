@@ -117,7 +117,7 @@ No configuration is required. It can be used out of the box.
 
 Get AbuseIPDB information related to an IP address.
 
-This analyzer comes in only on flavor.
+This analyzer comes in only one flavor.
 
 #### Requirements
 
@@ -125,7 +125,7 @@ This analyzer requires you to have an account on  [AbuseIPDB](https://www.abusei
 
 To configure the analyzer you need to supply the key as a value of the `key` parameter.
 
-### Bascatter.io
+### Backscatter.io
 
 Brings observations and enrichment data from Backscatter.io scanning service.
 
@@ -1032,7 +1032,7 @@ Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC AP
 
 ### Requirements
 
-To configure the responder, provide the URL of the plateform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
+To configure the responder, provide the URL of the platform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
 
 ### Umbrella Blacklister
 
