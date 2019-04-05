@@ -30,7 +30,7 @@ play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | hea
 _EOF_
 
 search.host = ['127.0.0.1:9300']
-analyzer.path = ["/opt/Cortex-Analyzers/analyzers"]
+analyzer.urls = ["/opt/Cortex-Analyzers/analyzers"]
 
 ) | sudo tee -a /etc/cortex/application.conf
 
