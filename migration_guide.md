@@ -52,7 +52,7 @@ By default, Cortex continues to run analyzers using processes, like before. To r
 
 ### Catalog of analyzers and responders
 
-The settings `analyzer.path` and `responder.path` are deprecated (but continue to work) and are replaced by `analyzer.urls` and `responder.url`. These settings can contain:
+The settings `analyzer.path` and `responder.path` are deprecated (but continue to work) and are replaced by `analyzer.urls` and `responder.urls`. These settings can contain:
    - path of directory where workers (analyzers/responders) are installed (like previous version of Cortex)
    - path or url (http(s)) of JSON file containing all worker definitions (merge of all JSON in one array)
 
