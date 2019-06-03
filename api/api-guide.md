@@ -373,7 +373,7 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: applicatio
 It returns a JSON object representing the updated user as described [above](#user-model).
 
 ### Get Details
-This call returns the user details. It's available to users with `superAdmin` or `orgAdmin` roles. Every user can also use it to read their own details.
+This call returns the user details. It's available to users with `superAdmin` roles and to users in the same organization. Every user can also use it to read their own details.
 
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/user/USER_LOGIN'
