@@ -19,6 +19,7 @@ Starting from Cortex version 2, you can create and manage multiple organizations
 - If you are looking for the Cortex 1 documentation, please check the [cortex-1](https://github.com/TheHive-Project/CortexDocs/tree/cortex-1) branch.
 
 ## Hardware Pre-requisites
+
 Cortex uses a Java VM. We recommend using a virtual machine with 8vCPU, 8 GB of RAM and 10 GB of disk. You can also use a
 physical machine with similar specifications.
 
@@ -32,6 +33,7 @@ physical machine with similar specifications.
 - [Changelog](https://github.com/TheHive-Project/Cortex/blob/master/CHANGELOG.md)
 
 ## Guides
+
 - [Installation Guide](installation/install-guide.md)
 - [Cortex Analyzer Requirements Guide](analyzer_requirements.md)
 - [Quick Start Guide](admin/quick-start.md)
@@ -40,23 +42,29 @@ physical machine with similar specifications.
 - [API Guide](api/api-guide.md)
 - [How to Create an Analyzer](api/how-to-create-an-analyzer.md)
 - [How to Create a Responder](api/how-to-create-a-responder.md)
+- [Migration Guide](migration_guide.md)
 
 ## Miscellaneous Information
+
 - [Training Material](https://github.com/TheHive-Project/TheHiveDocs/blob/master/training-material.md)
 - [FAQ](FAQ.md)
 
 # License
+
 Cortex is an open source and free software released under the [AGPL](https://github.com/TheHive-Project/TheHive/blob/master/LICENSE) (Affero General Public License). We, TheHive Project, are committed to ensure that TheHive will remain a free and open source project on the long-run.
 
 # Updates
+
 Information, news and updates are regularly posted on [TheHive Project Twitter account](https://twitter.com/thehive_project) and on [the blog](https://blog.thehive-project.org/).
 
 # Contributing
+
 We welcome your contributions. Please feel free to fork the code, play with it, make some patches and send us pull requests using [issues](https://github.com/TheHive-Project/Cortex/issues).
 
 We do have a [Code of conduct](code_of_conduct.md). Make sure to check it out before contributing.
 
 # Support
+
 Please [open an issue on GitHub](https://github.com/TheHive-Project/Cortex/issues/new) if you'd like to report a bug or request a feature. We are also available on [Gitter](https://gitter.im/TheHive-Project/TheHive) to help you out.
 
 If you need to contact the Project's team, send an email to <support@thehive-project.org>.
@@ -68,7 +76,9 @@ If you need to contact the Project's team, send an email to <support@thehive-pro
 - If you have problems with [Cortex4py](https://github.com/TheHive-Project/Cortex4py), please [open an issue on its dedicated repository](https://github.com/TheHive-Project/Cortex4py/issues/new).
 
 # Community Discussions
+
 We have set up a Google forum at <https://groups.google.com/a/thehive-project.org/d/forum/users>. To request access, you need a Google account. You may create one [using a Gmail address](https://accounts.google.com/SignUp?hl=en) or [without it](https://accounts.google.com/SignUpWithoutGmail?hl=en).
 
 # Website
+
 <https://thehive-project.org/>

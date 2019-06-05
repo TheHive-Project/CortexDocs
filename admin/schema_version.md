@@ -7,7 +7,10 @@ application.conf).
 
 The following table show for each version of Cortex the default name of the
 index:
+
 | Cortex version | Index name  |
 |----------------|-------------|
 | 1.x            | N/A         |
 | 2.0.0          | cortex_1    |
+| 2.1.0          | cortex_2    |
+| 3.0.0          | cortex_3    |
