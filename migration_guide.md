@@ -72,4 +72,6 @@ Similar catalogs exist for responders:
 - [responders/catalog-stable.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog-stable.json)
 - [responders/catalog.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog.json).
 
+By default, before start a job, Cortex checks if there is a new version of the Docker image available on the repository. If so, it will download and use it. This behavior can be disabled by setting `docker.autoUpdate` to false.
+  
 The JSON files can have a  `command` (can be run using the old-fashioned process runner) and a `dockerImage` attribute. The latter indicates the Docker image to use when running the related analyzer/responder. If it contains both, the runner is chosen according to the `job.runners` setting (`[docker, process]` by default). This setting defines how a job will be run. **The order is important**.
