@@ -32,7 +32,7 @@ on is free or requires special access or valid subscription or product license.
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cyberprotect](#cyberprotect)
     * [Cymon](#cymon)
-    * DNSSinkhole(#dnssinkhole)
+    * [DNSSinkhole](#dnssinkhole)
     * [DShield](#dshield)
     * [EmlParser](#emlparser)
     * [FileInfo](#fileinfo)
@@ -210,12 +210,12 @@ You need to sign up to the service at [https://cymon.io/user/signup](https://cym
 
 ### DNSSinkhole
 
-Checks if an IP address is registered in you sinkhole. 
+Checks if an IP address is registered in your sinkhole. 
 
 This analyzer comes in only one flavor.
 
 #### Requirements
-You need to provide the IP address as `ip` of your sinkhole and the sinkholed IP address as `sink_ip`.
+You need to provide the IP address of your sinkhole as the value of the`ip` parameter and the sinkholed IP address as the value of`sink_ip`.
 
 ### DShield
 Checks IP addresses against SANS ISC [DShield](https://www.dshield.org/) database.
@@ -552,7 +552,7 @@ Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email a
 You need to define the thresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
 
 ### Talos Reputation
-Query [Cisco Talos Intelligence](https://talosintelligence.com/) to check spam reputation against an IP.
+This analyzer lets you determine whether an IP address has been reported as a threat on [Cisco Talos Intelligence](https://talosintelligence.com/) service. No special access to is required to run the analyzer.
 
 This analyzer comes in only one flavor.
 
