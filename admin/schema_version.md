@@ -13,4 +13,5 @@ index:
 | 1.x            | N/A         |
 | 2.0.0          | cortex_1    |
 | 2.1.0          | cortex_2    |
-| 3.0.0          | cortex_3    |
+| 3.0.0-RC1      | cortex_3    |
+| 3.0.0-RC3      | cortex_4    |
