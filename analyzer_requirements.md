@@ -186,6 +186,13 @@ for more information on setting it up.
 To configure the analyzer you need to supply the **API URL** of your local instance
 as a value of the `url` parameter.
 
+In addition, since Cuckoo 2.0.7, you need to specify an **API token** used for authentication.
+This token can be found in your configuration, in the Cuckoo Working Directory (`$CWD/conf/cuckoo.conf`).
+
+Finally, if you secured your API calls thanks to HTTPS, using a custom CA, you can specify it in
+the `cert_path` parameter (`/etc/ssl/certs/my-custom-ca.pem`). Alternatively, you can disable TLS
+certificate verification setting the `cert_check` parameter to false.
+
 ### Cybercrime-Tracker
 Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
 
