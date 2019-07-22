@@ -97,7 +97,7 @@ For example, if the program requires a `thehive:case` (i.e. it applies at the ca
 			"key":"1234567890abcdef",
 			"max_tlp":1,
 			"check_tlp":true,
-			"max_pap":1
+			"max_pap":1,
 			"check_pap":true,
 			[..]
 		},
