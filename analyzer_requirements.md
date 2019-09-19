@@ -834,22 +834,22 @@ index=myindex_internet sourcetype=mysourcetype url=$args.url$*
 This query will recover the data using $args.url$.
 
 So, you can recover your data using :
-- $arg.type$: This parameter indicates the type of data (if you need so)
+- $args.type$: This parameter indicates the type of data (if you need so)
 
-- $arg.domain$: This parameter contains the data for an analysis over a domain
-- $arg.fqdn$: This parameter contains the data for an analysis over a fqdn
-- $arg.file$: This parameter contains the data for an analysis over a file
-- $arg.filename$: This parameter contains the data for an analysis over a filename
-- $arg.hash$: This parameter contains the data for an analysis over a hash
-- $arg.ip$: This parameter contains the data for an analysis over a ip
-- $arg.mail$: This parameter contains the data for an analysis over a mail
-- $arg.email$: This parameter contains the data for an analysis over a email
-- $arg.email_subject$: This parameter contains the data for an analysis over a email_subject
-- $arg.other$: This parameter contains the data for an analysis over a other
-- $arg.registry$: This parameter contains the data for an analysis over a registry
-- $arg.url$: This parameter contains the data for an analysis over a url
-- $arg.uri_path$: This parameter contains the data for an analysis over a uri_path
-- $arg.user-agent$: This parameter contains the data for an analysis over a user-agent
+- $args.domain$: This parameter contains the data for an analysis over a domain
+- $args.fqdn$: This parameter contains the data for an analysis over a fqdn
+- $args.file$: This parameter contains the data for an analysis over a file
+- $args.filename$: This parameter contains the data for an analysis over a filename
+- $args.hash$: This parameter contains the data for an analysis over a hash
+- $args.ip$: This parameter contains the data for an analysis over a ip
+- $args.mail$: This parameter contains the data for an analysis over a mail
+- $args.email$: This parameter contains the data for an analysis over a email
+- $args.email_subject$: This parameter contains the data for an analysis over a email_subject
+- $args.other$: This parameter contains the data for an analysis over a other
+- $args.registry$: This parameter contains the data for an analysis over a registry
+- $args.url$: This parameter contains the data for an analysis over a url
+- $args.uri_path$: This parameter contains the data for an analysis over a uri_path
+- $args.user-agent$: This parameter contains the data for an analysis over a user-agent
 
 #### Taxonomies
 They are 5 taxonomies available on this analyzer:
