@@ -815,20 +815,22 @@ This analyzer comes in 10 flavors:
 #### Requirements
 You need to have access to a Splunk instance with a dedicated account. For any saved search you want to use, you have to group them in the same Application and with the same owner.
 When you configure an analyzer, it will ask you these information:
-- host: This is the domain name or the IP of your Splunk instance.
-- port: This is the port to reach to access Splunk (HTTPS or API).
-- username (optional): If your Splunk instance has authentication, you need an account to access to it (and to the indexes you want to search). Please avoid to use admin. 
-- password (optional): If your Splunk instance has authentication, this is the password of the previous account. Please avoid to use admin and respect password complexity. No token access is supported.
-- application: This is the application in which all the saved searches are stored on your Splunk instance.
-- owner: This is the owner of all the saved searches, it must be the same for all of them. This can be different from the username mentionned above but you will need shared rights.
-- savedsearches: A list of all saved searches you want to execute. You just have to put the name of the saved searches here. **Each saved search will be executed/dispatch in parallel (and so they will become jobs)  but the Cortex job will finish once all Splunk jobs are done**.
-- max_count: This parameter is set to 1,000 by default. It's the number of results to recover from the job. A limit is set to avoid any trouble in TheHive/Cortex on the GUI. If value is set to 0, then all available results are returned.
+- **host**: This is the domain name or the IP of your Splunk instance.
+- **port**: This is the port to reach to access Splunk (HTTPS or API).
+- **username** (optional): If your Splunk instance has authentication, you need an account to access to it (and to the indexes you want to search). Please avoid to use admin. 
+- **password** (optional): If your Splunk instance has authentication, this is the password of the previous account. Please avoid to use admin and respect password complexity. No token access is supported.
+- **application**: This is the application in which all the saved searches are stored on your Splunk instance.
+- **owner**: This is the owner of all the saved searches, it must be the same for all of them. This can be different from the username mentionned above but you will need shared rights.
+- **savedsearches**: A list of all saved searches you want to execute. You just have to put the name of the saved searches here. **Each saved search will be executed/dispatch in parallel (and so they will become jobs)  but the Cortex job will finish once all Splunk jobs are done**.
+- **max_count**: This parameter is set to 1,000 by default. It's the number of results to recover from the job. A limit is set to avoid any trouble in TheHive/Cortex on the GUI. If value is set to 0, then all available results are returned.
 
 #### How to recover arguments in Splunk ?
 All arguments can be retrieve using "$args.DATATYPE$". As an example is better than a long speech, here it is:
 Imagine that you have a search with this query:
-```index=myindex_internet sourcetype=mysourcetype url=$args.url$*
-| stats count by user, url, src_ip```
+```
+index=myindex_internet sourcetype=mysourcetype url=$args.url$*
+| stats count by user, url, src_ip
+```
 This query will recover the data using $args.url$.
 
 So, you can recover your data using :
