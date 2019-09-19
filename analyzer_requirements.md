@@ -80,7 +80,7 @@ on is free or requires special access or valid subscription or product license.
     * [MnemonicPDNS](#mnemonicpdns)
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
-    * [Splunk] (#splunk)
+    * [Splunk](#splunk)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
