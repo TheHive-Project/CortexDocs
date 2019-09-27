@@ -31,7 +31,6 @@ on is free or requires special access or valid subscription or product license.
     * [CuckooSandbox](#cuckoosandbox)
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cyberprotect](#cyberprotect)
-    * [Cymon](#cymon)
     * [DNSSinkhole](#dnssinkhole)
     * [DShield](#dshield)
     * [EmlParser](#emlparser)
@@ -199,14 +198,6 @@ Use the [Cyberprotect](https://threatscore.cyberprotect.fr/) ThreatScore service
 This analyzer comes in only one flavor called **Cyberprotect_ThreatScore**.
 
 No configuration is required. It can be used out of the box.
-
-### Cymon
-Checks IP addresses against [Cymon.io](https://cymon.io/).
-
-This analyzer comes in only one flavor.
-
-#### Requirements
-You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
 
 ### DNSSinkhole
 
