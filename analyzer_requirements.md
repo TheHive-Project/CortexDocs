@@ -824,7 +824,6 @@ When you configure an analyzer, it will ask you these information:
 - **savedsearches**: A list of all saved searches you want to execute. You just have to put the name of the saved searches here. **Each saved search will be executed/dispatch in parallel (and so they will become jobs)  but the Cortex job will finish once all Splunk jobs are done**.
 - **earliest_time**: If not empty, this parameter will specify the earliest time to use for all searches. If empty, the earliest time set in the saved search will be used by Splunk 
 - **latest_time**: If not empty, this parameter will specify the latest time to use for all searches. If empty, the latest time set in the saved search will be used by Splunk 
-
 - **max_count**: This parameter is set to 1,000 by default. It's the number of results to recover from the job. A limit is set to avoid any trouble in TheHive/Cortex on the GUI. If value is set to 0, then all available results are returned.
 
 #### How to recover arguments in Splunk ?
