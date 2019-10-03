@@ -62,16 +62,16 @@ The settings `analyzer.path` and `responder.path` are deprecated but will contin
    - the path or URL (*http(s)*) of a JSON file containing all worker definitions (merge of all JSONs in one array).
 
 We provide a file, hosted on GitHub, containing all the analyzers of the [Cortex-Analyzers](https://github.com/TheHive-Project/Cortex-Analyzers)repository:
- - [analyzers/catalog-devel.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/develop/analyzers/catalog-devel.json): contains the latest versions of the analyzers, **before their release**. Each commit in the develop branch update the docker images used by this catalog. 
- - [analyzers/catalog-stable.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/analyzers/catalog-stable.json): contains the stable versions of the analyzers. They are never been updated. The Analyzer ID points to an exact version of the analyzer. If you want to use a new version of an analyzer, you can but it is not done automatically. You need to enable it in the organisation administration page of the Cortex Web UI.
- - [analyzers/catalog.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/analyzers/catalog.json): Docker images in this catalog contains minor version updates (without breaking changes).
+ - [analyzers-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-devel.json): contains the latest versions of the analyzers, **before their release**. Each commit in the develop branch update the docker images used by this catalog. 
+ - [analyzers-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-stable.json): contains the stable versions of the analyzers. They are never been updated. The Analyzer ID points to an exact version of the analyzer. If you want to use a new version of an analyzer, you can but it is not done automatically. You need to enable it in the organisation administration page of the Cortex Web UI.
+ - [analyzers.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers.json): Docker images in this catalog contains minor version updates (without breaking changes).
 
 Similar catalogs exist for responders:
 
--  [responders/catalog-devel.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/develop/responders/catalog-devel.json)
-- [responders/catalog-stable.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog-stable.json)
-- [responders/catalog.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog.json).
+-  [responders-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-devel.json)
+- [responders-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-stable.json)
+- [responders.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders.json).
 
 By default, before start a job, Cortex checks if there is a new version of the Docker image available on the repository. If so, it will download and use it. This behavior can be disabled by setting `docker.autoUpdate` to false.
-  
+
 The JSON files can have a  `command` (can be run using the old-fashioned process runner) and a `dockerImage` attribute. The latter indicates the Docker image to use when running the related analyzer/responder. If it contains both, the runner is chosen according to the `job.runners` setting (`[docker, process]` by default). This setting defines how a job will be run. **The order is important**.

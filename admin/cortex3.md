@@ -23,13 +23,13 @@ In Cortex configuration file, `analyzer.urls` and `responder.urls` (previously `
    - a path or an url (http(s)) to a JSON file containing all worker definitions (merge of all JSON in one array)
 
 If you want to use dockerized analyzers, you can add the following urls:
- - [catalog-stable.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/analyzers/catalog-stable.json) (once used, analyzer is never updated) 
- - [catalog.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/analyzers/catalog.json) (updated when new version is released) 
- - [catalog-devel.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/analyzers/catalog-devel.json) (updated at each commit, used for development)
- 
+ - [analyzers-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-stable.json) (once used, analyzer is never updated) 
+ - [analyzers.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers.json) (updated when new version is released) 
+ - [analyzers-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-devel.json) (updated at each commit, used for development)
+
 For responders urls are:
-  - [catalog-stable.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog-stable.json) (once used, analyzer is never updated) 
-  - [catalog.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog.json) (updated when new version is released) 
-  - [catalog-devel.json](https://raw.githubusercontent.com/TheHive-Project/Cortex-Analyzers/master/responders/catalog-devel.json) (updated at each commit, used for development)
-  
+  - [responders-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-stable.json) (once used, analyzer is never updated) 
+  - [responders.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders.json) (updated when new version is released) 
+  - [responders-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-devel.json) (updated at each commit, used for development)
+
   
