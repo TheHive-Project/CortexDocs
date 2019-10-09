@@ -816,7 +816,8 @@ This analyzer comes in 10 flavors:
 You need to have access to a Splunk instance with a dedicated account. For any saved search you want to use, you have to group them in the same Application and with the same owner.
 When you configure an analyzer, it will ask you these information:
 - **host**: This is the domain name or the IP of your Splunk instance.
-- **port**: This is the port to reach to access Splunk (HTTPS or API).
+- **port**: This is the port to reach to access Splunk (API).
+- **port_gui**: This is the port to reach to access Splunk (HTTP(s))
 - **username** (optional): If your Splunk instance has authentication, you need an account to access to it (and to the indexes you want to search). Please avoid to use admin. 
 - **password** (optional): If your Splunk instance has authentication, this is the password of the previous account. Please avoid to use admin and respect password complexity. No token access is supported.
 - **application**: This is the application in which all the saved searches are stored on your Splunk instance.
