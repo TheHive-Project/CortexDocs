@@ -811,6 +811,7 @@ This analyzer comes in 10 flavors:
 - Splunk_Search_**Registry**: Dispatch a list of saved searches on a given registry
 - Splunk_Search_**URL_URI_Path**: Dispatch a list of saved searches on a given url/uri_path
 - Splunk_Search_**User_Agent**: Dispatch a list of saved searches on a given user_agent
+- Splunk_Search_**User**: Dispatch a list of saved searches on a given user id (variable name is 'other'
 
 #### Requirements
 You need to have access to a Splunk instance with a dedicated account. For any saved search you want to use, you have to group them in the same Application and with the same owner.
