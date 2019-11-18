@@ -186,7 +186,7 @@ Both APIs supports the `range` and `sort` query parameters described in [paging 
 It is possible to create an organization using the following API call, which requires the API key associated with a `superAdmin` account:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/organization' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'https://CORTEX_APP_URL:9001/api/organization' -d '{
   "name": "demo",
   "description": "Demo organization",
   "status": "Active"
