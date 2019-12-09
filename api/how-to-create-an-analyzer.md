@@ -569,7 +569,7 @@ configuration in `/etc/cortex/application.conf` if needed. You can provide this 
 ### Verify Execution
 Use these three simple checks before submtting your analyzer:
 
--   Ensure it works with the expecyed configuration, TLP or dataType.
+-   Ensure it works with the expected configuration, TLP or dataType.
 -   Ensure it works with missing configuration, dataType or TLP: your
 analyzer must generate an explicit error message.
 -   Ensure the long report template handles error messages correctly.
