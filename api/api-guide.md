@@ -186,7 +186,7 @@ Both APIs supports the `range` and `sort` query parameters described in [paging 
 It is possible to create an organization using the following API call, which requires the API key associated with a `superAdmin` account:
 
 ```bash
-curl -XPOST -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/organization' -d '{
+curl -XPOST -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: application/json' 'https://CORTEX_APP_URL:9001/api/organization' -d '{
   "name": "demo",
   "description": "Demo organization",
   "status": "Active"
@@ -373,7 +373,7 @@ curl -XPATCH -H 'Authorization: Bearer **API_KEY**' -H 'Content-Type: applicatio
 It returns a JSON object representing the updated user as described [above](#user-model).
 
 ### Get Details
-This call returns the user details. It's available to users with `superAdmin` or `orgAdmin` roles. Every user can also use it to read their own details.
+This call returns the user details. It's available to users with `superAdmin` roles and to users in the same organization. Every user can also use it to read their own details.
 
 ```bash
 curl -H 'Authorization: Bearer **API_KEY**' 'https://CORTEX_APP_URL:9001/api/user/USER_LOGIN'

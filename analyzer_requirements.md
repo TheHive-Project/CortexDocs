@@ -32,6 +32,7 @@ on is free or requires special access or valid subscription or product license.
     * [Cybercrime-Tracker](#cybercrime-tracker)
     * [Cyberprotect](#cyberprotect)
     * [Cymon](#cymon)
+    * [DNSSinkhole](#dnssinkhole)
     * [DShield](#dshield)
     * [EmlParser](#emlparser)
     * [FileInfo](#fileinfo)
@@ -57,6 +58,7 @@ on is free or requires special access or valid subscription or product license.
     * [Robtex](#robtex)
     * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
+    * [Talos Reputation](#talos-reputation)
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
@@ -184,6 +186,13 @@ for more information on setting it up.
 To configure the analyzer you need to supply the **API URL** of your local instance
 as a value of the `url` parameter.
 
+In addition, since Cuckoo 2.0.7, you need to specify an **API token** used for authentication.
+This token can be found in your configuration, in the Cuckoo Working Directory (`$CWD/conf/cuckoo.conf`).
+
+Finally, if you secured your API calls thanks to HTTPS, using a custom CA, you can specify it in
+the `cert_path` parameter (`/etc/ssl/certs/my-custom-ca.pem`). Alternatively, you can disable TLS
+certificate verification setting the `cert_check` parameter to false.
+
 ### Cybercrime-Tracker
 Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
 
@@ -205,6 +214,15 @@ This analyzer comes in only one flavor.
 
 #### Requirements
 You need to sign up to the service at [https://cymon.io/user/signup](https://cymon.io/user/signup). Once you do, provide your API key as the value to the `key` parameter.
+
+### DNSSinkhole
+
+Checks if an IP address is registered in your sinkhole. 
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+You need to provide the IP address of your sinkhole as the value of the`ip` parameter and the sinkholed IP address as the value of`sink_ip`.
 
 ### DShield
 Checks IP addresses against SANS ISC [DShield](https://www.dshield.org/) database.
@@ -540,6 +558,13 @@ Query [StopForumSpam](http://www.stopforumspam.com) to check if an IP or email a
 #### Requirements
 You need to define the thresholds above which the analyzed observable should be marked as `suspicious` or `malicious`.
 
+### Talos Reputation
+This analyzer lets you determine whether an IP address has been reported as a threat on [Cisco Talos Intelligence](https://talosintelligence.com/) service. No special access to is required to run the analyzer.
+
+This analyzer comes in only one flavor.
+
+No configuration is needed. It can be used out of the box.
+
 ### ThreatCrowd
 Look up domains, mail and IP addresses on [ThreatCrowd](https://www.threatcrowd.org/), a service powered by AlienVault.
 
@@ -643,7 +668,7 @@ The Yeti analyzer requires you to have a local instance of [YETI](https://yeti-p
 deployed/configured. It is an open source tool that is free for use but needs
  to be manually deployed in your environment.
 
-Provide the URL of your YETI instance as a value for the `url` parameter.
+Provide the URL of your YETI instance as a value for the `url` parameter. Yhe analyzer also allow you to use an API key if needed.
 
 ## Analyzers Requiring Special Access
 ### CERTatPassiveDNS

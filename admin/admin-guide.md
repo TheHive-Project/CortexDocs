@@ -203,16 +203,18 @@ appended to the index base name (the 8th version of the schema uses the index
 [scroll](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/search-request-scroll.html)
 feature: the results are retrieved through pagination. You can specify the size
 of the page (`search.pagesize`) and how long pages are kept in Elasticsearch
-((`search.keepalive`) before purging.
+(`search.keepalive`) before purging.
 
 XPack and SearchGuard are optional and exclusive. If Cortex finds a valid configuration for XPack, SearchGuard configuration is ignored.
 
 ### Analyzers and Responders
-Cortex looks for installed analyzers and responders by scanning directories configured in
-`analyzer.path` and in `responder.path` respectively. This item is multi-valued.
+Cortex is able to run workers (analyzers and responders) installed locally or available as Docker image. Settings `analyzer.urls` and in `responder.urls` list paths or urls where Cortex looks for analyzers and responders. Theses settings accept:
+1. a path to a directory that Cortex scans to locate workers
+1. a path or an URL to a JSON file containing a JSON array of worker definitions
 
-These paths should contain directories with the corresponding analyzer JSON files. These files describe each
-flavor (name, version, license...) and how to run them.
+Worker definition is a JSON object that describe the worker, how to configure it and how to run it. If it contains a field "command", worker can be run using process runner (i.e. the command is executed). If it contains a field "dockerImage", worker can be run using docker runner (i.e. a container based on this image is started). If it contains both, the runner is chosen according to `job.runners` settings (`[docker, process]` by default).
+
+For security reason, if worker definitions fetched from remote url (http/https) contain command, they are ignored.
 
 You can control the number of simultaneous jobs that Cortex executes in parallel using the
 `analyzer.fork-join-executor` configuration item. The value depends on the
@@ -224,7 +226,7 @@ Similar settings can also be applied to responders.
 ```
 analyzer {
   # Directory that holds analyzers
-  path = [
+  urls = [
     "/path/to/default/analyzers",
     "/path/to/my/own/analyzers"
   ]
@@ -241,7 +243,7 @@ analyzer {
 
 responder {
   # Directory that holds responders
-  path = [
+  urls = [
     "/path/to/default/responders",
     "/path/to/my/own/responders"
   ]
@@ -258,7 +260,7 @@ responder {
 ```
 
 ### Authentication
-Like TheHive, Cortex supports local, LDAP, Active Directory (AD), X.509 SSO and/or API keys for authentication and soon OAuth2.
+Like TheHive, Cortex supports local, LDAP, Active Directory (AD), X.509 SSO and/or API keys for authentication and OAuth2.
 
 Please note that API keys can only be used to interact with the Cortex API (for example when TheHive is interfaced with a Cortex instance, it must use an API key to authenticate to it). API keys cannot be used to authenticate to the Web UI. By default, Cortex relies on local credentials stored in Elasticsearch.
 
