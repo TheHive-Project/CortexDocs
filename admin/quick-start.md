@@ -29,7 +29,7 @@ To generate a key, use the following command line:
 play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 
-search.host = ['127.0.0.1:9300']
+search.host = ["127.0.0.1:9300"]
 analyzer.urls = ["/opt/Cortex-Analyzers/analyzers"]
 
 ) | sudo tee -a /etc/cortex/application.conf
