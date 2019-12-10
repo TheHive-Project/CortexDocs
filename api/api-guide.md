@@ -1,5 +1,5 @@
 # API Guide
-This guide applies only to Cortex 2. It is not applicable to Cortex 1.
+This guide applies only to Cortex 2 and newer. It is not applicable to Cortex 1.
 
 ## Table of Contents
   * [Introduction](#introduction)

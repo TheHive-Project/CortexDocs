@@ -116,8 +116,8 @@ As described in the section above, Analyzers can only be configured using the We
 
 ### Database
 
-Cortex relies on the Elasticsearch 5.x search engine to store all persistent data.
-Elasticsearch 5.x is not part of the Cortex package. It must be installed and configured
+Cortex relies on the Elasticsearch 5.x (Cortex 3 also supports Elasticsearch 6.x) search engine to store all persistent data.
+Elasticsearch is not part of the Cortex package. It must be installed and configured
 as a standalone instance which can be located on the same machine. For more
 information on how to set up Elasticsearch, please refer to [Elasticsearch
 installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/_installation.html).

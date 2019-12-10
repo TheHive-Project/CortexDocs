@@ -1,5 +1,5 @@
 # Installation Guide
-This guide applies to Cortex 2 only.
+This guide applies to Cortex 2 and newer only.
 
 Before installing Cortex, you need to choose the installation option which suits your environment as described below, install the analyzers then proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
@@ -83,7 +83,7 @@ echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo te
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
 
-Cortex 2 requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
+Cortex 2 and newer requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
 
 #### Use Docker-compose
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
@@ -183,7 +183,7 @@ Like analyzers, responders are embedded in the docker image under `/opt/Cortex-A
 Once the Docker image is up and running, proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release Versions
-If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/cortex:version-RCx`. For example `thehiveproject/cortex:2.1.0-RC1`.
+If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/cortex:version-RCx`. For example `thehiveproject/cortex:3.0.0-RC4`.
 
 ### Binary
 The following section contains the instructions to manually install Cortex using binaries on **Ubuntu 16.04 LTS**. 
@@ -192,7 +192,7 @@ The following section contains the instructions to manually install Cortex using
 Install a minimal Ubuntu 16.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
-- Elasticsearch 5.x
+- Elasticsearch 5.x (Cortex 3 also supports Elasticsearch 6.x)
 
 Make sure your system is up-to-date:
 
