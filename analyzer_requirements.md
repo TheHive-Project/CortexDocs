@@ -59,7 +59,7 @@ on is free or requires special access or valid subscription or product license.
     * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
     * [Talos Reputation](#talos-reputation)
-    * [Team Cymru MHR](#teamcymrumhr)
+    * [Team Cymru MHR](#team-cymru-mhr)
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
