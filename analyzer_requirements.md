@@ -59,6 +59,7 @@ on is free or requires special access or valid subscription or product license.
     * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
     * [Talos Reputation](#talos-reputation)
+    * [Team Cymru MHR](#teamcymrumhr)
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
     * [Tor Project](#tor-project)
@@ -564,6 +565,13 @@ This analyzer lets you determine whether an IP address has been reported as a th
 This analyzer comes in only one flavor.
 
 No configuration is needed. It can be used out of the box.
+
+### Team Cymru MHR 
+This analyzer allows you to submit a file hash to [Team Cymru's Malware Hash Registrt](https://www.team-cymru.com/mhr.html), and return an evaluation (detection percentage)
+
+The analyzer comes in only one flavor called `HashLookup`.
+
+No configuration is required. It can be used out of the box.
 
 ### ThreatCrowd
 Look up domains, mail and IP addresses on [ThreatCrowd](https://www.threatcrowd.org/), a service powered by AlienVault.
