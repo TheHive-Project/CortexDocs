@@ -567,7 +567,7 @@ This analyzer comes in only one flavor.
 No configuration is needed. It can be used out of the box.
 
 ### Team Cymru MHR 
-This analyzer allows you to submit a file hash to [Team Cymru's Malware Hash Registrt](https://www.team-cymru.com/mhr.html), and return an evaluation (detection percentage)
+This analyzer allows you to submit a file hash to [Team Cymru's Malware Hash Registry](https://www.team-cymru.com/mhr.html), and return an evaluation (detection percentage).
 
 The analyzer comes in only one flavor called `HashLookup`.
 
