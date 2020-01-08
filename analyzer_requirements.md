@@ -850,7 +850,7 @@ Provide your username as a value for the `username` parameter and API key as
 a value for the `key` parameter.
 
 ### DomainTools Iris
-Look up domain names, IP addresses, e-mail addresses, and SSL hashes
+Look up domain names, IP addresses, e-mail addresses, and SSL hashes using the popular
 [DomainTools Iris](https://www.domaintools.com/resources/api-documentation/iris-investigate/) service API.
 
 The analyzer comes in 2 flavors:
