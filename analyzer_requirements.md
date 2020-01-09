@@ -81,6 +81,7 @@ on is free or requires special access or valid subscription or product license.
     * [SinkDB](#sinkdb)
     * [Shodan](#shodan)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
+    * [Autofocus](#autofocus)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
     * [EmergingThreats](#emergingthreats)
@@ -804,6 +805,19 @@ level account, otherwise a free one can be used.
 Supply the API key as the value for the `key` parameter.
 
 ## Subscription and License-based Analyzers
+### Autofocus
+[Autofocus](https://www.paloaltonetworks.com/cortex/autofocus) is a Threat Intelligence Platform provided by Palo Alto Networks as a commercial product
+
+This analyzer comes in 3 flavors:
+- AUTOFOCUS_**GetSampleAnalysis**: fetch the full analysis of sample based on its hash (hash).
+- AUTOFOCUS_**SearchIOC**: fetch samples linked to a specific IOC (domain, fqdn, user-agent, imphash, ip, mutex, url, tag).
+- AUTOFOCUS_**SearchJSON**: fetch samples matching a complex search in JSON format (other).
+
+#### Requirements
+You need to be an Autofocus customer of Palo Alto Networks to have access to their API and be able to use the analyzer.
+
+Provide your API key as a value to the `apikey` parameter.
+
 ### DNSDB
 Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
 
