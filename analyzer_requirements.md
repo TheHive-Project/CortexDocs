@@ -56,6 +56,7 @@ on is free or requires special access or valid subscription or product license.
     * [PhishingInitiative](#phishinginitiative)
     * [Pulsedive](#pusledive)
     * [Robtex](#robtex)
+    * [SpamhausDBL](#spamhausdbl)
     * [StaxxSearch](#staxxsearch)
     * [StopForumSpam](#stopforumspam)
     * [Talos Reputation](#talos-reputation)
@@ -536,6 +537,13 @@ This analyzer comes in three flavors:
 - Robtex_**Reverse_PDNS_Query**: check IPs in Robtex reverse passive DNS database.
 
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
+
+### SpamhausDBL
+This analyzer queries the [Spamhaus Domain Block List (DBL)](https://www.spamhaus.org/dbl/). which provides domain reputation information.
+
+This analyzer comes in only one flavor, `DBLLookup`.
+
+No configuration is needed. It can be used out of the box.
 
 ### StaxxSearch
 Fetch observable details from an [Anomali STAXX](https://www.anomali.com/platform/staxx) instance.
