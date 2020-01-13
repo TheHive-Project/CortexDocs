@@ -96,6 +96,8 @@ on is free or requires special access or valid subscription or product license.
     * [Umbrella](#umbrella)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
+* [Free Responders](#free-responders)
+  * [Palo Alto Minemeld](#palo-alto-minemeld)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
   * [Crownstrike Falcon](#crowdstrike-falcon)
   * [Umbrella blacklister](#umbrella-blacklister)
@@ -1049,13 +1051,44 @@ To configure the analyzer, provide the URL of the platform as a value for the
 To validate the X.509 certificate of your VMRay Analyzer Platform instance,
 use the `certpath` parameter.
 
+## Free Responders
+
+### Palo Alto Minemeld
+
+Submit indicators to a Palo Alto Minemeld instance from case observables.
+
+#### Requirements
+The following options are required in the Palo Alto Minemeld Responder configuration:
+
+`minemeld_url`   
+ URL of the Minemeld instance to which you will be posting indicators   
+ 
+`minemeld_user`   
+ User accessing the Minemeld instance to which you will be posting indicators   
+ 
+`minemeld_password`   
+ Password for the user accessing the Minemeld instance to which you will be posting indicators   
+ 
+`minemeld_indicator_list`      
+ Name of Minemeld indicator list to which you will be posting indicators (already created in Minemeld)   
+ 
+`minemeld_share_level`   
+ Share level for indicators (defaults to `red`)      
+ 
+`minemeld_confidence`   
+Confidence level for indicators  (defaults to `100`)    
+
+`minemeld_ttl`   
+TTL for indicators (defaults to `86400` seconds)      
+
+
 ## Subscription and License-based Responders
 
 ### Crowdstrike Falcon
 
 Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC API.
 
-### Requirements
+#### Requirements
 
 To configure the responder, provide the URL of the platform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
 
