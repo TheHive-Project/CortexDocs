@@ -96,6 +96,8 @@ on is free or requires special access or valid subscription or product license.
     * [Umbrella](#umbrella)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
+* [Free Responders](#free-responders)
+  * [Wazuh](#wazuh)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
   * [Crownstrike Falcon](#crowdstrike-falcon)
   * [Umbrella blacklister](#umbrella-blacklister)
