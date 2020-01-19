@@ -83,6 +83,7 @@ on is free or requires special access or valid subscription or product license.
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
+    * [DomainTools Iris](#domaintools-iris)
     * [EmergingThreats](#emergingthreats)
     * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
@@ -98,6 +99,8 @@ on is free or requires special access or valid subscription or product license.
     * [VMRay](#vmray)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
   * [Crownstrike Falcon](#crowdstrike-falcon)
+  * [DomainTools Iris Malicious Tags](#domaintools-iris-malicious-tags)
+  * [DomainTools Iris Risky DNS](#domaintools-iris-risky-dns)
   * [Umbrella blacklister](#umbrella-blacklister)
 
 ## Introduction
@@ -846,6 +849,23 @@ to use the analyzer.
 Provide your username as a value for the `username` parameter and API key as
 a value for the `key` parameter.
 
+### DomainTools Iris
+Look up domain names, IP addresses, e-mail addresses, and SSL hashes using the popular
+[DomainTools Iris](https://www.domaintools.com/resources/api-documentation/iris-investigate/) service API.
+
+The analyzer comes in 2 flavors:
+- DomainToolsIris_**Investigate**: Use DomainTools Iris API to investigate a domain.
+- DomainToolsIris_**Pivot**: Use DomainTools Iris API to pivot on ssl_hash, ip, or email.
+
+#### Requirements
+You need a [valid DomainTools API integration subscription](https://www.domaintools.com/products/api-integration/)
+to use the analyzer.
+
+Provide your username as a value for the `username` parameter and API key as
+a value for the `key` parameter.
+
+Setting the `pivot_count_threshold` will highlight items of interest in the template below that threshold.
+
 ### EmergingThreats
 Leverage Proofpoint's [Emerging Threats Intelligence](https://threatintel.proofpoint.com/)
 to assess the reputation of various observables and obtain additional and
@@ -1058,6 +1078,22 @@ Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC AP
 ### Requirements
 
 To configure the responder, provide the URL of the platform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
+
+### DomainTools Iris Malicious Tags
+
+Add tag saying that the observable and case have a malicious tag based on iris tags short summary from the DomainTools Iris investigate analyzer.
+
+#### Requirements
+
+To configure the responder, provide a set of values for the `monitored_iris_tags` parameter.
+
+### DomainTools Iris Risky DNS
+
+Add tag saying that the observable and case contains a risky DNS based on risk score short summary from the DomainTools Iris investigate analyzer.
+
+#### Requirements
+
+To configure the responder, provide a value for the `high_risk_threshold` parameter.
 
 ### Umbrella Blacklister
 
