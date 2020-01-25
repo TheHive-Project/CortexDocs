@@ -99,7 +99,7 @@ on is free or requires special access or valid subscription or product license.
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
-    * [AMPforEndpoints](#amp-for-endpoints)
+    * [AMP for Endpoints](#amp-for-endpoints)
     * [Crownstrike Falcon](#crowdstrike-falcon)
     * [Umbrella blacklister](#umbrella-blacklister)
 
