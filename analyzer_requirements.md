@@ -1102,7 +1102,7 @@ The [Cisco AMP for Endpoints](https://cisco.com/go/ampendpoints) responder has t
 - Remove a SHA256 from a Simple Custom Detection List
 - Move a connector GUID to a new group
 - Start Host Isolation
-    - Set a custom unlock code
+    - Can set a custom unlock code, if a custome unlock code isn't provided the unlock code is randomly genreated
 - Stop Host Isolation
 
 The analyzer comes in 5 flavors:
