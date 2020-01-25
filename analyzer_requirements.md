@@ -93,12 +93,15 @@ on is free or requires special access or valid subscription or product license.
     * [RecordedFuture](#recordedfuture)
     * [SecurityTrails](#securitytrails)
     * [SoltraEdge](#soltraedge)
+    * [Threat Grid](#threat-grid)
+    * [Threat Response](#threat-response)
     * [Umbrella](#umbrella)
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
-  * [Crownstrike Falcon](#crowdstrike-falcon)
-  * [Umbrella blacklister](#umbrella-blacklister)
+    * [AMPforEndpoints](#amp-for-endpoints)
+    * [Crownstrike Falcon](#crowdstrike-falcon)
+    * [Umbrella blacklister](#umbrella-blacklister)
 
 ## Introduction
 All analyzer and Responder configuration settings must be made using the Cortex Web UI. Please refer to the [Administration Guide](admin/admin-guide.md) for further details.
@@ -998,6 +1001,47 @@ Get information about any observable dataType from a SoltraEdge server.
 
 An account an a token from a SoltraEdge server are required to use this analyzer. Provide this information as values of `account`,`token` and `base_url` parameters. 
 
+### Threat Grid
+The [Cisco Threat Grid](https://cisco.com/go/threatgrid) analyzer has the following features:
+- Submit a `file` for analysis
+- Submit a `url` for analysis
+- Query Threat Grid for a `hash` (MD5, SHA1, SHA256) and get the highest scoring analysis results
+- Pivot into Threat Grid report to view the analysis
+- Pivot into Threat Grid report to a specific Behavioral Indicator
+- Pivot into Threat Grid report to a specific TCP/IP Stream
+
+The analyzer comes in only one flavor.
+
+#### Requirements
+You must have a Cisco Threat Grid Premium account with API access.
+
+To configure the analyzer, you must supply two parameters:
+- `tg_host`: URL of your Nessus scanner.
+- `api_key`: username to log to the scanner.
+
+### Threat Response
+The [Cisco Threat Response](https://cisco.com/go/threatresponse) analyzer has the following features:
+- Query Threat Response for Verdicts and Sightings for:
+    - `domain`
+    - `filename`
+    - `fqdn`
+    - `hash` (MD5, SHA1, SHA256)
+    - `ip`
+    - `url`
+- Pivot into a Threat Response investigation of an observable
+- If the AMP for Endpoints module is configured in Threat Resposnse and the feature is enabled on the analyzer; when a target is returned from the AMP for Endpoints module the analyzer will extract the connector GUIDs as Artifacts to enable seamless use of the [AMP for Endpoints Responder](#amp-for-endpoints)
+
+The analyzer comes in only one flavor.
+
+#### Requirements
+You must have a Cisco Threat Response account and a Threat Response API Client ID with the `enrich` scope.
+
+To configure the analyzer, you must supply three parameters:
+- `region`: The Threat Response region your account is in (US, EU, APJC).
+- `client_id`: Threat Response API Client ID with appropriate scopes.
+- `client_password`: Password for the Threat Response API Client.
+
+
 ### Umbrella
 
 Query the [Umbrella Reporting API](https://docs.umbrella.com/umbrella-api/docs/reporting-destinations-most-recent-requests) for recent DNS queries and their status, for a domain.
@@ -1050,6 +1094,33 @@ To validate the X.509 certificate of your VMRay Analyzer Platform instance,
 use the `certpath` parameter.
 
 ## Subscription and License-based Responders
+
+### AMP for Endpoints
+The [Cisco AMP for Endpoints](https://cisco.com/go/amp) responder has the following features:
+- Add a SHA256 to a Simple Custom Detection List
+    - The Hive Case ID and Description are appened to the description
+- Remove a SHA256 from a Simple Custom Detection List
+- Move a connector GUID to a new group
+- Start Host Isolation
+    - Set a custom unlock code
+- Stop Host Isolation
+
+The analyzer comes in 5 flavors:
+- AMPforEndpoints_**IsolationStart**: Start Host Isolation.
+- AMPforEndpoints_**IsolationStop**: Stop Host Isolation.
+- AMPforEndpoints_**MoveGUID**: Move Connector GUID to a new group.
+- AMPforEndpoints_**SCDAdd**: Add SHA256 to a Simple Custom Detetion List.
+- AMPforEndpoints_**SCDRemove**: Remove SHA256 from a Simple Custom Detetion List.
+
+#### Requirements
+You must have an AMP for Endpoints account and API Credentials with Read/Write API access
+
+To configure the analyzer, you must supply five parameters:
+- `amp_cloud`: The FQDN AMP for Endpoints Cloud your account is in.
+- `client_id`: AMP for Endpoints API Client ID.
+- `api_key`: Password for the AMP for Endpoints API Client.
+- `group_guid`: The Group GUID to move connectors into.
+- `scd_guid`: The Simple Custom Detection List GUID to add and remove SHA256s.
 
 ### Crowdstrike Falcon
 
