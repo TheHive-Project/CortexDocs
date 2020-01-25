@@ -1096,7 +1096,7 @@ use the `certpath` parameter.
 ## Subscription and License-based Responders
 
 ### AMP for Endpoints
-The [Cisco AMP for Endpoints](https://cisco.com/go/amp) responder has the following features:
+The [Cisco AMP for Endpoints](https://cisco.com/go/ampendpoints) responder has the following features:
 - Add a SHA256 to a Simple Custom Detection List
     - The Hive Case ID and Description are appened to the description
 - Remove a SHA256 from a Simple Custom Detection List
