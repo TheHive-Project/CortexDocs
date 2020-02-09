@@ -362,19 +362,6 @@ You need to have or create a free Hunter.io [account](https://hunter.io/).
 
 Provide the [API key](https://hunter.io/api_keys) as a value for the `key` parameter.
 
-### KnowBe4
-This responder will allow the integration between TheHive/Cortex and KnowBe4's User Events API.
-If a "Mail" dataType is tagged with a specified tag, such as "phished" (or left blank), then the associated user will have a custom event added to their profile in KnowBe4.
-
-#### Requirements
-You must provide an API key as a value for the `api_key` parameter to access the User Events API. API documentation to retreive your key is located at [User Event API ](https://developer.knowbe4.com/events/#tag/Introduction).
-
-You must provide the appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL).
-
-You must provide the appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline.
-
-You must provide the appropriate `event_type` parameter so that Cortex can create the correct type of event in the Users' timeline. [User Events API](https://developer.knowbe4.com/events/#tag/Event-Types).
-
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
 GeoLite2 **free** City and Country databases.
@@ -1093,6 +1080,18 @@ Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC AP
 ### Requirements
 
 To configure the responder, provide the URL of the platform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
+
+### KnowBe4
+This responder will allow the integration between TheHive/Cortex and KnowBe4's User Events API.
+If a mail observable is tagged with a specified tag, corresponding to the responder's configuration, (e.g. phished), then the associated user will have a custom event added to their profile in KnowBe4.
+
+#### Requirements
+You must provide:
+
+- an API key as a value for the `api_key` parameter to access the User Events API. API documentation to retreive your key is located at [User Event API ](https://developer.knowbe4.com/events/#tag/Introduction)
+- the appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL)
+- the appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline
+- the appropriate `event_type` parameter so that Cortex can create the correct type of event in the Users' timeline. [User Events API](https://developer.knowbe4.com/events/#tag/Event-Types).
 
 ### Umbrella Blacklister
 
