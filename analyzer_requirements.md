@@ -849,6 +849,22 @@ to use the analyzer.
 Provide your username as a value for the `username` parameter and API key as
 a value for the `key` parameter.
 
+### DomainTools Iris
+ Look up domain names, IP addresses, e-mail addresses, and SSL hashes using the popular
+ [DomainTools Iris](https://www.domaintools.com/resources/api-documentation/iris-investigate/) service API.
+
+ The analyzer comes in 2 flavors:
+ - DomainToolsIris_**Investigate**: Use DomainTools Iris API to investigate a domain.
+ - DomainToolsIris_**Pivot**: Use DomainTools Iris API to pivot on ssl_hash, ip, or email.
+
+ #### Requirements
+ You need a [valid DomainTools API integration subscription](https://www.domaintools.com/products/api-integration/) to use the analyzer:
+
+- Provide your username as a value for the `username` parameter and API key as
+ a value for the `key` parameter
+- Setting the `pivot_count_threshold` will highlight items of interest in the template below that threshold
+
+
 ### EmergingThreats
 Leverage Proofpoint's [Emerging Threats Intelligence](https://threatintel.proofpoint.com/)
 to assess the reputation of various observables and obtain additional and
@@ -1088,10 +1104,10 @@ If a mail observable is tagged with a specified tag, corresponding to the respon
 #### Requirements
 You must provide:
 
-- an API key as a value for the `api_key` parameter to access the User Events API. API documentation to retreive your key is located at [User Event API ](https://developer.knowbe4.com/events/#tag/Introduction)
-- the appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL)
-- the appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline
-- the appropriate `event_type` parameter so that Cortex can create the correct type of event in the Users' timeline. [User Events API](https://developer.knowbe4.com/events/#tag/Event-Types).
+- An API key as a value for the `api_key` parameter to access the User Events API. API documentation to retreive your key is located at [User Event API ](https://developer.knowbe4.com/events/#tag/Introduction)
+- The appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL)
+- The appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline
+- The appropriate `event_type` parameter so that Cortex can create the correct type of event in the Users' timeline. [User Events API](https://developer.knowbe4.com/events/#tag/Event-Types).
 
 ### Umbrella Blacklister
 
