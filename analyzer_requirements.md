@@ -758,6 +758,11 @@ Access to IBM X-Force Threat Exchange requires an [IBM ID](https://www.ibm.com/a
 
 Once you have access to the service, supply the URL of the service as value for the `url` parameter, the API key associated with your account as value for the `key` parameter and the associated password as the value of the `pwd` parameter.
 
+### IPInfo
+checks the reputation of an email address against the [emailrep.io](https://emailrep.io/) database.
+
+This analyzer comes in only one flavor, and no specific configuration is required.
+
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
 
