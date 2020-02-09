@@ -770,6 +770,11 @@ You need access to Malpedia to use this analyzer. Please note that Malpedia does
 
 If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
 
+### Maltiverse
+Query the free [Maltiverse](https://maltiverse.com/search) Threat Intelligence platform for enrichment information.
+
+This analyzer comes in only one flavor, and no specific configuration is required.
+
 ### Malwares
 Query [Malwares.com](https://www.malwares.com/) and get reports on files, hashes, domain names and IP addresses.
 
