@@ -966,6 +966,9 @@ The analyzer comes in 8 flavors:
 - PassiveTotal_**Ssl_Certificate_History**: Ssl Certificate History Lookup.
 - PassiveTotal_**Unique_Resolutions**: Unique Resolutions Lookup.
 - PassiveTotal_**Whois_Details**: Whois Details Lookup.
+- PassiveTotal_**Trackers**: tracker lookups.
+- PassiveTotal_**Host_Pairs**: host pairs lookups.
+- PassiveTotal_**Components**: Components lookups.
 
 #### Requirements
 You need a PassiveTotal account to obtain the API key which is required to
