@@ -783,6 +783,15 @@ You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.co
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
 
+### MalwareClustering
+Get the latest Malwares report for a file, hash, domain or an IP address. Refer to this [presentation](https://www.youtube.com/watch?v=nt2l5m8AJpQ) to learn more about this analyzer.
+In order to use the analyzer, you need to point it to a Neo4j server and provide:
+- `n4j_host`: host address of Neo4j server, , 
+- `n4j_port`: port number of Neo4j server 
+- `n4j_user`: Neo4j server user
+-  `n4j_pwd`:  Neo4j server password
+-  `threshold`: ApiScout correlation threshold
+
 ### MnemonicPDNS
 Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
 
