@@ -35,6 +35,7 @@ on is free or requires special access or valid subscription or product license.
     * [DNSSinkhole](#dnssinkhole)
     * [DShield](#dshield)
     * [EmlParser](#emlparser)
+    * [EmailRep](#emailrep)
     * [FileInfo](#fileinfo)
     * [FireHOLBlocklists](#fireholblocklists)
     * [Fortiguard](#fortiguard)
@@ -45,7 +46,8 @@ on is free or requires special access or valid subscription or product license.
     * [Hippocampe](#hippocampe)
     * [HybridAnalysis](#hybridanalysis)
     * [Hunterio_DomainSearch](#hunterio_domainSearch)
-    * [KnowBe4](#knowbe4)
+    * [Maltiverse](#maltiverse)
+    * [MalwareClustering](#malwareclustering)
     * [MaxMind](#maxmind)
     * [MISP](#misp)
     * [MISP Warninglists](#misp-warninglists)
@@ -78,6 +80,7 @@ on is free or requires special access or valid subscription or product license.
     * [CIRCLPassiveSSL](#circlpassivessl)
     * [GreyNoise](#greynoise)
     * [IBM X-Force](#ibm-x-force)
+    * [IPInfo](#ipinfo)
     * [Malpedia](#malpedia)
     * [Malwares](#malwares)
     * [MnemonicPDNS](#mnemonicpdns)
@@ -87,6 +90,7 @@ on is free or requires special access or valid subscription or product license.
     * [Autofocus](#autofocus)
     * [DNSDB](#dnsdb)
     * [DomainTools](#domaintools)
+    * [DomainToolsIris](#domaintoolsiris)
     * [EmergingThreats](#emergingthreats)
     * [FireEye iSIGHT](#fireeye-isight)
     * [JoeSandbox](#joesandbox)
@@ -105,6 +109,7 @@ on is free or requires special access or valid subscription or product license.
   * [Palo Alto Minemeld](#palo-alto-minemeld)
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
   * [Crownstrike Falcon](#crowdstrike-falcon)
+  * [KnowBe4](#KnowBe4) 
   * [Umbrella blacklister](#umbrella-blacklister)
 
 ## Introduction
@@ -238,6 +243,11 @@ The analyzer comes in only one flavor called *DShield_lookup*.
 
 No configuration is required. It can be used out of the box.
 
+### EmailRep
+checks the reputation of an email address against the [emailrep.io](https://emailrep.io/) database.
+
+This analyzer comes in only one flavor, and no specific configuration is required.
+
 ### EmlParser
 Use the [eml_parser python library](https://github.com/GOVCERT-LU/eml_parser) to parse EML email and extract useful information.
 
@@ -365,6 +375,20 @@ This analyzer comes in only one flavor called *Hunterio_DomainSearch*.
 You need to have or create a free Hunter.io [account](https://hunter.io/). 
 
 Provide the [API key](https://hunter.io/api_keys) as a value for the `key` parameter.
+
+### Maltiverse
+Query the free [Maltiverse](https://maltiverse.com/search) Threat Intelligence platform for enrichment information.
+
+This analyzer comes in only one flavor, and no specific configuration is required.
+
+### MalwareClustering
+Get the latest Malwares report for a file, hash, domain or an IP address. Refer to this [presentation](https://www.youtube.com/watch?v=nt2l5m8AJpQ) to learn more about this analyzer.
+In order to use the analyzer, you need to point it to a Neo4j server and provide:
+- `n4j_host`: host address of Neo4j server, , 
+- `n4j_port`: port number of Neo4j server 
+- `n4j_user`: Neo4j server user
+-  `n4j_pwd`:  Neo4j server password
+-  `threshold`: ApiScout correlation threshold
 
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
@@ -692,6 +716,7 @@ deployed/configured. It is an open source tool that is free for use but needs
 Provide the URL of your YETI instance as a value for the `url` parameter. Yhe analyzer also allow you to use an API key if needed.
 
 ## Analyzers Requiring Special Access
+
 ### CERTatPassiveDNS
 Check CERT.at Passive DNS Service for a given domain.
 
@@ -759,9 +784,12 @@ Access to IBM X-Force Threat Exchange requires an [IBM ID](https://www.ibm.com/a
 Once you have access to the service, supply the URL of the service as value for the `url` parameter, the API key associated with your account as value for the `key` parameter and the associated password as the value of the `pwd` parameter.
 
 ### IPInfo
-checks the reputation of an email address against the [emailrep.io](https://emailrep.io/) database.
+Get enrichment information from [ipinfo.io](ipinfo.io) service.
+This analyzer comes in two flavors: 
+- IPinfo_**Details** : IPinfo details lookup.
+- IPinfo_**Hosted_Domains** : Host domain lookup.
 
-This analyzer comes in only one flavor, and no specific configuration is required.
+To query the service, you need to provide an API key in the parameter `api_key`. 
 
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
@@ -775,11 +803,6 @@ You need access to Malpedia to use this analyzer. Please note that Malpedia does
 
 If you have access to Malpedia, provide your username as the value for the `username` parameter and the associated password as the value of the `password` parameter then specify a location where the analyzer will download the YARA rules to using the `path` parameter.
 
-### Maltiverse
-Query the free [Maltiverse](https://maltiverse.com/search) Threat Intelligence platform for enrichment information.
-
-This analyzer comes in only one flavor, and no specific configuration is required.
-
 ### Malwares
 Query [Malwares.com](https://www.malwares.com/) and get reports on files, hashes, domain names and IP addresses.
 
@@ -792,15 +815,6 @@ hash, domain or an IP address.
 You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account.
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
-
-### MalwareClustering
-Get the latest Malwares report for a file, hash, domain or an IP address. Refer to this [presentation](https://www.youtube.com/watch?v=nt2l5m8AJpQ) to learn more about this analyzer.
-In order to use the analyzer, you need to point it to a Neo4j server and provide:
-- `n4j_host`: host address of Neo4j server, , 
-- `n4j_port`: port number of Neo4j server 
-- `n4j_user`: Neo4j server user
--  `n4j_pwd`:  Neo4j server password
--  `threshold`: ApiScout correlation threshold
 
 ### MnemonicPDNS
 Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
