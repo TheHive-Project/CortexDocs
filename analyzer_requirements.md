@@ -101,11 +101,8 @@ on is free or requires special access or valid subscription or product license.
     * [VirusTotal](#virustotal)
     * [VMRay](#vmray)
 * [Free Responders](#free-responders)
-<<<<<<< HEAD
   * [Wazuh](#wazuh)
-=======
   * [Palo Alto Minemeld](#palo-alto-minemeld)
->>>>>>> 9f31e2b41177c0122b8f8d58423206c9b5f34d6b
 * [Subscription and License-based Responders](#subscription-and-license-based-responders)
   * [Crownstrike Falcon](#crowdstrike-falcon)
   * [Umbrella blacklister](#umbrella-blacklister)
@@ -828,12 +825,13 @@ level account, otherwise a free one can be used.
 Supply the API key as the value for the `key` parameter.
 
 ## Subscription and License-based Analyzers
+
 ### Autofocus
-[Autofocus](https://www.paloaltonetworks.com/cortex/autofocus) is a Threat Intelligence Platform provided by Palo Alto Networks as a commercial product
+[Autofocus](https://www.paloaltonetworks.com/cortex/autofocus) is a Threat Intelligence Platform provided by Palo Alto Networks as a commercial product.
 
 This analyzer comes in 3 flavors:
 - AUTOFOCUS_**GetSampleAnalysis**: fetch the full analysis of sample based on its hash (hash).
-- AUTOFOCUS_**SearchIOC**: fetch samples linked to a specific IOC (domain, fqdn, user-agent, imphash, ip, mutex, url, tag).
+- AUTOFOCUS_**SearchIOC**: fetch samples linked to a specific IOC (domain, fqdn, user-agent, imphash, ip, mutex, url, tag). Please note that mutex and tag are not default datatypes in TheHive. You need to create them before leveraging them. 
 - AUTOFOCUS_**SearchJSON**: fetch samples matching a complex search in JSON format (other).
 
 #### Requirements
