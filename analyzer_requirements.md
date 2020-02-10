@@ -24,98 +24,164 @@ on is free or requires special access or valid subscription or product license.
   * [Free Analyzers](#free-analyzers)
     * [Abuse\_Finder](#abuse_finder)
     * [AbuseIPDB](#abuseipdb)
-    * [Backscatter.io](#backscatterio)
+      * [Requirements](#requirements)
+    * [Backscatter\.io](#backscatterio)
+      * [Requirements](#requirements-1)
     * [C1fApp](#c1fapp)
+      * [Requirements](#requirements-2)
     * [Censys\.io](#censysio)
+      * [Requirements](#requirements-3)
     * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
-    * [Cybercrime-Tracker](#cybercrime-tracker)
+      * [Requirements](#requirements-4)
+    * [Cybercrime\-Tracker](#cybercrime-tracker)
     * [Cyberprotect](#cyberprotect)
     * [Cymon](#cymon)
+      * [Requirements](#requirements-5)
     * [DNSSinkhole](#dnssinkhole)
+      * [Requirements](#requirements-6)
     * [DShield](#dshield)
-    * [EmlParser](#emlparser)
     * [EmailRep](#emailrep)
+    * [EmlParser](#emlparser)
     * [FileInfo](#fileinfo)
+      * [Requirements](#requirements-7)
     * [FireHOLBlocklists](#fireholblocklists)
+      * [Requirements](#requirements-8)
     * [Fortiguard](#fortiguard)
+      * [Requirements](#requirements-9)
     * [GoogleDNS](#googledns)
     * [GoogleSafeBrowsing](#googlesafebrowsing)
+      * [Requirements](#requirements-10)
     * [Hashdd](#hashdd)
+      * [Requirements](#requirements-11)
     * [HIBP](#hibp)
+      * [Requirements](#requirements-12)
     * [Hippocampe](#hippocampe)
+      * [Requirements](#requirements-13)
     * [HybridAnalysis](#hybridanalysis)
-    * [Hunterio_DomainSearch](#hunterio_domainSearch)
+      * [Requirements](#requirements-14)
+    * [Hunterio\_DomainSearch](#hunterio_domainsearch)
+      * [Requirements](#requirements-15)
     * [Maltiverse](#maltiverse)
     * [MalwareClustering](#malwareclustering)
     * [MaxMind](#maxmind)
     * [MISP](#misp)
+      * [Requirements](#requirements-16)
     * [MISP Warninglists](#misp-warninglists)
+      * [Requirements](#requirements-17)
     * [Msg\_Parser](#msg_parser)
     * [Onyphe](#onyphe)
+      * [Requirements](#requirements-18)
     * [OTXQuery](#otxquery)
+      * [Requirements](#requirements-19)
     * [Patrowl](#patrowl)
+      * [Requirements](#requirements-20)
     * [PhishTank](#phishtank)
+      * [Requirements](#requirements-21)
     * [PhishingInitiative](#phishinginitiative)
-    * [Pulsedive](#pusledive)
+      * [Requirements](#requirements-22)
+    * [Pulsedive](#pulsedive)
+      * [Requirements](#requirements-23)
     * [Robtex](#robtex)
     * [SpamhausDBL](#spamhausdbl)
     * [StaxxSearch](#staxxsearch)
+      * [Requirements](#requirements-24)
     * [StopForumSpam](#stopforumspam)
+      * [Requirements](#requirements-25)
     * [Talos Reputation](#talos-reputation)
     * [Team Cymru MHR](#team-cymru-mhr)
     * [ThreatCrowd](#threatcrowd)
     * [Tor Blutmagie](#tor-blutmagie)
+      * [Requirements](#requirements-26)
     * [Tor Project](#tor-project)
-    * [URLhaus](#urlhaus)    
+      * [Requirements](#requirements-27)
     * [Unshortenlink](#unshortenlink)
-    * [UrlScan.io](#urlscanio)
+    * [UrlScan\.io](#urlscanio)
+    * [URLhaus](#urlhaus)
     * [Virusshare](#virusshare)
+      * [Requirements](#requirements-28)
     * [WOT](#wot)
+      * [Requirements](#requirements-29)
     * [Yara](#yara)
+      * [Requirements](#requirements-30)
     * [Yeti](#yeti)
+      * [Requirements](#requirements-31)
   * [Analyzers Requiring Special Access](#analyzers-requiring-special-access)
     * [CERTatPassiveDNS](#certatpassivedns)
+      * [Requirements](#requirements-32)
     * [CIRCLPassiveDNS](#circlpassivedns)
+      * [Requirements](#requirements-33)
     * [CIRCLPassiveSSL](#circlpassivessl)
+      * [Requirements](#requirements-34)
     * [GreyNoise](#greynoise)
-    * [IBM X-Force](#ibm-x-force)
+      * [Requirements](#requirements-35)
+    * [IBM X\-Force](#ibm-x-force)
+      * [Requirements](#requirements-36)
     * [IPInfo](#ipinfo)
     * [Malpedia](#malpedia)
+      * [Requirements](#requirements-37)
     * [Malwares](#malwares)
+      * [Requirements](#requirements-38)
     * [MnemonicPDNS](#mnemonicpdns)
+      * [Requirements](#requirements-39)
     * [SinkDB](#sinkdb)
+      * [Requirements](#requirements-40)
     * [Shodan](#shodan)
+      * [Requirements](#requirements-41)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [Autofocus](#autofocus)
+      * [Requirements](#requirements-42)
     * [DNSDB](#dnsdb)
+      * [Requirements](#requirements-43)
     * [DomainTools](#domaintools)
-    * [DomainToolsIris](#domaintoolsiris)
+      * [Requirements](#requirements-44)
+    * [DomainTools Iris](#domaintools-iris)
+      * [Requirements](#requirements-45)
     * [EmergingThreats](#emergingthreats)
+      * [Requirements](#requirements-46)
     * [FireEye iSIGHT](#fireeye-isight)
+      * [Requirements](#requirements-47)
     * [JoeSandbox](#joesandbox)
+      * [Requirements](#requirements-48)
     * [Investigate](#investigate)
+      * [Requirements](#requirements-49)
     * [Nessus](#nessus)
+      * [Requirements](#requirements-50)
     * [PassiveTotal](#passivetotal)
+      * [Requirements](#requirements-51)
     * [PayloadSecurity](#payloadsecurity)
+      * [Requirements](#requirements-52)
     * [RecordedFuture](#recordedfuture)
+      * [Requirements](#requirements-53)
     * [SecurityTrails](#securitytrails)
+      * [Requirements](#requirements-54)
     * [SoltraEdge](#soltraedge)
+      * [Requirements](#requirements-55)
     * [Umbrella](#umbrella)
+      * [Requirements](#requirements-56)
     * [VirusTotal](#virustotal)
+      * [Requirements](#requirements-57)
     * [VMRay](#vmray)
-* [Free Responders](#free-responders)
-  * [Wazuh](#wazuh)
-  * [Palo Alto Minemeld](#palo-alto-minemeld)
-* [Subscription and License-based Responders](#subscription-and-license-based-responders)
-  * [Crownstrike Falcon](#crowdstrike-falcon)
-  * [KnowBe4](#KnowBe4) 
-  * [Umbrella blacklister](#umbrella-blacklister)
+      * [Requirements](#requirements-58)
+  * [Free Responders](#free-responders)
+    * [Wazuh](#wazuh)
+      * [Requirements](#requirements-59)
+    * [Palo Alto Minemeld](#palo-alto-minemeld)
+      * [Requirements](#requirements-60)
+  * [Subscription and License\-based Responders](#subscription-and-license-based-responders)
+    * [Crowdstrike Falcon](#crowdstrike-falcon)
+      * [Requirements](#requirements-61)
+    * [KnowBe4](#knowbe4)
+      * [Requirements](#requirements-62)
+    * [Umbrella Blacklister](#umbrella-blacklister)
+      * [Requirements](#requirements-63)
 
 ## Introduction
-All analyzer and Responder configuration settings must be made using the Cortex Web UI. Please refer to the [Administration Guide](admin/admin-guide.md) for further details.
+All analyzer and responder configuration settings must be made using the Cortex Web UI. Please refer to the
+ [Administration Guide](admin/admin-guide.md) for further details.
 
-By default, and within every freshly created organization, all analyzers are disabled. If you want to enable and configure them, use the Web UI (**Organization** > **Configurations** and **Organization** > **Analyzers** tabs).
+By default, and within every freshly created organization, all analyzers and responders are disabled. If you want to
+ enable and configure them, use the Web UI (**Organization** > **Configurations** and **Organization** > **Analyzers** tabs).
 
 ## Free Analyzers
 
@@ -244,7 +310,7 @@ The analyzer comes in only one flavor called *DShield_lookup*.
 No configuration is required. It can be used out of the box.
 
 ### EmailRep
-checks the reputation of an email address against the [emailrep.io](https://emailrep.io/) database.
+Checks the reputation of an email address against the [emailrep.io](https://emailrep.io/) database.
 
 This analyzer comes in only one flavor, and no specific configuration is required.
 
@@ -382,13 +448,14 @@ Query the free [Maltiverse](https://maltiverse.com/search) Threat Intelligence p
 This analyzer comes in only one flavor, and no specific configuration is required.
 
 ### MalwareClustering
-Get the latest Malwares report for a file, hash, domain or an IP address. Refer to this [presentation](https://www.youtube.com/watch?v=nt2l5m8AJpQ) to learn more about this analyzer.
-In order to use the analyzer, you need to point it to a Neo4j server and provide:
-- `n4j_host`: host address of Neo4j server, , 
-- `n4j_port`: port number of Neo4j server 
-- `n4j_user`: Neo4j server user
--  `n4j_pwd`:  Neo4j server password
--  `threshold`: ApiScout correlation threshold
+Get the latest malware report for a file, hash, domain or an IP address. Refer to Andrea Garavaglia's [presentation
+](https://www.youtube.com/watch?v=nt2l5m8AJpQ) to learn more about this analyzer. In order to use it, you
+ need to point it to a Neo4j server and provide:
+- `n4j_host`: host address of the Neo4j server 
+- `n4j_port`: port number of the Neo4j server 
+- `n4j_user`: the Neo4j server username
+- `n4j_pwd`:  the Neo4j server password
+- `threshold`: ApiScout's correlation threshold
 
 ### MaxMind
 Geolocate an IP Address via [MaxMind](https://www.maxmind.com/en/home)
@@ -569,7 +636,8 @@ This analyzer comes in three flavors:
 The analyzer uses the free Robtex API which needs no subsequent configuration. However, the free API has limits with regard to rates and amount of data returned.
 
 ### SpamhausDBL
-This analyzer queries the [Spamhaus Domain Block List (DBL)](https://www.spamhaus.org/dbl/). which provides domain reputation information.
+This analyzer queries the [Spamhaus Domain Block List (DBL)](https://www.spamhaus.org/dbl/), which provides domain
+ reputation information.
 
 This analyzer comes in only one flavor, `DBLLookup`.
 
@@ -784,12 +852,11 @@ Access to IBM X-Force Threat Exchange requires an [IBM ID](https://www.ibm.com/a
 Once you have access to the service, supply the URL of the service as value for the `url` parameter, the API key associated with your account as value for the `key` parameter and the associated password as the value of the `pwd` parameter.
 
 ### IPInfo
-Get enrichment information from [ipinfo.io](ipinfo.io) service.
-This analyzer comes in two flavors: 
+Get enrichment information from the [ipinfo.io](ipinfo.io) service. This analyzer comes in two flavors: 
 - IPinfo_**Details** : IPinfo details lookup.
 - IPinfo_**Hosted_Domains** : Host domain lookup.
 
-To query the service, you need to provide an API key in the parameter `api_key`. 
+To query the service, you need to provide an API key as value of the `api_key` parameter. 
 
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
@@ -860,17 +927,22 @@ Supply the API key as the value for the `key` parameter.
 ## Subscription and License-based Analyzers
 
 ### Autofocus
-[Autofocus](https://www.paloaltonetworks.com/cortex/autofocus) is a Threat Intelligence Platform provided by Palo Alto Networks as a commercial product.
+[Autofocus](https://www.paloaltonetworks.com/cortex/autofocus) is a commercial Threat Intelligence Platform provided by
+ Palo Alto Networks.
 
 This analyzer comes in 3 flavors:
-- AUTOFOCUS_**GetSampleAnalysis**: fetch the full analysis of sample based on its hash (hash).
-- AUTOFOCUS_**SearchIOC**: fetch samples linked to a specific IOC (domain, fqdn, user-agent, imphash, ip, mutex, url, tag). Please note that mutex and tag are not default datatypes in TheHive. You need to create them before leveraging them. 
+- AUTOFOCUS_**GetSampleAnalysis**: fetch the full analysis of a sample based on its hash.
+- AUTOFOCUS_**SearchIOC**: fetch samples linked to a specific IoC (domain, fqdn, user-agent, imphash, ip, mutex, url
+, tag). Please note that mutex and tag are not default datatypes in TheHive. You need to create them in TheHive before
+ you can
+ leverage
+ them. 
 - AUTOFOCUS_**SearchJSON**: fetch samples matching a complex search in JSON format (other).
 
 #### Requirements
 You need to be an Autofocus customer of Palo Alto Networks to have access to their API and be able to use the analyzer.
 
-Provide your API key as a value to the `apikey` parameter.
+Provide your API key as the value of the `apikey` parameter.
 
 ### DNSDB
 Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
@@ -926,8 +998,9 @@ a value for the `key` parameter.
  You need a [valid DomainTools API integration subscription](https://www.domaintools.com/products/api-integration/) to use the analyzer:
 
 - Provide your username as a value for the `username` parameter and API key as
- a value for the `key` parameter
-- Setting the `pivot_count_threshold` will highlight items of interest in the template below that threshold
+ a value for the `key` parameter.
+- Set the `pivot_count_threshold` parameter to highlight any item below that value as being of interest in the
+ report's template.
 
 
 ### EmergingThreats
@@ -1028,8 +1101,8 @@ The analyzer comes in 8 flavors:
 - PassiveTotal_**Unique_Resolutions**: Unique Resolutions Lookup.
 - PassiveTotal_**Whois_Details**: Whois Details Lookup.
 - PassiveTotal_**Trackers**: tracker lookups.
-- PassiveTotal_**Host_Pairs**: host pairs lookups.
-- PassiveTotal_**Components**: Components lookups.
+- PassiveTotal_**Host_Pairs**: host pair lookups.
+- PassiveTotal_**Components**: Component lookups.
 
 #### Requirements
 You need a PassiveTotal account to obtain the API key which is required to
@@ -1139,8 +1212,11 @@ use the `certpath` parameter.
 ## Free Responders
 
 ### Wazuh
+This responder performs actions on [Wazuh](https://wazuh.com/), the open source security monitoring platform. It
+ currently supports ad-hoc firewall blocking of ip observables.
 
-Perform Wazuh Active Response actions.  Currently supports ad-hoc firewall blocking of IP addresses from an observable.  The responder will use the provided `wazuh_agent_id` (custom field) to call back to the defined Wazuh manager to implement the AR action.
+The responder will use the provided `wazuh_agent_id` (custom field) to call back to the defined Wazuh manager to
+ implement the active response action.
 
 #### Requirements
 The following options are required in the Wazuh Responder configuration:   
@@ -1156,46 +1232,43 @@ The following custom fields should be created and populated in related records:
 - `wazuh_rule_id`: The rule ID associated with the Wazuh alert   
 
 ### Palo Alto Minemeld
-
-Submit indicators to a Palo Alto Minemeld instance from case observables.
+This responder sends observables you select to a [Palo Alto Minemeld](https://www.paloaltonetworks.com/products/secure-the-network/subscriptions/minemeld) instance.
 
 #### Requirements
 The following options are required in the Palo Alto Minemeld Responder configuration:
 
 - `minemeld_url` : URL of the Minemeld instance to which you will be posting indicators   
-- `minemeld_user`: user accessing the Minemeld instance to which you will be posting indicators
-- `minemeld_password`:  password for the user accessing the Minemeld instance to which you will be posting indicators
-- `minemeld_indicator_list`: name of Minemeld indicator list to which you will be posting indicators (already created in Minemeld)
+- `minemeld_user`: user accessing the Minemeld instance
+- `minemeld_password`:  password for the user accessing the Minemeld instance
+- `minemeld_indicator_list`: name of Minemeld indicator list (already created in Minemeld)
 - `minemeld_share_level`: share level for indicators (defaults to `red`)
-- `minemeld_confidence`: confidence level for indicators  (defaults to `100`)
+- `minemeld_confidence`: confidence level for indicators (defaults to `100`)
 - `minemeld_ttl`: TTL for indicators (defaults to `86400` seconds)
 
 ## Subscription and License-based Responders
 
 ### Crowdstrike Falcon
-
 Submit observables from alerts and cases to the Crowdstrike Falcon Custom IOC API.
 
 #### Requirements
-
 To configure the responder, provide the URL of the platform as a value for the `falconapi_url` parameter, the api user as the `falconapi_user`parameter and the api key as the `falconapi_key` parameter.
 
 ### KnowBe4
-This responder will allow the integration between TheHive/Cortex and KnowBe4's User Events API.
-If a mail observable is tagged with a specified tag, corresponding to the responder's configuration, (e.g. phished), then the associated user will have a custom event added to their profile in KnowBe4.
+This responder allows the integration between TheHive/Cortex and KnowBe4's User Events API. If a mail observable
+ is tagged with a specified tag, corresponding to the responder's configuration, (e.g. phished), then the associated
+  user will have a custom event added to their profile in KnowBe4.
 
 #### Requirements
 You must provide:
 
-- An API key as a value for the `api_key` parameter to access the User Events API. API documentation to retreive your key is located at [User Event API ](https://developer.knowbe4.com/events/#tag/Introduction)
+- An API key as a value for the `api_key` parameter to access the User Events API. API documentation to retrieve your
+ key is located at [User Event API](https://developer.knowbe4.com/events/#tag/Introduction)
 - The appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL)
 - The appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline
-- The appropriate `event_type` parameter so that Cortex can create the correct type of event in the Users' timeline. [User Events API](https://developer.knowbe4.com/events/#tag/Event-Types).
+- The appropriate `event_type` parameter so that Cortex can create the [correct type of event](https://developer.knowbe4.com/events/#tag/Event-Types) in the Users' timeline.
 
 ### Umbrella Blacklister
-
 Add domain from observables in cases to Umbrella blacklist. 
 
 #### Requirements
-
 To configure the responder, provide the url of the service as a value for the `integration_url` parameter.
