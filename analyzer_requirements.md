@@ -31,6 +31,7 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-2)
     * [Censys\.io](#censysio)
       * [Requirements](#requirements-3)
+    * [Clamav](#clamav)
     * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
       * [Requirements](#requirements-4)
@@ -145,6 +146,7 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-48)
     * [Investigate](#investigate)
       * [Requirements](#requirements-49)
+    * [IPVoid](#ipvoid)
     * [Nessus](#nessus)
       * [Requirements](#requirements-50)
     * [PassiveTotal](#passivetotal)
@@ -164,6 +166,7 @@ on is free or requires special access or valid subscription or product license.
     * [VMRay](#vmray)
       * [Requirements](#requirements-58)
   * [Free Responders](#free-responders)
+    * [Redmine](#redmine)
     * [Wazuh](#wazuh)
       * [Requirements](#requirements-59)
     * [Palo Alto Minemeld](#palo-alto-minemeld)
@@ -238,6 +241,13 @@ The analyzer comes in only one flavor.
 
 #### Requirements
 Provide your API ID and the API secret as values for  `uid` and `key` parameters.
+
+### Clamav
+Clamav is a powerful and open source antivirus engine that permits you to write your custom signature using Yara and sigtool.This analyzer allows TheHive to communicate with a local clamav-daemon.
+
+A detailed configuration guide is available on Hetstat webstite [here](https://laskowski-tech.com/2018/07/24/clamav-analyzer-for-thehive-and-cortex/).
+
+The analyzer comes in only one flavor.
 
 ### Crtsh
 Get [Crt.sh](https://crt.sh/) certificate transparency lists associated with a domain name. Crt.sh is an online service operated by the Comodo Certificate Authority.
@@ -1064,6 +1074,16 @@ The analyzer comes in 2 flavors:
 #### Requirements
 Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
 
+### IPVoid
+
+This analyzer leverages the IP reputation check on [apivoid.com](https://apivoid.com), corresponding the the API of [ipvoid.com](https://ipvoid.com) web service. 
+
+This analyzer comes in only one flavor.
+
+#### Requirements
+Retrieve the API key associated with your account on [apivoid.com](https://apivoid.com) and provide it as a value for the `key` parameter. 
+
+
 ### Nessus
 Use [Nessus Professional](https://www.tenable.com/products/nessus-vulnerability-scanner),
 a popular vulnerability scanner to scan an IP address or a FQDN. This analyzer works with Nessus 6 or earlier. Tenable has [removed API access](https://www.tenable.com/blog/a-clarification-about-nessus-professional) starting from version 7 rendering this analyzer useless with that version.
@@ -1210,6 +1230,28 @@ To validate the X.509 certificate of your VMRay Analyzer Platform instance,
 use the `certpath` parameter.
 
 ## Free Responders
+
+### Redmine
+
+This responder can be used to create an issue in the Redmine ticketing system from a case. It will use the case title as the issue subject and the case description as the issue body. 
+To set it up in Cortex, you will need:
+- To define a user to allow Cortex to connect to Redmine and with access on the various project in which issues should be created
+- Define three custom fields in TheHive that will be used to select the project, the tracker and the assignee of the issue (the latest being optional) Those fields can be let free or can be custom fields with preset values
+
+#### Requirements
+The following options are required in the Redmin Responder configuration: 
+
+- `instance_name`: Name of the Redmine instance
+- `url`: URL where to find the Redmine API
+- `username`: Username to log into Redmine
+- `password`: Password to log into Redmine
+- `project_field`: Name of the custom field containing the Redmine project to use when creating the issue
+- `tracker_field`: Name of the custom field containing the Redmine tracker to use when creating the issue
+- `assignee_field`: Name of the custom field containing the Redmine assignee to use when creating the issue
+- `reference_field`: Name of the case custom field in which to store the opened issue. If not defined, this information will not be stored
+- `opening_status`: Status used when opening a Redmine issue (if not defined here, will use the default opening status from the Redmine Workflow)
+- `closing_task`: Closing the task after successfully creating the Redmine issue
+
 
 ### Wazuh
 This responder performs actions on [Wazuh](https://wazuh.com/), the open source security monitoring platform. It
