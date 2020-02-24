@@ -20,7 +20,7 @@ This documents also specifies whether the service that the analyzer is based
 on is free or requires special access or valid subscription or product license.
 
 ## Table of Contents
-  * [Introduction](#introduction)
+ * [Introduction](#introduction)
   * [Free Analyzers](#free-analyzers)
     * [Abuse\_Finder](#abuse_finder)
     * [AbuseIPDB](#abuseipdb)
@@ -131,74 +131,61 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-41)
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [Autofocus](#autofocus)
-      
       * [Requirements](#requirements-42)
     * [DNSDB](#dnsdb)
-      
       * [Requirements](#requirements-43)
     * [DomainTools](#domaintools)
-      
       * [Requirements](#requirements-44)
     * [DomainTools Iris](#domaintools-iris)
-      
       * [Requirements](#requirements-45)
     * [EmergingThreats](#emergingthreats)
-      
       * [Requirements](#requirements-46)
     * [FireEye iSIGHT](#fireeye-isight)
-      
       * [Requirements](#requirements-47)
     * [JoeSandbox](#joesandbox)
-      
       * [Requirements](#requirements-48)
     * [Investigate](#investigate)
-      
       * [Requirements](#requirements-49)
     * [IPVoid](#ipvoid)
-    * [Nessus](#nessus)
-      
       * [Requirements](#requirements-50)
-* [PassiveTotal](#passivetotal)
-      
-  * [Requirements](#requirements-51)
-    * [PayloadSecurity](#payloadsecurity)
-      
+    * [Nessus](#nessus)
+      * [Requirements](#requirements-51)
+    * [PassiveTotal](#passivetotal)
       * [Requirements](#requirements-52)
-    * [RecordedFuture](#recordedfuture)
-      
+    * [PayloadSecurity](#payloadsecurity)
       * [Requirements](#requirements-53)
-    * [SecurityTrails](#securitytrails)
-      
+    * [RecordedFuture](#recordedfuture)
       * [Requirements](#requirements-54)
-    * [SoltraEdge](#soltraedge)
+    * [SecurityTrails](#securitytrails)
       * [Requirements](#requirements-55)
-    * [Threat Grid](#threat-grid)
-    * [Threat Response](#threat-response)
-    * [Umbrella](#umbrella)
+    * [SoltraEdge](#soltraedge)
       * [Requirements](#requirements-56)
-    * [VirusTotal](#virustotal)
+    * [ThreatGrid](#threatgrid)
       * [Requirements](#requirements-57)
-    * [VMRay](#vmray)
+    * [Threat Response](#threat-response)
       * [Requirements](#requirements-58)
+    * [Umbrella](#umbrella)
+      * [Requirements](#requirements-59)
+    * [VirusTotal](#virustotal)
+      * [Requirements](#requirements-60)
+    * [VMRay](#vmray)
+      * [Requirements](#requirements-61)
   * [Free Responders](#free-responders)
     * [Redmine](#redmine)
-    * [Wazuh](#wazuh)
-      * [Requirements](#requirements-59)
-    * [Palo Alto Minemeld](#palo-alto-minemeld)
-      * [Requirements](#requirements-60)
-  * [Subscription and License\-based Responders](#subscription-and-license-based-responders)
-    * [Crowdstrike Falcon](#crowdstrike-falcon)
-      
-      * [Requirements](#requirements-61)
-    * [KnowBe4](#knowbe4)
-      
       * [Requirements](#requirements-62)
-* [Umbrella Blacklister](#umbrella-blacklister)
+    * [Wazuh](#wazuh)
       * [Requirements](#requirements-63)
-* [Subscription and License-based Responders](#subscription-and-license-based-responders)
+    * [Palo Alto Minemeld](#palo-alto-minemeld)
+      * [Requirements](#requirements-64)
+  * [Subscription and License\-based Responders](#subscription-and-license-based-responders)
     * [AMP for Endpoints](#amp-for-endpoints)
-    * [Crownstrike Falcon](#crowdstrike-falcon)
-    * [Umbrella blacklister](#umbrella-blacklister)
+      * [Requirements](#requirements-65)
+    * [Crowdstrike Falcon](#crowdstrike-falcon)
+      * [Requirements](#requirements-66)
+    * [KnowBe4](#knowbe4)
+      * [Requirements](#requirements-67)
+    * [Umbrella Blacklister](#umbrella-blacklister)
+      * [Requirements](#requirements-68)
 
 ## Introduction
 All analyzer and responder configuration settings must be made using the Cortex Web UI. Please refer to the
@@ -264,9 +251,10 @@ The analyzer comes in only one flavor.
 Provide your API ID and the API secret as values for  `uid` and `key` parameters.
 
 ### Clamav
-Clamav is a powerful and open source antivirus engine that permits you to write your custom signature using Yara and sigtool.This analyzer allows TheHive to communicate with a local clamav-daemon.
+Clamav is a powerful and open source antivirus engine that allows writing your custom signature using Yara and sigtool
+. This analyzer allows TheHive to communicate with a local clamav-daemon.
 
-A detailed configuration guide is available on Hetstat webstite [here](https://laskowski-tech.com/2018/07/24/clamav-analyzer-for-thehive-and-cortex/).
+A detailed configuration guide is available on [Hetstat's website](https://laskowski-tech.com/2018/07/24/clamav-analyzer-for-thehive-and-cortex/).
 
 The analyzer comes in only one flavor.
 
@@ -1097,7 +1085,8 @@ Retrieve the API key associated with your account and provide it as a value for 
 
 ### IPVoid
 
-This analyzer leverages the IP reputation check on [apivoid.com](https://apivoid.com), corresponding the the API of [ipvoid.com](https://ipvoid.com) web service. 
+This analyzer leverages the IP reputation check on [apivoid.com](https://apivoid.com), the API of the
+ [ipvoid.com](https://ipvoid.com) web service. 
 
 This analyzer comes in only one flavor.
 
@@ -1199,7 +1188,7 @@ Get information about any observable dataType from a SoltraEdge server.
 
 An account an a token from a SoltraEdge server are required to use this analyzer. Provide this information as values of `account`,`token` and `base_url` parameters. 
 
-### Threat Grid
+### ThreatGrid
 The [Cisco Threat Grid](https://cisco.com/go/threatgrid) analyzer has the following features:
 - Submit a `file` for analysis
 - Submit a `url` for analysis
@@ -1214,8 +1203,8 @@ The analyzer comes in only one flavor.
 You must have a Cisco Threat Grid Premium account with API access.
 
 To configure the analyzer, you must supply two parameters:
-- `tg_host`: URL of your Nessus scanner.
-- `api_key`: username to log to the scanner.
+- `tg_host`: hostname of your Threat Grid instance.
+- `api_key`: API key to authenticate to your Threat Grid instance.
 
 ### Threat Response
 The [Cisco Threat Response](https://cisco.com/go/threatresponse) analyzer has the following features:
@@ -1227,7 +1216,9 @@ The [Cisco Threat Response](https://cisco.com/go/threatresponse) analyzer has th
     - `ip`
     - `url`
 - Pivot into a Threat Response investigation of an observable
-- If the AMP for Endpoints module is configured in Threat Resposnse and the feature is enabled on the analyzer; when a target is returned from the AMP for Endpoints module the analyzer will extract the connector GUIDs as Artifacts to enable seamless use of the [AMP for Endpoints Responder](#amp-for-endpoints)
+- If the AMP for Endpoints module is configured in Threat Response and the feature is enabled on the analyzer: when a
+ target is returned from the AMP for Endpoints module the analyzer will extract the connector GUIDs as Artifacts to
+  enable seamless use of the [AMP for Endpoints Responder](#amp-for-endpoints).
 
 The analyzer comes in only one flavor.
 
@@ -1238,7 +1229,6 @@ To configure the analyzer, you must supply three parameters:
 - `region`: The Threat Response region your account is in (US, EU, APJC).
 - `client_id`: Threat Response API Client ID with appropriate scopes.
 - `client_password`: Password for the Threat Response API Client.
-
 
 ### Umbrella
 
@@ -1296,9 +1286,12 @@ use the `certpath` parameter.
 ### Redmine
 
 This responder can be used to create an issue in the Redmine ticketing system from a case. It will use the case title as the issue subject and the case description as the issue body. 
+
 To set it up in Cortex, you will need:
-- To define a user to allow Cortex to connect to Redmine and with access on the various project in which issues should be created
-- Define three custom fields in TheHive that will be used to select the project, the tracker and the assignee of the issue (the latest being optional) Those fields can be let free or can be custom fields with preset values
+- To define a user to allow Cortex to connect to Redmine and with access to the various projects in which issues should
+ be created
+- Define three custom fields in TheHive that will be used to select the project, the tracker and, optionally, the
+ assignee of the issue. These fields can be free form or can be custom fields with preset values.
 
 #### Requirements
 The following options are required in the Redmin Responder configuration: 
@@ -1311,7 +1304,8 @@ The following options are required in the Redmin Responder configuration:
 - `tracker_field`: Name of the custom field containing the Redmine tracker to use when creating the issue
 - `assignee_field`: Name of the custom field containing the Redmine assignee to use when creating the issue
 - `reference_field`: Name of the case custom field in which to store the opened issue. If not defined, this information will not be stored
-- `opening_status`: Status used when opening a Redmine issue (if not defined here, will use the default opening status from the Redmine Workflow)
+- `opening_status`: Status used when opening a Redmine issue (if not defined here, the responder will use the default
+ opening status from the Redmine Workflow)
 - `closing_task`: Closing the task after successfully creating the Redmine issue
 
 
@@ -1354,22 +1348,22 @@ The following options are required in the Palo Alto Minemeld Responder configura
 ### AMP for Endpoints
 The [Cisco AMP for Endpoints](https://cisco.com/go/ampendpoints) responder has the following features:
 - Add a SHA256 to a Simple Custom Detection List
-    - The Hive Case ID and Description are appened to the description
+    - TheHive's case ID and description are appended to the description
 - Remove a SHA256 from a Simple Custom Detection List
 - Move a connector GUID to a new group
 - Start Host Isolation
-    - Can set a custom unlock code, if a custom unlock code isn't provided it is randomly genreated
+    - Can set a custom unlock code, if a custom unlock code isn't provided it is randomly generated
 - Stop Host Isolation
 
 The analyzer comes in 5 flavors:
 - AMPforEndpoints_**IsolationStart**: Start Host Isolation.
 - AMPforEndpoints_**IsolationStop**: Stop Host Isolation.
 - AMPforEndpoints_**MoveGUID**: Move Connector GUID to a new group.
-- AMPforEndpoints_**SCDAdd**: Add SHA256 to a Simple Custom Detetion List.
-- AMPforEndpoints_**SCDRemove**: Remove SHA256 from a Simple Custom Detetion List.
+- AMPforEndpoints_**SCDAdd**: Add SHA256 to a Simple Custom Detection List.
+- AMPforEndpoints_**SCDRemove**: Remove SHA256 from a Simple Custom Detection List.
 
 #### Requirements
-You must have an AMP for Endpoints account and API Credentials with Read/Write API access
+You must have an AMP for Endpoints account and API Credentials with Read/Write API access.
 
 To configure the analyzer, you must supply five parameters:
 - `amp_cloud`: The FQDN AMP for Endpoints Cloud your account is in.
