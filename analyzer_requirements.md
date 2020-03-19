@@ -182,6 +182,8 @@ on is free or requires special access or valid subscription or product license.
   * [Subscription and License\-based Responders](#subscription-and-license-based-responders)
     * [AMP for Endpoints](#amp-for-endpoints)
       * [Requirements](#requirements-65)
+    * [DomainTools Iris Malicious Tags](#domaintools-iris-malicious-tags)
+    * [DomainTools Iris Risky DNS](#domaintools-iris-risky-dns)
     * [Crowdstrike Falcon](#crowdstrike-falcon)
       * [Requirements](#requirements-66)
     * [KnowBe4](#knowbe4)
@@ -1413,6 +1415,23 @@ You must provide:
 - The appropriate `base_url` parameter dependent on your geographic location. More information available at [User Events API](https://developer.knowbe4.com/events/#tag/Base-URL)
 - The appropriate `hive_url` parameter so that TheHive case can be referenced in the KnowBe4 Users' Timeline
 - The appropriate `event_type` parameter so that Cortex can create the [correct type of event](https://developer.knowbe4.com/events/#tag/Event-Types) in the Users' timeline.
+
+### DomainTools Iris Malicious Tags
+
+Add tag saying that the observable and case have a malicious tag based on iris tags short summary from the DomainTools Iris investigate analyzer.
+
+#### Requirements
+
+To configure the responder, provide a set of values for the `monitored_iris_tags` parameter.
+
+### DomainTools Iris Risky DNS
+
+Add tag saying that the observable and case contains a risky DNS based on risk score short summary from the DomainTools Iris investigate analyzer.
+
+#### Requirements
+
+To configure the responder, provide a value for the `high_risk_threshold` parameter.
+
 
 ### Umbrella Blacklister
 Add domain from observables in cases to Umbrella blacklist. 
