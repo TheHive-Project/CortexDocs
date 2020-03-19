@@ -71,6 +71,7 @@ on is free or requires special access or valid subscription or product license.
     * [MISP Warninglists](#misp-warninglists)
       * [Requirements](#requirements-17)
     * [Msg\_Parser](#msg_parser)
+    * [NSLR](#nslr)
     * [Onyphe](#onyphe)
       * [Requirements](#requirements-18)
     * [OTXQuery](#otxquery)
@@ -119,6 +120,7 @@ on is free or requires special access or valid subscription or product license.
     * [IBM X\-Force](#ibm-x-force)
       * [Requirements](#requirements-36)
     * [IPInfo](#ipinfo)
+    * [IntezerCommunity](#intezercommunity)
     * [Malpedia](#malpedia)
       * [Requirements](#requirements-37)
     * [Malwares](#malwares)
@@ -560,6 +562,20 @@ doesn't extract attachments.
 The analyzer comes in only one flavor.
 
 No configuration is required. It can be used out of the box.
+
+### NSLR
+Check a hash or filename against [NSLR](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download) database, and ensure this is a good known one.
+
+The analyzer comes in only one flavor.
+
+#### Requirements
+This analyzer needs you to download the and extract NSRLFile files from [NIST website](https://www.nist.gov/itl/ssd/software-quality-group/national-software-reference-library-nsrl/nsrl-download). 
+
+- Set these files in a folder and configure it in the `nsrl_folder` parameter
+- Add the path for grep command in parameter
+- Alternatively you can import all these data in a postgresql database to improve response speed. If so, set the `conn` parameter
+
+More information on how to set it up and install in [this detailed blog post](https://blog.thehive-project.org).
 
 ### Onyphe
 
