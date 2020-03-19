@@ -877,6 +877,12 @@ Get enrichment information from the [ipinfo.io](ipinfo.io) service. This analyze
 
 To query the service, you need to provide an API key as value of the `api_key` parameter. 
 
+### IntezerCommunity
+Submit a file to [Intezer Analyze™](http://intezer.com/intezer-analyze/) and get an analysis report. This analyzer comes in only one flavor.
+
+To query the service, you need to provide an API key as value of the `key` parameter. 
+
+
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
 
