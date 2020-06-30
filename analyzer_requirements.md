@@ -126,6 +126,7 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-38)
     * [IPInfo](#ipinfo)
     * [IntezerCommunity](#intezercommunity)
+    * [LastInfoSec](#lastinfosec)
     * [Malpedia](#malpedia)
       * [Requirements](#requirements-39)
     * [Malwares](#malwares)
@@ -953,6 +954,13 @@ Submit a file to [Intezer Analyze™](http://intezer.com/intezer-analyze/) and g
 
 To query the service, you need to provide an API key as value of the `key` parameter. 
 
+### LastInfoSec
+Gather intelligencefor a `hash` or a `domain` from [LastInfoSec](https://www.lastinfosec.com/) services. 
+
+This analyzer comes in only 1 flavor. 
+
+#### Requirements
+To query the service, you need to provide an API key as value of the `apiKey` parameter. 
 
 ### Malpedia
 Scan files against YARA rules automatically downloaded every 10 hours by the analyzer from [Malpedia](https://malpedia.caad.fkie.fraunhofer.de/).
