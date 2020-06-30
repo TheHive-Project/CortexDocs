@@ -130,6 +130,7 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-39)
     * [Malwares](#malwares)
       * [Requirements](#requirements-40)
+    * [MalwareBazaar](#malwarebazaar)
     * [MnemonicPDNS](#mnemonicpdns)
       * [Requirements](#requirements-41)
     * [SinkDB](#sinkdb)
@@ -973,6 +974,15 @@ hash, domain or an IP address.
 You need to [sign up](https://www.malwares.com/account/signup) for a Malwares.com account.
 
 An API key to use the service's API should be associated with your account. Supply it as the value of the `key` parameter.
+
+### MalwareBazaar
+MalwareBazaar is a project from [abuse.ch](https://bazaar.abuse.ch/) with the goal of sharing malware samples with the infosec community, AV vendors and threat intelligence providers. 
+
+The analyzer comes in one flavor and let you gather information from `domain`, `fqdn`, `hash`, `url` and `ip`.
+
+#### Requirements
+You need to login to MalwareBazaar with your Twitter account to obtain an API key and use is as the value of  `api_key` parameter in Cortex configuration. 
+
 
 ### MnemonicPDNS
 Query IP addresses and domain names against [Mnemonic](https://passivedns.mnemonic.no/) Passive DNS service.
