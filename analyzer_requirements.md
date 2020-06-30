@@ -133,6 +133,7 @@ on is free or requires special access or valid subscription or product license.
     * [MalwareBazaar](#malwarebazaar)
     * [MnemonicPDNS](#mnemonicpdns)
       * [Requirements](#requirements-41)
+    * [Sendgrid](#sendgrid)
     * [SinkDB](#sinkdb)
       * [Requirements](#requirements-42)
     * [Shodan](#shodan)
@@ -164,7 +165,6 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-55)
     * [RecordedFuture](#recordedfuture)
       * [Requirements](#requirements-56)
-    * RT4-CreateTicket](#rt4-createticket)
     * [SecurityTrails](#securitytrails)
       * [Requirements](#requirements-57)
     * [SoltraEdge](#soltraedge)
@@ -195,8 +195,11 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-68)
     * [KnowBe4](#knowbe4)
       * [Requirements](#requirements-69)
+    * [RT4-CreateTicket](#rt4-createticket)
+    * [Sendgrid](#sendgrid) 
     * [Umbrella Blacklister](#umbrella-blacklister)
       * [Requirements](#requirements-70)
+    * [VirusTotalDownloader](#virustotaldownloader)
 
 ## Introduction
 All analyzer and responder configuration settings must be made using the Cortex Web UI. Please refer to the
@@ -1497,10 +1500,19 @@ RT4 ([Request Tracker](https://bestpractical.com/request-tracker) is a ticketing
 
 This responder comes in only 1 flavor that lets you create a ticket from a Case in TheHive. 
 
-### requirements
+#### requirements
 
 This responder several configuration parameters. A detailed document can be found with the code, in the [Readme file](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/responders/RT4).
 
+### Sendgrid
+
+Send email by using [Sendrgrid](https://sendgrid.com/) services.
+
+This responder comes in only 1 flavor.
+
+#### Requirements
+
+To run this responder, you need a valid account on [Sendgrid](https://sendgrid.com/) and define an email to use as the _from_ field as the `from` parameter, and a valid API key as the `api_key` parameter.
 
 ### Umbrella Blacklister
 Add domain from observables in cases to Umbrella blacklist. 
