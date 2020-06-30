@@ -164,6 +164,7 @@ on is free or requires special access or valid subscription or product license.
       * [Requirements](#requirements-55)
     * [RecordedFuture](#recordedfuture)
       * [Requirements](#requirements-56)
+    * RT4-CreateTicket](#rt4-createticket)
     * [SecurityTrails](#securitytrails)
       * [Requirements](#requirements-57)
     * [SoltraEdge](#soltraedge)
@@ -1249,6 +1250,16 @@ This analyzer comes in only one flavor **RecordedFuture**.
 
 #### Requirements
 Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
+
+### RT4-CreateTicket
+
+RT4 ([Request Tracker](https://bestpractical.com/request-tracker) is a ticketing system. With this responder, an analyst can create a ticket in RT. CaseID is submitted to RT as a reference. 
+
+This responder comes in only 1 flavor that lets you create a ticket from a Case in TheHive. 
+
+### requirements
+
+This responder several configuration parameters. A detailed document can be found with the code, in the [Readme file](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/responders/RT4).
 
 ### SecurityTrails
 Get Whois and Passive DNS details using [SecurityTrails](https://securitytrails.com/).
