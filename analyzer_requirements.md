@@ -35,6 +35,7 @@ on is free or requires special access or valid subscription or product license.
     * [Crtsh](#crtsh)
     * [CuckooSandbox](#cuckoosandbox)
       * [Requirements](#requirements-4)
+    * [CyberChef](#cyberchef) 
     * [Cybercrime\-Tracker](#cybercrime-tracker)
     * [Cyberprotect](#cyberprotect)
     * [Cymon](#cymon)
@@ -112,6 +113,7 @@ on is free or requires special access or valid subscription or product license.
     * [Yeti](#yeti)
       * [Requirements](#requirements-33)
   * [Analyzers Requiring Special Access](#analyzers-requiring-special-access)
+    * [ANY.RUN](#anyrun)
     * [CERTatPassiveDNS](#certatpassivedns)
       * [Requirements](#requirements-34)
     * [CIRCLPassiveDNS](#circlpassivedns)
@@ -137,7 +139,6 @@ on is free or requires special access or valid subscription or product license.
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [Autofocus](#autofocus)
       * [Requirements](#requirements-44)
-    * [ANY.RUN](#anyrun)
     * [DNSDB](#dnsdb)
       * [Requirements](#requirements-45)
     * [DomainTools](#domaintools)
@@ -297,6 +298,21 @@ This token can be found in your configuration, in the Cuckoo Working Directory (
 Finally, if you secured your API calls thanks to HTTPS, using a custom CA, you can specify it in
 the `cert_path` parameter (`/etc/ssl/certs/my-custom-ca.pem`). Alternatively, you can disable TLS
 certificate verification setting the `cert_check` parameter to false.
+
+
+### CyberChef
+
+[CyberChef](https://gchq.github.io/CyberChef/) is a simple, intuitive web app for carrying out all manner of “cyber” operations within a web browser. 
+
+This analyzer connects to a CyberChef-server and comes in 3 flavors:
+
+- **CyberChef_FromBase64**, that takes Base64 strings as input for CyberChef-server
+- **CyberChef_FromCharCode**, that takes CharCode as input for CyberChef-server and run this recipe
+- **CyberChef_FromHex** , that takes Hex strings as input for CyberChef-server
+
+#### Requirements
+
+Alll you need to run this analyzer,  is the URL to an instance of  [CyberChef-Server](https://github.com/gchq/CyberChef-server) as the value to the `url` parameter.
 
 ### Cybercrime-Tracker
 Use the [Cybercrime-tracker.net](http://cybercrime-tracker.net/) service to assess whether an IP address, URL, domain, or FQDN has a C2 (Command & Control) entry in its database.
@@ -844,6 +860,16 @@ Provide the URL of your YETI instance as a value for the `url` parameter. Yhe an
 
 ## Analyzers Requiring Special Access
 
+### Any.run
+
+ANY.RUN is a malware sandbox service in the cloud. 
+
+This analyzer comes in only one flavor. Submit a `file` or `url` to the service for analysis, and get a report.
+
+#### Requirements
+
+you need to [register](https://app.any.run) and provide yout API key as a value of `token` to use this analyzer.
+
 ### CERTatPassiveDNS
 Check CERT.at Passive DNS Service for a given domain.
 
@@ -1008,16 +1034,6 @@ This analyzer comes in 3 flavors:
 You need to be an Autofocus customer of Palo Alto Networks to have access to their API and be able to use the analyzer.
 
 Provide your API key as the value of the `apikey` parameter.
-
-### Any.run
-
-ANY.RUN is a malware sandbox service in the cloud. 
-
-This analyzer comes in only one flavor. Submit a `file` or `url` to the service for analysis, and get a report.
-
-#### Requirements
-
-you need to [register](https://app.any.run) and provide yout API key as a value of `token` to use this analyzer.
 
 ### DNSDB
 Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
