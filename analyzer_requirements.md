@@ -1251,16 +1251,6 @@ This analyzer comes in only one flavor **RecordedFuture**.
 #### Requirements
 Retrieve the API key associated with your account and provide it as a value for the `key` parameter.
 
-### RT4-CreateTicket
-
-RT4 ([Request Tracker](https://bestpractical.com/request-tracker) is a ticketing system. With this responder, an analyst can create a ticket in RT. CaseID is submitted to RT as a reference. 
-
-This responder comes in only 1 flavor that lets you create a ticket from a Case in TheHive. 
-
-### requirements
-
-This responder several configuration parameters. A detailed document can be found with the code, in the [Readme file](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/responders/RT4).
-
 ### SecurityTrails
 Get Whois and Passive DNS details using [SecurityTrails](https://securitytrails.com/).
 
@@ -1501,9 +1491,29 @@ Add tag saying that the observable and case contains a risky DNS based on risk s
 
 To configure the responder, provide a value for the `high_risk_threshold` parameter.
 
+### RT4-CreateTicket
+
+RT4 ([Request Tracker](https://bestpractical.com/request-tracker) is a ticketing system. With this responder, an analyst can create a ticket in RT. CaseID is submitted to RT as a reference. 
+
+This responder comes in only 1 flavor that lets you create a ticket from a Case in TheHive. 
+
+### requirements
+
+This responder several configuration parameters. A detailed document can be found with the code, in the [Readme file](https://github.com/TheHive-Project/Cortex-Analyzers/tree/master/responders/RT4).
+
 
 ### Umbrella Blacklister
 Add domain from observables in cases to Umbrella blacklist. 
 
 #### Requirements
 To configure the responder, provide the url of the service as a value for the `integration_url` parameter.
+
+### VirusTotalDownloader
+
+This responder comes in only 1 flavor that lets you download a sample of malware from VirusTotal by submitting a hash.
+
+#### Requirements
+
+This responder need a valid Premium API key from VirusTotal as the `virustotal_apikey` parameter in the configuration. 
+To add the sample in Observables in TheHive, the responder also requires the URL of TheHive as the `thehive_url` paramenter and a valid API key as the `thehive_apikey` parameter.
+
