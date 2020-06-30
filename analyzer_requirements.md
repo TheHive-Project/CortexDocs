@@ -137,6 +137,7 @@ on is free or requires special access or valid subscription or product license.
   * [Subscription and License\-based Analyzers](#subscription-and-license-based-analyzers)
     * [Autofocus](#autofocus)
       * [Requirements](#requirements-44)
+    * [ANY.RUN](#anyrun)
     * [DNSDB](#dnsdb)
       * [Requirements](#requirements-45)
     * [DomainTools](#domaintools)
@@ -1007,6 +1008,16 @@ This analyzer comes in 3 flavors:
 You need to be an Autofocus customer of Palo Alto Networks to have access to their API and be able to use the analyzer.
 
 Provide your API key as the value of the `apikey` parameter.
+
+### Any.run
+
+ANY.RUN is a malware sandbox service in the cloud. 
+
+This analyzer comes in only one flavor. Submit a `file` or `url` to the service for analysis, and get a report.
+
+#### Requirements
+
+you need to [register](https://app.any.run) and provide yout API key as a value of `token` to use this analyzer.
 
 ### DNSDB
 Leverage Farsight Security's [DNSDB](https://www.dnsdb.info/) for Passive DNS.
