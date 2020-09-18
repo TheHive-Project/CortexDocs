@@ -34,13 +34,14 @@ Cortex is available as:
 In addition, Cortex can be also be [built from the source code](#build-it-yourself).
 
 ### RPM
-RPM packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
+RPM packages are published on a TheHive-project repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
 First install the RPM release package:
+**TODO**
 ```
-yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
+yum install https://rpm.thehive-project.org//thehive-project-release-1.1.0-2.noarch.rpm
 ```
 This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`.
@@ -56,36 +57,80 @@ Once the package is installed, [install the analyzers](#analyzers-and-responders
 The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
 
 ### DEB
-Debian packages are published on a Bintray repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
+Debian packages are published on a TheHive-Project repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
 To install the Cortex Debian package, use the following commands:
-```
-echo 'deb https://dl.bintray.com/thehive-project/debian-stable any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
-sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C
+```bash
+echo 'deb https://deb.thehive-project.org/ stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+curl https://download.thehive-project.org/PGP-PUBLIC-KEY | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install cortex
 ```
-
-Some environments may block access to the `pgp.mit.edu` key server. As a result, the command `sudo apt-key adv --keyserver hkp://pgp.mit.edu --recv-key 562CBC1C` will fail. In that case, you can run the following command instead:
-
-`curl https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY | sudo apt-key add -`
 
 Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release versions
 If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
 ```bash
-echo 'deb https://dl.bintray.com/thehive-project/debian-beta any main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://deb.thehive-project.org/ beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 ```
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
 
-Cortex 2 and newer requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
+By default, the docker image generate a configuration file for Cortex with:
+ - the Elasticsearch uri is determined by resolving the host name "elasticsearch",
+ - the [analyzers](https://download.thehive-project.org/analyzers.json) and [responders](https://download.thehive-project.org/responders.json) official location,
+ - a generated secret (used to protect the user sessions).
+The behaviour of the Cortex Docker image can be customized using environment variables or parameters:
+| Parameter | Env variable | Description |
+| ------ | ------------ | ----------- |
+| `--no-config` | `no_config=1` | Do not configure Cortex |
+| `--no-config-secret` | `no_config_secret=1` | Do not add the random secret to the configuration |
+| `--no-config-es` | `no_config_es=1` | do not add elasticsearch hosts to configuration
+| `--es-uri <uri>` | `es_uri=<uri>` | use this string to configure elasticsearch hosts (format: http(s)://host:port,host:port(/prefix)?querystring)
+| `--es-hostname <host>` | `es_hostname=host` | resolve this hostname to find elasticsearch instances
+| `--secret <secret>` | `secret=<secret>` | secret to secure sessions
+| `--show-secret` | `show_secret=1` | show the generated secret
+| `--job-directory <dir>` | `job_directory=<dir>` | use this directory to store job files
+| `--docker-job-directory <dir>` | `docker_job_directory=<dir>` | indicate the job directory in the host (not inside container)
+| `--analyzer-url <url>` | `analyzer_urls=<url>,<url>,...` | where analyzers are located (url or path)
+| `--responder-url <url>` | `responder_urls=<url>,<url>,...` | where responders are located (url or path)
+| `--start-docker` | `start_docker=1` | start an internal docker (inside container) to run analyzers/responders
+| `--daemon-user <user>` | `daemon_user=<user>` | run cortex using this user
+
+At the end of the generated configuration, the file `/etc/cortex/application.conf` is included. Thus you can override any setting by binding your own `application.conf` into this file:
+```
+docker run --volume /path/to/my/application.conf:/etc/cortex/application.conf thehiveproject/cortex:3.1.0-0.3RC1 --es-uri http://elasticsearch.local:9200
+```
+
+Cortex uses docker to run analyzers and responders. If you run Cortex inside a docker, you can:
+ - give Cortex access to docker service (recommended solution)
+ - start a docker service inside Cortex docker container
+
+#### Cortex uses main docker service
+In order to use docker service the docker socket must be bound into Cortex container. Moreover, as Cortex shares files with analyzers, a folder must be bound between them.
+```
+docker run --volume /var/run/docker.sock:/var/run/docker.sock --volume /var/run/cortex/jobs:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory /var/run/cortex/jobs
+```
+Cortex can instantiate docker container by using the docker socket `/var/run/docker.sock`. The folder `/var/run/cortex/jobs` is used to store temporary file of jobs. The folder `/tmp/cortex-jobs` is job folder inside the docker. In order to make job file visible to analyzer docker, Cortex needs to know both folders (parameters `--job-directory` and `-docker-job-directory`). On most cases, job directories are the same and `--docker-job-directory` can be omitted.
+
+If you run Cortex in Windows, the docker service is accessible through the named pipe `\\.\pipe\docker_engine`. The command becomes
+```
+docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\CORTEX\\JOBS:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory C:\\CORTEX\\JOBS
+```
+
+#### Docker in docker (docker-ception)
+You can also run docker service inside Cortex container, a docker in a docker with `--start-docker` parameter:
+```
+docker run thehiveproject/cortex:3.1.0-0.3RC1 --start-docker
+```
+In this case you don't need to bind job directory.
 
 #### Use Docker-compose
+Cortex 2 and newer requires [Elasticsearch](#elasticsearch-inside-a-docker) to run. You can use `docker-compose` to start them together in Docker or install and configure Elasticsearch manually.
 [Docker-compose](https://docs.docker.com/compose/install/) can start multiple dockers and link them together.
 
 The following [docker-compose.yml](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/cortex/docker-compose.yml)
@@ -94,34 +139,32 @@ file starts Elasticsearch and Cortex:
 version: "2"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+    image: elasticsearch:7.8.1
     environment:
       - http.host=0.0.0.0
-      - transport.host=0.0.0.0
-      - xpack.security.enabled=false
-      - cluster.name=hive
-      - script.inline=true
-      - thread_pool.index.queue_size=100000
+      - discovery.type=single-node
+      - script.allowed_types=inline
       - thread_pool.search.queue_size=100000
-      - thread_pool.bulk.queue_size=100000
+      - thread_pool.write.queue_size=10000
+    volumes:
+      - /path/to/data:/usr/share/elasticsearch/data
   cortex:
-    image: thehiveproject/cortex:latest
+    image: thehiveproject/cortex:3.1.0-0.3RC1
+    environment:
+      - job_directory=${job_directory}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${job_directory}:${job_directory}
     depends_on:
       - elasticsearch
     ports:
       - "0.0.0.0:9001:9001"
 ```
 
-Put this file in an empty folder and run `docker-compose up`. Cortex is exposed on 9001/tcp port. These ports can be changed by modifying the `docker-compose` file.
+Put this [docker-compose file](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/docker-compose.yaml) and [.env](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/cortex/.env) in an empty folder and run `docker-compose up`. Cortex is exposed on 9001/tcp port. These ports can be changed by modifying the `docker-compose` file.
 
 You can also use TheHive [docker-compose](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/docker/thehive/docker-compose.yml) file which contains TheHive, Cortex and Elasticsearch, as documented in [TheHive's Docker installation instructions](https://github.com/TheHive-Project/TheHiveDocs/blob/master/installation/docker-guide.md).
 
-You can specify a custom Cortex configuration file (`application.conf`) by adding the following lines in the `cortex` section of your docker-compose file:
-
-```
-volumes:
-    - /path/to/application.conf:/etc/cortex/application.conf
-```
 
 You should define where the data (i.e. the Elasticsearch database) will be located on your operating system by adding the following lines in the `elasticsearch` section of your docker-compose file:
 ```
@@ -129,54 +172,20 @@ volumes:
     - /path/to/data:/usr/share/elasticsearch/data
 ```
 
-#### Manual Installation of Elasticsearch
-Elasticsearch can be installed on the same server as Cortex or on a different one. You can then configure Cortex according to the
-[documentation](../admin/admin-guide.md) and run Cortex docker as follow:
+#### Analyzers and responders
+Neurons (analyzers and responders) are not embedded anymore in docker image. The recommended method to run neurons is to use docker. Official neurons have their own image is dockerhub under cortexneurons organisation. The catalog of available neurons is provided to Cortex using `--analyzer-url`/`--responder-url` parameters.
+
+You can still use legacy method (process) but you must ensure that Neuron files are accessible by Cortex and all the requirements (library dependencies) of your neurons are met.
+`docker run -v /path/to/your/analyzers:/opt/cortex/analyzers thehiveproject/cortex:latest --analyzer-urls /opt/cortex/analyzers`
+
+In order to add dependencies, you need to extends docker image with your own dockerfile:
 ```
-docker run --volume /path/to/cortex/application.conf:/etc/cortex/application.conf thehiveproject/cortex:latest --no-config
-```
+FROM thehiveproject/cortex:3.1.0-0.1RC1
 
-You can add the `--publish` docker option to expose the Cortex HTTP service.
-
-#### Customize the Docker Image
-By default, the Cortex Docker image has minimal configuration:
- - choose a random secret (`play.http.secret.key`)
- - search for the Elasticsearch instance (host named `elasticsearch`) and add it to configuration
-
-This behavior can be disabled by adding `--no-config` to the Docker command line:
-
-`docker run thehiveproject/cortex:latest --no-config`
-
-Or by adding the line `command: --no-config` in the `cortex` section of
-docker-compose file.
-
-The image accepts more options:
-
-| Option | Description |
-| ------ | ----------- |
-| `--no-config` | Do not try to configure Cortex (add the secret and Elasticsearch) |
-| `--no-config-secret` | Do not add the random secret to the configuration |
-| `--no-config-es` | Do not add the Elasticsearch hosts to configuration |
-| `--es-hosts <esconfig>` | Use this string to configure the Elasticsearch hosts (format: `["host1:9300","host2:9300"]`) |
-| `--es-hostname <host>` | Resolve this hostname to find Elasticsearch instances |
-| `--secret <secret>` | Cryptographic secret needed to secure sessions |
-
-**Note**: please remember that you must **[install and configure Elasticsearch](#elasticsearch-installation)**.
-
-#### Analyzers
-Analyzers are embedded in the docker image under `/opt/Cortex-Analyzers/analyzers`. To use new analyzers or get updates for the existing ones, you should
-[install them](#analyzers-and-responders) outside of Docker and overwrite the existing ones by adding the following parameter:
-
-```
---volume /path/to/analyzers:/opt/Cortex-Analyzers/analyzers:ro thehiveproject/cortex:latest  
-```
-
-#### Responders
-Like analyzers, responders are embedded in the docker image under `/opt/Cortex-Analyzers/responders`. To use new responders or get updates for the existing ones, you should
-[install them](#analyzers-and-responders) outside of Docker and overwrite the existing ones by adding the following parameter:
-
-```
---volume /path/to/responders:/opt/Cortex-Analyzers/responders:ro thehiveproject/cortex:latest  
+USER root
+RUN apt update && apt install -y python3-pip && rm -rf /var/lib/apt/lists/*
+RUN pip3 install ldap3 requests
+USER daemon
 ```
 
 #### What to Do Next?
@@ -186,13 +195,13 @@ Once the Docker image is up and running, proceed to the configuration using the 
 If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/cortex:version-RCx`. For example `thehiveproject/cortex:3.0.0-RC4`.
 
 ### Binary
-The following section contains the instructions to manually install Cortex using binaries on **Ubuntu 16.04 LTS**. 
+The following section contains the instructions to manually install Cortex using binaries on **Ubuntu**.
 
 #### 1. Minimal Ubuntu Installation
 Install a minimal Ubuntu 16.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
-- Elasticsearch 5.x (Cortex 3 also supports Elasticsearch 6.x)
+- Elasticsearch 6.x for Cortex 3.0, 7.x for Cortex 3.1
 
 Make sure your system is up-to-date:
 
@@ -224,18 +233,18 @@ sudo apt-get install openjdk-8-jre-headless
 To install Elasticsearch, please read the [Elasticsearch Installation](#elasticsearch-installation) section below.
 
 #### 4. Install Cortex
-Binary packages can be downloaded from [Bintray](https://dl.bintray.com/thehive-project/binary/). The latest version is called [cortex-latest.zip](https://dl.bintray.com/thehive-project/binary/cortex-latest.zip).
+Binary packages can be downloaded from TheHive-Project repository. The latest version is called [cortex-latest.zip](https://download.thehive-project.org/cortex-latest.zip).
 
 Download and unzip the chosen binary package. Cortex files can be installed wherever you want on the filesystem. In this guide, we assume you have chosen to install them under `/opt`.
 
 ```
 cd /opt
-wget https://dl.bintray.com/thehive-project/binary/cortex-latest.zip
+wget https://download.thehive-project.org/cortex-latest.zip
 unzip cortex-latest.zip
 ln -s cortex-x.x.x cortex
 ```
 
-**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://dl.bintray.com/thehive-project/binary/cortex-version-RCx.zip`. For example `https://dl.bintray.com/thehive-project/binary/cortex-2.1.0-RC1.zip`.
+**Note**: if you would like to use pre-release, beta versions of and help us find bugs to the benefit of the whole community, please download `https://download.thehive-project.org/cortex-version-RCx.zip`. For example `https://download.thehive-project.org/cortex-2.1.0-RC1.zip`.
 
 #### 5. First start
 It is recommended to use a dedicated, non-privileged user account to start Cortex. If so, make sure that the chosen account can create log files in `/opt/cortex/logs`.
@@ -287,7 +296,7 @@ restart the service.
 ```
 service cortex stop
 cd /opt
-wget https://dl.bintray.com/thehive-project/binary/cortex-latest.zip
+wget https://download.thehive-project.org/cortex-latest.zip
 unzip cortex-latest.zip
 rm /opt/cortex && ln -s cortex-x.x.x cortex
 chown -R cortex:cortex /opt/cortex /opt/cortex-x.x.x
@@ -437,7 +446,7 @@ This step generates static files (HTML, JavaScript and related resources) in  th
 
 ## Analyzers and Responders
 Analyzers and Responders are autonomous applications managed by and run through the Cortex core engine. They have their
-[own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers). 
+[own dedicated GitHub repository](https://github.com/TheHive-Project/Cortex-Analyzers).
 They are included in the Docker image but must be installed separately if you are using binary, RPM or DEB packages.
 
 ### Installation
@@ -523,7 +532,7 @@ for I in $(find /opt/Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3
 ```
 After running these commands, read the Analyzer Requirements Guide,  log into the Cortex 2 Web UI as an `orgAdmin`, click on the Refresh Analyzers button in the Cortex Web UI, configure the new analyzers and enjoy!
 
-If you are using TheHive, get the [latest version of the report templates](https://dl.bintray.com/thehive-project/binary/report-templates.zip) and import them into TheHive.
+If you are using TheHive, get the [latest version of the report templates](https://download.thehive-project.org/report-templates.zip) and import them into TheHive.
 
 ### Additional Analyzers
 The following analyzers are not supported by TheHive Project at this time:

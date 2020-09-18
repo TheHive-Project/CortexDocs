@@ -29,16 +29,18 @@ To generate a key, use the following command line:
 play.http.secret.key="$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 64 | head -n 1)"
 _EOF_
 
-search.host = ["127.0.0.1:9300"]
-analyzer.urls = ["/opt/Cortex-Analyzers/analyzers"]
+search.uri = "http://127.0.0.1:9200"
+analyzer.urls = "https://download.thehive-project.org/analyzers.json"
 
 ) | sudo tee -a /etc/cortex/application.conf
 
 ```
 
-Please note that this secret key is mandatory to start the Cortex application. After saving the file, restart the application (`service cortex restart` on Ubuntu). 
+Please note that this secret key is mandatory to start the Cortex application. After saving the file, restart the application (`service cortex restart` on Ubuntu).
 
 **Important Note**: Elasticsearch must be installed in order for Cortex to work. If you need to install it or if you are using an Elasticsearch instance that is not on the same machine as Cortex, please refer to the [Administration Guide](admin-guide.md#database).
+
+**Important Note**: Cortex run analyzers using docker service. Docker must be install on the same server. The user `cortex` must be in the `docker` group to be able to use it.
 
 ## Step 2: Update the Database
 Cortex uses ElasticSearch to store users, organizations and analyzers configuration. The first time you connect to the Web UI (`http://<CORTEX_IP>:9001` by default), you have to create the database by clicking the `Update Database` button.
@@ -84,13 +86,13 @@ If you are using TheHive, create a new account inside your organisation with the
 If you are migrating from Cortex 1.x, we recommend that you:
 
 1. Save the configuration of your analyzers (which ones are enabled and what are their configuration items such as users/passwords or API keys).
-2. Install Cortex 2.
+2. Install Cortex 3.
 3. Edit `/etc/cortex/application.conf` to add the secret key as shown in Step 1 and point Cortex to the location of the analyzers.
 3. Follow the remaining steps of this Quick Start Guide to enable the analyzers you need and reinject their configuration.
 ```
 play.http.secret.key="..."
-search.host = ['127.0.0.1:9300']
-analyzer.path = ["/opt/Cortex-Analyzers/analyzers"]
+search.uri = "http://127.0.0.1:9200"
+analyzer.urls = "https://download.thehive-project.org/analyzers.json"
 ```
 
 ![Enable and configure analyzers](../images/configure_analyzers.png)

@@ -1,7 +1,7 @@
 # Administration Guide
 This administration guide applies to Cortex 2 only.
 
-**Note**: you will need TheHive 3.0.7 or later to call Cortex 2 from TheHive. Earlier versions support only Cortex 1. 
+**Note**: you will need TheHive 3.0.7 or later to call Cortex 2 from TheHive. Earlier versions support only Cortex 1.
 
 ## Table of Contents
   * [User Roles](#user-roles)
@@ -150,7 +150,7 @@ search {
     # Maximum number of nested fields
     mapping.nested_fields.limit = 100
   }
-  
+
   ### XPack SSL configuration
   # Username for XPack authentication
   #search.username
@@ -277,6 +277,7 @@ auth {
 	# services.LocalAuthSrv : passwords are stored in user entity (in Elasticsearch). No configuration is required.
 	# ad : use ActiveDirectory to authenticate users. Configuration is under "auth.ad" key
 	# ldap : use LDAP to authenticate users. Configuration is under "auth.ldap" key
+  # oauth2 : use OAuth/OIDC to authenticate users. Configuration is under "auth.oauth2" and "auth.sso" keys
 	provider = [local]
 
   # By default, basic authentication is disabled. You can enable it by setting "method.basic" to true.
@@ -318,6 +319,67 @@ auth {
 		# Filter to search user {0} is replaced by user name. This parameter is required.
 		#filter = "(cn={0})"
 	}
+
+  oauth2 {
+    # URL of the authorization server
+    #clientId = "client-id"
+    #clientSecret = "client-secret"
+    #redirectUri = "https://my-cortex-instance.example/api/ssoLogin"
+    #responseType = "code"
+    #grantType = "authorization_code"
+
+    # URL from where to get the access token
+    #authorizationUrl = "https://auth-site.com/OAuth/Authorize"
+    #tokenUrl = "https://auth-site.com/OAuth/Token"
+
+    # The endpoint from which to obtain user details using the OAuth token, after successful login
+    #userUrl = "https://auth-site.com/api/User"
+    #scope = "openid profile"
+  }
+
+  # Single-Sign On
+  sso {
+    # Autocreate user in database?
+    #autocreate = false
+
+    # Autoupdate its profile and roles?
+    #autoupdate = false
+
+    # Autologin user using SSO?
+    #autologin = false
+
+    # Name of mapping class from user resource to backend user ('simple' or 'group')
+    #mapper = group
+    #attributes {
+    #  login = "user"
+    #  name = "name"
+    #  groups = "groups"
+    #  organization = "org"
+    #}
+    #defaultRoles = ["read"]
+    #defaultOrganization = "csirt"
+    #groups {
+    #  # URL to retreive groups (leave empty if you are using OIDC)
+    #  #url = "https://auth-site.com/api/Groups"
+    #  # Group mappings, you can have multiple roles for each group: they are merged
+    #  mappings {
+    #    admin-profile-name = ["admin"]
+    #    editor-profile-name = ["write"]
+    #    reader-profile-name = ["read"]
+    #  }
+    #}
+
+    #mapper = simple
+    #attributes {
+    #  login = "user"
+    #  name = "name"
+    #  roles = "roles"
+    #  organization = "org"
+    #}
+    #defaultRoles = ["read"]
+    #defaultOrganization = "csirt"
+  }
+
 }
 
 # Maximum time between two requests without requesting authentication
@@ -398,24 +460,29 @@ to the highest value among the two: file upload and text size as defined in Cort
 `application.conf` file.
 
 ### HTTPS
-To enable HTTPS in the application, add the following lines to
-`/etc/cortex/application.conf`:
+Enable HTTPS directly on Cortex is not supported anymore. You must install a reverse proxy in front of Cortex.
+Below an example of NGINX configuration:
 ```
-    https.port: 9443
-    play.server.https.keyStore {
-      path: "/path/to/keystore.jks"
-      type: "JKS"
-      password: "password_of_keystore"
-    }
+	server {
+			listen 443 ssl;
+			server_name cortex.example.com;
+
+			ssl_certificate			ssl/cortex_cert.pem;
+			ssl_certificate_key		ssl/cortex_key.pem;
+
+			proxy_connect_timeout   600;
+			proxy_send_timeout      600;
+			proxy_read_timeout      600;
+			send_timeout            600;
+			client_max_body_size    2G;
+			proxy_buffering off;
+			client_header_buffer_size 8k;
+
+			location / {
+					add_header				          Strict-Transport-Security "max-age=31536000; includeSubDomains";
+					proxy_pass                  http://127.0.0.1:9001/;
+					proxy_http_version          1.1;
+					proxy_set_header Connection "";
+			}
+	}
 ```
-As HTTPS is enabled, HTTP can be disabled by adding `http.port=disabled` in the
-configuration.
-
-To import your certificate in the keystore, depending on your situation, you can
-follow [Digital Ocean's tutorial](https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores).
-
-HTTPS can also be offloaded to a reverse proxy such as NGINX.
-
-**More information**:
-This is a setting of the Play framework that is documented on its website.
-Please refer to [https://www.playframework.com/documentation/2.6.x/ConfiguringHttps](https://www.playframework.com/documentation/2.6.x/ConfiguringHttps).

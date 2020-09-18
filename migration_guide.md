@@ -43,7 +43,7 @@ The Elasticsearch client also accepts the following settings:
  - `redirectsEnabled` (`true`/`false`)
  - `relativeRedirectsAllowed` (`true`/`false`)
  - `socketTimeout` (number of seconds)
- - `targetPreferredAuthSchemes` (??) 
+ - `targetPreferredAuthSchemes` (??)
 
 The configuration items `keepalive`, `pageSize`, `nbshards` and `nbreplicas` are still valid.
 
@@ -53,7 +53,7 @@ Cortex 3 requires at least Cortexutils 2.0 because communication between Cortex 
 ### Docker vs. Process
 Analyzers can now be started in a Docker container. This permits a better isolation between analyzers and simplify the installation of their respective requirements and their update.
 
-By default, Cortex continues to run analyzers using processes, like before. To run the dockerised version of analyzers and responders, the [docker service](https://docs.docker.com/install/) must be installed and the user under which Cortex is running must be able to use it. Normally, adding that user to the `docker` user group should be sufficient. Then Cortex will accept dockerised analyzers.
+By default, Cortex try to run analyzers using docker, thus the [docker service](https://docs.docker.com/install/) must be installed and the user under which Cortex is running must be able to use it. Normally, adding that user to the `docker` user group should be sufficient. Then Cortex will accept dockerised analyzers.
 
 ### Analyzer and Responder Catalog
 
@@ -62,15 +62,15 @@ The settings `analyzer.path` and `responder.path` are deprecated but will contin
    - the path or URL (*http(s)*) of a JSON file containing all worker definitions (merge of all JSONs in one array).
 
 We provide a file, hosted on GitHub, containing all the analyzers of the [Cortex-Analyzers](https://github.com/TheHive-Project/Cortex-Analyzers)repository:
- - [analyzers-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-devel.json): contains the latest versions of the analyzers, **before their release**. Each commit in the develop branch update the docker images used by this catalog. 
- - [analyzers-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers-stable.json): contains the stable versions of the analyzers. They are never been updated. The Analyzer ID points to an exact version of the analyzer. If you want to use a new version of an analyzer, you can but it is not done automatically. You need to enable it in the organisation administration page of the Cortex Web UI.
- - [analyzers.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=analyzers.json): Docker images in this catalog contains minor version updates (without breaking changes).
+ - [analyzers-devel.json](https://download.thehive-project.org/analyzers-devel.json): contains the latest versions of the analyzers, **before their release**. Each commit in the develop branch update the docker images used by this catalog.
+ - [analyzers-stable.json](https://download.thehive-project.org/analyzers-stable.json): contains the stable versions of the analyzers. They are never been updated. The Analyzer ID points to an exact version of the analyzer. If you want to use a new version of an analyzer, you can but it is not done automatically. You need to enable it in the organisation administration page of the Cortex Web UI.
+ - [analyzers.json](https://download.thehive-project.org/analyzers.json): Docker images in this catalog contains minor version updates (without breaking changes).
 
 Similar catalogs exist for responders:
 
--  [responders-devel.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-devel.json)
-- [responders-stable.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders-stable.json)
-- [responders.json](https://bintray.com/thehive-project/cortexneurons/download_file?file_path=responders.json).
+-  [responders-devel.json](https://download.thehive-project.org/responders-devel.json)
+- [responders-stable.json](https://download.thehive-project.org/responders-stable.json)
+- [responders.json](https://download.thehive-project.org/responders.json).
 
 By default, before start a job, Cortex checks if there is a new version of the Docker image available on the repository. If so, it will download and use it. This behavior can be disabled by setting `docker.autoUpdate` to false.
 
