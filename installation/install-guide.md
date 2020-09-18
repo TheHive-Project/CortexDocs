@@ -85,6 +85,7 @@ By default, the docker image generate a configuration file for Cortex with:
  - the [analyzers](https://download.thehive-project.org/analyzers.json) and [responders](https://download.thehive-project.org/responders.json) official location,
  - a generated secret (used to protect the user sessions).
 The behaviour of the Cortex Docker image can be customized using environment variables or parameters:
+
 | Parameter | Env variable | Description |
 | ------ | ------------ | ----------- |
 | `--no-config` | `no_config=1` | Do not configure Cortex |
