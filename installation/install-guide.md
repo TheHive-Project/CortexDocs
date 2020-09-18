@@ -123,9 +123,9 @@ docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\C
 ```
 
 #### Docker in docker (docker-ception)
-You can also run docker service inside Cortex container, a docker in a docker with `--start-docker` parameter:
+You can also run docker service inside Cortex container, a docker in a docker with `--start-docker` parameter. The container must be run in privileged mode.
 ```
-docker run thehiveproject/cortex:3.1.0-0.3RC1 --start-docker
+docker run --privileged thehiveproject/cortex:3.1.0-0.3RC1 --start-docker
 ```
 In this case you don't need to bind job directory.
 
