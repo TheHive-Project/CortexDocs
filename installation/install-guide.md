@@ -41,7 +41,7 @@ RPM packages are published on a TheHive-project repository. All packages are sig
 First install the RPM release package:
 **TODO**
 ```
-yum install https://rpm.thehive-project.org//thehive-project-release-1.1.0-2.noarch.rpm
+yum install https://dl.bintray.com/thehive-project/rpm-stable/thehive-project-release-1.1.0-2.noarch.rpm
 ```
 This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
 `/etc/pki/rpm-gpg/GPG-TheHive-Project`.
