@@ -34,48 +34,91 @@ Cortex is available as:
 In addition, Cortex can be also be [built from the source code](#build-it-yourself).
 
 ### RPM
-RPM packages are published on a TheHive-project repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
-`0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
+RPM packages are published on a our RPM repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
-First install the RPM release package:
-**TODO**
+`0CD5 AC59 DE5C 5A8E 0EE1 3849 3D99 BB18 562C BC1C`
+
+Run the following command to import the GPG key :
+
+```bash
+sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
-yum install https://rpm.thehive-project.org//thehive-project-release-1.1.0-2.noarch.rpm
+
+
+#### Stable versions
+
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=http://rpm.thehive-project.org/stable/noarch
+gpgcheck=1
 ```
-This will install TheHive Project's repository in `/etc/yum.repos.d/thehive-rpm.repo` and the corresponding GPG public key in
-`/etc/pki/rpm-gpg/GPG-TheHive-Project`.
 
 Then you will able to install the package using `yum`:
-```
+
+```bash
 yum install cortex
 ```
 
+#### Following beta versions
+
+To follow beta versions of Cortex, use the following setup:
+
+And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=http://rpm.thehive-project.org/beta/noarch
+gpgcheck=1
+```
+
+Then you will able to install the package using `yum`:
+
+```bash
+yum install cortex
+```
+
+⚠️ **We do not recommend that configuration for production servers**
+
 Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
-#### Pre-release versions
-The RPM release package installs two repositories: `thehive-project-stable` and `thehive-project-beta`. The latter contains pre-release, beta versions and is disabled by default. If you want to install them and help us find bugs to the benefit of the whole community, you can enable it by editing `/etc/yum.repos.d/thehive-rpm.repo` and set `enable` value to `1` for `thehive-project-beta` repository.
-
 ### DEB
-Debian packages are published on a TheHive-Project repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/PGP-PUBLIC-KEY). Its fingerprint is:
+
+Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
-To install the Cortex Debian package, use the following commands:
+#### Stable versions
+
+To install the  Debian package, use the following commands:
+
 ```bash
-echo 'deb https://deb.thehive-project.org/ stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
-curl https://download.thehive-project.org/PGP-PUBLIC-KEY | sudo apt-key add -
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
 sudo apt-get install cortex
 ```
 
-Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+#### Following beta versions
 
-#### Pre-release versions
-If you want to install pre-release, beta versions of TheHive packages and help us find bugs to the benefit of the whole community, you can add the pre-release repository with the command:
+To follow beta versions of Cortex, use the following commands:
+
 ```bash
-echo 'deb https://deb.thehive-project.org/ beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org beta main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+sudo apt-get install cortex
 ```
+
+⚠️ **We do not recommend that configuration for production servers**
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
