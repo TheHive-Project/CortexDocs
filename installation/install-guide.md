@@ -104,7 +104,7 @@ The behaviour of the Cortex Docker image can be customized using environment var
 
 At the end of the generated configuration, the file `/etc/cortex/application.conf` is included. Thus you can override any setting by binding your own `application.conf` into this file:
 ```
-docker run --volume /path/to/my/application.conf:/etc/cortex/application.conf thehiveproject/cortex:3.1.0-0.3RC1 --es-uri http://elasticsearch.local:9200
+docker run --volume /path/to/my/application.conf:/etc/cortex/application.conf thehiveproject/cortex:3.1.0-0.2RC1 --es-uri http://elasticsearch.local:9200
 ```
 
 Cortex uses docker to run analyzers and responders. If you run Cortex inside a docker, you can:
@@ -114,19 +114,19 @@ Cortex uses docker to run analyzers and responders. If you run Cortex inside a d
 #### Cortex uses main docker service
 In order to use docker service the docker socket must be bound into Cortex container. Moreover, as Cortex shares files with analyzers, a folder must be bound between them.
 ```
-docker run --volume /var/run/docker.sock:/var/run/docker.sock --volume /var/run/cortex/jobs:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory /var/run/cortex/jobs
+docker run --volume /var/run/docker.sock:/var/run/docker.sock --volume /var/run/cortex/jobs:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.2RC1 --job-directory /tmp/cortex-jobs --docker-job-directory /var/run/cortex/jobs
 ```
 Cortex can instantiate docker container by using the docker socket `/var/run/docker.sock`. The folder `/var/run/cortex/jobs` is used to store temporary file of jobs. The folder `/tmp/cortex-jobs` is job folder inside the docker. In order to make job file visible to analyzer docker, Cortex needs to know both folders (parameters `--job-directory` and `-docker-job-directory`). On most cases, job directories are the same and `--docker-job-directory` can be omitted.
 
 If you run Cortex in Windows, the docker service is accessible through the named pipe `\\.\pipe\docker_engine`. The command becomes
 ```
-docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\CORTEX\\JOBS:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory C:\\CORTEX\\JOBS
+docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\CORTEX\\JOBS:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.2RC1 --job-directory /tmp/cortex-jobs --docker-job-directory C:\\CORTEX\\JOBS
 ```
 
 #### Docker in docker (docker-ception)
 You can also run docker service inside Cortex container, a docker in a docker with `--start-docker` parameter. The container must be run in privileged mode.
 ```
-docker run --privileged thehiveproject/cortex:3.1.0-0.3RC1 --start-docker
+docker run --privileged thehiveproject/cortex:3.1.0-0.2RC1 --start-docker
 ```
 In this case you don't need to bind job directory.
 
@@ -150,7 +150,7 @@ services:
     volumes:
       - /path/to/data:/usr/share/elasticsearch/data
   cortex:
-    image: thehiveproject/cortex:3.1.0-0.3RC1
+    image: thehiveproject/cortex:3.1.0-0.2RC1
     environment:
       - job_directory=${job_directory}
     volumes:
@@ -161,6 +161,35 @@ services:
     ports:
       - "0.0.0.0:9001:9001"
 ```
+
+If you are running on Windows with WSL2, you can use this docker-compose.yml file:
+```
+version: "2"
+services:
+  elasticsearch:
+    image: elasticsearch:7.8.1
+    environment:
+      - http.host=0.0.0.0
+      - discovery.type=single-node
+      - script.allowed_types=inline
+      - thread_pool.search.queue_size=100000
+      - thread_pool.write.queue_size=10000
+    volumes:
+      - //./pipe/docker_engine://./pipe/docker_engine
+      - /mnt/c/your/path/to/jobs/folder/in/c/disk/jobs:/tmp/jobs
+  cortex:
+    image: thehiveproject/cortex:3.1.0-0.2RC1
+    environment:
+      - job_directory=/mnt/c/your/path/to/jobs/folder/in/c/disk/jobs
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /mnt/c/your/path/to/jobs/folder/in/c/disk/jobs:/tmp/jobs
+    depends_on:
+      - elasticsearch
+    ports:
+      - "0.0.0.0:9001:9001"
+```
+
 
 Put this [docker-compose file](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/docker-compose.yaml) and [.env](https://raw.githubusercontent.com/TheHive-Project/Cortex/master/docker/cortex/.env) in an empty folder and run `docker-compose up`. Cortex is exposed on 9001/tcp port. These ports can be changed by modifying the `docker-compose` file.
 
