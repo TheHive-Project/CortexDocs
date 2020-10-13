@@ -36,7 +36,7 @@ analyzer.urls = "https://download.thehive-project.org/analyzers.json"
 
 ```
 
-Please note that this secret key is mandatory to start the Cortex application. After saving the file, restart the application (`service cortex restart` on Ubuntu).
+Please note that this secret key is mandatory to start the Cortex application. After saving the file, restart the application (`service cortex restart` on Ubuntu or `systemctl restart cortex` on CentOS).
 
 **Important Note**: Elasticsearch must be installed in order for Cortex to work. If you need to install it or if you are using an Elasticsearch instance that is not on the same machine as Cortex, please refer to the [Administration Guide](admin-guide.md#database).
 
