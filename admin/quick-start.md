@@ -1,5 +1,5 @@
 # Quick Start Guide
-This is the Quick Start guide for Cortex 2. It assumes that Cortex [has been installed](../installation), and that [the analyzers](../installation/install-guide.md#analyzers-1) have been installed as well. For further details and configuration options, please refer to the [Administration Guide](admin-guide.md).
+This is the Quick Start guide for Cortex 3. It assumes that Cortex [has been installed](../installation), and that [the analyzers](../installation/install-guide.md#analyzers-1) have been installed as well. For further details and configuration options, please refer to the [Administration Guide](admin-guide.md).
 
 ## Table of Contents
   * [Step 1: Setup Cortex](#step-1-setup-cortex)
