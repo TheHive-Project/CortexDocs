@@ -165,17 +165,17 @@ apt install cortex
 #### Stable versions
 
 
-The main repository  is a legacy repository and contains packages for **Cortex 3.1.0** that **does not support Elasticsearch version 7.x**, but version 6.x.
+The main repository  is a legacy repository and contains packages for **Cortex 3.0.1** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
 Setup apt configuration  with the `main` repository:
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
-echo 'deb https://deb.thehive-project.org main main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
 ```
 
-Then you will able to install  **Cortex 3.1.0+**   package using `apt` command:
+Then you will able to install  **Cortex 3.0.1**   package using `apt` command:
 
 ```bash
 apt install cortex
