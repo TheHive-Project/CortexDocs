@@ -131,18 +131,20 @@ yum install cortex
 
 Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
+---
+
 ### DEB
 
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
+
+---
+
 #### Release versions
 
----
 The release repository contains packages for **Cortex 3.1.0+**.
-
----
 
 Setup apt configuration  with the `release` repository:
 
@@ -158,12 +160,12 @@ Then you will able to install  **Cortex 3.1.0+**  the package using `apt` comman
 apt install cortex
 ```
 
+---
+
 #### Stable versions
 
----
-The main repository  is a legacy repository and contains packages for **Cortex 3.1.0** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
----
+The main repository  is a legacy repository and contains packages for **Cortex 3.1.0** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
 Setup apt configuration  with the `main` repository:
 
@@ -179,6 +181,8 @@ Then you will able to install  **Cortex 3.1.0+**   package using `apt` command:
 apt install cortex
 ```
 
+---
+
 #### Following beta versions
 
 To follow beta versions of Cortex, use the following commands:
@@ -191,6 +195,8 @@ sudo apt-get install cortex
 ```
 
 ⚠️   **We do not recommend that configuration for production servers**
+
+---
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
