@@ -183,7 +183,7 @@ apt install cortex
 
 ---
 
-#### Following beta versions
+#### Beta versions
 
 To follow beta versions of Cortex, use the following commands:
 
