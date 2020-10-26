@@ -131,14 +131,12 @@ yum install cortex
 
 Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
----
-
+  
 ### DEB
 
 Debian packages are published on a our DEB packages repository. All packages are signed using our GPG key [562CBC1C](https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY). Its fingerprint is:
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
-
 
 ---
 
