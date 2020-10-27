@@ -389,6 +389,40 @@ session {
 }
 ```
 
+#### OAUTH2 Example
+
+```
+	oauth2 {
+		name: oauth2
+		clientId: "client-id"
+		clientSecret: "client-secret"
+		redirectUri: "http://localhost:9112/api/ssoLogin"
+		responseType: code
+		grantType: "authorization_code"
+		authorizationUrl: "https://github.com/login/oauth/authorize"
+		authorizationHeader: "token"
+		tokenUrl: "https://github.com/login/oauth/access_token"
+		userUrl: "https://api.github.com/user"
+		scope: ["user"]
+	}
+	
+sso {
+		autocreate: false
+		autoupdate: false
+		mapper: "simple"
+		attributes {
+		login: "login"
+		name: "name"
+		roles: "role"
+		}
+		defaultRoles: ["read", "analyze"]
+		defaultOrganization: "demo"
+    }
+    
+
+```
+
+
 ### Cache
 #### Performance
 In order to increase Cortex performance, a cache is configured to prevent
