@@ -46,7 +46,7 @@ The output should look like this:
 
 ```
 health status index           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   cortex_4    1CGSt9R3Rlm0bc9E-qEkXg       5   1       8531            8       19mb            9mb 
+green  open   cortex_4    Y5rDTO23RBC_n6pjFP0-Qw   5   0       8531            8       13mb           13mb 
 ```
 
 
@@ -90,8 +90,8 @@ The output should look like this:
 
 ```
 health status index           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-yellow open   new_the_hive_15 A2KLoZPpSXygutlfy_RNCQ   5   1          0            0      1.1kb          1.1kb
-green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977           36     33.2mb         33.2mb
+green  open   new_cortex_4    wRX6rhzXTuW_F2wLNxqVyg   5   0          0            0      1.1kb          1.1kb
+green  open   cortex_4        Y5rDTO23RBC_n6pjFP0-Qw   5   0       8531            8       13mb           13mb
 ```
 
 ### Proceed to Reindex 
@@ -146,8 +146,8 @@ The output should look like this:
 
 ```
 health status index           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   new_the_hive_15 GV-3Y8QjTjWw0F-p2sjW6Q   5   0      30977            0       26mb           26mb
-green  open   the_hive_15     Oap-I61ySgyv6EAI1ZUTFQ   5   0      30977           36     33.2mb         33.2mb
+green  open   new_cortex_4    wRX6rhzXTuW_F2wLNxqVyg   5   0       8531            0     12.6mb         12.6mb
+green  open   cortex_4        Y5rDTO23RBC_n6pjFP0-Qw   5   0       8531            8       13mb           13mb
 ```
 
 ### Delete old indices
