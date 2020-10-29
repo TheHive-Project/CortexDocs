@@ -16,6 +16,7 @@ This administration guide applies to Cortex 2 only.
     * [Database](#database)
     * [Analyzers](#analyzers-1)
     * [Authentication](#authentication)
+      * [OAuth2/OpenID Connect](#OAuth2openid-connect)	
     * [Cache](#cache)
        * [Performance](#performance)
        * [Analyzer Results](#analyzer-results)
@@ -334,7 +335,7 @@ auth {
 
     # The endpoint from which to obtain user details using the OAuth token, after successful login
     #userUrl = "https://auth-site.com/api/User"
-    #scope = "openid profile"
+    #scope = ["openid profile"]
   }
 
   # Single-Sign On
@@ -389,7 +390,17 @@ session {
 }
 ```
 
-#### OAuth2 
+#### OAuth2/OpenID Connect
+
+To enable authentication using OAuth2/OpenID Connect, edit the `application.conf` file and supply the values of `auth.oauth2` according to your environment. In addition, you need to supply:
+
+- `auth.sso.attributes.login`: name of the attribute containing the OAuth2 user's login in retreived user info (mandatory)
+- `auth.sso.attributes.name`: name of the attribute containing the OAuth2 user's name in retreived user info (mandatory)
+- `auth.sso.attributes.groups`: name of the attribute containing the OAuth2 user's groups (mandatory using groups mappings)
+- `auth.sso.attributes.roles`: name of the attribute containing the OAuth2 user's roles in retreived user info (mandatory using simple mapping)
+
+##### Important notes
+
 
 Authenticate the user using an external OAuth2 authenticator server. The configuration is:
 
