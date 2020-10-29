@@ -389,37 +389,58 @@ session {
 }
 ```
 
-#### OAUTH2 Example
+#### OAuth2 
+
+Authenticate the user using an external OAuth2 authenticator server. The configuration is:
+
+- clientId (string) client ID in the OAuth2 server.
+- clientSecret (string) client secret in the OAuth2 server.
+- redirectUri (string) the url of TheHive AOuth2 page (.../api/ssoLogin).
+- responseType (string) type of the response. Currently only "code" is accepted.
+- grantType (string) type of the grant. Currently only "authorization_code" is accepted.
+- authorizationUrl (string) the url of the OAuth2 server.
+- authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
+- tokenUrl (string) the token url of the OAuth2 server.
+- userUrl (string) the url to get user information in OAuth2 server.
+- scope (list of string) list of scope.
+
+##### Example
 
 ```
-	oauth2 {
-		name: oauth2
-		clientId: "client-id"
-		clientSecret: "client-secret"
-		redirectUri: "http://localhost:9000/api/ssoLogin"
-		responseType: code
-		grantType: "authorization_code"
-		authorizationUrl: "https://github.com/login/oauth/authorize"
-		authorizationHeader: "token"
-		tokenUrl: "https://github.com/login/oauth/access_token"
-		userUrl: "https://api.github.com/user"
-		scope: ["user"]
-	}
-	
-sso {
-		autocreate: false
-		autoupdate: false
-		mapper: "simple"
-		attributes {
-		login: "login"
-		name: "name"
-		roles: "role"
-		}
-		defaultRoles: ["read", "analyze"]
-		defaultOrganization: "demo"
-    }
-    
+auth {
+		
+  provider = [local, oauth2]
 
+  [..]
+
+  sso {
+    autocreate: false
+    autoupdate: false
+    mapper: "simple"
+    attributes {
+      login: "login"
+      name: "name"
+      roles: "role"
+    }
+    defaultRoles: ["read", "analyze"]
+    defaultOrganization: "demo"
+  }  
+  oauth2 {
+    name: oauth2
+    clientId: "Client_ID"
+    clientSecret: "Client_ID"
+    redirectUri: "http://localhost:9001/api/ssoLogin"
+    responseType: code
+    grantType: "authorization_code"
+    authorizationUrl: "https://github.com/login/oauth/authorize"
+    authorizationHeader: "token"
+    tokenUrl: "https://github.com/login/oauth/access_token"
+    userUrl: "https://api.github.com/user"
+    scope: ["user"]
+  }
+
+  [..]	
+}
 ```
 
 
