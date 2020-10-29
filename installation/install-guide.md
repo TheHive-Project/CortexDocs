@@ -733,3 +733,27 @@ docker run \
   -e "thread_pool.search.queue_size=100000" \
 	docker.elastic.co/elasticsearch/elasticsearch:7.9.1
 ```
+
+### Running Analyzers and Responders directly in Cortex container (using "process" method) 
+
+Cortex is able to run these programs with Docker when images exist. The default configuration included in the official docker image of Cortex  uses our catalogs of images of Analyzers and Responders.
+
+Running Analyzers and Responders directly in Cortex container (using "process" method) is still supported. You can include them in container thanks to the Docker volumes when you start the container. If they need dependencies, you can create your own Docker image from our official Cortex image. Below an example of Dockerfile that retrieves Analyzers and Responders like previous Cortex Docker image:
+
+```
+FROM thehiveproject/cortex:3.1.0-1
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends                        \
+        python-pip python2.7-dev python3-pip python3-dev              \
+        ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl          \
+        libmagic1 build-essential git libssl-dev dnsutils iptables
+RUN pip2 install -U pip setuptools
+RUN pip3 install -U pip setuptools
+RUN git clone https://github.com/TheHive-Project/Cortex-Analyzers.git \
+        /opt/Cortex-Analyzers
+RUN for I in $(find /opt/Cortex-Analyzers -name 'requirements.txt')   \
+    do                                                                \
+        pip2 install -r $I || true                                    \
+        pip3 install -r $I || true                                    \
+    done
+```
