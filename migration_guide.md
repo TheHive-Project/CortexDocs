@@ -26,14 +26,14 @@ Run the following command :
 curl -s http://127.0.0.1:9200/cortex_4?human | jq '.cortex_4.settings.index.version.created_string'
 ```
 
-- if the output is similar to `"5.x"`  then your database index has been created with Elasticsearch 5.x  reindexing is required, you should follow [a dedicated process to upgrade](../admin/upgrade_to_thehive_3_5_and_es_7_x.md). 
+- if the output is similar to `"5.x"`  then your database index has been created with Elasticsearch 5.x  reindexing is required, you should follow [a dedicated process to upgrade](admin/upgrade_to_thehive_3_5_and_es_7_x.md). 
 - If it is   `"6.x"` then your database has been created with Elasticsearch 6.
 
 ### Your database was created with Elasticsearch 5.x or earlier
 
 This is where things might be complicated. This upgrade progress  requires handling the database index by updating parameters, and reindex before updating Elasticsearch, and updating TheHive.
 
-Read carefully [the dedicated documentation](../admin/upgrade_to_cortex_3_1_and_es7_x). It should help you run this specific actions on your Elasticsearch database, and also install or update application whether you are using DEB, RPM or binary packages, and even docker images.
+Read carefully [the dedicated documentation](admin/upgrade_to_cortex_3_1_and_es7_x). It should help you run this specific actions on your Elasticsearch database, and also install or update application whether you are using DEB, RPM or binary packages, and even docker images.
 
 ### Your database was created with Elasticsearch 6.x
 
@@ -56,7 +56,7 @@ Following parameters are **not accepted anymore** by Elasticsearch 7:
 
 With TheHive service stopped, ensure the new version of Elasticsearch starts.
 
-If everything is ok, then Cortex 3.1.0 can be installed. To run this operation successfully, you need to **update your repository configuration**  if you are using DEB and RPM packages, or specify the right version to install if using docker. Read carefully the [installation guide](../installation/install-guide.md). 
+If everything is ok, then Cortex 3.1.0 can be installed. To run this operation successfully, you need to **update your repository configuration**  if you are using DEB and RPM packages, or specify the right version to install if using docker. Read carefully the [installation guide](installation/install-guide.md). 
 
 
 
