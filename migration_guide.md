@@ -26,7 +26,7 @@ Run the following command :
 curl -s http://127.0.0.1:9200/cortex_4?human | jq '.cortex_4.settings.index.version.created_string'
 ```
 
-- if the output is similar to `"5.x"`  then your database index has been created with Elasticsearch 5.x  reindexing is required, you should follow [a dedicated process to upgrade](admin/upgrade_to_thehive_3_5_and_es_7_x.md). 
+- if the output is similar to `"5.x"`  then your database index has been created with Elasticsearch 5.x  reindexing is required, you should follow [a dedicated process to upgrade](admin/upgrade_to_cortex_3_1_and_es7_x.md). 
 - If it is   `"6.x"` then your database has been created with Elasticsearch 6.
 
 ### Your database was created with Elasticsearch 5.x or earlier
