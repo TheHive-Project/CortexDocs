@@ -33,7 +33,7 @@ curl -s http://127.0.0.1:9200/cortex_4?human | jq '.cortex_4.settings.index.vers
 
 This is where things might be complicated. This upgrade progress  requires handling the database index by updating parameters, and reindex before updating Elasticsearch, and updating TheHive.
 
-Read carefully [the dedicated documentation](admin/upgrade_to_cortex_3_1_and_es7_x). It should help you run this specific actions on your Elasticsearch database, and also install or update application whether you are using DEB, RPM or binary packages, and even docker images.
+Read carefully [the dedicated documentation](admin/upgrade_to_cortex_3_1_and_es7_x.md). It should help you run this specific actions on your Elasticsearch database, and also install or update application whether you are using DEB, RPM or binary packages, and even docker images.
 
 ### Your database was created with Elasticsearch 6.x
 
