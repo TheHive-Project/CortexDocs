@@ -16,6 +16,7 @@ This administration guide applies to Cortex 2 only.
     * [Database](#database)
     * [Analyzers](#analyzers-1)
     * [Authentication](#authentication)
+      * [OAuth2/OpenID Connect](#OAuth2openid-connect)	
     * [Cache](#cache)
        * [Performance](#performance)
        * [Analyzer Results](#analyzer-results)
@@ -334,7 +335,7 @@ auth {
 
     # The endpoint from which to obtain user details using the OAuth token, after successful login
     #userUrl = "https://auth-site.com/api/User"
-    #scope = "openid profile"
+    #scope = ["openid profile"]
   }
 
   # Single-Sign On
@@ -388,6 +389,71 @@ session {
   inactivity = 1h
 }
 ```
+
+#### OAuth2/OpenID Connect
+
+To enable authentication using OAuth2/OpenID Connect, edit the `application.conf` file and supply the values of `auth.oauth2` according to your environment. In addition, you need to supply:
+
+- `auth.sso.attributes.login`: name of the attribute containing the OAuth2 user's login in retreived user info (mandatory)
+- `auth.sso.attributes.name`: name of the attribute containing the OAuth2 user's name in retreived user info (mandatory)
+- `auth.sso.attributes.groups`: name of the attribute containing the OAuth2 user's groups (mandatory using groups mappings)
+- `auth.sso.attributes.roles`: name of the attribute containing the OAuth2 user's roles in retreived user info (mandatory using simple mapping)
+
+##### Important notes
+
+
+Authenticate the user using an external OAuth2 authenticator server. The configuration is:
+
+- clientId (string) client ID in the OAuth2 server.
+- clientSecret (string) client secret in the OAuth2 server.
+- redirectUri (string) the url of TheHive AOuth2 page (.../api/ssoLogin).
+- responseType (string) type of the response. Currently only "code" is accepted.
+- grantType (string) type of the grant. Currently only "authorization_code" is accepted.
+- authorizationUrl (string) the url of the OAuth2 server.
+- authorizationHeader (string) prefix of the authorization header to get user info: Bearer, token, ...
+- tokenUrl (string) the token url of the OAuth2 server.
+- userUrl (string) the url to get user information in OAuth2 server.
+- scope (list of string) list of scope.
+
+##### Example
+
+```
+auth {
+		
+  provider = [local, oauth2]
+
+  [..]
+
+  sso {
+    autocreate: false
+    autoupdate: false
+    mapper: "simple"
+    attributes {
+      login: "login"
+      name: "name"
+      roles: "role"
+    }
+    defaultRoles: ["read", "analyze"]
+    defaultOrganization: "demo"
+  }  
+  oauth2 {
+    name: oauth2
+    clientId: "Client_ID"
+    clientSecret: "Client_ID"
+    redirectUri: "http://localhost:9001/api/ssoLogin"
+    responseType: code
+    grantType: "authorization_code"
+    authorizationUrl: "https://github.com/login/oauth/authorize"
+    authorizationHeader: "token"
+    tokenUrl: "https://github.com/login/oauth/access_token"
+    userUrl: "https://api.github.com/user"
+    scope: ["user"]
+  }
+
+  [..]	
+}
+```
+
 
 ### Cache
 #### Performance

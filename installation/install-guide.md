@@ -1,5 +1,14 @@
 # Installation Guide
-This guide applies to Cortex 2 and newer only.
+
+---
+⚠️   _**Please read carrefully this documentation. Depending on you make a fresh installation or update an existing version, repository or packages names may vary.**_
+
+Current supported versions of Cortex are:
+- Version 3.1.0 and later that supports **only** Elasticsearch 7.x. 
+
+Instruction to  install Cortex supporting Elasticsearch 6.x (EoL in Nov. 2020) are still detailled in this documentation. 
+
+---
 
 Before installing Cortex, you need to choose the installation option which suits your environment as described below, install the analyzers then proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
@@ -45,25 +54,57 @@ Run the following command to import the GPG key :
 sudo rpm --import https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY
 ```
 
+---
 
-#### Stable versions
+#### Release versions
 
-And setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+The release repository contains packages for **Cortex 3.1.0+**.
+
+
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
 ```bash
 [thehive-project]
 enabled=1
 priority=1
 name=TheHive-Project RPM repository
-baseurl=http://rpm.thehive-project.org/stable/noarch
+baseurl=https://rpm.thehive-project.org/release/noarch
 gpgcheck=1
 ```
 
-Then you will able to install the package using `yum`:
+Then you will able to install  **Cortex 3.1.0+**  the package using `yum`:
 
 ```bash
 yum install cortex
 ```
+
+---
+
+
+#### Stable versions (or legacy versions)
+
+
+The main repository  is a legacy repository and contains packages for **Cortex 3.0.1** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
+
+```bash
+[thehive-project]
+enabled=1
+priority=1
+name=TheHive-Project RPM repository
+baseurl=https://rpm.thehive-project.org/stable/noarch
+gpgcheck=1
+```
+
+Then you will able to install **Cortex 3.0.1** package using `yum`:
+
+```bash
+yum install cortex
+```
+
+---
 
 #### Following beta versions
 
@@ -86,9 +127,12 @@ Then you will able to install the package using `yum`:
 yum install cortex
 ```
 
-⚠️ **We do not recommend that configuration for production servers**
+⚠️   **We do not recommend that configuration for production servers**
 
 Once the package is installed, [install the analyzers](#analyzers-and-responders) as outlined in the next section and proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
+
+---
+
 
 ### DEB
 
@@ -96,18 +140,50 @@ Debian packages are published on a our DEB packages repository. All packages are
 
 `0CD5 AC59 DE5C 5A8E 0EE1  3849 3D99 BB18 562C BC1C`
 
+---
+
+#### Release versions
+
+The release repository contains packages for **Cortex 3.1.0+**.
+
+Setup apt configuration  with the `release` repository:
+
+```bash
+curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
+echo 'deb https://deb.thehive-project.org release main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
+sudo apt-get update
+```
+
+Then you will able to install  **Cortex 3.1.0+**  the package using `apt` command:
+
+```bash
+apt install cortex
+```
+
+---
+
 #### Stable versions
 
-To install the  Debian package, use the following commands:
+
+The main repository  is a legacy repository and contains packages for **Cortex 3.0.1** that **does not support Elasticsearch version 7.x**, but version 6.x.
+
+Setup apt configuration  with the `main` repository:
 
 ```bash
 curl https://raw.githubusercontent.com/TheHive-Project/TheHive/master/PGP-PUBLIC-KEY | sudo apt-key add -
 echo 'deb https://deb.thehive-project.org stable main' | sudo tee -a /etc/apt/sources.list.d/thehive-project.list
 sudo apt-get update
-sudo apt-get install cortex
 ```
 
-#### Following beta versions
+Then you will able to install  **Cortex 3.0.1**   package using `apt` command:
+
+```bash
+apt install cortex
+```
+
+---
+
+#### Beta versions
 
 To follow beta versions of Cortex, use the following commands:
 
@@ -118,7 +194,9 @@ sudo apt-get update
 sudo apt-get install cortex
 ```
 
-⚠️ **We do not recommend that configuration for production servers**
+⚠️   **We do not recommend that configuration for production servers**
+
+---
 
 ### Docker
 To use the Docker image, you must use [Docker](https://www.docker.com/) (courtesy of Captain Obvious).
@@ -147,7 +225,7 @@ The behaviour of the Cortex Docker image can be customized using environment var
 
 At the end of the generated configuration, the file `/etc/cortex/application.conf` is included. Thus you can override any setting by binding your own `application.conf` into this file:
 ```
-docker run --volume /path/to/my/application.conf:/etc/cortex/application.conf thehiveproject/cortex:3.1.0-0.3RC1 --es-uri http://elasticsearch.local:9200
+docker run --volume /path/to/my/application.conf:/etc/cortex/application.conf thehiveproject/cortex:3.1.0-1 --es-uri http://elasticsearch.local:9200
 ```
 
 Cortex uses docker to run analyzers and responders. If you run Cortex inside a docker, you can:
@@ -157,19 +235,19 @@ Cortex uses docker to run analyzers and responders. If you run Cortex inside a d
 #### Cortex uses main docker service
 In order to use docker service the docker socket must be bound into Cortex container. Moreover, as Cortex shares files with analyzers, a folder must be bound between them.
 ```
-docker run --volume /var/run/docker.sock:/var/run/docker.sock --volume /var/run/cortex/jobs:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory /var/run/cortex/jobs
+docker run --volume /var/run/docker.sock:/var/run/docker.sock --volume /var/run/cortex/jobs:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-1 --job-directory /tmp/cortex-jobs --docker-job-directory /var/run/cortex/jobs
 ```
 Cortex can instantiate docker container by using the docker socket `/var/run/docker.sock`. The folder `/var/run/cortex/jobs` is used to store temporary file of jobs. The folder `/tmp/cortex-jobs` is job folder inside the docker. In order to make job file visible to analyzer docker, Cortex needs to know both folders (parameters `--job-directory` and `-docker-job-directory`). On most cases, job directories are the same and `--docker-job-directory` can be omitted.
 
 If you run Cortex in Windows, the docker service is accessible through the named pipe `\\.\pipe\docker_engine`. The command becomes
 ```
-docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\CORTEX\\JOBS:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-0.3RC1 --job-directory /tmp/cortex-jobs --docker-job-directory C:\\CORTEX\\JOBS
+docker run --volume //./pipe/docker_engine://./pipe/docker_engine --volume C:\\CORTEX\\JOBS:/tmp/cortex-jobs thehiveproject/cortex:3.1.0-1 --job-directory /tmp/cortex-jobs --docker-job-directory C:\\CORTEX\\JOBS
 ```
 
 #### Docker in docker (docker-ception)
 You can also run docker service inside Cortex container, a docker in a docker with `--start-docker` parameter. The container must be run in privileged mode.
 ```
-docker run --privileged thehiveproject/cortex:3.1.0-0.3RC1 --start-docker
+docker run --privileged thehiveproject/cortex:3.1.0-1 --start-docker
 ```
 In this case you don't need to bind job directory.
 
@@ -183,7 +261,7 @@ file starts Elasticsearch and Cortex:
 version: "2"
 services:
   elasticsearch:
-    image: elasticsearch:7.8.1
+    image: elasticsearch:7.9.1
     environment:
       - http.host=0.0.0.0
       - discovery.type=single-node
@@ -193,7 +271,7 @@ services:
     volumes:
       - /path/to/data:/usr/share/elasticsearch/data
   cortex:
-    image: thehiveproject/cortex:3.1.0-0.3RC1
+    image: thehiveproject/cortex:3.1.1
     environment:
       - job_directory=${job_directory}
     volumes:
@@ -224,7 +302,7 @@ You can still use legacy method (process) but you must ensure that Neuron files 
 
 In order to add dependencies, you need to extends docker image with your own dockerfile:
 ```
-FROM thehiveproject/cortex:3.1.0-0.1RC1
+FROM thehiveproject/cortex:3.1.0-1
 
 USER root
 RUN apt update && apt install -y python3-pip && rm -rf /var/lib/apt/lists/*
@@ -236,16 +314,16 @@ USER daemon
 Once the Docker image is up and running, proceed to the configuration using the [Quick Start Guide](../admin/quick-start.md). For more advanced configuration options, please refer to the [Administration Guide](../admin/admin-guide.md).
 
 #### Pre-release Versions
-If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/cortex:version-RCx`. For example `thehiveproject/cortex:3.0.0-RC4`.
+If you would like to use pre-release, beta versions of our Docker images and help us find bugs to the benefit of the whole community, please use `thehiveproject/cortex:version-RCx`. For example `thehiveproject/cortex:3.1.0-0.1RC1`.
 
 ### Binary
 The following section contains the instructions to manually install Cortex using binaries on **Ubuntu**.
 
 #### 1. Minimal Ubuntu Installation
-Install a minimal Ubuntu 16.04 system with the following software:
+Install a minimal Ubuntu 20.04 system with the following software:
 
 - Java runtime environment 1.8+ (JRE)
-- Elasticsearch 6.x for Cortex 3.0, 7.x for Cortex 3.1
+- Elasticsearch 7.x for Cortex 3.1
 
 Make sure your system is up-to-date:
 
@@ -262,14 +340,14 @@ You can install either Oracle Java or OpenJDK.
 echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main' | sudo tee -a /etc/apt/sources.list.d/java.list
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key EEA14886
 sudo apt-get update
-sudo apt-get install oracle-java8-installer
+sudo apt-get install oracle-java11-installer
 ```
 
 ##### 2.2 OpenJDK
 ```
 sudo add-apt-repository ppa:openjdk-r/ppa
 sudo apt-get update
-sudo apt-get install openjdk-8-jre-headless
+sudo apt-get install openjdk-11-jre-headless
 
 ```
 
@@ -454,12 +532,9 @@ Proceed to [installing the analyzers](#analyzers-and-responders) as outlined in 
 Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
-network.host: 127.0.0.1
-script.inline: on
+http.host: 127.0.0.1
 cluster.name: hive
-thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
-thread_pool.bulk.queue_size: 1000
 ```
 
 Start the service:
@@ -596,7 +671,7 @@ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-key D88E42B4
 # wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
 # Debian repository configuration
-echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
 
 # Install https support for apt
 sudo apt install apt-transport-https
@@ -621,12 +696,9 @@ The cluster name must also be set (`hive` for example). Threadpool queue size mu
 Edit `/etc/elasticsearch/elasticsearch.yml` and add the following lines:
 
 ```
-network.host: 127.0.0.1
-script.inline: on
+http.host: 127.0.0.1
 cluster.name: hive
-thread_pool.index.queue_size: 100000
 thread_pool.search.queue_size: 100000
-thread_pool.bulk.queue_size: 100000
 ```
 
 ### Start the Service
@@ -653,15 +725,35 @@ docker run \
   --hostname elasticsearch \
   --rm \
   --publish 127.0.0.1:9200:9200 \
-	--publish 127.0.0.1:9300:9300 \
   --volume ***DATA_DIR***:/usr/share/elasticsearch/data \
 	-e "http.host=0.0.0.0" \
-	-e "transport.host=0.0.0.0" \
 	-e "xpack.security.enabled=false" \
 	-e "cluster.name=hive" \
   -e "script.inline=true" \
-  -e "thread_pool.index.queue_size=100000" \
   -e "thread_pool.search.queue_size=100000" \
-  -e "thread_pool.bulk.queue_size=100000" \
-	docker.elastic.co/elasticsearch/elasticsearch:5.6.0
+	docker.elastic.co/elasticsearch/elasticsearch:7.9.1
+```
+
+### Running Analyzers and Responders directly in Cortex container (using "process" method) 
+
+Cortex is able to run these programs with Docker when images exist. The default configuration included in the official docker image of Cortex  uses our catalogs of images of Analyzers and Responders.
+
+Running Analyzers and Responders directly in Cortex container (using "process" method) is still supported. You can include them in container thanks to the Docker volumes when you start the container. If they need dependencies, you can create your own Docker image from our official Cortex image. Below an example of Dockerfile that retrieves Analyzers and Responders like previous Cortex Docker image:
+
+```
+FROM thehiveproject/cortex:3.1.0-1
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends                        \
+        python-pip python2.7-dev python3-pip python3-dev              \
+        ssdeep libfuzzy-dev libfuzzy2 libimage-exiftool-perl          \
+        libmagic1 build-essential git libssl-dev dnsutils iptables
+RUN pip2 install -U pip setuptools
+RUN pip3 install -U pip setuptools
+RUN git clone https://github.com/TheHive-Project/Cortex-Analyzers.git \
+        /opt/Cortex-Analyzers
+RUN for I in $(find /opt/Cortex-Analyzers -name 'requirements.txt')   \
+    do                                                                \
+        pip2 install -r $I || true                                    \
+        pip3 install -r $I || true                                    \
+    done
 ```
