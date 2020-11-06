@@ -85,7 +85,7 @@ yum install cortex
 #### Stable versions (or legacy versions)
 
 
-The main repository  is a legacy repository and contains packages for **Cortex 3.0.1** that **does not support Elasticsearch version 7.x**, but version 6.x.
+The stable repository  is a legacy repository and contains packages for **Cortex 3.0.1** that **does not support Elasticsearch version 7.x**, but version 6.x.
 
 Setup your system to connect the RPM repository. Create and edit the file `/etc/yum.repos.d/thehive-project.repo`:
 
