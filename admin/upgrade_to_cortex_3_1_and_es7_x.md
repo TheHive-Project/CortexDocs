@@ -63,13 +63,13 @@ sudo service cortex stop
 ### Create a new index
 
 
-The First operation lies in creating a new index named `new_the_hive_15` with settings from current index `the_hive_15` (ensure to keep index version, needed for future upgrade).
+The First operation lies in creating a new index named `new_cortex_4` with settings from current index `cortex_4` (ensure to keep index version, needed for future upgrade).
 
 ```bash
 curl -XPUT 'http://localhost:9200/new_cortex_4' \
   -H 'Content-Type: application/json' \
   -d "$(curl http://localhost:9200/cortex_4 |\
-   jq '.the_hive_15 |
+   jq '.cortex_4 |
    del(.settings.index.provided_name,
     .settings.index.creation_date,
     .settings.index.uuid,
@@ -311,7 +311,7 @@ The output should look like this:
 
 ```
 health status index           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-green  open   new_the_hive_15 GV-3Y8QjTjWw0F-p2sjW6Q   5   0      30977            0       26mb           26mb
-yellow open   the_hive_16     Nz0vCKqhRK2xkx1t_WF-0g   5   1      30977            0     26.1mb         26.1mb
+green  open   new_cortex_4 GV-3Y8QjTjWw0F-p2sjW6Q   5   0      30977            0       26mb           26mb
+yellow open   cortex_5     Nz0vCKqhRK2xkx1t_WF-0g   5   1      30977            0     26.1mb         26.1mb
 ```
 
