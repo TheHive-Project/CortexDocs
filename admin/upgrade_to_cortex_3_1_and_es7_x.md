@@ -223,7 +223,7 @@ thread_pool.write.queue_size: 10000
 
 Now, upgrade Elasticsearch to version 7.x following the documentation for your Operating System, and ensure the service start successfully.
 
-## Install or update to TheHive 3.5.0
+## Install or update to Cortex 3.1.0
 
 ### DEB package
 
