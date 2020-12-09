@@ -70,45 +70,60 @@ For example, if the program requires a `thehive:case` (i.e. it applies at the ca
 
 ```json
 	{
-		"caseId":1484,
-		"title":"Invoice mail",
-		"description":"...",
-		"startDate":1532586900000,
-		"customFields":{},
-		"pap":2,
-		"flag":false,
-		"status":"Open",
-		"owner":"me",
-		"severity":2,
-		"tlp":2,
-		"tags":["phishing"],
-		"metrics":{},
-		"createdBy":"me",
-		"createdAt":1532586924589,
-		"updatedBy":"me",
-		"updatedAt":1532697739274,
-		"_type":"case",
-		"_routing":"AWTVTJzWpVfF5eRPi-qd",
-		"_parent":null,
-		"_id":"AWTVTJzWpVfF5eRPi-qd",
-		"_version":3,
-		"id":"AWTVTJzWpVfF5eRPi-qd",
-		"config":{
-			"key":"1234567890abcdef",
-			"max_tlp":1,
-			"check_tlp":true,
-			"max_pap":1,
-			"check_pap":true,
-			[..]
-		},
-		"proxy":{
-			"http":"http://myproxy:8080",
-			"https":"https://myproxy:8080"
-		}
+	    "data": {
+		"updatedAt": 1606230814019,
+		"tlp": 2,
+		"endDate": 1606230814019,
+		"description": "Case Description",
+		"tags": [
+		    "tag"
+		],
+		"caseId": 157,
+		"customFields": {},
+		"pap": 2,
+		"status": "Open",
+		"resolutionStatus": "Indeterminate",
+		"createdAt": 1606183201646,
+		"createdBy": "user",
+		"flag": false,
+		"severity": 2,
+		"metrics": {},
+		"owner": "user",
+		"title": "Title",
+		"updatedBy": "user",
+		"startDate": 1606183201000,
+		"impactStatus": "NotApplicable",
+		"_type": "case",
+		"_routing": "iwD693UBlJefU8pMrqOq",
+		"_parent": null,
+		"_id": "iwD693UBlJefU8pMrqOq",
+		"_seqNo": 4572,
+		"_primaryTerm": 48,
+		"id": "iwD693UBlJefU8pMrqOq"
+	    },
+	    "dataType": "thehive:case",
+	    "tlp": 2,
+	    "pap": 2,
+	    "message": "",
+	    "parameters": {
+		"user": "user"
+	    },
+	    "config": {
+		"proxy_https": null,
+		"cacerts": null,
+		"max_pap": 2,
+		"jobTimeout": 30,
+		"api_key": "3bDBUb7EL409MHOmXBkqsysZ1vpTab1Q",
+		"check_tlp": true,
+		"proxy_http": null,
+		"max_tlp": 2,
+		"url": "configured_url",
+		"check_pap": true
+	    }
 	}
 ```
 
-In the addition to the input sent by the submitter, Cortex adds the `config` section which is the responder's specific configuration provided by an `orgAdmin` user when the responder is enabled in the Cortex UI. 
+In the addition to the input (`data` section) sent by the submitter, Cortex adds the `config` section which is the responder's specific configuration provided by an `orgAdmin` user when the responder is enabled in the Cortex UI. 
 
 #### Example: Service Interaction File for the Mailer Responder
 The `<==` sign and anything after it are comments that do no appear in the
@@ -121,27 +136,48 @@ original file.
   "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
   "license": "AGPL-V3",
   "description": "Send an email with information from a TheHive case or alert",
-  "dataTypeList": ["thehive:case", "thehive:alert"],
-  "command": "Mailer/mailer.py", <== Program to run when invoking the responder
-  "baseConfig": "Mailer", <== name of base config in Cortex responder config page
-  "config": {
-    <== any configuration items
-  },
-  "configurationItems": [ <== list of configuration items the responder needs to operate (api key etc.)
+  "dataTypeList": ["thehive:case", "thehive:alert", "thehive:case_task"],
+  "command": "Mailer/mailer.py",
+  "baseConfig": "Mailer",
+  "configurationItems": [
     {
       "name": "from",
       "description": "email address from which the mail is send",
-      "type": "string", <== defines what kind of data type the configuration item is (string, number)
-      "multi": false, <== setting multi to true allows to pass a list of items
-      "required": true 
+      "type": "string",
+      "multi": false,
+      "required": true
     },
     {
-      "name": "smtp.host",
+      "name": "smtp_host",
       "description": "SMTP server used to send mail",
       "type": "string",
       "multi": false,
       "required": true,
       "defaultValue": "localhost"
+    },
+    {
+      "name": "smtp_port",
+      "description": "SMTP server port",
+      "type": "number",
+      "multi": false,
+      "required": true,
+      "defaultValue": 25
+    },
+    {
+      "name": "smtp_user",
+      "description": "SMTP server user",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": "user"
+    },
+    {
+      "name": "smtp_pwd",
+      "description": "SMTP server password",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": "pwd"
     }
   ]
 }
@@ -307,7 +343,7 @@ If the responder **succeeds** (i.e. it runs without any error):
 ### The Cortexutils Python Library
 So far, all the published responders have been written in Python. We provide a Python library called `cortexutils` to help developers easily write their programs. Note though that Python is not mandatory for responder coding and any language that runs on Linux can be used, though you won't have the benefits of the CortexUtils library.
 
-Cortexutils can be used with Python 2 and 3.
+Cortexutils can be used with Python 2 and 3. Due to the end of life from Python2 it is strongly advised to work as much with Python3 as possible.
 To install it :
 
 ```bash
@@ -348,27 +384,48 @@ Mailer JSON responder configuration file(s):
   "url": "https://github.com/TheHive-Project/Cortex-Analyzers",
   "license": "AGPL-V3",
   "description": "Send an email with information from a TheHive case or alert",
-  "dataTypeList": ["thehive:case", "thehive:alert"],
-  "command": "Mailer/mailer.py", <== Program to run when invoking the responder
-  "baseConfig": "Mailer", <== name of base config in Cortex responder config page
-  "config": {
-    <== any configuration items
-  },
-  "configurationItems": [ <== list of configuration items the responder needs to operate (api key etc.)
+  "dataTypeList": ["thehive:case", "thehive:alert", "thehive:case_task"],
+  "command": "Mailer/mailer.py",
+  "baseConfig": "Mailer",
+  "configurationItems": [
     {
       "name": "from",
       "description": "email address from which the mail is send",
-      "type": "string", <== defines what kind of data type the configuration item is (string, number)
-      "multi": false, <== setting multi to true allows to pass a list of items
-      "required": true 
+      "type": "string",
+      "multi": false,
+      "required": true
     },
     {
-      "name": "smtp.host",
+      "name": "smtp_host",
       "description": "SMTP server used to send mail",
       "type": "string",
       "multi": false,
       "required": true,
       "defaultValue": "localhost"
+    },
+    {
+      "name": "smtp_port",
+      "description": "SMTP server port",
+      "type": "number",
+      "multi": false,
+      "required": true,
+      "defaultValue": 25
+    },
+    {
+      "name": "smtp_user",
+      "description": "SMTP server user",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": "user"
+    },
+    {
+      "name": "smtp_pwd",
+      "description": "SMTP server password",
+      "type": "string",
+      "multi": false,
+      "required": false,
+      "defaultValue": "pwd"
     }
   ]
 }
