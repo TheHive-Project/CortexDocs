@@ -143,8 +143,8 @@ original file.
     {
       "name": "from",
       "description": "email address from which the mail is send",
-      "type": "string",
-      "multi": false,
+      "type": "string", <== defines what kind of data type the configuration item is (string, number)
+      "multi": false, <== setting multi to true allows to pass a list of items
       "required": true
     },
     {
@@ -391,8 +391,8 @@ Mailer JSON responder configuration file(s):
     {
       "name": "from",
       "description": "email address from which the mail is send",
-      "type": "string",
-      "multi": false,
+      "type": "string", <== defines what kind of data type the configuration item is (string, number)
+      "multi": false, <== setting multi to true allows to pass a list of items
       "required": true
     },
     {
