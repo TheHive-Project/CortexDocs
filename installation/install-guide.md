@@ -1,7 +1,7 @@
 # Installation Guide
 
 ---
-⚠️   _**Please read carrefully this documentation. Depending on you make a fresh installation or update an existing version, repository or packages names may vary.**_
+⚠️   _**Please read this documentation carefully. Depending on making a fresh installation or updating an existing version, repository or packages names may vary.**_
 
 Current supported versions of Cortex are:
 - Version 3.1.0 and later that supports **only** Elasticsearch 7.x. 
