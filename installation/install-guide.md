@@ -599,7 +599,8 @@ Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be i
 ```
 analyzer {
   # Directory that holds analyzers
-  path = [
+  urls = [
+    "https://download.thehive-project.org/analyzers.json",
     "/path/to/default/analyzers",
     "/path/to/my/own/analyzers"
   ]
@@ -616,7 +617,8 @@ analyzer {
 
 responder {
   # Directory that holds responders
-  path = [
+  urls = [
+    "https://download.thehive-project.org/responders.json",
     "/path/to/default/responder",
     "/path/to/my/own/responder"
   ]
