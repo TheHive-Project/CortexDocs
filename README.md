@@ -1,6 +1,11 @@
 ![](images/cortex-logo.png)
 
-[![Join the chat at https://gitter.im/TheHive-Project/TheHive](https://badges.gitter.im/TheHive-Project/TheHive.svg)](https://gitter.im/TheHive-Project/TheHive)
+---
+
+**Cortex documentation has moved** and can be found at [https://docs.thehive-project.org/cortex/](https://docs.thehive-project.org/cortex/).
+
+---
+
 
 Cortex solves two common problems frequently encountered by SOCs, CSIRTs and security researchers in the course of threat intelligence, digital forensics and incident response:
 
