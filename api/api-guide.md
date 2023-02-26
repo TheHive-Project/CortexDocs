@@ -442,7 +442,6 @@ A job is defined by the following attributes:
 | `organization` | The organization to which the job belongs | readonly |
 | `analyzerDefinitionId`| Analyzer definition name | readonly |
 | `analyzerId` | Instance ID of the analyzer to which the job is associated  | readonly |
-| `organization` | Organization to which the user belongs (set upon account creation) | readonly |
 | `analyzerName` | Name of the analyzer to which the job is associated | readonly |
 | `dataType` | the datatype of the analyzed observable | readonly |
 | `status` | Status of the job (`Waiting`, `InProgress`, `Success`, `Failure`, `Deleted`) | computed |
