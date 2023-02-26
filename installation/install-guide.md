@@ -590,8 +590,10 @@ git clone https://github.com/TheHive-Project/Cortex-Analyzers
 Each analyzer comes with its own, pip compatible `requirements.txt` file. You can install all requirements with the following commands:
 
 ```
-for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip2 install -r $I; done && \
-for I in $(find Cortex-Analyzers -name 'requirements.txt'); do sudo -H pip3 install -r $I || true; done
+for I in $(find Cortex-Analyzers -name 'requirements.txt'); do cat >> combined_requirements.txt < $I; sort -u -o combined_requirements.txt combined_requirements.txt; done
+sudo -H pip2 install -r combined_requirements.txt
+sudo -H pip3 install -r combined_requirements.txt
+rm combined_requirements.txt
 ```
 
 Next, you'll need to tell Cortex where to find the analyzers. Analyzers may be in different directories as shown in this dummy example of the Cortex configuration file (`application.conf`):
